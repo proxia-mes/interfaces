@@ -1,0 +1,209 @@
+---
+openapi: 3.0.2
+info:
+  title: Proxia MES Monitoring Dashboard GUI Service API
+  description: Proxia MES Monitoring Dashboard GUI Service API
+  version: '1.0.0'
+servers:
+- url: "/proxia/mes/montoring-dashboard/gui-service/v1"
+tags:
+- name: views
+  description: Everything about dashboard views
+- name: widgets
+  description: Everything about dashboard widgets
+paths:
+  "/views":
+    get:
+      tags:
+      - views
+      summary: returns all views for a user
+      parameters:
+      - name: userId
+        in: query
+        description: ask for all Views of a specified userId
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/View"
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+  "/view":
+    post:
+      tags:
+      - views
+      summary: adds a new view for a user
+      security:
+        - OpenID:
+          - admin
+      parameters:
+      - name: userId
+        in: query
+        description: ask for all Views of a specified userId
+        required: true
+        style: form
+        schema:
+          type: string
+          maxLength: 10
+          minLength: 3
+      requestBody:
+        description: View object that needs to be added for the user
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/View"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '400':
+          description: Bad Request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '409':
+          description: Conflict
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+  "/view/{viewId}":
+    get:
+      tags:
+      - views
+      summary: returns a view for a user
+      parameters:
+      - name: userId
+        in: query
+        description: ask for a view of a specified userId
+        required: true
+        style: form
+        schema:
+          type: string
+      - name: viewId
+        in: path
+        description: ask for a View of a specified viewId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/View"
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+  "/widgets":
+    get:
+      tags:
+      - widgets
+      summary: returns all widgets for a user and a dashboard
+      parameters:
+      - name: userId
+        in: query
+        required: true
+        style: form
+        schema:
+          type: string
+      - name: dashboardId
+        in: query
+        required: true
+        style: form
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Widget"
+        '400':
+          description: Bad Request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+components:
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
+  schemas:
+    View:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of a view
+          maxLength: 10
+          minLength: 3
+        name:
+          type: string
+          description: The name of a view
+        description:
+          type: string
+          description: The description of a view
+    Widget:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of a widget
+          maxLength: 10
+          minLength: 3
+        name:
+          type: string
+          description: The name of a widget
+        description:
+          type: string
+          description: The description of a widget
