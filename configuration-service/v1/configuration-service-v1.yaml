@@ -20,7 +20,7 @@ paths:
         in: path
         description: The sectionId of the configuration
         required: true
-        style: form
+        style: simple
         schema:
           type: string
       responses:
@@ -57,7 +57,7 @@ paths:
         in: path
         description: The sectionId of the configuration
         required: true
-        style: form
+        style: simple
         schema:
           type: string
       requestBody:
@@ -91,6 +91,4 @@ components:
   securitySchemes: 
     OpenID:
       type: openIdConnect
-      openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
-  schemas:
-    
+      openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration    
