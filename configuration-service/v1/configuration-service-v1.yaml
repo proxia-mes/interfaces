@@ -92,6 +92,3 @@ components:
     OpenID:
       type: openIdConnect
       openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration    
-  schemas:
-    Dummy:
-      type: object
