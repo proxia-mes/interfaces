@@ -23,14 +23,8 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: create controller-out dir
-        run: |
-          pwd
-          ll
-          mkdir out
-          ll
-          cd out 
-          mkdir controller
-          
+        run: pwd
+        
       - name: generate C# controller
         uses: docker://openapitools/openapi-generator-cli
         with:
