@@ -49,7 +49,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
       
       - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --username flobuc-proxia --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
+        run: dotnet nuget add source --username flobuc-proxia --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/orgs/flobuc-proxia/index.json"
       
       - name: Create the package
         run: dotnet pack out/controller/src/$CONTROLLER_PACKAGE_NAME/$CONTROLLER_PACKAGE_NAME.csproj --no-build --configuration Release --include-source --include-symbols
