@@ -19,7 +19,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a set of commands using the runners shell
       - name: Create controller out dir
         run: mkdir -p out/controller
         
@@ -27,6 +26,7 @@ jobs:
         uses: docker://openapitools/openapi-generator-cli
         with:
           args: generate -o /github/workspace/out/controller -i /github/workspace/configuration-service/v1/configuration-service-v1.yaml -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.CONTROLLER_PACKAGE_NAME}}
+      
       - name: Change access rights for generated sources
         run: |
              sudo chmod 777 -R out/controller
@@ -41,14 +41,19 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '5.0.x'
+      
       - name: Install dependencies
         run: dotnet restore out/controller/src/$CONTROLLER_PACKAGE_NAME
+      
       - name: Build
         run: dotnet build --configuration Release --no-restore out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
+      
       - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
+        run: dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/OWNER/index.json"
+      
       - name: Create the package
         run: dotnet pack out/controller/src/$CONTROLLER_PACKAGE_NAME/$CONTROLLER_PACKAGE_NAME.csproj --no-build --configuration Release --include-source --include-symbols
+      
       - name: Publish the package to Github Package Repository (GPR)
         run: dotnet nuget push out/controller/src/$CONTROLLER_PACKAGE_NAME/bin/Release/$CONTROLLER_PACKAGE_NAME*.nupkg --api-key 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 --source github
       
