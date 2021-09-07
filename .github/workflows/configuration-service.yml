@@ -36,7 +36,11 @@ jobs:
         run: |
              echo "namespace $CONTROLLER_PACKAGE_NAME.Models {}" > out/controller/src/$CONTROLLER_PACKAGE_NAME/Models.cs
              cat out/controller/src/$CONTROLLER_PACKAGE_NAME/Models.cs
-      
+      - name: Set RepositoryUrl and RepositoryType in csproj-File (necessary for nuget push to GitHub) 
+        run: |
+             sed -i "s|<PropertyGroup>|<PropertyGroup><RepositoryUrl>https://github.com/$GITHUB_REPOSITORY</RepositoryUrl>|" out/controller/src/$CONTROLLER_PACKAGE_NAME/$CONTROLLER_PACKAGE_NAME.csproj
+             sed -i "s|<PropertyGroup>|<PropertyGroup><RepositoryType>git</RepositoryType>|" out/controller/src/$CONTROLLER_PACKAGE_NAME/$CONTROLLER_PACKAGE_NAME.csproj
+            
       - name: Setup .NET Core SDK 5.0
         uses: actions/setup-dotnet@v1
         with:
@@ -46,7 +50,7 @@ jobs:
         run: dotnet restore out/controller/src/$CONTROLLER_PACKAGE_NAME
       
       - name: Build
-        run: dotnet build -p:RepositoryUrl=https://github.com/$GITHUB_REPOSITORY.git -p:RepositoryType=git --configuration Release --no-restore out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
+        run: dotnet build --configuration Release --no-restore out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
       
       - name: Add GitHub Nuget Source
         run: dotnet nuget add source --username flobuc --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
