@@ -32,6 +32,11 @@ jobs:
         with:
           args: generate -o /github/workspace/${{env.OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.PACKAGE_NAME}}
       
+      - name: Generate C# controller code2
+        uses: docker://openapitools/openapi-generator-cli
+        with:
+          args: generate -o /github/workspace/${{env.OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.PACKAGE_NAME}}
+      
       - name: Change access rights for generated sources
         run: |
              sudo chmod 777 -R $OUT_DIR
@@ -52,6 +57,11 @@ jobs:
         with:
           dotnet-version: '5.0.x'
       
+      - name: Setup .NET Core SDK 5.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+          
       - name: Install dependencies
         run: dotnet restore $PROJECT_DIR
       
