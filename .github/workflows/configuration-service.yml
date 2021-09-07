@@ -26,10 +26,10 @@ jobs:
       - name: Generate C# controller code
         uses: docker://openapitools/openapi-generator-cli
         with:
-          args: generate -o /github/workspace/out/controller -i /github/workspace/configuration-service/v1/configuration-service-v1.yaml -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=PAG.Mes.ConfigurationService.ControllerStub
+          args: generate -o /github/workspace/out/controller -i /github/workspace/configuration-service/v1/configuration-service-v1.yaml -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=$CONTROLLER_PACKAGE_NAME
       
       - name: small fix for generator Create empty Models package using packageName
-        run: "'namespace $CONTROLLER_PACKAGE_NAME.Models {}' > out/controller/src/$CONTROLLER_PACKAGE_NAME/Models.cs"
+        run: "sudo 'namespace $CONTROLLER_PACKAGE_NAME.Models {}' > out/controller/src/$CONTROLLER_PACKAGE_NAME/Models.cs"
       
       - name: Setup .NET Core SDK 5.0
         uses: actions/setup-dotnet@v1
