@@ -50,7 +50,7 @@ jobs:
       - name: Create the package
         run: dotnet pack out/controller/src/$CONTROLLER_PACKAGE_NAME/$CONTROLLER_PACKAGE_NAME.csproj --no-build --configuration Release --include-source --include-symbols
       - name: Publish the package to GPR
-        run: dotnet nuget push out/controller/bin/Release/$CONTROLLER_PACKAGE_NAME.nupkg --source github
+        run: dotnet nuget push out/controller/src/$CONTROLLER_PACKAGE_NAME/bin/Release/$CONTROLLER_PACKAGE_NAME*.nupkg --source github
       
       
         
