@@ -8,11 +8,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-defaults:
-  run:
-    shell: bash
-    working-directory: /github/home
-
 jobs:
   generate-controllers:
     runs-on: ubuntu-20.04
@@ -28,5 +23,5 @@ jobs:
       - name: generate C# controller
         uses: docker://openapitools/openapi-generator-cli
         with:
-          args: generate -o /github/home/out/controller -i /github/workspace/configuration-service/v1/configuration-service-v1.yaml -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=PAG.Mes.ConfigurationService.ControllerStub
+          args: generate -o /github/workspace/out/controller -i /github/workspace/configuration-service/v1/configuration-service-v1.yaml -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=PAG.Mes.ConfigurationService.ControllerStub
           
