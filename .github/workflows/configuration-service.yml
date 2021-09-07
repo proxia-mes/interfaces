@@ -56,10 +56,10 @@ jobs:
         run: dotnet nuget add source --username flobuc --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
       
       - name: Create the package
-        run: dotnet pack out/controller/src/$CONTROLLER_PACKAGE_NAME/$CONTROLLER_PACKAGE_NAME.csproj --no-build --configuration Release --include-source --include-symbols
+        run: dotnet pack out/controller/src/$CONTROLLER_PACKAGE_NAME/$CONTROLLER_PACKAGE_NAME.csproj --no-build --configuration Release --include-source
       
       - name: Publish the package to Github Package Repository (GPR)
-        run: dotnet nuget push out/controller/src/$CONTROLLER_PACKAGE_NAME/bin/Release/$CONTROLLER_PACKAGE_NAME*.nupkg --api-key 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 --source github
+        run: dotnet nuget push out/controller/src/$CONTROLLER_PACKAGE_NAME/bin/Release/$CONTROLLER_PACKAGE_NAME*.nupkg --api-key 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 --source github --skip-duplicate
       
       
         
