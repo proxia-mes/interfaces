@@ -17,11 +17,23 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a set of commands using the runners shell
-      - name: create controller-out dir
+      - name: Create controller out dir
         run: mkdir -p out/controller
         
-      - name: generate C# controller
+      - name: Generate C# controller code
         uses: docker://openapitools/openapi-generator-cli
         with:
           args: generate -o /github/workspace/out/controller -i /github/workspace/configuration-service/v1/configuration-service-v1.yaml -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=PAG.Mes.ConfigurationService.ControllerStub
-          
+      
+      - name: small fix for generator Create empty Models package using packageName
+        run: "'namespace %PACKAGE_NAME%.Models {}' > out/controller/src/%PACKAGE_NAME%/Models.cs"
+      
+      - name: Setup .NET Core SDK 5.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+      - name: Install dependencies
+        run: dotnet restore out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
+      - name: Build
+        run: dotnet build --configuration Release --no-restore out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
+        
