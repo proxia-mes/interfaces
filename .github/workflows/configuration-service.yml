@@ -11,6 +11,7 @@ on:
 defaults:
   run:
     shell: bash
+    working-directory: /github/home
 
 jobs:
   generate-controllers:
