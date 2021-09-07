@@ -24,7 +24,10 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: create controller-out dir
         run: |
+          pwd
+          ll
           mkdir out
+          ll
           cd out 
           mkdir controller
           
