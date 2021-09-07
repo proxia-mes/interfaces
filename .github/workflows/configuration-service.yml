@@ -34,7 +34,7 @@ jobs:
       
       - name: small fix for generator Create empty Models package using packageName
         run: |
-             "echo 'namespace $CONTROLLER_PACKAGE_NAME.Models {}' > out/controller/src/$CONTROLLER_PACKAGE_NAME/Models.cs"
+             echo 'namespace $CONTROLLER_PACKAGE_NAME.Models {}' > out/controller/src/$CONTROLLER_PACKAGE_NAME/Models.cs
              cat out/controller/src/$CONTROLLER_PACKAGE_NAME/Models.cs
       
       - name: Setup .NET Core SDK 5.0
