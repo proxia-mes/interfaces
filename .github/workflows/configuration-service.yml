@@ -12,7 +12,7 @@ env:
   CONTROLLER_PACKAGE_NAME: PAG.Mes.ConfigurationService.ControllerStub
   OUT_DIR: out/controller
   INTERFACE_FILE: configuration-service/v1/configuration-service-v1.yaml
-  PROJECT_DIR: ${{OUT_DIR}}/src/${{CONTROLLER_PACKAGE_NAME}}
+  PROJECT_DIR: out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
 
 jobs:
   generate-controllers:
