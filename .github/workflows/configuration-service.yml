@@ -27,10 +27,10 @@ jobs:
         uses: docker://openapitools/openapi-generator-cli
         with:
           args: generate -o /github/workspace/out/controller -i /github/workspace/configuration-service/v1/configuration-service-v1.yaml -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.CONTROLLER_PACKAGE_NAME}}
-      - name: debug
+      - name: Change access right for generated sources
         run: |
-             chmod 777 -R out/controller
-             ls -la out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
+             sudo chmod 777 -R out/controller
+             ls -la out/controller
              
         
       - name: small fix for generator Create empty Models package using packageName
