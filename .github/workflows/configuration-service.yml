@@ -9,20 +9,22 @@ on:
   workflow_dispatch:
 
 env:
-  CONTROLLER_PACKAGE_NAME: PAG.Mes.ConfigurationService.ControllerStub
-  OUT_DIR: out/controller
+  OUT_DIR: out
   INTERFACE_FILE: configuration-service/v1/configuration-service-v1.yaml
-  PROJECT_DIR: out/controller/src/PAG.Mes.ConfigurationService.ControllerStub
 
 jobs:
-  generate-controllers:
+  generate-controller:
     runs-on: ubuntu-20.04
-
+    
+    env:
+      CONTROLLER_PACKAGE_NAME: PAG.Mes.ConfigurationService.ControllerStub
+      PROJECT_DIR: ${{env.OUT_DIR}}/src/PAG.Mes.ConfigurationService.ControllerStub
+    
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Create controller out dir
+      - name: Create out dir
         run: mkdir -p $OUT_DIR
         
       - name: Generate C# controller code
@@ -39,10 +41,58 @@ jobs:
         run: |
              echo "namespace $CONTROLLER_PACKAGE_NAME.Models {}" > $PROJECT_DIR/Models.cs
              cat $PROJECT_DIR/Models.cs
+             
       - name: Set RepositoryUrl and RepositoryType in csproj-File (necessary for nuget push to GitHub) 
         run: |
              sed -i "s|<PropertyGroup>|<PropertyGroup><RepositoryUrl>https://github.com/$GITHUB_REPOSITORY</RepositoryUrl>|" $PROJECT_DIR/$CONTROLLER_PACKAGE_NAME.csproj
              sed -i "s|<PropertyGroup>|<PropertyGroup><RepositoryType>git</RepositoryType>|" $PROJECT_DIR/$CONTROLLER_PACKAGE_NAME.csproj
+            
+      - name: Setup .NET Core SDK 5.0
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+      
+      - name: Install dependencies
+        run: dotnet restore $PROJECT_DIR
+      
+      - name: Build
+        run: dotnet build --configuration Release --no-restore $PROJECT_DIR/
+      
+      - name: Add GitHub Nuget Source
+        run: dotnet nuget add source --username flobuc --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
+      
+      - name: Create the package
+        run: dotnet pack $PROJECT_DIR/$CONTROLLER_PACKAGE_NAME.csproj --no-build --configuration Release --include-source
+      
+      - name: Publish the package to Github Package Repository (GPR)
+        run: dotnet nuget push $PROJECT_DIR/bin/Release/$CONTROLLER_PACKAGE_NAME*.nupkg --api-key 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 --source github
+
+  generate-client:
+    runs-on: ubuntu-20.04
+
+    env:
+      CONTROLLER_PACKAGE_NAME: PAG.Mes.ConfigurationService.Client
+      PROJECT_DIR: ${{env.OUT_DIR}}/src/PAG.Mes.ConfigurationService.Client
+      
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Create out dir
+        run: mkdir -p $OUT_DIR
+        
+      - name: Generate C# client code
+        uses: docker://openapitools/openapi-generator-cli
+        with:
+          args: generate -o /github/workspace/${{env.OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g csharp-netcore --additional-properties targetFramework=net5.0,packageName=${{env.CONTROLLER_PACKAGE_NAME}}
+      
+      - name: Change access rights for generated sources
+        run: |
+             sudo chmod 777 -R $OUT_DIR
+             ls -la $OUT_DIR
+      
+      - name: Replace RepositoryUrl in csproj-File (necessary for nuget push to GitHub) 
+        run: sed -i "s|GIT_USER_ID/GIT_REPO_ID|$GITHUB_REPOSITORY|" $PROJECT_DIR/$CONTROLLER_PACKAGE_NAME.csproj
             
       - name: Setup .NET Core SDK 5.0
         uses: actions/setup-dotnet@v1
