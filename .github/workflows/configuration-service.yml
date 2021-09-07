@@ -18,7 +18,7 @@ jobs:
     
     env:
       CONTROLLER_PACKAGE_NAME: PAG.Mes.ConfigurationService.ControllerStub
-      PROJECT_DIR: ${{env.OUT_DIR}}/src/PAG.Mes.ConfigurationService.ControllerStub
+      PROJECT_DIR: out/src/PAG.Mes.ConfigurationService.ControllerStub
     
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -72,7 +72,7 @@ jobs:
 
     env:
       CONTROLLER_PACKAGE_NAME: PAG.Mes.ConfigurationService.Client
-      PROJECT_DIR: ${{env.OUT_DIR}}/src/PAG.Mes.ConfigurationService.Client
+      PROJECT_DIR: out/src/PAG.Mes.ConfigurationService.Client
       
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
