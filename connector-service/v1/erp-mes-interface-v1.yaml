@@ -3,26 +3,26 @@ openapi: 3.0.3
 info:
   title: ERP MES API
   description: REST API provided by the ERP system for MES systems
-  version: '1.0.0'
+  version: '1.0.2'
 servers:
   - url: "erp/mes/interface/v1"
 tags:
   - name: mes
     description: Everything about the interface for MES systems provided by the ERP system
 paths:
-  "/worktickets-feedbacks":
+  "/worktickets-replies":
     post:
       tags:
         - mes
-      summary: Stores the feedbacks for the work tickets
+      summary: Stores the replies for the work tickets
       requestBody:
-        description: Array of feedback objects
+        description: Array of reply objects
         content:
           application/json:
             schema:
               type: array
               items:
-                "$ref": "#/components/schemas/Workticket-Feedback"
+                "$ref": "#/components/schemas/Workticket-Reply"
         required: true
       responses:
         '200':
@@ -108,25 +108,25 @@ paths:
           content: { }
 components:
   schemas:
-    Workticket-Feedback:
+    Workticket-Reply:
       type: object
       required:
-        - WT_NR
+        - WT_NO
         - WT_STATUS
       properties:
-        WT_NR:
+        WT_NO:
           type: string
-          description: Unique connoisseur of the work license, also serves as a feedback number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          description: Unique connoisseur of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
           maxLength: 50
           minLength: 1
           nullable: false
-        MASCH_NR:
+        MACHINE_NO:
           type: string
           description: Guide number of manufacturing resource (group number or KST)/Leitzahl der Fertigungsressource (Gruppennummer bzw. KST)
           maxLength: 50
           minLength: 1
           nullable: false
-        PERS_NR:
+        PERS_NO:
           type: string
           description: Personnel number for personal tours. Is not filled with a machine page record/Personalnummer für Personenzeiten. Wird bei einem Maschinenzeiten-Datensatz nicht gefüllt
           maxLength: 50
@@ -142,48 +142,43 @@ components:
           format: float
           description: Production time for the operation (min) in the confirmation period/Produktionszeit für den Arbeitsgang (Min) im Rückmeldezeitraum
           nullable: false
-        QTY_GUT:
+        QTY_YIELD:
           type: number
           format: float
           description: Good amount in the confirmation period/Gut-Menge im Rückmeldezeitraum
           nullable: false
-        QTY_AUS:
+        QTY_SCRAP:
           type: number
           format: float
-          description: Committee amount in the confirmation period/Ausschuss-Menge im Rückmeldezeitraum
+          description: Scrap amount in the confirmation period/Ausschuss-Menge im Rückmeldezeitraum
           nullable: false
         WT_STATUS:
           type: string
           maxLength: 50
           minLength: 1
-          description: Status of the operation/Status des Arbeitsgangs; "C_START" If the WT is logged in for the first time (configurable)/Wenn das WT das erste mal angemeldet wird (konfigurierbar); "C_RUECK" feedback during WT running/Rückmeldung bei laufendem WT; "C_TFRTG" part/Teilfertig; "C_FRTG" done/Fertig
+          description: Status of the operation/Status des Arbeitsgangs; "C_START" If the WT is logged in for the first time (configurable)/Wenn das WT das erste mal angemeldet wird (konfigurierbar); "C_REPLY" reply during WT running/Rückmeldung bei laufendem WT; "C_PARTIALLY" part/Teilfertig; "C_DONE" done/Fertig
           nullable: false
           enum:
             - 'C_START'
-            - 'C_RUECK'
-            - 'C_TFRTG'
-            - 'C_FRTG'
-        TAETIGKEIT:
+            - 'C_REPLY'
+            - 'C_PARTIALLY'
+            - 'C_DONE'
+        ACTIVITY:
           type: string
           description: Description of activities in unplanned operations/Beschreibung der Tätigkeiten bei ungeplanten Arbeitsgängen
           maxLength: 255
           minLength: 1
           nullable: false
-        BEGIN_TS:
-          type: string
-          format: date-time
-          description: The field is outdated. Function is not supported/Das Feld ist veraltet. Funktion wird nicht unterstützt
-          nullable: false
         END_TS:
           type: string
           format: date-time
-          description: Timestamp of the last feedback in the confirmation period/Zeitstempel der letzten Rückmeldung im Rückmeldezeitraum
+          description: Timestamp of the last reply in the confirmation period/Zeitstempel der letzten Rückmeldung im Rückmeldezeitraum
           nullable: false
-        END_CHARGE:
+        END_BATCH:
           type: string
           maxLength: 50
           minLength: 1
-          description: End Product Charge/Endprodukt-Charge
+          description: End Product batch/Endprodukt-Charge
           nullable: false
         RES_TYPE:
           type: string
@@ -195,46 +190,46 @@ components:
             - 'C_MACH'
             - 'C_WKPL'
             - 'C_COLLECTIVE_WKPL'
-        AUSSCHUSSGRUND:
+        SCRAP_REASON:
           type: string
           maxLength: 50
           minLength: 1
-          description: When turned on in the configuration, the committee reason is passed to the set quantity in box QTY_AUS/Wenn in der Konfiguration eingeschaltet, wird der Ausschussgrund zur gemeldeten Menge in Feld QTY_AUS übergeben
+          description: When turned on in the configuration, the scrap reason is passed to the set quantity in box QTY_SCRAP/Wenn in der Konfiguration eingeschaltet, wird der SCRAP_REASON zur gemeldeten Menge in Feld QTY_SCRAP übergeben
           nullable: false
-        RUECKMELDER:
+        REPLIER:
           type: string
           maxLength: 50
           minLength: 1
-          description: PPS_NR of the feedback/PPS_NR des Rückmelders
+          description: PPS_NR of the replier/PPS_NR des Rückmelders
           nullable: false
-        RM-KOMMENTAR:
+        REPLY_COMMENT:
           type: string
           maxLength: 2000
           minLength: 1
-          description: Feedback comment up to 2000 characters/Rückmelder Kommentar bis zu 2000 Zeichen
+          description: Reply comment up to 2000 characters/Rückmelder Kommentar bis zu 2000 Zeichen
           nullable: false
     Workticket-Material-Removal:
       type: object
       required:
-        - WT_NR
-        - MAT_NR
-        - CHARGEN_NR
+        - WT_NO
+        - MAT_NO
+        - BATCH_NO
         - QTY
-        - EINHEIT
+        - UNIT
       properties:
-        WT_NR:
+        WT_NO:
           type: string
-          description: Unique connoisseur of the work license, also serves as a feedback number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          description: Unique connoisseur of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
           maxLength: 50
           minLength: 1
           nullable: false
-        MAT_NR:
+        MAT_NO:
           type: string
           description: material number/Materialnummer
           maxLength: 50
           minLength: 1
           nullable: false
-        CHARGEN_NR:
+        BATCH_NO:
           type: string
           description: batch number/Chargennummer
           maxLength: 50
@@ -245,31 +240,31 @@ components:
           format: float
           description: Quantity, which was taken for the work ticket/Menge, welche zum Arbeitsschein entnommen wurde
           nullable: false
-        POS_NR:
+        POS_NO:
           type: number
           format: int32
           description: Position number in the parts list/Positionsnummer in der Stückliste
           nullable: false
-        EINHEIT:
+        UNIT:
           type: string
-          description: unit/Einheit
+          description: Unit/Einheit
           maxLength: 50
           minLength: 1
           nullable: false
     Workticket-Planning-Data:
       type: object
       required:
-        - WT_NR
-        - MASCH_NR
+        - WT_NO
+        - MACHINE_NO
         - CREATE_TS
       properties:
-        WT_NR:
+        WT_NO:
           type: string
-          description: Unique connoisseur of the work license, also serves as a feedback number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          description: Unique connoisseur of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
           maxLength: 50
           minLength: 1
           nullable: false
-        MASCH_NR:
+        MACHINE_NO:
           type: string
           description: Guide number of manufacturing resource (group number or KST)/Leitzahl der Fertigungsressource (Gruppennummer bzw. KST)
           maxLength: 50
@@ -303,10 +298,10 @@ components:
     Order-Planning-Data:
       type: object
       required:
-        - ORDER_NR
+        - ORDER_NO
         - CREATE_TS
       properties:
-        ORDER_NR:
+        ORDER_NO:
           type: string
           description: order number/Auftragsnummer
           maxLength: 50
