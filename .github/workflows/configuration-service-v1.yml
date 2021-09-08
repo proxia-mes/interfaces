@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 
 env:
+  READ_PROXIA_GITHUB_PACKAGES_SECRET: ${{ secrets.READ_PROXIA_GITHUB_PACKAGES_SECRET }}
   OUT_DIR: out
   INTERFACE_FILE: configuration-service/v1/configuration-service-v1.yaml
 
@@ -47,19 +48,14 @@ jobs:
              sed -i "s|<PropertyGroup>|<PropertyGroup><RepositoryUrl>https://github.com/$GITHUB_REPOSITORY</RepositoryUrl>|" $PROJECT_DIR/$PACKAGE_NAME.csproj
              sed -i "s|<PropertyGroup>|<PropertyGroup><RepositoryType>git</RepositoryType>|" $PROJECT_DIR/$PACKAGE_NAME.csproj
             
-      - name: Setup .NET Core SDK 5.0
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '5.0.x'
+      - name: Add GitHub Nuget Source
+        run: dotnet nuget add source --username flobuc --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
       
       - name: Install dependencies
         run: dotnet restore $PROJECT_DIR
       
       - name: Build
         run: dotnet build --configuration Release --no-restore $PROJECT_DIR/
-      
-      - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --username flobuc --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
       
       - name: Create the package
         run: dotnet pack $PROJECT_DIR/$PACKAGE_NAME.csproj --no-build --configuration Release
@@ -94,20 +90,15 @@ jobs:
       - name: Replace RepositoryUrl in csproj-File (necessary for nuget push to GitHub) 
         run: sed -i "s|GIT_USER_ID/GIT_REPO_ID|$GITHUB_REPOSITORY|" $PROJECT_DIR/$PACKAGE_NAME.csproj
             
-      - name: Setup .NET Core SDK 5.0
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '5.0.x'
-      
+      - name: Add GitHub Nuget Source
+        run: dotnet nuget add source --username flobuc --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
+            
       - name: Install dependencies
         run: dotnet restore $PROJECT_DIR
       
       - name: Build
         run: dotnet build --configuration Release --no-restore $PROJECT_DIR/
-      
-      - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
-      
+            
       - name: Create the package
         run: dotnet pack $PROJECT_DIR/$PACKAGE_NAME.csproj --no-build --configuration Release
       
