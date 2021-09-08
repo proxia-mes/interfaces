@@ -90,7 +90,8 @@ jobs:
           registry-url: ${{env.REGISTRY}}
           
       - run: |
-             npm install $OUT_DIR
-             npm publish $OUT_DIR
+             cd $OUT_DIR
+             npm install
+             npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
