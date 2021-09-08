@@ -3,7 +3,7 @@ name: configuration-service
 on:
   push:
     paths:
-      - 'configuration-service/**'
+      - 'configuration-service/v1/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
