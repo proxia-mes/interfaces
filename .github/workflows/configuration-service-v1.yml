@@ -106,7 +106,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore $PROJECT_DIR/
       
       - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --username flobuc --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
+        run: dotnet nuget add source --name github "https://nuget.pkg.github.com/flobuc-proxia/index.json"
       
       - name: Create the package
         run: dotnet pack $PROJECT_DIR/$PACKAGE_NAME.csproj --no-build --configuration Release
