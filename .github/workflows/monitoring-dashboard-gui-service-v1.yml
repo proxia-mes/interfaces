@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
-      PACKAGE_NAME: @proxia/monitoring-dashboard-gui-service-api
+      PACKAGE_NAME: '@proxia/monitoring-dashboard-gui-service-api'
       REGISTRY: https://npm.pkg.github.com
       
     steps:
