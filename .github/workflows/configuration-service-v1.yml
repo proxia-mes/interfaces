@@ -1,4 +1,4 @@
-name: configuration-service
+name: configuration-service-v1
 
 on:
   push:
