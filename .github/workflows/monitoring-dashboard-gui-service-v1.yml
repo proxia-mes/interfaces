@@ -53,10 +53,10 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore $PROJECT_DIR/
 
-      - name: Create the package
+      - name: Create the Nuget package
         run: dotnet pack $PROJECT_DIR/$PACKAGE_NAME.csproj --no-build --configuration Release
 
-      - name: Publish the package to Github Package Repository (GPR)
+      - name: Publish the Nuget package to Github Package Repository (GPR)
         run: dotnet nuget push $PROJECT_DIR/bin/Release/$PACKAGE_NAME*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source github
 
   generate-ts-client:
@@ -94,7 +94,7 @@ jobs:
           node-version: 12.x
           registry-url: ${{env.REGISTRY}}
 
-      - name: npm install and publish
+      - name: Publish the npm package to Github Package Repository (GPR)
         run: |
           cd $OUT_DIR
           npm publish
