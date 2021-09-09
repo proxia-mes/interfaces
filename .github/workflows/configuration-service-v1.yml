@@ -10,9 +10,10 @@ on:
 
 env:
   READ_PROXIA_GITHUB_PACKAGES_SECRET: ${{ secrets.READ_PROXIA_GITHUB_PACKAGES_SECRET }}
+  READ_PROXIA_GITHUB_PACKAGES_USER: flobuc
   OUT_DIR: out
   INTERFACE_FILE: configuration-service/v1/configuration-service-v1.yaml
-  REGISTRY: https://nuget.pkg.github.com/flobuc-proxia/index.json
+  NUGET_REPOSITORY: https://nuget.pkg.github.com/flobuc-proxia/index.json
 
 jobs:
   generate-csharp-controller:
@@ -50,7 +51,7 @@ jobs:
              sed -i "s|<PropertyGroup>|<PropertyGroup><RepositoryType>git</RepositoryType>|" $PROJECT_DIR/$PACKAGE_NAME.csproj
             
       - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --username flobuc --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "$REGISTRY"
+        run: dotnet nuget add source --username $READ_PROXIA_GITHUB_PACKAGES_USER --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "$NUGET_REPOSITORY"
       
       - name: Install dependencies
         run: dotnet restore $PROJECT_DIR
@@ -92,7 +93,7 @@ jobs:
         run: sed -i "s|GIT_USER_ID/GIT_REPO_ID|$GITHUB_REPOSITORY|" $PROJECT_DIR/$PACKAGE_NAME.csproj
             
       - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --username flobuc --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "$REGISTRY"
+        run: dotnet nuget add source --username $READ_PROXIA_GITHUB_PACKAGES_USER --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "$NUGET_REPOSITORY"
             
       - name: Install dependencies
         run: dotnet restore $PROJECT_DIR
