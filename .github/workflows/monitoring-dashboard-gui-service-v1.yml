@@ -93,10 +93,10 @@ jobs:
         with:
           node-version: 12.x
           registry-url: ${{env.REGISTRY}}
-          
+
       - name: npm install and publish
-      - run: |
+        run: |
           cd $OUT_DIR
           npm publish
-        env:
+          env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
