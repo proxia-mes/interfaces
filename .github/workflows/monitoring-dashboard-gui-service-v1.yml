@@ -83,7 +83,7 @@ jobs:
           sudo chmod 777 -R $OUT_DIR
           ls -la $OUT_DIR
 
-      - name: Set RepositoryUrl package.json (necessary for push to GitHub)
+      - name: Set repository in package.json (necessary for push to GitHub)
         run: |
           sed -i "s|{|{\"repository\":\"https://github.com/$GITHUB_REPOSITORY\",|" $OUT_DIR/package.json
           cat $OUT_DIR/package.json
@@ -97,6 +97,6 @@ jobs:
       - run: |
           cd $OUT_DIR
           npm install
-          npm publish
+#          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
