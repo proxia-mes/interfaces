@@ -85,7 +85,7 @@ jobs:
           
       - name: Set RepositoryUrl package.json (necessary for push to GitHub)
         run: |
-          sed -i "s|{|{\"repository\":\"https://github.com/$GITHUB_REPOSITORY\"" $OUT_DIR/package.json
+          sed -i "s|{|{\"repository\":\"https://github.com/$GITHUB_REPOSITORY\"|" $OUT_DIR/package.json
           
       # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v2
