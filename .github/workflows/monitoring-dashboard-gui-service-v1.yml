@@ -14,7 +14,7 @@ env:
   INTERFACE_FILE: monitoring-dashboard-gui-service/v1/monitoring-dashboard-gui-service-v1.yaml
 
 jobs:
-  generate-controller:
+  generate-csharp-controller:
     runs-on: ubuntu-20.04
 
     env:
@@ -59,7 +59,7 @@ jobs:
       - name: Publish the package to Github Package Repository (GPR)
         run: dotnet nuget push $PROJECT_DIR/bin/Release/$PACKAGE_NAME*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source github
 
-  generate-client:
+  generate-ts-client:
     runs-on: ubuntu-20.04
 
     env:
