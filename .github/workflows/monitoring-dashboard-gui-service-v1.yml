@@ -98,5 +98,5 @@ jobs:
         run: |
           cd $OUT_DIR
           npm publish
-          env:
+        env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
