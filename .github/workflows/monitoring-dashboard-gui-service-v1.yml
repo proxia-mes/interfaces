@@ -97,7 +97,6 @@ jobs:
       - name: npm install and publish
       - run: |
           cd $OUT_DIR
-#          npm install
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
