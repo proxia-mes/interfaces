@@ -64,7 +64,7 @@ jobs:
 
     env:
       PACKAGE_NAME: '@proxia/monitoring-dashboard-gui-service-api'
-      REGISTRY: https://npm.pkg.github.com
+      REGISTRY: 'https://npm.pkg.github.com'
       
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -82,7 +82,11 @@ jobs:
         run: |
           sudo chmod 777 -R $OUT_DIR
           ls -la $OUT_DIR
-      
+          
+      - name: Set RepositoryUrl package.json (necessary for push to GitHub)
+        run: |
+          sed -i "s|{|{\"repository\":\"https://github.com/$GITHUB_REPOSITORY\"" $OUT_DIR/package.json
+          
       # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v2
         with:
