@@ -99,6 +99,7 @@ jobs:
         run: |
           cd $OUT_DIR
           npm install
+          echo ----------> Start build:
           npm run build
           
       - name: Publish the npm package to Github Package Repository (GPR)
