@@ -99,7 +99,8 @@ jobs:
         run: |
           cd $OUTDIR
           npm build
-
+          ls -la $OUT_DIR/dist
+          
       - name: Publish the npm package to Github Package Repository (GPR)
         run: |
           cd $OUT_DIR
