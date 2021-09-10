@@ -99,6 +99,7 @@ jobs:
         run: |
           cd $OUT_DIR
           npm install ng-packagr
+          npm install @angular/cli@latest
           pwd
           ls -la .
           npm run build
