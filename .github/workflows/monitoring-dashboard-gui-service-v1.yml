@@ -98,12 +98,8 @@ jobs:
       - name: Build the module 
         run: |
           cd $OUT_DIR
-          npm install -g @angular/compiler-cli
-          npm install -g ng-packagr
-          pwd
-          ls -la .
+          npm install
           npm run build
-          ls -la dist
           
       - name: Publish the npm package to Github Package Repository (GPR)
         run: |
