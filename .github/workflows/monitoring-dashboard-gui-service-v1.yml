@@ -98,8 +98,8 @@ jobs:
       - name: Build the module 
         run: |
           cd $OUT_DIR
-          npm install ng-packagr
-          npm install @angular/cli@latest
+          npm install -g ng-packagr
+          npm install -g @angular/cli@latest
           pwd
           ls -la .
           npm run build
