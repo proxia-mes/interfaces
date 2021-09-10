@@ -98,7 +98,8 @@ jobs:
       - name: Build the module 
         run: |
           cd $OUTDIR
-          npm build
+          npm install ng-packagr
+          npm run build
           ls -la $OUT_DIR/dist
           
       - name: Publish the npm package to Github Package Repository (GPR)
