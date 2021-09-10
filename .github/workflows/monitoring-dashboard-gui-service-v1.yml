@@ -99,6 +99,8 @@ jobs:
         run: |
           cd $OUTDIR
           npm install ng-packagr
+          pwd
+          ls -la .
           npm run build .
           ls -la dist
           
