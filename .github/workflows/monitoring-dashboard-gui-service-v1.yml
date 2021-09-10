@@ -84,11 +84,6 @@ jobs:
           sudo chmod 777 -R $OUT_DIR
           ls -la $OUT_DIR
 
-      - name: Set repository in package.json (necessary for push to GitHub)
-        run: |
-          sed -i "s|{|{\"repository\":\"https://github.com/$GITHUB_REPOSITORY\",|" $OUT_DIR/package.json
-          cat $OUT_DIR/package.json
-
       # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v2
         with:
@@ -101,7 +96,13 @@ jobs:
           npm install
           echo ----------> Start build:
           npm run build
-          
+
+      - name: Set repository in package.json (necessary for push to GitHub)
+        run: |
+          sed -i "s|{|{\"repository\":\"https://github.com/$GITHUB_REPOSITORY\",|" $OUT_DIR/dist/package.json
+          cat $OUT_DIR/dist/package.json
+
+
       - name: Publish the npm package to Github Package Repository (GPR)
         run: |
           cd $OUT_DIR
