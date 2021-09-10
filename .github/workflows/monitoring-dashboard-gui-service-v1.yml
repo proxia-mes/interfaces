@@ -98,7 +98,7 @@ jobs:
 
       - name: Set repository in package.json (necessary for push to GitHub)
         run: |
-          sed -i "s|\"name:\"|\"repository\":\"https://github.com/$GITHUB_REPOSITORY\",\"name:\"|" $OUT_DIR/dist/package.json
+          sed -i "s|\"name\:\"|\"repository\":\"https://github.com/$GITHUB_REPOSITORY\",\"name:\"|" $OUT_DIR/dist/package.json
           cat $OUT_DIR/dist/package.json
 
       - name: Publish the npm package to Github Package Repository (GPR)
