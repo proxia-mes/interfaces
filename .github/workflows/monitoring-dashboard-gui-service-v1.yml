@@ -94,7 +94,6 @@ jobs:
         run: |
           cd $OUT_DIR
           npm install
-          echo ----------> Start build:
           npm run build
 
       - name: Set repository in package.json (necessary for push to GitHub)
@@ -102,10 +101,9 @@ jobs:
           sed -i "s|{|{\"repository\":\"https://github.com/$GITHUB_REPOSITORY\",|" $OUT_DIR/dist/package.json
           cat $OUT_DIR/dist/package.json
 
-
       - name: Publish the npm package to Github Package Repository (GPR)
         run: |
-          cd $OUT_DIR
-          npm publish dist
+          cd $OUT_DIR/dist
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
