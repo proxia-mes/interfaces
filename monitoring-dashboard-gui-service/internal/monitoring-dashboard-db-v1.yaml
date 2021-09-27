@@ -1,0 +1,43 @@
+﻿---
+openapi: 3.0.2
+info:
+  title: Proxia MES Monitoring Dashboard Database API
+  description: Proxia MES Monitoring Dashboard Database API
+  version: '1.0.0'
+servers:
+  - url: "/proxia/mes/montoring-dashboard/db/v1"
+tags:
+  - name: data
+    description: Everything about dashboard views
+paths:
+  
+components:
+  schemas:
+    View:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of a view
+          maxLength: 10
+          minLength: 3
+        name:
+          type: string
+          description: The name of a view
+        description:
+          type: string
+          description: The description of a view
+    Widget:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of a widget
+          maxLength: 10
+          minLength: 3
+        name:
+          type: string
+          description: The name of a widget
+        description:
+          type: string
+          description: The description of a widget
