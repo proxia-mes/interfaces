@@ -11,9 +11,9 @@ on:
 env:
   READ_PROXIA_GITHUB_PACKAGES_SECRET: ${{ secrets.READ_PROXIA_GITHUB_PACKAGES_SECRET }}
   READ_PROXIA_GITHUB_PACKAGES_USER: flobuc
-  OUT_DIR: out
+  GEN_DIR: gen
   INTERFACE_FILE: configuration-service/v1/configuration-service-v1.yaml
-  NUGET_REPOSITORY: https://nuget.pkg.github.com/flobuc-proxia/index.json
+  GITHUB_NUGET_REPOSITORY: https://nuget.pkg.github.com/flobuc-proxia/index.json
 
 jobs:
   generate-csharp-controller:
@@ -21,24 +21,24 @@ jobs:
     
     env:
       PACKAGE_NAME: PAG.Mes.ConfigurationService.ControllerStub
-      PROJECT_DIR: out/src/PAG.Mes.ConfigurationService.ControllerStub
+      PROJECT_DIR: gen/src/PAG.Mes.ConfigurationService.ControllerStub
     
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Create out dir
-        run: mkdir -p $OUT_DIR
+      - name: Create gen dir
+        run: mkdir -p $GEN_DIR
         
       - name: Generate C# controller code
         uses: docker://openapitools/openapi-generator-cli
         with:
-          args: generate -o /github/workspace/${{env.OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.PACKAGE_NAME}}
+          args: generate -o /github/workspace/${{env.GEN_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.PACKAGE_NAME}}
       
       - name: Change access rights for generated sources
         run: |
-             sudo chmod 777 -R $OUT_DIR
-             ls -la $OUT_DIR
+             sudo chmod 777 -R $GEN_DIR
+             ls -la $GEN_DIR
       
       - name: Create empty Models package using packageName (small fix for generator)
         run: |
@@ -51,7 +51,7 @@ jobs:
              sed -i "s|<PropertyGroup>|<PropertyGroup><RepositoryType>git</RepositoryType>|" $PROJECT_DIR/$PACKAGE_NAME.csproj
             
       - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --username $READ_PROXIA_GITHUB_PACKAGES_USER --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "$NUGET_REPOSITORY"
+        run: dotnet nuget add source --username $READ_PROXIA_GITHUB_PACKAGES_USER --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "$GITHUB_NUGET_REPOSITORY"
       
       - name: Install dependencies
         run: dotnet restore $PROJECT_DIR
@@ -70,30 +70,30 @@ jobs:
 
     env:
       PACKAGE_NAME: PAG.Mes.ConfigurationService.Client
-      PROJECT_DIR: out/src/PAG.Mes.ConfigurationService.Client
+      PROJECT_DIR: gen/src/PAG.Mes.ConfigurationService.Client
       
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Create out dir
-        run: mkdir -p $OUT_DIR
+      - name: Create gen dir
+        run: mkdir -p $GEN_DIR
         
       - name: Generate C# client code
         uses: docker://openapitools/openapi-generator-cli
         with:
-          args: generate -o /github/workspace/${{env.OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g csharp-netcore --additional-properties targetFramework=net5.0,packageName=${{env.PACKAGE_NAME}}
+          args: generate -o /github/workspace/${{env.GEN_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g csharp-netcore --additional-properties targetFramework=net5.0,packageName=${{env.PACKAGE_NAME}}
       
       - name: Change access rights for generated sources
         run: |
-             sudo chmod 777 -R $OUT_DIR
-             ls -la $OUT_DIR
+             sudo chmod 777 -R $GEN_DIR
+             ls -la $GEN_DIR
       
       - name: Replace RepositoryUrl in csproj-File (necessary for nuget push to GitHub) 
         run: sed -i "s|GIT_USER_ID/GIT_REPO_ID|$GITHUB_REPOSITORY|" $PROJECT_DIR/$PACKAGE_NAME.csproj
             
       - name: Add GitHub Nuget Source
-        run: dotnet nuget add source --username $READ_PROXIA_GITHUB_PACKAGES_USER --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "$NUGET_REPOSITORY"
+        run: dotnet nuget add source --username $READ_PROXIA_GITHUB_PACKAGES_USER --password $READ_PROXIA_GITHUB_PACKAGES_SECRET --store-password-in-clear-text --name github "$GITHUB_NUGET_REPOSITORY"
             
       - name: Install dependencies
         run: dotnet restore $PROJECT_DIR
