@@ -107,7 +107,7 @@ paths:
           - admin
       parameters:
       - name: userId
-        in: query
+        in: path
         description: the userId
         required: true
         style: form
@@ -150,7 +150,7 @@ paths:
             - admin
       parameters:
         - name: userId
-          in: query
+          in: path
           description: the userId
           required: true
           style: form
