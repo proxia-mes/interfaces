@@ -32,7 +32,7 @@ jobs:
         run: mkdir -p $GEN_OUT_DIR
 
       - name: Get interface version from yaml and set to env
-        run: echo $INTERFACE_VERSION=`yq eval .info.version $INTERFACE_FILE` >> $GITHUB_ENV 
+        run: echo INTERFACE_VERSION=`yq eval .info.version $INTERFACE_FILE` >> $GITHUB_ENV 
 
       - name: Generate C# controller code
         uses: docker://openapitools/openapi-generator-cli
