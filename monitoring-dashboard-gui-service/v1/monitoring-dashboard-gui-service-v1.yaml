@@ -3,19 +3,19 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.1'
+  version: '1.0.2'
 servers:
 - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
-- name: dashboards
+- name: dashboard
   description: Everything about dashboard views
-- name: widgets
+- name: widget
   description: Everything about dashboard widgets
 paths:
   "/dashboards":
     get:
       tags:
-      - dashboards
+      - dashboard
       summary: returns all dashboards for a user
       parameters:
       - name: userId
@@ -52,9 +52,52 @@ paths:
           description: Internal Server Error
           content: {}
   "/dashboard/{userId}/{dashboardId}":
+    delete:
+      tags:
+        - dashboard
+      summary: deletes a dashboard for a user
+      parameters:
+        - name: userId
+          in: path
+          description: the userId
+          required: true
+          style: form
+          schema:
+            type: string
+            maxLength: 10
+            minLength: 3
+        - name: dashboardId
+          in: path
+          description: the dashboardId
+          required: true
+          style: form
+          schema:
+            type: number
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/dashboard"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
     get:
       tags:
-        - dashboards
+        - dashboard
       summary: returns a dashboard for a user
       parameters:
         - name: userId
@@ -72,9 +115,7 @@ paths:
           required: true
           style: form
           schema:
-            type: string
-            maxLength: 10
-            minLength: 3
+            type: number
       responses:
         '200':
           description: OK
@@ -100,7 +141,7 @@ paths:
   "/dashboard/{userId}":
     post:
       tags:
-        - dashboards
+        - dashboard
       summary: adds a new dashboard for a user
       security:
         - OpenID:
@@ -143,7 +184,7 @@ paths:
           content: {}
     put:
       tags:
-        - dashboards
+        - dashboard
       summary: modifies an existing dashboard for a user
       security:
         - OpenID:
