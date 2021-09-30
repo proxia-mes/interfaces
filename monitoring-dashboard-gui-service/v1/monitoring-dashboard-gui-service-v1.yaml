@@ -3,28 +3,30 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.0'
+  version: '1.0.1'
 servers:
 - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
-- name: views
+- name: dashboards
   description: Everything about dashboard views
 - name: widgets
   description: Everything about dashboard widgets
 paths:
-  "/views":
+  "/dashboards":
     get:
       tags:
-      - views
-      summary: returns all views for a user
+      - dashboards
+      summary: returns all dashboards for a user
       parameters:
       - name: userId
         in: query
-        description: ask for all Views of a specified userId
+        description: the userId
         required: true
         style: form
         schema:
           type: string
+          maxLength: 10
+          minLength: 3
       responses:
         '200':
           description: OK
@@ -33,7 +35,7 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/View"
+                  "$ref": "#/components/schemas/dashboard"
         '204':
           description: No Content
           content: {}
@@ -49,18 +51,64 @@ paths:
         '500':
           description: Internal Server Error
           content: {}
-  "/view":
+  "/dashboard/{userId}/{dashboardId}":
+    get:
+      tags:
+        - dashboards
+      summary: returns a dashboard for a user
+      parameters:
+        - name: userId
+          in: path
+          description: the userId
+          required: true
+          style: form
+          schema:
+            type: string
+            maxLength: 10
+            minLength: 3
+        - name: dashboardId
+          in: path
+          description: the dashboardId
+          required: true
+          style: form
+          schema:
+            type: string
+            maxLength: 10
+            minLength: 3
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/dashboard"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/dashboard/{userId}":
     post:
       tags:
-      - views
-      summary: adds a new view for a user
+        - dashboards
+      summary: adds a new dashboard for a user
       security:
         - OpenID:
           - admin
       parameters:
       - name: userId
         in: query
-        description: ask for all Views of a specified userId
+        description: the userId
         required: true
         style: form
         schema:
@@ -68,11 +116,11 @@ paths:
           maxLength: 10
           minLength: 3
       requestBody:
-        description: View object that needs to be added for the user
+        description: dashboard object
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/View"
+              "$ref": "#/components/schemas/dashboard"
         required: true
       responses:
         '200':
@@ -93,117 +141,176 @@ paths:
         '500':
           description: Internal Server Error
           content: {}
-  "/view/{viewId}":
-    get:
+    put:
       tags:
-      - views
-      summary: returns a view for a user
+        - dashboards
+      summary: modifies an existing dashboard for a user
+      security:
+        - OpenID:
+            - admin
       parameters:
-      - name: userId
-        in: query
-        description: ask for a view of a specified userId
+        - name: userId
+          in: query
+          description: the userId
+          required: true
+          style: form
+          schema:
+            type: string
+            maxLength: 10
+            minLength: 3
+      requestBody:
+        description: dashboard object
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/dashboard"
         required: true
-        style: form
-        schema:
-          type: string
-      - name: viewId
-        in: path
-        description: ask for a View of a specified viewId
-        required: true
-        schema:
-          type: string
       responses:
         '200':
           description: OK
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/View"
-        '204':
-          description: No Content
-          content: {}
+          content: { }
         '400':
           description: Bad Request
-          content: {}
+          content: { }
         '401':
           description: Unauthorized
-          content: {}
+          content: { }
         '403':
           description: Forbidden
-          content: {}
+          content: { }
+        '409':
+          description: Conflict
+          content: { }
         '500':
           description: Internal Server Error
-          content: {}
-  "/widgets":
-    get:
-      tags:
-      - widgets
-      summary: returns all widgets for a user and a dashboard
-      parameters:
-      - name: userId
-        in: query
-        required: true
-        style: form
-        schema:
-          type: string
-      - name: dashboardId
-        in: query
-        required: true
-        style: form
-        schema:
-          type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/Widget"
-        '400':
-          description: Bad Request
-          content: {}
-        '401':
-          description: Unauthorized
-          content: {}
-        '403':
-          description: Forbidden
-          content: {}
-        '500':
-          description: Internal Server Error
-          content: {}
+          content: { }
 components:
   securitySchemes:
     OpenID:
       type: openIdConnect
       openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
   schemas:
-    View:
+    dashboard:
       type: object
+      required:
+        - id
+        - name
+        - widgets
       properties:
         id:
-          type: string
-          description: The id of a view
-          maxLength: 10
-          minLength: 3
+          type: number
+          description: The id of a dashboard
+          nullable: false
         name:
           type: string
-          description: The name of a view
-        description:
-          type: string
-          description: The description of a view
-    Widget:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of a widget
+          description: The name of a dashboard
           maxLength: 10
           minLength: 3
-        name:
-          type: string
-          description: The name of a widget
+          nullable: false
         description:
           type: string
-          description: The description of a widget
+          description: The description of a dashboard
+          maxLength: 255
+          minLength: 0
+          nullable: false
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/widget'
+          minItems: 0
+          maxItems: 100
+          nullable: false
+    widget:
+        type: object
+        required:
+          - id
+          - name
+          - performance_indicator
+          - resource
+          - visualitation
+        properties:
+          id:
+            type: number
+            description: The id of a widget
+            nullable: false
+          name:
+            type: string
+            description: The name of a widget
+            maxLength: 10
+            minLength: 3
+            nullable: false
+          description:
+            type: string
+            description: The description of a widget
+            maxLength: 255
+            minLength: 0
+            nullable: false
+          performance_indicator:
+            type: string
+            description: The performance-indicator visualized by the widget
+            enum:
+              - 'RESOURCE_STATE'
+              - 'RESOURCE_UTILIZATION'
+              - 'TIMELINESS_ORDER_PLANNING'
+            nullable: false
+          resource:
+            type: string
+            description: The resource visualized by the widget
+            enum:
+              - 'MACHINE'
+              - 'WORKPLACE'
+              - 'PERSON'
+            nullable: false
+          time_period:
+            type: string
+            description: The time-period visualized by the widget
+            enum:
+              - 'LAST_5_MIN'
+              - 'LAST_15_MIN'
+              - 'LAST_30_MIN'
+              - 'LAST_1_HOUR'
+              - 'LAST_4_HOUR'
+              - 'LAST_SHIFT'
+              - 'WORKDAY'
+              - 'WORKWEEK'
+              - 'MONTH'
+            nullable: false
+          time_moment:
+            type: string
+            description: The time-moment visualized by the widget
+            enum:
+              - 'NOW'
+              - 'CURRENT_SHIFT_START'
+              - 'CURRENT_SHIFT_STOP'
+              - 'LAST_SHIFT_START'
+              - 'LAST_SHIFT_STOP'
+              - 'PENULTIMATE_SHIFT_START'
+              - 'PENULTIMATE_SHIFT_STOP'
+            nullable: false
+          visualitation:
+            type: string
+            description: The visualitation of the widget
+            enum:
+              - 'STACKED_HORIZONTAL_BAR_CHART'
+              - 'BAR_CHART'
+              - 'PIE_CHART'
+              - 'LINE_CHART'
+              - 'VALUE_WITH_SPARKLINE'
+              - 'TREE_MAP_CHART'
+              - 'VALUE_CARD'
+            nullable: false
+          unit:
+            type: string
+            description: The time unit for grouping summarizing charts
+            enum:
+              - 'MINUTE'
+              - 'HOUR'
+              - 'SHIFT'
+              - 'WORKDAY'
+              - 'WORKWEEK'
+            nullable: false
+          calc_no_shift_time:
+            type: boolean
+            description: if it is a summarizing visualisation calc no shift time
+            default: false
+            nullable: false
