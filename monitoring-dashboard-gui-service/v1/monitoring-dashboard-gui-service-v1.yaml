@@ -3,30 +3,30 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.3'
+  version: '1.0.4'
 servers:
-- url: "/proxia/mes/montoring-dashboard/gui-service/v1"
+  - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
-- name: dashboard
-  description: Everything about dashboard views
-- name: widget
-  description: Everything about dashboard widgets
+  - name: dashboard
+    description: Everything about dashboard views
+  - name: widget
+    description: Everything about dashboard widgets
 paths:
   "/dashboards":
     get:
       tags:
-      - dashboard
+        - dashboard
       summary: returns all dashboards for a user
       parameters:
-      - name: userId
-        in: query
-        description: the userId
-        required: true
-        style: form
-        schema:
-          type: string
-          maxLength: 10
-          minLength: 3
+        - name: userId
+          in: query
+          description: the userId
+          required: true
+          style: form
+          schema:
+            type: string
+            maxLength: 10
+            minLength: 3
       responses:
         '200':
           description: OK
@@ -38,19 +38,19 @@ paths:
                   "$ref": "#/components/schemas/dashboard"
         '204':
           description: No Content
-          content: {}
+          content: { }
         '400':
           description: Bad Request
-          content: {}
+          content: { }
         '401':
           description: Unauthorized
-          content: {}
+          content: { }
         '403':
           description: Forbidden
-          content: {}
+          content: { }
         '500':
           description: Internal Server Error
-          content: {}
+          content: { }
   "/dashboard/{userId}/{dashboardId}":
     delete:
       tags:
@@ -145,17 +145,17 @@ paths:
       summary: adds a new dashboard for a user
       security:
         - OpenID:
-          - admin
+            - admin
       parameters:
-      - name: userId
-        in: path
-        description: the userId
-        required: true
-        style: form
-        schema:
-          type: string
-          maxLength: 10
-          minLength: 3
+        - name: userId
+          in: path
+          description: the userId
+          required: true
+          style: form
+          schema:
+            type: string
+            maxLength: 10
+            minLength: 3
       requestBody:
         description: dashboard object
         content:
@@ -166,22 +166,22 @@ paths:
       responses:
         '200':
           description: OK
-          content: {}
+          content: { }
         '400':
           description: Bad Request
-          content: {}
+          content: { }
         '401':
           description: Unauthorized
-          content: {}
+          content: { }
         '403':
           description: Forbidden
-          content: {}
+          content: { }
         '409':
           description: Conflict
-          content: {}
+          content: { }
         '500':
           description: Internal Server Error
-          content: {}
+          content: { }
     put:
       tags:
         - dashboard
@@ -241,125 +241,130 @@ components:
         id:
           type: number
           description: The id of a dashboard
-          nullable: false
         name:
           type: string
           description: The name of a dashboard
           maxLength: 10
           minLength: 3
-          nullable: false
         description:
           type: string
           description: The description of a dashboard
           maxLength: 255
           minLength: 0
-          nullable: false
         widgets:
           type: array
           items:
             $ref: '#/components/schemas/widget'
           minItems: 0
           maxItems: 100
-          nullable: false
     widget:
-        type: object
-        required:
-          - id
-          - name
-          - performance_indicator
-          - resource
-          - time_nature
-          - time
-          - visualitation
-        properties:
-          id:
-            type: number
-            description: The id of a widget
-            nullable: false
-          name:
-            type: string
-            description: The name of a widget
-            maxLength: 10
-            minLength: 3
-            nullable: false
-          description:
-            type: string
-            description: The description of a widget
-            maxLength: 255
-            minLength: 0
-            nullable: false
-          performance_indicator:
-            type: string
-            description: The performance-indicator visualized by the widget
-            enum:
-              - 'RESOURCE_STATE'
-              - 'RESOURCE_UTILIZATION'
-              - 'TIMELINESS_ORDER_PLANNING'
-            nullable: false
-          resource:
-            type: string
-            description: The resource visualized by the widget
-            enum:
-              - 'MACHINE'
-              - 'WORKPLACE'
-              - 'PERSON'
-            nullable: false
-          time_nature:
-            type: string
-            description: The nature of time visualisation
-            enum:
-              - 'PERIOD'
-              - 'MOMENT'
-          time:
-            type: string
-            description: The time visualized by the widget
-            enum:
-              - 'LAST_5_MIN'
-              - 'LAST_15_MIN'
-              - 'LAST_30_MIN'
-              - 'LAST_1_HOUR'
-              - 'LAST_4_HOUR'
-              - 'LAST_SHIFT'
-              - 'WORKDAY'
-              - 'WORKWEEK'
-              - 'MONTH'
-              - 'NOW'
-              - 'CURRENT_SHIFT_START'
-              - 'CURRENT_SHIFT_STOP'
-              - 'LAST_SHIFT_START'
-              - 'LAST_SHIFT_STOP'
-              - 'PENULTIMATE_SHIFT_START'
-              - 'PENULTIMATE_SHIFT_STOP'
-            nullable: false
-          visualitation:
-            type: string
-            description: The visualitation of the widget
-            enum:
-              - 'STACKED_HORIZONTAL_BAR_CHART'
-              - 'BAR_CHART'
-              - 'PIE_CHART'
-              - 'LINE_CHART'
-              - 'VALUE_WITH_SPARKLINE'
-              - 'TREE_MAP_CHART'
-              - 'VALUE_CARD'
-            nullable: false
-          summarizing_chart:
-            type: boolean
-            description: Is for the choosen visualitation a summary necessary
-            default: false
-            nullable: false
-          summarizing_unit:
-            type: string
-            description: The time unit for grouping summarizing charts
-            enum:
-              - 'MINUTE'
-              - 'HOUR'
-              - 'SHIFT'
-              - 'WORKDAY'
-              - 'WORKWEEK'
-            nullable: false
-          calc_no_shift_time:
-            type: boolean
-            description: calc no shift time on summarizing visualisation
-            default: false
-            nullable: false
+      type: object
+      required:
+        - id
+        - name
+        - performance_indicator
+        - resource
+        - time
+        - chart
+      properties:
+        id:
+          type: number
+          description: The id of a widget
+        name:
+          type: string
+          description: The name of a widget
+          maxLength: 10
+          minLength: 3
+        description:
+          type: string
+          description: The description of a widget
+          maxLength: 255
+          minLength: 0
+        performance_indicator:
+          type: string
+          description: The performance-indicator visualized by the widget
+          enum:
+            - 'RESOURCE_STATE'
+            - 'RESOURCE_UTILIZATION'
+            - 'TIMELINESS_ORDER_PLANNING'
+        resource:
+          type: string
+          description: The resource visualized by the widget
+          enum:
+            - 'MACHINE'
+            - 'WORKPLACE'
+            - 'PERSON'
+        time:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/time_moments'
+            - $ref: '#/components/schemas/time_periods'
+        chart:
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/summarizing_chart'
+            - $ref: '#/components/schemas/timeline_chart'
+            - $ref: '#/components/schemas/time_moment_chart'
+    time_moments:
+      type: string
+      enum:
+        - 'NOW'
+        - 'CURRENT_SHIFT_START'
+        - 'CURRENT_SHIFT_STOP'
+        - 'LAST_SHIFT_START'
+        - 'LAST_SHIFT_STOP'
+        - 'PENULTIMATE_SHIFT_START'
+        - 'PENULTIMATE_SHIFT_STOP'
+    time_periods:
+      type: string
+      enum:
+        - 'LAST_5_MIN'
+        - 'LAST_15_MIN'
+        - 'LAST_30_MIN'
+        - 'LAST_1_HOUR'
+        - 'LAST_4_HOUR'
+        - 'LAST_SHIFT'
+        - 'WORKDAY'
+        - 'WORKWEEK'
+        - 'MONTH'
+    timeline_chart:
+      type: string
+      description: The chart for a timeline
+      enum:
+        - 'STACKED_HORIZONTAL_BAR_CHART'
+    time_moment_chart:
+      type: string
+      description: The chart for a time_moment
+      enum:
+        - 'VALUE_CARD'
+    summarizing_chart:
+      type: object
+      required: 
+        - chart
+        - unit
+      properties: 
+        chart:
+          type: string
+          description: The visualitation of the widget
+          enum:
+            - 'BAR_CHART'
+            - 'PIE_CHART'
+            - 'LINE_CHART'
+            - 'VALUE_WITH_SPARKLINE'
+            - 'TREE_MAP_CHART'
+        unit:
+          type: string
+          description: The time unit for grouping summarizing charts
+          enum:
+            - 'MINUTE'
+            - 'HOUR'
+            - 'SHIFT'
+            - 'WORKDAY'
+            - 'WORKWEEK'
+        calc_no_shift_time:
+          type: boolean
+          description: calc no shift time on summarizing visualisation
+          default: false
+          
+          
+       
