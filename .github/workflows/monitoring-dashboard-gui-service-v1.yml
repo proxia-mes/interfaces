@@ -80,7 +80,7 @@ jobs:
       - name: Generate angular typescript client code
         uses: docker://openapitools/openapi-generator-cli
         with:
-          args: generate -o /github/workspace/${{env.GEN_OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g typescript-angular --additional-properties npmName=${{env.PACKAGE_NAME}},npmRepository=${{env.GITHUB_NPM_REGISTRY}}
+          args: generate -o /github/workspace/${{env.GEN_OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g typescript-angular --additional-properties npmName=${{env.PACKAGE_NAME}},npmRepository=${{env.GITHUB_NPM_REGISTRY}},stringEnums=true
 
       - name: Change access rights for generated sources
         run: |
