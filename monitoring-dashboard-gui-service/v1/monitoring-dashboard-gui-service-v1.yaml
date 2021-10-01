@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.2'
+  version: '1.0.3'
 servers:
 - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -268,6 +268,8 @@ components:
           - name
           - performance_indicator
           - resource
+          - time_nature
+          - time
           - visualitation
         properties:
           id:
@@ -302,9 +304,15 @@ components:
               - 'WORKPLACE'
               - 'PERSON'
             nullable: false
-          time_period:
+          time_nature:
             type: string
-            description: The time-period visualized by the widget
+            description: The nature of time visualisation
+            enum:
+              - 'PERIOD'
+              - 'MOMENT'
+          time:
+            type: string
+            description: The time visualized by the widget
             enum:
               - 'LAST_5_MIN'
               - 'LAST_15_MIN'
@@ -315,11 +323,6 @@ components:
               - 'WORKDAY'
               - 'WORKWEEK'
               - 'MONTH'
-            nullable: false
-          time_moment:
-            type: string
-            description: The time-moment visualized by the widget
-            enum:
               - 'NOW'
               - 'CURRENT_SHIFT_START'
               - 'CURRENT_SHIFT_STOP'
@@ -340,7 +343,12 @@ components:
               - 'TREE_MAP_CHART'
               - 'VALUE_CARD'
             nullable: false
-          unit:
+          summarizing_chart:
+            type: boolean
+            description: Is for the choosen visualitation a summary necessary
+            default: false
+            nullable: false
+          summarizing_unit:
             type: string
             description: The time unit for grouping summarizing charts
             enum:
@@ -352,6 +360,6 @@ components:
             nullable: false
           calc_no_shift_time:
             type: boolean
-            description: if it is a summarizing visualisation calc no shift time
+            description: calc no shift time on summarizing visualisation
             default: false
             nullable: false
