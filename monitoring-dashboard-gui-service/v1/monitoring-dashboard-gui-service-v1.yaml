@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.5'
+  version: '1.0.6'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -331,7 +331,7 @@ components:
       type: string
       description: The chart for a timeline
       enum:
-        - 'STACKED_HORIZONTAL_BAR_CHART'
+        - 'TIMELINE_CHART'
     time_moment_chart:
       type: string
       description: The chart for a time_moment
