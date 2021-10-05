@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.8'
+  version: '1.0.9'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -280,19 +280,9 @@ components:
           maxLength: 255
           minLength: 0
         performance_indicator:
-          type: string
-          description: The performance-indicator visualized by the widget
-          enum:
-            - 'RESOURCE_STATE'
-            - 'RESOURCE_UTILIZATION'
-            - 'TIMELINESS_ORDER_PLANNING'
-        resource:
-          type: string
-          description: The resource visualized by the widget
-          enum:
-            - 'MACHINE'
-            - 'WORKPLACE'
-            - 'PERSON'
+          oneOf:
+            - $ref: '#/components/schemas/resource_pki'
+            - $ref: '#/components/schemas/timeliness_pki'
         time:
           oneOf:
             - $ref: '#/components/schemas/time_moment'
@@ -436,5 +426,39 @@ components:
       format: int32
       default: 1
       description: the number of widget time units the value must exceed the threshold 
-      
-  
+    resource_pki:
+      type: object
+      description: pki for a resource
+      required: 
+        - name
+        - nature
+        - resource
+      properties: 
+        nature:
+          type: string
+          description: The performance-indicator visualized by the widget
+          enum:
+            - 'RESOURCE_STATE'
+            - 'RESOURCE_UTILIZATION'
+        resource:
+          type: string
+          description: The resource visualized by the widget
+          enum:
+            - 'MACHINE'
+            - 'WORKPLACE'
+            - 'PERSON'
+        name:
+          type: string
+          description: the name of the resource
+          minLength: 1
+          maxLength: 100
+    timeliness_pki:
+      type: object
+      description: pki for a resource
+      properties:
+        nature:
+          type: string
+          description: The performance-indicator visualized by the widget
+          enum:
+            - 'TIMELINESS_ORDER_PLANNING'
+        
