@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.6'
+  version: '1.0.7'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -263,7 +263,6 @@ components:
         - id
         - name
         - performance_indicator
-        - resource
         - time
         - chart
       properties:
@@ -295,16 +294,16 @@ components:
             - 'WORKPLACE'
             - 'PERSON'
         time:
-          type: object
           oneOf:
             - $ref: '#/components/schemas/time_moments'
             - $ref: '#/components/schemas/time_periods'
         chart:
-          type: object
           oneOf:
             - $ref: '#/components/schemas/summarizing_chart'
             - $ref: '#/components/schemas/timeline_chart'
             - $ref: '#/components/schemas/time_moment_chart'
+        threshold:
+          $ref: '#/components/schemas/threshold'
     time_moments:
       type: string
       enum:
@@ -365,6 +364,16 @@ components:
           type: boolean
           description: calc no shift time on summarizing visualisation
           default: false
-          
+    threshold:
+      type: object
+      description: the tresholds of the widget
+      properties: 
+        low:
+          type: number
+        medium:
+          type: number
+        high:
+          type: number
+              
           
        
