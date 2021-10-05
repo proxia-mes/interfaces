@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.7'
+  version: '1.0.8'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -61,7 +61,7 @@ paths:
           in: path
           description: the userId
           required: true
-          style: form
+          style: simple
           schema:
             type: string
             maxLength: 10
@@ -70,7 +70,7 @@ paths:
           in: path
           description: the dashboardId
           required: true
-          style: form
+          style: simple
           schema:
             type: number
       responses:
@@ -104,7 +104,7 @@ paths:
           in: path
           description: the userId
           required: true
-          style: form
+          style: simple
           schema:
             type: string
             maxLength: 10
@@ -113,7 +113,7 @@ paths:
           in: path
           description: the dashboardId
           required: true
-          style: form
+          style: simple
           schema:
             type: number
       responses:
@@ -151,7 +151,7 @@ paths:
           in: path
           description: the userId
           required: true
-          style: form
+          style: simple
           schema:
             type: string
             maxLength: 10
@@ -194,7 +194,7 @@ paths:
           in: path
           description: the userId
           required: true
-          style: form
+          style: simple
           schema:
             type: string
             maxLength: 10
@@ -295,37 +295,46 @@ components:
             - 'PERSON'
         time:
           oneOf:
-            - $ref: '#/components/schemas/time_moments'
-            - $ref: '#/components/schemas/time_periods'
+            - $ref: '#/components/schemas/time_moment'
+            - $ref: '#/components/schemas/time_period'
         chart:
           oneOf:
             - $ref: '#/components/schemas/summarizing_chart'
             - $ref: '#/components/schemas/timeline_chart'
             - $ref: '#/components/schemas/time_moment_chart'
-        threshold:
-          $ref: '#/components/schemas/threshold'
-    time_moments:
-      type: string
-      enum:
-        - 'NOW'
-        - 'CURRENT_SHIFT_START'
-        - 'CURRENT_SHIFT_STOP'
-        - 'LAST_SHIFT_START'
-        - 'LAST_SHIFT_STOP'
-        - 'PENULTIMATE_SHIFT_START'
-        - 'PENULTIMATE_SHIFT_STOP'
-    time_periods:
-      type: string
-      enum:
-        - 'LAST_5_MIN'
-        - 'LAST_15_MIN'
-        - 'LAST_30_MIN'
-        - 'LAST_1_HOUR'
-        - 'LAST_4_HOUR'
-        - 'LAST_SHIFT'
-        - 'WORKDAY'
-        - 'WORKWEEK'
-        - 'MONTH'
+    time_moment:
+      type: object
+      required:
+        - moment
+      properties:
+        moment:
+          type: string
+          nullable: false
+          enum:
+            - 'NOW'
+            - 'CURRENT_SHIFT_START'
+            - 'CURRENT_SHIFT_STOP'
+            - 'LAST_SHIFT_START'
+            - 'LAST_SHIFT_STOP'
+            - 'PENULTIMATE_SHIFT_START'
+            - 'PENULTIMATE_SHIFT_STOP'
+    time_period:
+      type: object
+      required:
+        - period
+      properties:
+        period:
+          type: string
+          enum:
+            - 'LAST_5_MIN'
+            - 'LAST_15_MIN'
+            - 'LAST_30_MIN'
+            - 'LAST_1_HOUR'
+            - 'LAST_4_HOUR'
+            - 'LAST_SHIFT'
+            - 'WORKDAY'
+            - 'WORKWEEK'
+            - 'MONTH'
     timeline_chart:
       type: string
       description: The chart for a timeline
@@ -338,10 +347,10 @@ components:
         - 'VALUE_CARD'
     summarizing_chart:
       type: object
-      required: 
+      required:
         - chart
         - unit
-      properties: 
+      properties:
         chart:
           type: string
           description: The visualitation of the widget
@@ -364,16 +373,68 @@ components:
           type: boolean
           description: calc no shift time on summarizing visualisation
           default: false
-    threshold:
+        threshold:
+          anyOf:
+            - $ref: '#/components/schemas/threshold_low'
+            - $ref: '#/components/schemas/threshold_medium'
+            - $ref: '#/components/schemas/threshold_high'
+    threshold_low:
       type: object
-      description: the tresholds of the widget
-      properties: 
+      description: the low tresholds of the widget
+      required:
+        - low
+      properties:
         low:
-          type: number
+          type: object
+          required:
+            - value
+            - duration
+          properties:
+            value:
+              $ref: '#/components/schemas/threshold_value'
+            duration:
+              $ref: '#/components/schemas/threshold_duration'
+    threshold_medium:
+      type: object
+      description: the medium tresholds of the widget
+      required:
+        - medium
+      properties:
         medium:
-          type: number
+          type: object
+          required:
+            - value
+            - duration
+          properties:
+            value:
+              $ref: '#/components/schemas/threshold_value'
+            duration:
+              $ref: '#/components/schemas/threshold_duration'
+    threshold_high:
+      type: object
+      description: the high tresholds of the widget
+      required:
+        - high
+      properties:
         high:
-          type: number
-              
-          
-       
+          type: object
+          required:
+            - value
+            - duration
+          properties:
+            value:
+              $ref: '#/components/schemas/threshold_value'
+            duration:
+              $ref: '#/components/schemas/threshold_duration'
+    threshold_value:
+      type: string
+      description: the value of the threshold
+      minLength: 1
+      maxLength: 100
+    threshold_duration:
+      type: number
+      format: int32
+      default: 1
+      description: the number of widget time units the value must exceed the threshold 
+      
+  
