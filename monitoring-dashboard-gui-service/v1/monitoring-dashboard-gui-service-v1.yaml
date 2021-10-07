@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.11'
+  version: '1.0.12'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -299,16 +299,6 @@ components:
           format: int32
           minimum: 1
           maximum: 100
-        width:
-          type: number
-          format: int32
-          minimum: 1
-          maximum: 1000
-        height:
-          type: number
-          format: int32
-          minimum: 1
-          maximum: 1000
         performance_indicator:
           oneOf:
             - $ref: '#/components/schemas/resource_pki'
