@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.12'
+  version: '1.0.13'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -346,22 +346,32 @@ components:
             - 'WORKWEEK'
             - 'MONTH'
     timeline_chart:
-      type: string
-      description: The chart for a timeline
-      enum:
-        - 'TIMELINE_CHART'
+      type: object
+      required:
+        - timeline_chart
+      properties:
+        timeline_chart:
+          type: string
+          description: The chart for a timeline
+          enum:
+            - 'TIMELINE_CHART'
     time_moment_chart:
-      type: string
-      description: The chart for a time_moment
-      enum:
-        - 'VALUE_CARD'
+      type: object
+      required:
+        - time_moment_chart
+      properties:
+        time_moment_chart:
+          type: string
+          description: The visualitation of the widget
+          enum:
+            - 'VALUE_CARD'
     summarizing_chart:
       type: object
       required:
         - chart
         - unit
       properties:
-        chart:
+        summarizing_chart:
           type: string
           description: The visualitation of the widget
           enum:
