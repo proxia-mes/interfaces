@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-20.04
     
     env:
-      INTERFACE_FILE: configuration-service/v1/proxia-mes-erp-interface-v1.yaml
+      INTERFACE_FILE: connector-service/v1/proxia-mes-erp-interface-v1.yaml
       PACKAGE_NAME: PAG.Mes.Connector.ERPService.ControllerStub
       PROJECT_DIR: gen/src/PAG.Mes.Connector.ERPService.ControllerStub
     
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
-      INTERFACE_FILE: configuration-service/v1/erp-mes-interface-v1.yaml
+      INTERFACE_FILE: connector-service/v1/erp-mes-interface-v1.yaml
       PACKAGE_NAME: PAG.Mes.Connector.ERPService.Client
       PROJECT_DIR: gen/src/PAG.Mes.Connector.ERPService.Client
       
