@@ -1,4 +1,4 @@
-name: configuration-service-v1
+name: connector-service-v1
 
 on:
   push:
