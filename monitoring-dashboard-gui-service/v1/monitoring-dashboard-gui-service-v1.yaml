@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.13'
+  version: '1.0.14'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -300,18 +300,25 @@ components:
           minimum: 1
           maximum: 100
         performance_indicator:
-          oneOf:
-            - $ref: '#/components/schemas/resource_pki'
-            - $ref: '#/components/schemas/timeliness_pki'
+          properties:
+            resource_pki:
+              $ref: '#/components/schemas/resource_pki'
+            timeliness_pki:
+              $ref: '#/components/schemas/timeliness_pki'
         time:
-          oneOf:
-            - $ref: '#/components/schemas/time_moment'
-            - $ref: '#/components/schemas/time_period'
+          properties: 
+            time_moment:
+              $ref: '#/components/schemas/time_moment'
+            time_period:    
+             $ref: '#/components/schemas/time_period'
         chart:
-          oneOf:
-            - $ref: '#/components/schemas/summarizing_chart'
-            - $ref: '#/components/schemas/timeline_chart'
-            - $ref: '#/components/schemas/time_moment_chart'
+          properties:
+            summarizing_chart:
+              $ref: '#/components/schemas/summarizing_chart'
+            timeline_chart:
+              $ref: '#/components/schemas/timeline_chart'
+            time_moment_chart:
+              $ref: '#/components/schemas/time_moment_chart'
     time_moment:
       type: object
       required:
@@ -347,33 +354,26 @@ components:
             - 'MONTH'
     timeline_chart:
       type: object
-      required:
-        - timeline_chart
       properties:
-        timeline_chart:
+        visualization:
           type: string
-          description: The chart for a timeline
+          description: The visualization of the widget
           enum:
             - 'TIMELINE_CHART'
     time_moment_chart:
       type: object
-      required:
-        - time_moment_chart
       properties:
-        time_moment_chart:
+        visualization:
           type: string
-          description: The visualitation of the widget
+          description: The visualization of the widget
           enum:
             - 'VALUE_CARD'
     summarizing_chart:
       type: object
-      required:
-        - chart
-        - unit
       properties:
-        summarizing_chart:
+        visualization:
           type: string
-          description: The visualitation of the widget
+          description: The visualization of the widget
           enum:
             - 'BAR_CHART'
             - 'PIE_CHART'
@@ -394,76 +394,35 @@ components:
           description: calc no shift time on summarizing visualisation
           default: false
         threshold:
-          anyOf:
-            - $ref: '#/components/schemas/threshold_low'
-            - $ref: '#/components/schemas/threshold_medium'
-            - $ref: '#/components/schemas/threshold_high'
-    threshold_low:
-      type: object
-      description: the low tresholds of the widget
-      required:
-        - low
-      properties:
-        low:
-          type: object
-          required:
-            - value
-            - duration
           properties:
-            value:
-              $ref: '#/components/schemas/threshold_value'
-            duration:
-              $ref: '#/components/schemas/threshold_duration'
-    threshold_medium:
+            low:
+              $ref: '#/components/schemas/threshold'
+            medium:
+              $ref: '#/components/schemas/threshold'
+            high:
+              $ref: '#/components/schemas/threshold'
+    threshold:
       type: object
-      description: the medium tresholds of the widget
-      required:
-        - medium
+      description: a treshold of a widget
       properties:
-        medium:
-          type: object
-          required:
-            - value
-            - duration
-          properties:
-            value:
-              $ref: '#/components/schemas/threshold_value'
-            duration:
-              $ref: '#/components/schemas/threshold_duration'
-    threshold_high:
-      type: object
-      description: the high tresholds of the widget
-      required:
-        - high
-      properties:
-        high:
-          type: object
-          required:
-            - value
-            - duration
-          properties:
-            value:
-              $ref: '#/components/schemas/threshold_value'
-            duration:
-              $ref: '#/components/schemas/threshold_duration'
-    threshold_value:
-      type: string
-      description: the value of the threshold
-      minLength: 1
-      maxLength: 100
-    threshold_duration:
-      type: number
-      format: int32
-      default: 1
-      description: the number of widget time units the value must exceed the threshold 
+        value:
+          type: string
+          description: the value of the threshold
+          minLength: 1
+          maxLength: 100
+        duration:
+          type: number
+          format: int32
+          default: 1
+          description: the number of widget time units the value must exceed the threshold
     resource_pki:
       type: object
       description: pki for a resource
-      required: 
+      required:
         - name
         - nature
         - resource
-      properties: 
+      properties:
         nature:
           type: string
           description: The performance-indicator visualized by the widget
