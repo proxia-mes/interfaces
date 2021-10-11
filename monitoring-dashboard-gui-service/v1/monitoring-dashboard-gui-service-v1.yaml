@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.17'
+  version: '1.0.18'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -419,6 +419,7 @@ components:
           description: calc no shift time on summarizing visualisation
           default: false
         threshold:
+          type: object
           properties:
             low:
               $ref: '#/components/schemas/threshold'
