@@ -313,7 +313,14 @@ components:
             timeliness_pki:
               $ref: '#/components/schemas/timeliness_pki'
         time:
-          properties: 
+          required:
+            - type
+          properties:
+            'type':
+              type: string
+              enum:
+                - 'time_moment'
+                - 'time_period'
             time_moment:
               $ref: '#/components/schemas/time_moment'
             time_period:    
