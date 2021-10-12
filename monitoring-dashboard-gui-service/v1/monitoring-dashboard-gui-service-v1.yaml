@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.21'
+  version: '1.0.22'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -20,13 +20,10 @@ paths:
       parameters:
         - name: userId
           in: query
-          description: the userId
           required: true
           style: form
           schema:
-            type: string
-            maxLength: 10
-            minLength: 3
+            $ref: "#/components/schemas/userId"
       responses:
         '200':
           description: OK
@@ -35,7 +32,7 @@ paths:
               schema:
                 type: array
                 items:
-                  "$ref": "#/components/schemas/dashboard"
+                  $ref: "#/components/schemas/dashboard"
         '204':
           description: No Content
           content: { }
@@ -59,30 +56,23 @@ paths:
       parameters:
         - name: userId
           in: path
-          description: the userId
           required: true
           style: simple
           schema:
-            type: string
-            maxLength: 10
-            minLength: 3
+            $ref: "#/components/schemas/userId"
         - name: dashboardId
           in: path
-          description: the dashboardId
           required: true
           style: simple
           schema:
-            type: string
-            description: The id of a dashboard
-            maxLength: 50
-            minLength: 10
+            $ref: "#/components/schemas/dashboardId"
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/dashboard"
+                $ref: "#/components/schemas/dashboard"
         '204':
           description: No Content
           content: { }
@@ -105,30 +95,23 @@ paths:
       parameters:
         - name: userId
           in: path
-          description: the userId
           required: true
           style: simple
           schema:
-            type: string
-            maxLength: 10
-            minLength: 3
+            $ref: "#/components/schemas/userId"
         - name: dashboardId
           in: path
-          description: the dashboardId
           required: true
           style: simple
           schema:
-            type: string
-            description: The id of a dashboard
-            maxLength: 50
-            minLength: 10
+            $ref: "#/components/schemas/dashboardId"
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/dashboard"
+                $ref: "#/components/schemas/dashboard"
         '204':
           description: No Content
           content: { }
@@ -159,15 +142,13 @@ paths:
           required: true
           style: simple
           schema:
-            type: string
-            maxLength: 10
-            minLength: 3
+            $ref: "#/components/schemas/userId"
       requestBody:
         description: dashboard object
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/dashboard"
+              $ref: "#/components/schemas/dashboard"
         required: true
       responses:
         '200':
@@ -202,15 +183,13 @@ paths:
           required: true
           style: simple
           schema:
-            type: string
-            maxLength: 10
-            minLength: 3
+            $ref: "#/components/schemas/userId"
       requestBody:
         description: dashboard object
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/dashboard"
+              $ref: "#/components/schemas/dashboard"
         required: true
       responses:
         '200':
@@ -237,6 +216,17 @@ components:
       type: openIdConnect
       openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
   schemas:
+    userId:
+      type: string
+      description: the userId
+      maxLength: 255
+      minLength: 3
+    dashboardId:
+      type: string
+      description: The unque id of a dashboard (UUID4)
+      example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 10
     dashboard:
       type: object
       required:
@@ -245,14 +235,11 @@ components:
         - widgets
       properties:
         id:
-          type: string
-          description: The id of a dashboard
-          maxLength: 50
-          minLength: 10
+          $ref: '#/components/schemas/dashboardId'
         name:
           type: string
           description: The name of a dashboard
-          maxLength: 10
+          maxLength: 100
           minLength: 3
         description:
           type: string
@@ -276,13 +263,14 @@ components:
       properties:
         id:
           type: string
-          description: The id of a dashboard
+          description: The unque id of a widget (UUID4)
+          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
           maxLength: 50
           minLength: 10
         name:
           type: string
           description: The name of a widget
-          maxLength: 10
+          maxLength: 100
           minLength: 3
         description:
           type: string
@@ -292,12 +280,12 @@ components:
         x:
           type: number
           format: int32
-          minimum: 1
+          minimum: 0
           maximum: 100
         y:
           type: number
           format: int32
-          minimum: 1
+          minimum: 0
           maximum: 100
         cols:
           type: number
@@ -445,11 +433,13 @@ components:
           type: string
           description: the value of the threshold
           minLength: 1
-          maxLength: 100
+          maxLength: 50
         duration:
           type: number
           format: int32
           default: 1
+          minimum: 1
+          maximum: 60
           description: the number of widget time units the value must exceed the threshold
     resource_pki:
       type: object
