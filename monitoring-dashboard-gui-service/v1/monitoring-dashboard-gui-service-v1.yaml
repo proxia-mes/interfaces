@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.19'
+  version: '1.0.20'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -72,7 +72,10 @@ paths:
           required: true
           style: simple
           schema:
-            type: number
+            type: string
+            description: The id of a dashboard
+            maxLength: 50
+            minLength: 10
       responses:
         '200':
           description: OK
@@ -115,7 +118,10 @@ paths:
           required: true
           style: simple
           schema:
-            type: number
+            type: string
+            description: The id of a dashboard
+            maxLength: 50
+            minLength: 10
       responses:
         '200':
           description: OK
@@ -329,14 +335,14 @@ components:
                 - 'time_period'
             time_moment:
               $ref: '#/components/schemas/time_moment'
-            time_period:    
-             $ref: '#/components/schemas/time_period'
+            time_period:
+              $ref: '#/components/schemas/time_period'
         chart:
           type: object
-          required: 
+          required:
             - category
           properties:
-            category: 
+            category:
               type: string
               enum:
                 - 'summarizing_chart'
