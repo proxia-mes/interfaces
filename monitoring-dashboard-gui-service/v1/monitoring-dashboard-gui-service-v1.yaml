@@ -239,8 +239,10 @@ components:
         - widgets
       properties:
         id:
-          type: number
+          type: string
           description: The id of a dashboard
+          maxLength: 50
+          minLength: 10
         name:
           type: string
           description: The name of a dashboard
@@ -267,8 +269,10 @@ components:
         - chart
       properties:
         id:
-          type: number
-          description: The id of a widget
+          type: string
+          description: The id of a dashboard
+          maxLength: 50
+          minLength: 10
         name:
           type: string
           description: The name of a widget
