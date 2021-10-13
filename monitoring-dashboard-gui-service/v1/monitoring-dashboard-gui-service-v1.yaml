@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.22'
+  version: '1.0.23'
 servers:
   - url: "/proxia/mes/montoring-dashboard/gui-service/v1"
 tags:
@@ -353,11 +353,11 @@ components:
           enum:
             - 'NOW'
             - 'CURRENT_SHIFT_START'
-            - 'CURRENT_SHIFT_STOP'
+            - 'CURRENT_SHIFT_END'
             - 'LAST_SHIFT_START'
-            - 'LAST_SHIFT_STOP'
+            - 'LAST_SHIFT_END'
             - 'PENULTIMATE_SHIFT_START'
-            - 'PENULTIMATE_SHIFT_STOP'
+            - 'PENULTIMATE_SHIFT_END'
     time_period:
       type: object
       required:
