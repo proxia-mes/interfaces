@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA MES ERP INTERFACE API
   description: REST API provided by the PROXIA MES system for ERP systems
-  version: '1.0.3'
+  version: '1.0.4'
 servers:
   - url: "/proxia/mes/erp/interface/v1"
 tags:
@@ -211,8 +211,6 @@ components:
         ORDER_TYPE:
           type: string
           description: Order type/Auftragsart; "F" production order/Fertigungsauftrag; "P" planned order/Planauftrag; "I" internal order/Innenauftrag; "S" service order/Serviceauftrag; "N" rework/Nacharbeit (C_NACHARBEIT); "M" orders for samples/Bemusterungsauftrag (C_MUSTER); "W" equipment order/Betriebsmittelauftrag (C_WKZ)
-          maxLength: 1
-          minLength: 0
           nullable: true
           default: 'F'
           enum:
@@ -321,8 +319,6 @@ components:
         PLANNING_STRATEGY:
           type: string
           description: Planning strategy/Planungsstrategie; "V" forward termination/Vorwärts Terminierung; "R" backward termination/Rückwärts Terminierung; "NULL" invalid/ungültig
-          maxLength: 1
-          minLength: 0
           nullable: true
           enum:
             - 'V'
@@ -452,8 +448,6 @@ components:
         OVERLAP:
           type: string
           description: Overlapping indicator, the overlap always applies to the successor/Überlappungskennzeichen, die Überlappung gilt immer zum Nachfolger; "K" no overlap/keine Überlappung; "Q" Overlap by quantity/Überlappung nach Menge; "R" Overlap in percent/Überlappung in Prozent
-          maxLength: 1
-          minLength: 0
           nullable: true
           default: 'K'
           enum:
@@ -483,8 +477,6 @@ components:
           nullable: true
         WT_STATUS:
           type: string
-          maxLength: 20
-          minLength: 0
           description: Work ticket status/Arbeitsschein-Status; "C_FREI" released/Freigegeben; "C_TFRTG" part/Teilfertig; "C_FRTG" done/Fertig
           nullable: true
           default: 'C_FREI'
@@ -772,8 +764,6 @@ components:
         OBJECT_STATE:
           type: string
           description: Article release/Artikelfreigabe; "F" released/freigegeben; "G" locked/Gesperrt
-          maxLength: 1
-          minLength: 1
           nullable: true
           default: 'F'
           enum:
@@ -793,8 +783,6 @@ components:
         ARTICLE_TYPE:
           type: string
           description: Type of article/Artikeltyp; "EIGENFERTIGUNG" In-house production/Eigenproduktion; "FREMDBESCHAFFUNG" external procurment/Fremdbeschaffung
-          maxLength: 50
-          minLength: 0
           nullable: true
           default: 'EIGENFERTIGUNG'
           enum:
@@ -814,8 +802,6 @@ components:
         PPS_MAT_TYPE_ID:
           type: string
           description: PPS Characteristics for material type/PPS Kennzeichen für Material Type<br/><br />Tabelle TMM_MAT_TYPE muss gepflegt sein! Zuordnung über PPS_MAT_TYPE_ID/The table TMM_MAT_TYPE must contain values in PPS_MAT_TYPE_ID!<br /><br />Wenn nicht gefüllt --> Fallback zu C_ARTICLE./If not filled --> fallback to C_ARTICLE.<br /><br />Wenn gefüllt aber nicht gefunden in TMM_MAT_TYPE wird es zu C_UNKNOWN/If filled but not found in TMM_MAT_TYPE the value C_UNKNOWN will be set<br /><br />Wenn ARTICLE_TYPE=FREMDBESCHAFFUNG wrid immer C_ARTICLE_PURCHASED angenommen./If ARTICLE_TYPE=FREMDBESCHAFFUNG then the value will always be set to C_ARTICLE_PURCHASED.<br /><br /> PPS_MAT_TYPE_ID|Name/Bezeichnung|Consumables/Verbrauchsmaterial<br/> C_ARTICLE|article/Artikel|true<br/> C_ARTICLE_PURCHASED|purchased article/Zukaufteil|true<br/> C_COMPONENT|component/Komponente|false<br/> C_FACILITY|facility/Spannmittel|false<br/> C_FIXTURE|fixture/Vorrichtung|false<br/> C_HANDTOOL|hand tool/Handwerkzeug|false<br/> C_MEASUREMENT|measurement/Messmittel|false<br/> C_RAW|raw material/Rohmaterial|true<br/> C_TOOL|tool/Werkzeug|false<br/> C_UNKNOWN|Unknown type/Unbekannter Typ|true
-          maxLength: 50
-          minLength: 0
           nullable: true
           default: 'C_UNKNOWN'
           enum:
@@ -862,8 +848,6 @@ components:
         STOCK_TYPE:
           type: string
           description: Stock type/Bestandsart; "B" Stock of the ERP system as an absolute amount in the base unit of the material/Bestand aus dem ERP-System als absolute Menge in der Basiseinheit des Materials; "A" disposal/access, all planned material movements, which have not yet been substantiated. Material movements which result from the in-house production (requirement and produced articles) will not be handed over here /Ab-/Zugang Alle geplanten Materialbewegungen, welche sich noch nicht bestandändernd ausgewirkt haben. Materialbewegungen welche aus der Eigenfertigung resultieren (Bedarfe und produzierte Artikel) werden hier nicht übergeben; "E" deposit As stored, a quantity produced applies if she has had an inventive effect. In this case, the inventory is increased and passed with the inventory type "E" a storage document. This storage document has the relation to the production order which has manufactured the material via the Order_NR field. This amount is displayed relatively/Eingelagerung Als eingelagert gilt eine produzierte Menge, wenn sie sich Bestandserhöhend ausgewirkt hat. In diesem Fall wird der Bestand erhöht und mit der Bestandsart "E" ein Einlagerungsbeleg übergeben. Dieser Einlagerungsbeleg hat über das Feld ORDER_NO den Bezug zum Fertigungsauftrag, welcher das Material gefertigt hat. Diese Menge wird relativ verbucht; "O" Outsourcing As outsourced, a lot applies if it has had an inventive impact. In this case, the stock is reduced and passed with the inventory "O" a paging document. This paging document has been taken via the WT_NO field with the reference to which the material removed (reserved). It can be configured whether this amount is posted relative or absolutely./Auslagerung Als ausgelagert gilt eine Menge, wenn sie sich Bestandsmindernd ausgewirkt hat. In diesem Fall wird der Bestand vermindert und mit der Bestandart "O" ein Auslagerungsbeleg übergeben. Dieser Auslagerungsbeleg hat über das Feld WT_NO den Bezug zu dem Arbeitsgang für welchen das Material entnommen (reserviert) wurde. Es kann konfiguriert werden, ob diese Menge relativ oder absolut verbucht wird;
-          maxLength: 1
-          minLength: 1
           nullable: false
           default: 'B'
           enum:
