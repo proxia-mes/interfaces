@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA MES ERP INTERFACE API
   description: REST API provided by the PROXIA MES system for ERP systems
-  version: '1.0.2'
+  version: '1.0.3'
 servers:
   - url: "/proxia/mes/erp/interface/v1"
 tags:
@@ -195,14 +195,14 @@ components:
           type: string
           description: Order description/Beschreibung
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         PLANT_NO:
           type: string
           description: Plant/Werk
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         DELETE_FLAG:
           type: boolean
           description: object will be deleted, also all WTs for the order will be deleted/Objekt löschen, auch alle Arbeitsscheine zu dem Auftrag werden gelöscht
@@ -212,8 +212,8 @@ components:
           type: string
           description: Order type/Auftragsart; "F" production order/Fertigungsauftrag; "P" planned order/Planauftrag; "I" internal order/Innenauftrag; "S" service order/Serviceauftrag; "N" rework/Nacharbeit (C_NACHARBEIT); "M" orders for samples/Bemusterungsauftrag (C_MUSTER); "W" equipment order/Betriebsmittelauftrag (C_WKZ)
           maxLength: 1
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
           default: 'F'
           enum:
             - 'F'
@@ -227,8 +227,8 @@ components:
           type: string
           description: Customer (production order)/Kunde (bei Fertigungsaufträgen)
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         BEGIN_SCHEDULED:
           type: string
           format: date-time
@@ -255,8 +255,8 @@ components:
           type: string
           description: Drawing number for the order/Zeichnungsnummer zum Auftrag
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         QTY_TARGET:
           type: number
           format: float
@@ -266,67 +266,67 @@ components:
           type: string
           description: Long text/Langtext
           maxLength: 2000
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         PARENT_ORDER_NO:
           type: string
           description: Operating order number that comes after this operating order/Betriebsauftragsnummer die nach diesem Betriebsauftrag kommt
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_01:
           type: string
           description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_02:
           type: string
           description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_03:
           type: string
           description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_04:
           type: string
           description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_05:
           type: string
           description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         PARENT_WT_NO:
           type: string
           description: Only useable with field PARENT_ORDER_NO/Nur mit Feld PARENT_ORDER_NO nutzbar
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         PRIO:
           type: number
           format: float
           description: Priority/Priorität
-          default: 0.0
+          default: 0
           minimum: -10.0
           maximum: 10.0
-          nullable: false
+          nullable: true
         PLANNING_STRATEGY:
           type: string
           description: Planning strategy/Planungsstrategie; "V" forward termination/Vorwärts Terminierung; "R" backward termination/Rückwärts Terminierung; "NULL" invalid/ungültig
-          maxLength: 4
-          minLength: 1
+          maxLength: 1
+          minLength: 0
+          nullable: true
           enum:
             - 'V'
             - 'R'
-            - 'NULL'
     Workticket:
       type: object
       required:
@@ -343,7 +343,7 @@ components:
       properties:
         WT_NO:
           type: string
-          description: Unique connoisseur of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          description: Unique identifier of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
           maxLength: 50
           minLength: 1
           nullable: false
@@ -373,14 +373,14 @@ components:
           type: string
           description: Article number of article to be made/Artikelnummer des zu fertigenden Artikels
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         ARTICLE_DES:
           type: string
           description: Article description of article to be made. First sentence of the article description/Artikelbezeichnung des zu fertigenden Artikels. Erster Satz aus der Artikelbezeichnung
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         SETUP_TIME:
           type: number
           format: float
@@ -405,8 +405,8 @@ components:
           type: string
           description: Drawing number for the work step/Zeichnungsnummer zum work step
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         QTY_TARGET:
           type: number
           format: float
@@ -427,34 +427,34 @@ components:
           type: number
           format: float
           description: Produced is amount for operation/Produzierte Ist-Menge zum Arbeitsgang
-          nullable: false
+          nullable: true
         QTY_SCRAP:
           type: number
           format: float
           description: Produced scrap for the operation/Produzierter Ausschussmenge zum Arbeitsgang
-          nullable: false
+          nullable: true
         END_BATCH:
           type: string
           description: End product batch/Endprodukt-Charge
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         MOVE_TIME:
           type: number
           format: float
           description: Transport time for operation (min)/Transportzeit zum Arbeitsgang (Min)
-          nullable: false
+          nullable: true
         WAIT_TIME:
           type: number
           format: float
           description: Lying time for operation (min)/Liegezeit zum Arbeitsgang (Min)
-          nullable: false
+          nullable: true
         OVERLAP:
           type: string
           description: Overlapping indicator, the overlap always applies to the successor/Überlappungskennzeichen, die Überlappung gilt immer zum Nachfolger; "K" no overlap/keine Überlappung; "Q" Overlap by quantity/Überlappung nach Menge; "R" Overlap in percent/Überlappung in Prozent
           maxLength: 1
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
           default: 'K'
           enum:
             - 'K'
@@ -464,12 +464,12 @@ components:
           type: number
           format: float
           description: Overlap/Überlappungsmenge
-          nullable: false
+          nullable: true
         OVERLAP_RATE:
           type: number
           format: float
           description: Overlap level between 0 - 1.0 (1.0 -> 100% percent)/Überlappungsgrad zwischen 0 – 1.0 (1.0 -> 100% Prozent)
-          nullable: false
+          nullable: true
           minimum: 0.0
           maximum: 1.0
           default: 0.2
@@ -480,78 +480,78 @@ components:
           minimum: 0
           maximum: 100
           default: 0
-          nullable: false
+          nullable: true
         WT_STATUS:
           type: string
-          maxLength: 50
-          minLength: 1
-          description: Work ticket status/Arbeitsschein-Status; "C_RELEASED" released/Freigegeben; "C_PARTIALLY" part/Teilfertig; "C_DONE" done/Fertig
-          nullable: false
-          default: 'C_RELEASED'
+          maxLength: 20
+          minLength: 0
+          description: Work ticket status/Arbeitsschein-Status; "C_FREI" released/Freigegeben; "C_TFRTG" part/Teilfertig; "C_FRTG" done/Fertig
+          nullable: true
+          default: 'C_FREI'
           enum:
-            - 'C_RELEASED'
-            - 'C_PARTIALLY'
-            - 'C_DONE'
+            - 'C_FREI'
+            - 'C_TFRTG'
+            - 'C_FRTG'
         INFO_01:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_02:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_03:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_04:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_05:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_06:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_07:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_08:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_09:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         INFO_10:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         PARALLEL_WITH_PREV:
           type: boolean
           description: False = sequentiell, true = parallel to the direct predecessor. If only evaluated in the FPL, no influence on the predecessor successor relationships/false = sequentiell, true = parallel zum direkten Vorgänger. Wird nur in der FPL ausgewertet, keinen Einfluss auf die Vorgänger-Nachfolger Beziehungen
@@ -561,40 +561,40 @@ components:
           type: number
           format: float
           description: Downstream time for the entire operation (min)/Abrüstzeit für den gesamten Arbeitsgang (Min) abrüsten
-          nullable: false
+          nullable: true
         LONG_DES:
           type: string
           description: Long text to work ticket/Langtext zum Arbeitsschein
           maxLength: 2000
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         QTY_PER_RUN:
           type: number
           format: float
           description: Parts per run/Teile pro Durchlauf
-          nullable: false
-          default: 1.0
+          nullable: true
+          default: 1
         ERP_SPLIT_FACTOR:
           type: number
           format: int32
           description: Divides WTs in N segments/Teilt WTs in n-Segmente
-          nullable: false
+          nullable: true
           default: 1
         IS_PREVIEW:
           type: boolean
           description: False = The workshot can be logged in to the terminal (default) true = The workshoot is displayed only on the terminal, but can not be logged in/false = Der Arbeitsschein kann am Terminal angemeldet werden (default) true = Der Arbeitsschein wird nur am Terminal angezeigt, kann jedoch nicht angemeldet werden
-          nullable: false
+          nullable: true
           default: false
         IS_BLOCKED:
           type: boolean
           description: Indicates whether a WT is locked or not false = not locked, true = locked/Kennzeichnet ob ein WT gesperrt ist oder nicht false = nicht gesperrt, true = gesperrt
-          nullable: false
+          nullable: true
           default: false
         IMP_PER_QTY:
           type: number
           format: int32
           description: Pulses per piece/Impulse pro Stück
-          nullable: false
+          nullable: true
           default: 1
         IS_EXCLUSIVE_RES:
           type: boolean
@@ -605,32 +605,32 @@ components:
           type: string
           description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         DETAIL_INFO_02:
           type: string
           description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         DETAIL_INFO_03:
           type: string
           description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         DETAIL_INFO_04:
           type: string
           description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         DETAIL_INFO_05:
           type: string
           description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
     Workticket-Material:
       type: object
       required:
@@ -658,7 +658,6 @@ components:
           maxLength: 50
           minLength: 1
           nullable: false
-          default: 'PC'
         AMOUNT:
           type: number
           format: float
@@ -745,14 +744,14 @@ components:
           type: string
           description: Article description/Artikelbeschreibung
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         LONG_DES:
           type: string
           description: Comment/Bemerkung
           maxLength: 500
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         DELETE_FLAG:
           type: boolean
           description: object will be deleted/Objekt löschen
@@ -762,63 +761,62 @@ components:
           type: string
           description: Drawing number/Zeichnungsnummer
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         REVISION_INDEX:
           type: string
           description: Change/Änderungsstand
           maxLength: 10
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         OBJECT_STATE:
           type: string
-          description: Article release/Artikelfreigabe; "R" released/freigegeben; "L" locked/Gesperrt
+          description: Article release/Artikelfreigabe; "F" released/freigegeben; "G" locked/Gesperrt
           maxLength: 1
           minLength: 1
-          nullable: false
-          default: 'R'
+          nullable: true
+          default: 'F'
           enum:
-            - 'R'
-            - 'L'
+            - 'F'
+            - 'G'
         LOCK_REASON_ID:
           type: number
           format: int32
           description: Article status/Artikelstatus
           default: 0
-          nullable: false
+          nullable: true
         PLANNING_RELEVANT:
           type: boolean
           description: Relevant for planning/Planungsrelevant
           default: true
           nullable: false
-        ARTICLE_TYP:
+        ARTICLE_TYPE:
           type: string
-          description: Type of article/Artikeltyp; "IN_HOUSE" In-house production/Eigenproduktion; "EXTERNAL" external procurment/Fremdbeschaffung
+          description: Type of article/Artikeltyp; "EIGENFERTIGUNG" In-house production/Eigenproduktion; "FREMDBESCHAFFUNG" external procurment/Fremdbeschaffung
           maxLength: 50
-          minLength: 1
-          nullable: false
-          default: 'IN_HOUSE'
+          minLength: 0
+          nullable: true
+          default: 'EIGENFERTIGUNG'
           enum:
-            - 'IN_HOUSE'
-            - 'EXTERNAL'
+            - 'EIGENFERTIGUNG'
+            - 'FREMDBESCHAFFUNG'
         UNIT:
           type: string
           description: Quantity unit in the base unit of the material/Mengeneinheit in der Basiseinheit des Materials
           maxLength: 50
           minLength: 1
           nullable: false
-          default: 'STK'
         REPLACEMENT_TIME:
           type: number
           format: float
           description: Replacement time in days/Wiederbeschaffungszeit in Tagen
-          nullable: false
+          nullable: true
         PPS_MAT_TYPE_ID:
           type: string
-          description: PPS Characteristics for material type/PPS Kennzechen für Material Type<br/> PPS_MAT_TYPE_ID|Name/Bezeichnung|Consumables/Verbrauchsmaterial<br/> C_ARTICLE|article/Artikel|true<br/> C_ARTICLE_PURCHASED|purchased article/Zukaufteil|true<br/> C_COMPONENT|component/Komponente|false<br/> C_FACILITY|facility/Spannmittel|false<br/> C_FIXTURE|fixture/Vorrichtung|false<br/> C_HANDTOOL|hand tool/Handwerkzeug|false<br/> C_MEASUREMENT|measurement/Messmittel|false<br/> C_RAW|raw material/Rohmaterial|true<br/> C_TOOL|tool/Werkzeug|false<br/> C_UNKNOWN|Unknown type/Unbekannter Typ|true
+          description: PPS Characteristics for material type/PPS Kennzeichen für Material Type<br/><br />Tabelle TMM_MAT_TYPE muss gepflegt sein! Zuordnung über PPS_MAT_TYPE_ID/The table TMM_MAT_TYPE must contain values in PPS_MAT_TYPE_ID!<br /><br />Wenn nicht gefüllt --> Fallback zu C_ARTICLE./If not filled --> fallback to C_ARTICLE.<br /><br />Wenn gefüllt aber nicht gefunden in TMM_MAT_TYPE wird es zu C_UNKNOWN/If filled but not found in TMM_MAT_TYPE the value C_UNKNOWN will be set<br /><br />Wenn ARTICLE_TYPE=FREMDBESCHAFFUNG wrid immer C_ARTICLE_PURCHASED angenommen./If ARTICLE_TYPE=FREMDBESCHAFFUNG then the value will always be set to C_ARTICLE_PURCHASED.<br /><br /> PPS_MAT_TYPE_ID|Name/Bezeichnung|Consumables/Verbrauchsmaterial<br/> C_ARTICLE|article/Artikel|true<br/> C_ARTICLE_PURCHASED|purchased article/Zukaufteil|true<br/> C_COMPONENT|component/Komponente|false<br/> C_FACILITY|facility/Spannmittel|false<br/> C_FIXTURE|fixture/Vorrichtung|false<br/> C_HANDTOOL|hand tool/Handwerkzeug|false<br/> C_MEASUREMENT|measurement/Messmittel|false<br/> C_RAW|raw material/Rohmaterial|true<br/> C_TOOL|tool/Werkzeug|false<br/> C_UNKNOWN|Unknown type/Unbekannter Typ|true
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
           default: 'C_UNKNOWN'
           enum:
             - 'C_ARTICLE'
@@ -877,7 +875,7 @@ components:
           type: string
           format: date-time
           description: Must be completed upon "A" disposal/access, with otherwise it remains empty/muss bei Ab-/Zugang ausgefüllt werden, bei sonst bleibt es leer
-          nullable: false
+          nullable: true
         AMOUNT:
           type: number
           format: float
@@ -887,11 +885,11 @@ components:
           type: string
           description: Number of the manufacturing order for the storage of manufacturing products of a specific manufacturing order. STOCK_TYPE "E"/Nummer des Fertigungsauftrags für die Einlagerung von Fertigungserzeugnissen eines bestimmten Fertigungsauftrags. STOCK_TYPE "E"
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         WT_NO:
           type: string
           description: Number of the work ticket for which a lot has been outsourced. STOCK_TYPE "O"/Nummer des Arbeitsscheins für welchen eine Menge ausgelagert wurde. STOCK_TYPE "O"
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
