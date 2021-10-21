@@ -1,9 +1,9 @@
 ---
-openapi: 3.0.2
+openapi: 3.0.3
 info:
   title: Proxia MES Monitoring Dashboard GUI Service API
   description: Proxia MES Monitoring Dashboard GUI Service API
-  version: '1.0.24'
+  version: '1.0.25'
 servers:
   - url: "/proxia/mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -30,9 +30,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/dashboard"
+                $ref: "#/components/schemas/dashboards"
         '204':
           description: No Content
           content: { }
@@ -227,6 +225,10 @@ components:
       example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
       maxLength: 50
       minLength: 10
+    dashboards:
+      type: array
+      items:
+        $ref: '#/components/schemas/dashboard'
     dashboard:
       type: object
       required:
