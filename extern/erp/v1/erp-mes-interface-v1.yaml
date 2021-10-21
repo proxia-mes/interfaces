@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: ERP MES API
   description: REST API provided by the ERP system for MES systems
-  version: '1.0.3'
+  version: '1.0.4'
 servers:
   - url: "erp/mes/interface/v1"
 tags:
@@ -124,7 +124,7 @@ components:
           type: string
           description: Guide number of manufacturing resource (group number or KST)/Leitzahl der Fertigungsressource (Gruppennummer bzw. KST)
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: false
         PERS_NO:
           type: string
@@ -152,7 +152,7 @@ components:
           format: float
           description: Scrap amount in the confirmation period/Ausschuss-Menge im Rückmeldezeitraum
           nullable: true
-        WT_STATUS:
+        WT_STATUS: 
           type: string
           description: Status of the operation/Status des Arbeitsgangs; "C_START" If the WT is logged in for the first time (configurable)/Wenn das WT das erste mal angemeldet wird (konfigurierbar); "C_RUECK" reply during WT running/Rückmeldung bei laufendem WT; "C_TFRTG" part/Teilfertig; "C_FRTG" done/Fertig
           nullable: false
