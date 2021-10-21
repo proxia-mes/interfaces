@@ -13,7 +13,7 @@ env:
   READ_PROXIA_GITHUB_PACKAGES_USER: flobuc
   GEN_OUT_DIR: gen
   INTERFACE_FILE: configuration-service/v1/configuration-service-v1.yaml
-  GITHUB_NUGET_REPOSITORY: https://nuget.pkg.github.com/flobuc-proxia/index.json
+  GITHUB_NUGET_REPOSITORY: https://nuget.pkg.github.com/proxia-mes/index.json
 
 jobs:
   generate-csharp-controller:
