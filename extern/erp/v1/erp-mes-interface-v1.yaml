@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: ERP MES API
   description: REST API provided by the ERP system for MES systems
-  version: '1.0.2'
+  version: '1.0.3'
 servers:
   - url: "erp/mes/interface/v1"
 tags:
@@ -116,7 +116,7 @@ components:
       properties:
         WT_NO:
           type: string
-          description: Unique connoisseur of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          description: Unique identifier of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
           maxLength: 50
           minLength: 1
           nullable: false
@@ -130,62 +130,60 @@ components:
           type: string
           description: Personnel number for personal tours. Is not filled with a machine page record/Personalnummer für Personenzeiten. Wird bei einem Maschinenzeiten-Datensatz nicht gefüllt
           maxLength: 50
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         SETUPTIME:
           type: number
           format: float
           description: Set time for the operation (min) in the confirmation period/Rüstzeit für den Arbeitsgang (Min) im Rückmeldezeitraum
-          nullable: false
+          nullable: true
         PROCESSTIME:
           type: number
           format: float
           description: Production time for the operation (min) in the confirmation period/Produktionszeit für den Arbeitsgang (Min) im Rückmeldezeitraum
-          nullable: false
+          nullable: true
         QTY_YIELD:
           type: number
           format: float
           description: Good amount in the confirmation period/Gut-Menge im Rückmeldezeitraum
-          nullable: false
+          nullable: true
         QTY_SCRAP:
           type: number
           format: float
           description: Scrap amount in the confirmation period/Ausschuss-Menge im Rückmeldezeitraum
-          nullable: false
+          nullable: true
         WT_STATUS:
           type: string
-          maxLength: 50
-          minLength: 1
-          description: Status of the operation/Status des Arbeitsgangs; "C_START" If the WT is logged in for the first time (configurable)/Wenn das WT das erste mal angemeldet wird (konfigurierbar); "C_REPLY" reply during WT running/Rückmeldung bei laufendem WT; "C_PARTIALLY" part/Teilfertig; "C_DONE" done/Fertig
+          description: Status of the operation/Status des Arbeitsgangs; "C_START" If the WT is logged in for the first time (configurable)/Wenn das WT das erste mal angemeldet wird (konfigurierbar); "C_RUECK" reply during WT running/Rückmeldung bei laufendem WT; "C_TFRTG" part/Teilfertig; "C_FRTG" done/Fertig
           nullable: false
           enum:
             - 'C_START'
-            - 'C_REPLY'
-            - 'C_PARTIALLY'
-            - 'C_DONE'
+            - 'C_RUECK'
+            - 'C_TFRTG'
+            - 'C_FRTG'
         ACTIVITY:
           type: string
           description: Description of activities in unplanned operations/Beschreibung der Tätigkeiten bei ungeplanten Arbeitsgängen
           maxLength: 255
-          minLength: 1
-          nullable: false
+          minLength: 0
+          nullable: true
         END_TS:
           type: string
           format: date-time
           description: Timestamp of the last reply in the confirmation period/Zeitstempel der letzten Rückmeldung im Rückmeldezeitraum
-          nullable: false
+          nullable: true
         END_BATCH:
           type: string
           maxLength: 50
-          minLength: 1
+          minLength: 0
           description: End Product batch/Endprodukt-Charge
-          nullable: false
+          nullable: true
         RES_TYPE:
           type: string
           maxLength: 50
-          minLength: 1
+          minLength: 0
           description: Workplace Type/Arbeitsplatztyp; "C_MACH" Machine/Maschine; "C_WKPL" Assembly/Montage; "C_COLLECTIVE_WKPL" Collective Workplace/Sammelarbeitsplatz
-          nullable: false
+          nullable: true
           enum:
             - 'C_MACH'
             - 'C_WKPL'
@@ -193,21 +191,21 @@ components:
         SCRAP_REASON:
           type: string
           maxLength: 50
-          minLength: 1
+          minLength: 0
           description: When turned on in the configuration, the scrap reason is passed to the set quantity in box QTY_SCRAP/Wenn in der Konfiguration eingeschaltet, wird der SCRAP_REASON zur gemeldeten Menge in Feld QTY_SCRAP übergeben
-          nullable: false
+          nullable: true
         REPLIER:
           type: string
           maxLength: 50
-          minLength: 1
+          minLength: 0
           description: PPS_NR of the replier/PPS_NR des Rückmelders
-          nullable: false
+          nullable: true
         REPLY_COMMENT:
           type: string
           maxLength: 2000
-          minLength: 1
+          minLength: 0
           description: Reply comment up to 2000 characters/Rückmelder Kommentar bis zu 2000 Zeichen
-          nullable: false
+          nullable: true
     Workticket-Material-Removal:
       type: object
       required:
@@ -219,7 +217,7 @@ components:
       properties:
         WT_NO:
           type: string
-          description: Unique connoisseur of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          description: Unique identifier of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
           maxLength: 50
           minLength: 1
           nullable: false
@@ -244,7 +242,7 @@ components:
           type: number
           format: int32
           description: Position number in the parts list/Positionsnummer in der Stückliste
-          nullable: false
+          nullable: true
         UNIT:
           type: string
           description: Unit/Einheit
@@ -260,7 +258,7 @@ components:
       properties:
         WT_NO:
           type: string
-          description: Unique connoisseur of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          description: Unique identifier of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
           maxLength: 50
           minLength: 1
           nullable: false
@@ -274,12 +272,12 @@ components:
           type: string
           format: date-time
           description: planned start date/Geplanter Starttermin
-          nullable: false
+          nullable: true
         END_SCHEDULED:
           type: string
           format: date-time
           description: planned end date/Geplanter Endtermin
-          nullable: false
+          nullable: true
         CREATE_TS:
           type: string
           format: date-time
@@ -289,12 +287,12 @@ components:
           type: number
           format: int32
           description: Pallet ID What is planned/Palletten ID worauf geplant ist
-          nullable: false
+          nullable: true
         COUNT_OF_SPLITS:
           type: number
           format: int32
           description: Number of all splits of the WT/Anzahl aller Splits des WTs
-          nullable: false
+          nullable: true
     Order-Planning-Data:
       type: object
       required:
@@ -311,12 +309,12 @@ components:
           type: string
           format: date-time
           description: planned start date/Geplanter Starttermin
-          nullable: false
+          nullable: true
         END_SCHEDULED:
           type: string
           format: date-time
           description: planned end date/Geplanter Endtermin
-          nullable: false
+          nullable: true
         CREATE_TS:
           type: string
           format: date-time
