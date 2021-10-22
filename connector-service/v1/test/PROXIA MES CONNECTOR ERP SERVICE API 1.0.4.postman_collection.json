@@ -1,0 +1,926 @@
+{
+	"info": {
+		"_postman_id": "98d6f87d-bb3e-42bc-82ba-9bddcff561ac",
+		"name": "PROXIA MES CONNECTOR ERP SERVICE API 1.0.4",
+		"description": "REST API provided by the PROXIA MES system for ERP systems",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Stores new orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var lastCreatedFileContent=\"ad|ipsum Duis sit minim|aliqua est Duis||FEnum|mollit deserunt in|20140110002133|19570915103458|voluptate sed nisi|anim cillum consectetur offi|aute Duis incididunt proident|-97793496|culpa in|in reprehenderit incididunt Duis|laboris in enim ea elit|Excepteur dolore officia deserunt tempor|in irure ea|s|ad|fugiat officia nostrud|0|REnum\\ntempor aliquip cillum officia|ut et aliquip voluptate |ipsum ut dolore||FEnum|sed veniam|20120225155558|19621220165303|occaecat dolore|ut culpa veniam sed||-89483464|voluptate esse qui officia|reprehenderit laborum aute laboris|sit|in sit|quis|id|consectetur|nulla offic|0|REnum\\n\";\r",
+							"\r",
+							"pm.sendRequest(pm.variables.get('protocol')+'://'+pm.variables.get('host')+':'+pm.variables.get('port')+'/lastCreatedFile.txt', (error, response) => {\r",
+							"    if (error || response.code !== 200) {\r",
+							"        pm.expect.fail('Could not load lastCreatedFile!');\r",
+							"    }\r",
+							"\r",
+							"    console.log(response.text());\r",
+							"    //Validate the lastCreatedFile content\r",
+							"    pm.test('LastCreatedFile content is correct', function() {\r",
+							"          pm.expect(response.text()).to.be.equal(lastCreatedFileContent);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"ORDER_NO\": \"ad\",\n        \"BEGIN_SCHEDULED\": \"2014-01-10T00:21:33.276Z\",\n        \"END_SCHEDULED\": \"1957-09-15T10:34:58.805Z\",\n        \"ARTICLE_NO\": \"voluptate sed nisi\",\n        \"ARTICLE_DES\": \"anim cillum consectetur offi\",\n        \"QTY_TARGET\": -97793493.8046641,\n        \"ORDER_DES\": \"ipsum Duis sit minim\",\n        \"PLANT_NO\": \"aliqua est Duis\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"mollit deserunt in\",\n        \"DRAW_NO\": \"aute Duis incididunt proident\",\n        \"LONG_DES\": \"culpa in\",\n        \"PARENT_ORDER_NO\": \"in reprehenderit incididunt Duis\",\n        \"INFO_01\": \"laboris in enim ea elit\",\n        \"INFO_02\": \"Excepteur dolore officia deserunt tempor\",\n        \"INFO_03\": \"in irure ea\",\n        \"INFO_04\": \"s\",\n        \"INFO_05\": \"ad\",\n        \"PARENT_WT_NO\": \"fugiat officia nostrud\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"R\"\n    },\n    {\n        \"ORDER_NO\": \"tempor aliquip cillum officia\",\n        \"BEGIN_SCHEDULED\": \"2012-02-25T15:55:58.570Z\",\n        \"END_SCHEDULED\": \"1962-12-20T16:53:03.168Z\",\n        \"ARTICLE_NO\": \"occaecat dolore\",\n        \"ARTICLE_DES\": \"ut culpa veniam sed\",\n        \"QTY_TARGET\": -89483462.97280061,\n        \"ORDER_DES\": \"ut et aliquip voluptate \",\n        \"PLANT_NO\": \"ipsum ut dolore\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"sed veniam\",\n        \"DRAW_NO\": \"\",\n        \"LONG_DES\": \"voluptate esse qui officia\",\n        \"PARENT_ORDER_NO\": \"reprehenderit laborum aute laboris\",\n        \"INFO_01\": \"sit\",\n        \"INFO_02\": \"in sit\",\n        \"INFO_03\": \"quis\",\n        \"INFO_04\": \"id\",\n        \"INFO_05\": \"consectetur\",\n        \"PARENT_WT_NO\": \"nulla offic\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"R\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{context}}/orders",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"ORDER_NO\": \"minim dolore amet id\",\n        \"BEGIN_SCHEDULED\": \"1962-06-27T23:22:03.336Z\",\n        \"END_SCHEDULED\": \"1958-07-30T04:18:01.197Z\",\n        \"ARTICLE_NO\": \"irure id voluptate\",\n        \"ARTICLE_DES\": \"aliquip ullamco \",\n        \"QTY_TARGET\": -82999169.9942286,\n        \"ORDER_DES\": \"consequat deserunt ex\",\n        \"PLANT_NO\": \"elit\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"veniam\",\n        \"DRAW_NO\": \"in minim mollit Ut\",\n        \"LONG_DES\": \"amet Excepteur Ut cupidatat\",\n        \"PARENT_ORDER_NO\": \"cillum Ut\",\n        \"INFO_01\": \"amet\",\n        \"INFO_02\": \"Excepteur magna\",\n        \"INFO_03\": \"exercitation laborum\",\n        \"INFO_04\": \"sint irure\",\n        \"INFO_05\": \"adipisicing ut\",\n        \"PARENT_WT_NO\": \"est sed amet proide\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"V\"\n    },\n    {\n        \"ORDER_NO\": \"tempor ea consectetur voluptate\",\n        \"BEGIN_SCHEDULED\": \"1973-01-21T08:38:19.049Z\",\n        \"END_SCHEDULED\": \"2018-10-15T08:44:20.924Z\",\n        \"ARTICLE_NO\": \"magna esse\",\n        \"ARTICLE_DES\": \"sunt deserunt cupidatat incididunt\",\n        \"QTY_TARGET\": -39554692.47728503,\n        \"ORDER_DES\": \"enim magna tempor\",\n        \"PLANT_NO\": \"sunt id eu\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"ut cup\",\n        \"DRAW_NO\": \"Ut et Excepteur consequat\",\n        \"LONG_DES\": \"enim irure occaecat Ut aute\",\n        \"PARENT_ORDER_NO\": \"elit cupidatat do\",\n        \"INFO_01\": \"est\",\n        \"INFO_02\": \"Lorem reprehenderit sed ullamco\",\n        \"INFO_03\": \"qui commodo velit dolore\",\n        \"INFO_04\": \"minim et\",\n        \"INFO_05\": \"tempor dolore in consectetur\",\n        \"PARENT_WT_NO\": \"nostrud\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"V\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"ORDER_NO\": \"minim dolore amet id\",\n        \"BEGIN_SCHEDULED\": \"1962-06-27T23:22:03.336Z\",\n        \"END_SCHEDULED\": \"1958-07-30T04:18:01.197Z\",\n        \"ARTICLE_NO\": \"irure id voluptate\",\n        \"ARTICLE_DES\": \"aliquip ullamco \",\n        \"QTY_TARGET\": -82999169.9942286,\n        \"ORDER_DES\": \"consequat deserunt ex\",\n        \"PLANT_NO\": \"elit\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"veniam\",\n        \"DRAW_NO\": \"in minim mollit Ut\",\n        \"LONG_DES\": \"amet Excepteur Ut cupidatat\",\n        \"PARENT_ORDER_NO\": \"cillum Ut\",\n        \"INFO_01\": \"amet\",\n        \"INFO_02\": \"Excepteur magna\",\n        \"INFO_03\": \"exercitation laborum\",\n        \"INFO_04\": \"sint irure\",\n        \"INFO_05\": \"adipisicing ut\",\n        \"PARENT_WT_NO\": \"est sed amet proide\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"V\"\n    },\n    {\n        \"ORDER_NO\": \"tempor ea consectetur voluptate\",\n        \"BEGIN_SCHEDULED\": \"1973-01-21T08:38:19.049Z\",\n        \"END_SCHEDULED\": \"2018-10-15T08:44:20.924Z\",\n        \"ARTICLE_NO\": \"magna esse\",\n        \"ARTICLE_DES\": \"sunt deserunt cupidatat incididunt\",\n        \"QTY_TARGET\": -39554692.47728503,\n        \"ORDER_DES\": \"enim magna tempor\",\n        \"PLANT_NO\": \"sunt id eu\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"ut cup\",\n        \"DRAW_NO\": \"Ut et Excepteur consequat\",\n        \"LONG_DES\": \"enim irure occaecat Ut aute\",\n        \"PARENT_ORDER_NO\": \"elit cupidatat do\",\n        \"INFO_01\": \"est\",\n        \"INFO_02\": \"Lorem reprehenderit sed ullamco\",\n        \"INFO_03\": \"qui commodo velit dolore\",\n        \"INFO_04\": \"minim et\",\n        \"INFO_05\": \"tempor dolore in consectetur\",\n        \"PARENT_WT_NO\": \"nostrud\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"V\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"ORDER_NO\": \"minim dolore amet id\",\n        \"BEGIN_SCHEDULED\": \"1962-06-27T23:22:03.336Z\",\n        \"END_SCHEDULED\": \"1958-07-30T04:18:01.197Z\",\n        \"ARTICLE_NO\": \"irure id voluptate\",\n        \"ARTICLE_DES\": \"aliquip ullamco \",\n        \"QTY_TARGET\": -82999169.9942286,\n        \"ORDER_DES\": \"consequat deserunt ex\",\n        \"PLANT_NO\": \"elit\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"veniam\",\n        \"DRAW_NO\": \"in minim mollit Ut\",\n        \"LONG_DES\": \"amet Excepteur Ut cupidatat\",\n        \"PARENT_ORDER_NO\": \"cillum Ut\",\n        \"INFO_01\": \"amet\",\n        \"INFO_02\": \"Excepteur magna\",\n        \"INFO_03\": \"exercitation laborum\",\n        \"INFO_04\": \"sint irure\",\n        \"INFO_05\": \"adipisicing ut\",\n        \"PARENT_WT_NO\": \"est sed amet proide\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"V\"\n    },\n    {\n        \"ORDER_NO\": \"tempor ea consectetur voluptate\",\n        \"BEGIN_SCHEDULED\": \"1973-01-21T08:38:19.049Z\",\n        \"END_SCHEDULED\": \"2018-10-15T08:44:20.924Z\",\n        \"ARTICLE_NO\": \"magna esse\",\n        \"ARTICLE_DES\": \"sunt deserunt cupidatat incididunt\",\n        \"QTY_TARGET\": -39554692.47728503,\n        \"ORDER_DES\": \"enim magna tempor\",\n        \"PLANT_NO\": \"sunt id eu\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"ut cup\",\n        \"DRAW_NO\": \"Ut et Excepteur consequat\",\n        \"LONG_DES\": \"enim irure occaecat Ut aute\",\n        \"PARENT_ORDER_NO\": \"elit cupidatat do\",\n        \"INFO_01\": \"est\",\n        \"INFO_02\": \"Lorem reprehenderit sed ullamco\",\n        \"INFO_03\": \"qui commodo velit dolore\",\n        \"INFO_04\": \"minim et\",\n        \"INFO_05\": \"tempor dolore in consectetur\",\n        \"PARENT_WT_NO\": \"nostrud\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"V\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Stores new work tickets",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"WT_NO\": \"do velit aute officia\",\n        \"WT_DES\": \"consequat tempor\",\n        \"WORKSTEP_NO\": -99453802.42382856,\n        \"ORDER_NO\": \"aliquip dolor al\",\n        \"SETUP_TIME\": -35354683.45271347,\n        \"TARGET_TIME\": -44045434.85296188,\n        \"BEGIN_SCHEDULED\": \"1990-05-12T20:50:57.144Z\",\n        \"END_SCHEDULED\": \"1948-10-30T10:10:36.518Z\",\n        \"QTY_TARGET\": -28216830.65473199,\n        \"WORK_CENTER\": \"exercitation\",\n        \"DELETE_FLAG\": false,\n        \"ARTICLE_NO\": \"o\",\n        \"ARTICLE_DES\": \"nostrud pariatur\",\n        \"DRAW_NO\": \"aliquip labore\",\n        \"PLANNING_RELEVANT\": true,\n        \"QTY_YIELD\": -46983816.06975937,\n        \"QTY_SCRAP\": 59131539.413698494,\n        \"END_BATCH\": \"laboris incididunt\",\n        \"MOVE_TIME\": 38908513.53857708,\n        \"WAIT_TIME\": -86682547.46446688,\n        \"OVERLAP\": \"K\",\n        \"OVERLAP_QTY\": 38421525.97299582,\n        \"OVERLAP_RATE\": 0.2,\n        \"PRIO\": 0,\n        \"WT_STATUS\": \"C_FREI\",\n        \"INFO_01\": \"exercitation amet velit ut\",\n        \"INFO_02\": \"ea deserunt nulla\",\n        \"INFO_03\": \"quis commodo labo\",\n        \"INFO_04\": \"non laborum eu consectetur\",\n        \"INFO_05\": \"minim dolore sed consequat consectetur\",\n        \"INFO_06\": \"deserunt nostrud\",\n        \"INFO_07\": \"Ut aliquip\",\n        \"INFO_08\": \"voluptate id quis laborum\",\n        \"INFO_09\": \"amet ut veniam\",\n        \"INFO_10\": \"tempor ipsum minim sit\",\n        \"PARALLEL_WITH_PREV\": false,\n        \"DOWNSTREAM_TIME\": -26715754.830735654,\n        \"LONG_DES\": \"sit dolor Excepteur Ut\",\n        \"QTY_PER_RUN\": 1,\n        \"ERP_SPLIT_FACTOR\": 1,\n        \"IS_PREVIEW\": false,\n        \"IS_BLOCKED\": false,\n        \"IMP_PER_QTY\": 1,\n        \"IS_EXCLUSIVE_RES\": false,\n        \"DETAIL_INFO_01\": \"sit nisi al\",\n        \"DETAIL_INFO_02\": \"ipsum in\",\n        \"DETAIL_INFO_03\": \"Lorem occaecat velit\",\n        \"DETAIL_INFO_04\": \"tempor\",\n        \"DETAIL_INFO_05\": \"est quis ut do\"\n    },\n    {\n        \"WT_NO\": \"sit laboris do\",\n        \"WT_DES\": \"al\",\n        \"WORKSTEP_NO\": -79109178.44722047,\n        \"ORDER_NO\": \"aliqua cill\",\n        \"SETUP_TIME\": -78532884.00768346,\n        \"TARGET_TIME\": 90722764.22748962,\n        \"BEGIN_SCHEDULED\": \"2005-01-10T01:59:56.879Z\",\n        \"END_SCHEDULED\": \"1979-11-13T06:02:53.662Z\",\n        \"QTY_TARGET\": -13423243.387247384,\n        \"WORK_CENTER\": \"magna voluptate veniam\",\n        \"DELETE_FLAG\": false,\n        \"ARTICLE_NO\": \"sunt exercitation incididun\",\n        \"ARTICLE_DES\": \"labore \",\n        \"DRAW_NO\": \"amet ut\",\n        \"PLANNING_RELEVANT\": true,\n        \"QTY_YIELD\": -63622675.830046885,\n        \"QTY_SCRAP\": 5811917.949434295,\n        \"END_BATCH\": \"ullamco \",\n        \"MOVE_TIME\": 19853986.40324317,\n        \"WAIT_TIME\": -53660186.62558938,\n        \"OVERLAP\": \"K\",\n        \"OVERLAP_QTY\": -56847098.58682093,\n        \"OVERLAP_RATE\": 0.2,\n        \"PRIO\": 0,\n        \"WT_STATUS\": \"C_FREI\",\n        \"INFO_01\": \"elit esse\",\n        \"INFO_02\": \"sit eu veniam culpa\",\n        \"INFO_03\": \"magna cupidatat\",\n        \"INFO_04\": \"aliqua esse Ut\",\n        \"INFO_05\": \"non ad nulla sed\",\n        \"INFO_06\": \"laboris irure nisi\",\n        \"INFO_07\": \"proident eu cillum voluptate ea\",\n        \"INFO_08\": \"ut fugiat elit amet\",\n        \"INFO_09\": \"qui eiusmod\",\n        \"INFO_10\": \"anim officia est\",\n        \"PARALLEL_WITH_PREV\": false,\n        \"DOWNSTREAM_TIME\": 37818963.56872213,\n        \"LONG_DES\": \"reprehenderit et\",\n        \"QTY_PER_RUN\": 1,\n        \"ERP_SPLIT_FACTOR\": 1,\n        \"IS_PREVIEW\": false,\n        \"IS_BLOCKED\": false,\n        \"IMP_PER_QTY\": 1,\n        \"IS_EXCLUSIVE_RES\": false,\n        \"DETAIL_INFO_01\": \"fugiat Ut\",\n        \"DETAIL_INFO_02\": \"velit proident sint\",\n        \"DETAIL_INFO_03\": \"ea aliquip eu\",\n        \"DETAIL_INFO_04\": \"magna proident nisi est\",\n        \"DETAIL_INFO_05\": \"in\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{context}}/worktickets",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"worktickets"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"WT_NO\": \"Duis qui\",\n        \"WT_DES\": \"culpa\",\n        \"WORKSTEP_NO\": 7755695.96140188,\n        \"ORDER_NO\": \"in\",\n        \"SETUP_TIME\": -64568817.70454932,\n        \"TARGET_TIME\": -4583768.6337042,\n        \"BEGIN_SCHEDULED\": \"1995-09-30T03:04:54.139Z\",\n        \"END_SCHEDULED\": \"1991-04-05T15:13:03.078Z\",\n        \"QTY_TARGET\": -87611780.39431883,\n        \"WORK_CENTER\": \"voluptate non sint eu\",\n        \"DELETE_FLAG\": false,\n        \"ARTICLE_NO\": \"aliquip incididunt cillum non in\",\n        \"ARTICLE_DES\": \"Excepteur labore\",\n        \"DRAW_NO\": \"est occaecat pariatur fugiat do\",\n        \"PLANNING_RELEVANT\": true,\n        \"QTY_YIELD\": 89203869.18567279,\n        \"QTY_SCRAP\": -4714173.200987831,\n        \"END_BATCH\": \"deserunt in\",\n        \"MOVE_TIME\": 1700938.8966321647,\n        \"WAIT_TIME\": 31199534.662983686,\n        \"OVERLAP\": \"K\",\n        \"OVERLAP_QTY\": 87387788.61476654,\n        \"OVERLAP_RATE\": 0.2,\n        \"PRIO\": 0,\n        \"WT_STATUS\": \"C_FREI\",\n        \"INFO_01\": \"laborum ullamco eu\",\n        \"INFO_02\": \"quis deserunt\",\n        \"INFO_03\": \"sunt dolore\",\n        \"INFO_04\": \"ut in\",\n        \"INFO_05\": \"qui nostrud enim\",\n        \"INFO_06\": \"consectetur\",\n        \"INFO_07\": \"ullamco dolore fugiat consectetur tempor\",\n        \"INFO_08\": \"Ut voluptate cupidatat mollit\",\n        \"INFO_09\": \"enim qui labore sunt\",\n        \"INFO_10\": \"non et cillum\",\n        \"PARALLEL_WITH_PREV\": false,\n        \"DOWNSTREAM_TIME\": -95800352.31619126,\n        \"LONG_DES\": \"esse Excepteur in\",\n        \"QTY_PER_RUN\": 1,\n        \"ERP_SPLIT_FACTOR\": 1,\n        \"IS_PREVIEW\": false,\n        \"IS_BLOCKED\": false,\n        \"IMP_PER_QTY\": 1,\n        \"IS_EXCLUSIVE_RES\": false,\n        \"DETAIL_INFO_01\": \"non eiusmod nulla\",\n        \"DETAIL_INFO_02\": \"exercitation do eiusmod proident dolore\",\n        \"DETAIL_INFO_03\": \"ullamco labore magna sed id\",\n        \"DETAIL_INFO_04\": \"est Lorem\",\n        \"DETAIL_INFO_05\": \"Ut tempor veniam laboris\"\n    },\n    {\n        \"WT_NO\": \"dolor off\",\n        \"WT_DES\": \"tempor esse est proident\",\n        \"WORKSTEP_NO\": 94363076.73427272,\n        \"ORDER_NO\": \"amet\",\n        \"SETUP_TIME\": 89623467.27664113,\n        \"TARGET_TIME\": 200742.6768990308,\n        \"BEGIN_SCHEDULED\": \"1947-05-26T01:08:28.572Z\",\n        \"END_SCHEDULED\": \"1951-06-05T22:46:20.092Z\",\n        \"QTY_TARGET\": -18105164.695009142,\n        \"WORK_CENTER\": \"qui o\",\n        \"DELETE_FLAG\": false,\n        \"ARTICLE_NO\": \"non Duis id\",\n        \"ARTICLE_DES\": \"sit voluptate commodo\",\n        \"DRAW_NO\": \"minim\",\n        \"PLANNING_RELEVANT\": true,\n        \"QTY_YIELD\": -34256045.58446338,\n        \"QTY_SCRAP\": -51791411.85496125,\n        \"END_BATCH\": \"laborum deserunt cupidatat dolor\",\n        \"MOVE_TIME\": 35221525.86386618,\n        \"WAIT_TIME\": 17237591.901586354,\n        \"OVERLAP\": \"K\",\n        \"OVERLAP_QTY\": 7778132.427907243,\n        \"OVERLAP_RATE\": 0.2,\n        \"PRIO\": 0,\n        \"WT_STATUS\": \"C_FREI\",\n        \"INFO_01\": \"quis mollit sint ea\",\n        \"INFO_02\": \"occaecat aliqua cupidatat\",\n        \"INFO_03\": \"sunt cupidatat elit aliqua aliquip\",\n        \"INFO_04\": \"Excepteur commodo fugiat\",\n        \"INFO_05\": \"sed do eiusmod\",\n        \"INFO_06\": \"in pariatur aliqua\",\n        \"INFO_07\": \"Excepteur aliquip\",\n        \"INFO_08\": \"sit commodo\",\n        \"INFO_09\": \"quis laboris\",\n        \"INFO_10\": \"proident eu\",\n        \"PARALLEL_WITH_PREV\": false,\n        \"DOWNSTREAM_TIME\": -39475732.778111406,\n        \"LONG_DES\": \"deserunt qui velit\",\n        \"QTY_PER_RUN\": 1,\n        \"ERP_SPLIT_FACTOR\": 1,\n        \"IS_PREVIEW\": false,\n        \"IS_BLOCKED\": false,\n        \"IMP_PER_QTY\": 1,\n        \"IS_EXCLUSIVE_RES\": false,\n        \"DETAIL_INFO_01\": \"magna elit enim \",\n        \"DETAIL_INFO_02\": \"Duis tempor dolor Lorem\",\n        \"DETAIL_INFO_03\": \"consectetur velit aute\",\n        \"DETAIL_INFO_04\": \"pariatur minim\",\n        \"DETAIL_INFO_05\": \"ullamco\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/worktickets",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worktickets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"WT_NO\": \"Duis qui\",\n        \"WT_DES\": \"culpa\",\n        \"WORKSTEP_NO\": 7755695.96140188,\n        \"ORDER_NO\": \"in\",\n        \"SETUP_TIME\": -64568817.70454932,\n        \"TARGET_TIME\": -4583768.6337042,\n        \"BEGIN_SCHEDULED\": \"1995-09-30T03:04:54.139Z\",\n        \"END_SCHEDULED\": \"1991-04-05T15:13:03.078Z\",\n        \"QTY_TARGET\": -87611780.39431883,\n        \"WORK_CENTER\": \"voluptate non sint eu\",\n        \"DELETE_FLAG\": false,\n        \"ARTICLE_NO\": \"aliquip incididunt cillum non in\",\n        \"ARTICLE_DES\": \"Excepteur labore\",\n        \"DRAW_NO\": \"est occaecat pariatur fugiat do\",\n        \"PLANNING_RELEVANT\": true,\n        \"QTY_YIELD\": 89203869.18567279,\n        \"QTY_SCRAP\": -4714173.200987831,\n        \"END_BATCH\": \"deserunt in\",\n        \"MOVE_TIME\": 1700938.8966321647,\n        \"WAIT_TIME\": 31199534.662983686,\n        \"OVERLAP\": \"K\",\n        \"OVERLAP_QTY\": 87387788.61476654,\n        \"OVERLAP_RATE\": 0.2,\n        \"PRIO\": 0,\n        \"WT_STATUS\": \"C_FREI\",\n        \"INFO_01\": \"laborum ullamco eu\",\n        \"INFO_02\": \"quis deserunt\",\n        \"INFO_03\": \"sunt dolore\",\n        \"INFO_04\": \"ut in\",\n        \"INFO_05\": \"qui nostrud enim\",\n        \"INFO_06\": \"consectetur\",\n        \"INFO_07\": \"ullamco dolore fugiat consectetur tempor\",\n        \"INFO_08\": \"Ut voluptate cupidatat mollit\",\n        \"INFO_09\": \"enim qui labore sunt\",\n        \"INFO_10\": \"non et cillum\",\n        \"PARALLEL_WITH_PREV\": false,\n        \"DOWNSTREAM_TIME\": -95800352.31619126,\n        \"LONG_DES\": \"esse Excepteur in\",\n        \"QTY_PER_RUN\": 1,\n        \"ERP_SPLIT_FACTOR\": 1,\n        \"IS_PREVIEW\": false,\n        \"IS_BLOCKED\": false,\n        \"IMP_PER_QTY\": 1,\n        \"IS_EXCLUSIVE_RES\": false,\n        \"DETAIL_INFO_01\": \"non eiusmod nulla\",\n        \"DETAIL_INFO_02\": \"exercitation do eiusmod proident dolore\",\n        \"DETAIL_INFO_03\": \"ullamco labore magna sed id\",\n        \"DETAIL_INFO_04\": \"est Lorem\",\n        \"DETAIL_INFO_05\": \"Ut tempor veniam laboris\"\n    },\n    {\n        \"WT_NO\": \"dolor off\",\n        \"WT_DES\": \"tempor esse est proident\",\n        \"WORKSTEP_NO\": 94363076.73427272,\n        \"ORDER_NO\": \"amet\",\n        \"SETUP_TIME\": 89623467.27664113,\n        \"TARGET_TIME\": 200742.6768990308,\n        \"BEGIN_SCHEDULED\": \"1947-05-26T01:08:28.572Z\",\n        \"END_SCHEDULED\": \"1951-06-05T22:46:20.092Z\",\n        \"QTY_TARGET\": -18105164.695009142,\n        \"WORK_CENTER\": \"qui o\",\n        \"DELETE_FLAG\": false,\n        \"ARTICLE_NO\": \"non Duis id\",\n        \"ARTICLE_DES\": \"sit voluptate commodo\",\n        \"DRAW_NO\": \"minim\",\n        \"PLANNING_RELEVANT\": true,\n        \"QTY_YIELD\": -34256045.58446338,\n        \"QTY_SCRAP\": -51791411.85496125,\n        \"END_BATCH\": \"laborum deserunt cupidatat dolor\",\n        \"MOVE_TIME\": 35221525.86386618,\n        \"WAIT_TIME\": 17237591.901586354,\n        \"OVERLAP\": \"K\",\n        \"OVERLAP_QTY\": 7778132.427907243,\n        \"OVERLAP_RATE\": 0.2,\n        \"PRIO\": 0,\n        \"WT_STATUS\": \"C_FREI\",\n        \"INFO_01\": \"quis mollit sint ea\",\n        \"INFO_02\": \"occaecat aliqua cupidatat\",\n        \"INFO_03\": \"sunt cupidatat elit aliqua aliquip\",\n        \"INFO_04\": \"Excepteur commodo fugiat\",\n        \"INFO_05\": \"sed do eiusmod\",\n        \"INFO_06\": \"in pariatur aliqua\",\n        \"INFO_07\": \"Excepteur aliquip\",\n        \"INFO_08\": \"sit commodo\",\n        \"INFO_09\": \"quis laboris\",\n        \"INFO_10\": \"proident eu\",\n        \"PARALLEL_WITH_PREV\": false,\n        \"DOWNSTREAM_TIME\": -39475732.778111406,\n        \"LONG_DES\": \"deserunt qui velit\",\n        \"QTY_PER_RUN\": 1,\n        \"ERP_SPLIT_FACTOR\": 1,\n        \"IS_PREVIEW\": false,\n        \"IS_BLOCKED\": false,\n        \"IMP_PER_QTY\": 1,\n        \"IS_EXCLUSIVE_RES\": false,\n        \"DETAIL_INFO_01\": \"magna elit enim \",\n        \"DETAIL_INFO_02\": \"Duis tempor dolor Lorem\",\n        \"DETAIL_INFO_03\": \"consectetur velit aute\",\n        \"DETAIL_INFO_04\": \"pariatur minim\",\n        \"DETAIL_INFO_05\": \"ullamco\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/worktickets",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worktickets"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"WT_NO\": \"Duis qui\",\n        \"WT_DES\": \"culpa\",\n        \"WORKSTEP_NO\": 7755695.96140188,\n        \"ORDER_NO\": \"in\",\n        \"SETUP_TIME\": -64568817.70454932,\n        \"TARGET_TIME\": -4583768.6337042,\n        \"BEGIN_SCHEDULED\": \"1995-09-30T03:04:54.139Z\",\n        \"END_SCHEDULED\": \"1991-04-05T15:13:03.078Z\",\n        \"QTY_TARGET\": -87611780.39431883,\n        \"WORK_CENTER\": \"voluptate non sint eu\",\n        \"DELETE_FLAG\": false,\n        \"ARTICLE_NO\": \"aliquip incididunt cillum non in\",\n        \"ARTICLE_DES\": \"Excepteur labore\",\n        \"DRAW_NO\": \"est occaecat pariatur fugiat do\",\n        \"PLANNING_RELEVANT\": true,\n        \"QTY_YIELD\": 89203869.18567279,\n        \"QTY_SCRAP\": -4714173.200987831,\n        \"END_BATCH\": \"deserunt in\",\n        \"MOVE_TIME\": 1700938.8966321647,\n        \"WAIT_TIME\": 31199534.662983686,\n        \"OVERLAP\": \"K\",\n        \"OVERLAP_QTY\": 87387788.61476654,\n        \"OVERLAP_RATE\": 0.2,\n        \"PRIO\": 0,\n        \"WT_STATUS\": \"C_FREI\",\n        \"INFO_01\": \"laborum ullamco eu\",\n        \"INFO_02\": \"quis deserunt\",\n        \"INFO_03\": \"sunt dolore\",\n        \"INFO_04\": \"ut in\",\n        \"INFO_05\": \"qui nostrud enim\",\n        \"INFO_06\": \"consectetur\",\n        \"INFO_07\": \"ullamco dolore fugiat consectetur tempor\",\n        \"INFO_08\": \"Ut voluptate cupidatat mollit\",\n        \"INFO_09\": \"enim qui labore sunt\",\n        \"INFO_10\": \"non et cillum\",\n        \"PARALLEL_WITH_PREV\": false,\n        \"DOWNSTREAM_TIME\": -95800352.31619126,\n        \"LONG_DES\": \"esse Excepteur in\",\n        \"QTY_PER_RUN\": 1,\n        \"ERP_SPLIT_FACTOR\": 1,\n        \"IS_PREVIEW\": false,\n        \"IS_BLOCKED\": false,\n        \"IMP_PER_QTY\": 1,\n        \"IS_EXCLUSIVE_RES\": false,\n        \"DETAIL_INFO_01\": \"non eiusmod nulla\",\n        \"DETAIL_INFO_02\": \"exercitation do eiusmod proident dolore\",\n        \"DETAIL_INFO_03\": \"ullamco labore magna sed id\",\n        \"DETAIL_INFO_04\": \"est Lorem\",\n        \"DETAIL_INFO_05\": \"Ut tempor veniam laboris\"\n    },\n    {\n        \"WT_NO\": \"dolor off\",\n        \"WT_DES\": \"tempor esse est proident\",\n        \"WORKSTEP_NO\": 94363076.73427272,\n        \"ORDER_NO\": \"amet\",\n        \"SETUP_TIME\": 89623467.27664113,\n        \"TARGET_TIME\": 200742.6768990308,\n        \"BEGIN_SCHEDULED\": \"1947-05-26T01:08:28.572Z\",\n        \"END_SCHEDULED\": \"1951-06-05T22:46:20.092Z\",\n        \"QTY_TARGET\": -18105164.695009142,\n        \"WORK_CENTER\": \"qui o\",\n        \"DELETE_FLAG\": false,\n        \"ARTICLE_NO\": \"non Duis id\",\n        \"ARTICLE_DES\": \"sit voluptate commodo\",\n        \"DRAW_NO\": \"minim\",\n        \"PLANNING_RELEVANT\": true,\n        \"QTY_YIELD\": -34256045.58446338,\n        \"QTY_SCRAP\": -51791411.85496125,\n        \"END_BATCH\": \"laborum deserunt cupidatat dolor\",\n        \"MOVE_TIME\": 35221525.86386618,\n        \"WAIT_TIME\": 17237591.901586354,\n        \"OVERLAP\": \"K\",\n        \"OVERLAP_QTY\": 7778132.427907243,\n        \"OVERLAP_RATE\": 0.2,\n        \"PRIO\": 0,\n        \"WT_STATUS\": \"C_FREI\",\n        \"INFO_01\": \"quis mollit sint ea\",\n        \"INFO_02\": \"occaecat aliqua cupidatat\",\n        \"INFO_03\": \"sunt cupidatat elit aliqua aliquip\",\n        \"INFO_04\": \"Excepteur commodo fugiat\",\n        \"INFO_05\": \"sed do eiusmod\",\n        \"INFO_06\": \"in pariatur aliqua\",\n        \"INFO_07\": \"Excepteur aliquip\",\n        \"INFO_08\": \"sit commodo\",\n        \"INFO_09\": \"quis laboris\",\n        \"INFO_10\": \"proident eu\",\n        \"PARALLEL_WITH_PREV\": false,\n        \"DOWNSTREAM_TIME\": -39475732.778111406,\n        \"LONG_DES\": \"deserunt qui velit\",\n        \"QTY_PER_RUN\": 1,\n        \"ERP_SPLIT_FACTOR\": 1,\n        \"IS_PREVIEW\": false,\n        \"IS_BLOCKED\": false,\n        \"IMP_PER_QTY\": 1,\n        \"IS_EXCLUSIVE_RES\": false,\n        \"DETAIL_INFO_01\": \"magna elit enim \",\n        \"DETAIL_INFO_02\": \"Duis tempor dolor Lorem\",\n        \"DETAIL_INFO_03\": \"consectetur velit aute\",\n        \"DETAIL_INFO_04\": \"pariatur minim\",\n        \"DETAIL_INFO_05\": \"ullamco\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/worktickets",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worktickets"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Stores materials for work tickets",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"WT_NO\": \"sed pariatur commodo\",\n        \"MAT_NO\": \"labore cupidatat\",\n        \"UNIT\": \"do in aliqua\",\n        \"AMOUNT\": 25269247.467801884,\n        \"POS_NO\": 3559728.904586017\n    },\n    {\n        \"WT_NO\": \"Duis consectetur\",\n        \"MAT_NO\": \"laborum in enim s\",\n        \"UNIT\": \"cillum dolore in\",\n        \"AMOUNT\": -89057621.48877954,\n        \"POS_NO\": -83995803.30010897\n    }\n]"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{context}}/worktickets_materials",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"worktickets_materials"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"WT_NO\": \"officia laboris\",\n        \"MAT_NO\": \"commodo\",\n        \"UNIT\": \"esse in\",\n        \"AMOUNT\": 94705531.27782118,\n        \"POS_NO\": -32929750.095410615\n    },\n    {\n        \"WT_NO\": \"sit qui tempor velit\",\n        \"MAT_NO\": \"ut dolor\",\n        \"UNIT\": \"aliquip cons\",\n        \"AMOUNT\": 28805699.703260317,\n        \"POS_NO\": 87398297.06877506\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/worktickets_materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worktickets_materials"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"WT_NO\": \"officia laboris\",\n        \"MAT_NO\": \"commodo\",\n        \"UNIT\": \"esse in\",\n        \"AMOUNT\": 94705531.27782118,\n        \"POS_NO\": -32929750.095410615\n    },\n    {\n        \"WT_NO\": \"sit qui tempor velit\",\n        \"MAT_NO\": \"ut dolor\",\n        \"UNIT\": \"aliquip cons\",\n        \"AMOUNT\": 28805699.703260317,\n        \"POS_NO\": 87398297.06877506\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/worktickets_materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worktickets_materials"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"WT_NO\": \"officia laboris\",\n        \"MAT_NO\": \"commodo\",\n        \"UNIT\": \"esse in\",\n        \"AMOUNT\": 94705531.27782118,\n        \"POS_NO\": -32929750.095410615\n    },\n    {\n        \"WT_NO\": \"sit qui tempor velit\",\n        \"MAT_NO\": \"ut dolor\",\n        \"UNIT\": \"aliquip cons\",\n        \"AMOUNT\": 28805699.703260317,\n        \"POS_NO\": 87398297.06877506\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/worktickets_materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"worktickets_materials"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Stores new customers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"CUSTOMER_NO\": \"pariatur ut ad fugiat\",\n        \"CUSTOMER_DES\": \"elit cupidatat \",\n        \"DELETE_FLAG\": false\n    },\n    {\n        \"CUSTOMER_NO\": \"tempor\",\n        \"CUSTOMER_DES\": \"dolore sun\",\n        \"DELETE_FLAG\": false\n    }\n]"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{context}}/customers",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"CUSTOMER_NO\": \"in labore\",\n        \"CUSTOMER_DES\": \"dolor voluptate consectetur adipisicing\",\n        \"DELETE_FLAG\": false\n    },\n    {\n        \"CUSTOMER_NO\": \"consectetur\",\n        \"CUSTOMER_DES\": \"ni\",\n        \"DELETE_FLAG\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"CUSTOMER_NO\": \"in labore\",\n        \"CUSTOMER_DES\": \"dolor voluptate consectetur adipisicing\",\n        \"DELETE_FLAG\": false\n    },\n    {\n        \"CUSTOMER_NO\": \"consectetur\",\n        \"CUSTOMER_DES\": \"ni\",\n        \"DELETE_FLAG\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"CUSTOMER_NO\": \"in labore\",\n        \"CUSTOMER_DES\": \"dolor voluptate consectetur adipisicing\",\n        \"DELETE_FLAG\": false\n    },\n    {\n        \"CUSTOMER_NO\": \"consectetur\",\n        \"CUSTOMER_DES\": \"ni\",\n        \"DELETE_FLAG\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Stores new assignments of material to batches",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"MAT_NO\": \"amet est\",\n        \"BATCH_NO\": \"amet labore\",\n        \"DELETE_FLAG\": false\n    },\n    {\n        \"MAT_NO\": \"dolo\",\n        \"BATCH_NO\": \"esse cupidatat non velit\",\n        \"DELETE_FLAG\": false\n    }\n]"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{context}}/material-batch-assignments",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"material-batch-assignments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"est Lorem incididunt\",\n        \"BATCH_NO\": \"velit quis\",\n        \"DELETE_FLAG\": false\n    },\n    {\n        \"MAT_NO\": \"enim labore\",\n        \"BATCH_NO\": \"adipis\",\n        \"DELETE_FLAG\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/material-batch-assignments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"material-batch-assignments"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"est Lorem incididunt\",\n        \"BATCH_NO\": \"velit quis\",\n        \"DELETE_FLAG\": false\n    },\n    {\n        \"MAT_NO\": \"enim labore\",\n        \"BATCH_NO\": \"adipis\",\n        \"DELETE_FLAG\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/material-batch-assignments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"material-batch-assignments"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"est Lorem incididunt\",\n        \"BATCH_NO\": \"velit quis\",\n        \"DELETE_FLAG\": false\n    },\n    {\n        \"MAT_NO\": \"enim labore\",\n        \"BATCH_NO\": \"adipis\",\n        \"DELETE_FLAG\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/material-batch-assignments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"material-batch-assignments"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Stores new materials",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"MAT_NO\": \"ex eu et aliquip quis\",\n        \"PLANT_NO\": \"C_STD\",\n        \"ARTICLE_NAME\": \"sint\",\n        \"UNIT\": \"ut aute esse\",\n        \"ARTICLE_DES\": \"sit magna in\",\n        \"LONG_DES\": \"proident\",\n        \"DELETE_FLAG\": false,\n        \"DRAWING_NO\": \"aliqua velit aute fugiat\",\n        \"REVISION_INDEX\": \"ut non\",\n        \"OBJECT_STATE\": \"F\",\n        \"LOCK_REASON_ID\": 0,\n        \"PLANNING_RELEVANT\": true,\n        \"ARTICLE_TYPE\": \"EIGENFERTIGUNG\",\n        \"REPLACEMENT_TIME\": -39764713.20772257,\n        \"PPS_MAT_TYPE_ID\": \"C_UNKNOWN\",\n        \"BATCH_NEEDED\": false,\n        \"SERIALNUMBER_NEEDED\": false\n    },\n    {\n        \"MAT_NO\": \"et\",\n        \"PLANT_NO\": \"C_STD\",\n        \"ARTICLE_NAME\": \"nulla esse do enim\",\n        \"UNIT\": \"au\",\n        \"ARTICLE_DES\": \"fugiat pr\",\n        \"LONG_DES\": \"et tempor fugiat\",\n        \"DELETE_FLAG\": false,\n        \"DRAWING_NO\": \"fugiat e\",\n        \"REVISION_INDEX\": \"ut \",\n        \"OBJECT_STATE\": \"F\",\n        \"LOCK_REASON_ID\": 0,\n        \"PLANNING_RELEVANT\": true,\n        \"ARTICLE_TYPE\": \"EIGENFERTIGUNG\",\n        \"REPLACEMENT_TIME\": -49658909.039784096,\n        \"PPS_MAT_TYPE_ID\": \"C_UNKNOWN\",\n        \"BATCH_NEEDED\": false,\n        \"SERIALNUMBER_NEEDED\": false\n    }\n]"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{context}}/materials",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"materials"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"dolore pariatur\",\n        \"PLANT_NO\": \"C_STD\",\n        \"ARTICLE_NAME\": \"dolore\",\n        \"UNIT\": \"irure \",\n        \"ARTICLE_DES\": \"id dolor nisi d\",\n        \"LONG_DES\": \"labore Excepteur id in\",\n        \"DELETE_FLAG\": false,\n        \"DRAWING_NO\": \"est in proident pariatur in\",\n        \"REVISION_INDEX\": \"do\",\n        \"OBJECT_STATE\": \"F\",\n        \"LOCK_REASON_ID\": 0,\n        \"PLANNING_RELEVANT\": true,\n        \"ARTICLE_TYPE\": \"EIGENFERTIGUNG\",\n        \"REPLACEMENT_TIME\": 32421961.536246926,\n        \"PPS_MAT_TYPE_ID\": \"C_UNKNOWN\",\n        \"BATCH_NEEDED\": false,\n        \"SERIALNUMBER_NEEDED\": false\n    },\n    {\n        \"MAT_NO\": \"id incid\",\n        \"PLANT_NO\": \"C_STD\",\n        \"ARTICLE_NAME\": \"sit incididunt ea ullamco\",\n        \"UNIT\": \"Ut in nostrud\",\n        \"ARTICLE_DES\": \"exercitation\",\n        \"LONG_DES\": \"Excepteur dolore in enim\",\n        \"DELETE_FLAG\": false,\n        \"DRAWING_NO\": \"irure sint\",\n        \"REVISION_INDEX\": \"adipi\",\n        \"OBJECT_STATE\": \"F\",\n        \"LOCK_REASON_ID\": 0,\n        \"PLANNING_RELEVANT\": true,\n        \"ARTICLE_TYPE\": \"EIGENFERTIGUNG\",\n        \"REPLACEMENT_TIME\": 67967252.78606015,\n        \"PPS_MAT_TYPE_ID\": \"C_UNKNOWN\",\n        \"BATCH_NEEDED\": false,\n        \"SERIALNUMBER_NEEDED\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"materials"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"dolore pariatur\",\n        \"PLANT_NO\": \"C_STD\",\n        \"ARTICLE_NAME\": \"dolore\",\n        \"UNIT\": \"irure \",\n        \"ARTICLE_DES\": \"id dolor nisi d\",\n        \"LONG_DES\": \"labore Excepteur id in\",\n        \"DELETE_FLAG\": false,\n        \"DRAWING_NO\": \"est in proident pariatur in\",\n        \"REVISION_INDEX\": \"do\",\n        \"OBJECT_STATE\": \"F\",\n        \"LOCK_REASON_ID\": 0,\n        \"PLANNING_RELEVANT\": true,\n        \"ARTICLE_TYPE\": \"EIGENFERTIGUNG\",\n        \"REPLACEMENT_TIME\": 32421961.536246926,\n        \"PPS_MAT_TYPE_ID\": \"C_UNKNOWN\",\n        \"BATCH_NEEDED\": false,\n        \"SERIALNUMBER_NEEDED\": false\n    },\n    {\n        \"MAT_NO\": \"id incid\",\n        \"PLANT_NO\": \"C_STD\",\n        \"ARTICLE_NAME\": \"sit incididunt ea ullamco\",\n        \"UNIT\": \"Ut in nostrud\",\n        \"ARTICLE_DES\": \"exercitation\",\n        \"LONG_DES\": \"Excepteur dolore in enim\",\n        \"DELETE_FLAG\": false,\n        \"DRAWING_NO\": \"irure sint\",\n        \"REVISION_INDEX\": \"adipi\",\n        \"OBJECT_STATE\": \"F\",\n        \"LOCK_REASON_ID\": 0,\n        \"PLANNING_RELEVANT\": true,\n        \"ARTICLE_TYPE\": \"EIGENFERTIGUNG\",\n        \"REPLACEMENT_TIME\": 67967252.78606015,\n        \"PPS_MAT_TYPE_ID\": \"C_UNKNOWN\",\n        \"BATCH_NEEDED\": false,\n        \"SERIALNUMBER_NEEDED\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"materials"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"dolore pariatur\",\n        \"PLANT_NO\": \"C_STD\",\n        \"ARTICLE_NAME\": \"dolore\",\n        \"UNIT\": \"irure \",\n        \"ARTICLE_DES\": \"id dolor nisi d\",\n        \"LONG_DES\": \"labore Excepteur id in\",\n        \"DELETE_FLAG\": false,\n        \"DRAWING_NO\": \"est in proident pariatur in\",\n        \"REVISION_INDEX\": \"do\",\n        \"OBJECT_STATE\": \"F\",\n        \"LOCK_REASON_ID\": 0,\n        \"PLANNING_RELEVANT\": true,\n        \"ARTICLE_TYPE\": \"EIGENFERTIGUNG\",\n        \"REPLACEMENT_TIME\": 32421961.536246926,\n        \"PPS_MAT_TYPE_ID\": \"C_UNKNOWN\",\n        \"BATCH_NEEDED\": false,\n        \"SERIALNUMBER_NEEDED\": false\n    },\n    {\n        \"MAT_NO\": \"id incid\",\n        \"PLANT_NO\": \"C_STD\",\n        \"ARTICLE_NAME\": \"sit incididunt ea ullamco\",\n        \"UNIT\": \"Ut in nostrud\",\n        \"ARTICLE_DES\": \"exercitation\",\n        \"LONG_DES\": \"Excepteur dolore in enim\",\n        \"DELETE_FLAG\": false,\n        \"DRAWING_NO\": \"irure sint\",\n        \"REVISION_INDEX\": \"adipi\",\n        \"OBJECT_STATE\": \"F\",\n        \"LOCK_REASON_ID\": 0,\n        \"PLANNING_RELEVANT\": true,\n        \"ARTICLE_TYPE\": \"EIGENFERTIGUNG\",\n        \"REPLACEMENT_TIME\": 67967252.78606015,\n        \"PPS_MAT_TYPE_ID\": \"C_UNKNOWN\",\n        \"BATCH_NEEDED\": false,\n        \"SERIALNUMBER_NEEDED\": false\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"materials"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Stores new materials for stock",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"MAT_NO\": \"Ut nulla in\",\n        \"PLANT_NO\": \"sit tempor dol\",\n        \"STOCK_TYPE\": \"B\",\n        \"AMOUNT\": 16594589.074539855,\n        \"TIMESTAMP\": \"2011-11-18T16:03:29.155Z\",\n        \"ORDER_NO\": \"voluptate minim Excepteur occaecat\",\n        \"WT_NO\": \"anim sunt Exce\"\n    },\n    {\n        \"MAT_NO\": \"voluptate proident\",\n        \"PLANT_NO\": \"aute aliqua quis anim\",\n        \"STOCK_TYPE\": \"B\",\n        \"AMOUNT\": -2166759.0113888234,\n        \"TIMESTAMP\": \"2015-07-23T13:34:43.639Z\",\n        \"ORDER_NO\": \"in laboris tempor incididunt enim\",\n        \"WT_NO\": \"laboris aliqua do laborum\"\n    }\n]"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}{{context}}/stock-materials",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"stock-materials"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"sit\",\n        \"PLANT_NO\": \"Lorem officia\",\n        \"STOCK_TYPE\": \"B\",\n        \"AMOUNT\": -69470421.62079744,\n        \"TIMESTAMP\": \"1995-10-10T12:44:59.468Z\",\n        \"ORDER_NO\": \"ad dolore\",\n        \"WT_NO\": \"eu commodo reprehenderit qui\"\n    },\n    {\n        \"MAT_NO\": \"nulla irure ex\",\n        \"PLANT_NO\": \"pariatur nisi\",\n        \"STOCK_TYPE\": \"B\",\n        \"AMOUNT\": 96127177.59773183,\n        \"TIMESTAMP\": \"2011-04-26T10:55:30.424Z\",\n        \"ORDER_NO\": \"qui sunt minim\",\n        \"WT_NO\": \"qui ut enim\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stock-materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-materials"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"sit\",\n        \"PLANT_NO\": \"Lorem officia\",\n        \"STOCK_TYPE\": \"B\",\n        \"AMOUNT\": -69470421.62079744,\n        \"TIMESTAMP\": \"1995-10-10T12:44:59.468Z\",\n        \"ORDER_NO\": \"ad dolore\",\n        \"WT_NO\": \"eu commodo reprehenderit qui\"\n    },\n    {\n        \"MAT_NO\": \"nulla irure ex\",\n        \"PLANT_NO\": \"pariatur nisi\",\n        \"STOCK_TYPE\": \"B\",\n        \"AMOUNT\": 96127177.59773183,\n        \"TIMESTAMP\": \"2011-04-26T10:55:30.424Z\",\n        \"ORDER_NO\": \"qui sunt minim\",\n        \"WT_NO\": \"qui ut enim\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stock-materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-materials"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"MAT_NO\": \"sit\",\n        \"PLANT_NO\": \"Lorem officia\",\n        \"STOCK_TYPE\": \"B\",\n        \"AMOUNT\": -69470421.62079744,\n        \"TIMESTAMP\": \"1995-10-10T12:44:59.468Z\",\n        \"ORDER_NO\": \"ad dolore\",\n        \"WT_NO\": \"eu commodo reprehenderit qui\"\n    },\n    {\n        \"MAT_NO\": \"nulla irure ex\",\n        \"PLANT_NO\": \"pariatur nisi\",\n        \"STOCK_TYPE\": \"B\",\n        \"AMOUNT\": 96127177.59773183,\n        \"TIMESTAMP\": \"2011-04-26T10:55:30.424Z\",\n        \"ORDER_NO\": \"qui sunt minim\",\n        \"WT_NO\": \"qui ut enim\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stock-materials",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-materials"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "context",
+			"value": "/proxia/mes/erp/interface/v1"
+		},
+		{
+			"key": "host",
+			"value": "localhost"
+		},
+		{
+			"key": "port",
+			"value": "5000"
+		},
+		{
+			"key": "protocol",
+			"value": "http"
+		}
+	]
+}
