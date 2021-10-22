@@ -15,17 +15,30 @@
 						"exec": [
 							"var lastCreatedFileContent=\"ad|ipsum Duis sit minim|aliqua est Duis||FEnum|mollit deserunt in|20140110002133|19570915103458|voluptate sed nisi|anim cillum consectetur offi|aute Duis incididunt proident|-97793496|culpa in|in reprehenderit incididunt Duis|laboris in enim ea elit|Excepteur dolore officia deserunt tempor|in irure ea|s|ad|fugiat officia nostrud|0|REnum\\ntempor aliquip cillum officia|ut et aliquip voluptate |ipsum ut dolore||FEnum|sed veniam|20120225155558|19621220165303|occaecat dolore|ut culpa veniam sed||-89483464|voluptate esse qui officia|reprehenderit laborum aute laboris|sit|in sit|quis|id|consectetur|nulla offic|0|REnum\\n\";\r",
 							"\r",
-							"pm.sendRequest(pm.variables.get('protocol')+'://'+pm.variables.get('host')+':'+pm.variables.get('port')+'/lastCreatedFile.txt', (error, response) => {\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.sendRequest(pm.variables.get('protocol')+'://'+pm.variables.get('host')+':'+pm.variables.get('port')+'/lastCreatedFile.txta', (error, response) => {\r",
 							"    if (error || response.code !== 200) {\r",
 							"        pm.expect.fail('Could not load lastCreatedFile!');\r",
 							"    }\r",
 							"\r",
-							"    console.log(response.text());\r",
+							"    //console.log(response.text());\r",
 							"    //Validate the lastCreatedFile content\r",
 							"    pm.test('LastCreatedFile content is correct', function() {\r",
 							"          pm.expect(response.text()).to.be.equal(lastCreatedFileContent);\r",
 							"    });\r",
 							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
 							""
 						],
 						"type": "text/javascript"
