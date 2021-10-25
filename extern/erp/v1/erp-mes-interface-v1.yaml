@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: ERP MES API
   description: REST API provided by the ERP system for MES systems
-  version: '1.0.4'
+  version: '1.0.5'
 servers:
   - url: "erp/mes/interface/v1"
 tags:
@@ -161,6 +161,11 @@ components:
             - 'C_RUECK'
             - 'C_TFRTG'
             - 'C_FRTG'
+          x-enum-varnames:
+            - 'C_START'
+            - 'C_RUECK'
+            - 'C_TFRTG'
+            - 'C_FRTG'
         ACTIVITY:
           type: string
           description: Description of activities in unplanned operations/Beschreibung der Tätigkeiten bei ungeplanten Arbeitsgängen
@@ -185,6 +190,10 @@ components:
           description: Workplace Type/Arbeitsplatztyp; "C_MACH" Machine/Maschine; "C_WKPL" Assembly/Montage; "C_COLLECTIVE_WKPL" Collective Workplace/Sammelarbeitsplatz
           nullable: true
           enum:
+            - 'C_MACH'
+            - 'C_WKPL'
+            - 'C_COLLECTIVE_WKPL'
+          x-enum-varnames:
             - 'C_MACH'
             - 'C_WKPL'
             - 'C_COLLECTIVE_WKPL'
