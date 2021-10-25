@@ -34,7 +34,7 @@ jobs:
       - name: Generate C# controller code
         uses: docker://openapitools/openapi-generator-cli
         with:
-          args: generate -o /github/workspace/${{env.GEN_OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.PACKAGE_NAME}},packageVersion=${{env.INTERFACE_VERSION}},enumValueSuffix=
+          args: generate -o /github/workspace/${{env.GEN_OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.PACKAGE_NAME}},packageVersion=${{env.INTERFACE_VERSION}},enumValueSuffix=,removeEnumValuePrefix=false
       
       - name: Change access rights for generated sources
         run: |

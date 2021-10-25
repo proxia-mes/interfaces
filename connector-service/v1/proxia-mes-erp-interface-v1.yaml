@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA MES ERP INTERFACE API
   description: REST API provided by the PROXIA MES system for ERP systems
-  version: '1.0.5'
+  version: '1.0.6'
 servers:
   - url: "/proxia/mes/erp/interface/v1"
 tags:
@@ -484,6 +484,10 @@ components:
             - 'C_FREI'
             - 'C_TFRTG'
             - 'C_FRTG'
+          x-enum-varnames:
+            - 'C_FREI'
+            - 'C_TFRTG'
+            - 'C_FRTG'
         INFO_01:
           type: string
           description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
@@ -805,6 +809,17 @@ components:
           nullable: true
           default: 'C_UNKNOWN'
           enum:
+            - 'C_ARTICLE'
+            - 'C_ARTICLE_PURCHASED'
+            - 'C_COMPONENT'
+            - 'C_FACILITY'
+            - 'C_FIXTURE'
+            - 'C_HANDTOOL'
+            - 'C_MEASUREMENT'
+            - 'C_RAW'
+            - 'C_TOOL'
+            - 'C_UNKNOWN'
+          x-enum-varnames:
             - 'C_ARTICLE'
             - 'C_ARTICLE_PURCHASED'
             - 'C_COMPONENT'
