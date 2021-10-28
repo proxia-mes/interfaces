@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA MES ERP INTERFACE API
   description: REST API provided by the PROXIA MES system for ERP systems
-  version: '1.0.6'
+  version: '1.0.7'
 servers:
   - url: "/proxia/mes/erp/interface/v1"
 tags:
@@ -889,6 +889,12 @@ components:
         WT_NO:
           type: string
           description: Number of the work ticket for which a lot has been outsourced. STOCK_TYPE "O"/Nummer des Arbeitsscheins für welchen eine Menge ausgelagert wurde. STOCK_TYPE "O"
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        LOC_NO:
+          type: string
+          description: PPS number of the storage place/PPS Nummer des Lagerplatzes
           maxLength: 50
           minLength: 0
           nullable: true
