@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA MES ERP INTERFACE API
   description: REST API provided by the PROXIA MES system for ERP systems
-  version: '1.0.7'
+  version: '1.0.8'
 servers:
   - url: "/proxia/mes/erp/interface/v1"
 tags:
@@ -418,7 +418,7 @@ components:
           type: boolean
           description: Planning relevance/Planungsrelevanz
           default: true
-          nullable: false
+          nullable: true
         QTY_YIELD:
           type: number
           format: float
@@ -783,7 +783,7 @@ components:
           type: boolean
           description: Relevant for planning/Planungsrelevant
           default: true
-          nullable: false
+          nullable: true
         ARTICLE_TYPE:
           type: string
           description: Type of article/Artikeltyp; "EIGENFERTIGUNG" In-house production/Eigenproduktion; "FREMDBESCHAFFUNG" external procurment/Fremdbeschaffung
