@@ -1,0 +1,333 @@
+---
+openapi: 3.0.3
+info:
+  title: ERP MES API
+  description: REST API provided by the ERP system for MES systems
+  version: '1.0.5'
+servers:
+  - url: "erp/mes-service/v1"
+tags:
+  - name: mes
+    description: Everything about the interface for MES systems provided by the ERP system
+paths:
+  "/worktickets-replies":
+    post:
+      tags:
+        - mes
+      summary: Stores the replies for the work tickets
+      requestBody:
+        description: Array of reply objects
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Workticket-Reply"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets-planning-datas":
+    post:
+      tags:
+        - mes
+      summary: Stores the planning-data for the work tickets
+      requestBody:
+        description: Array of work ticket planing data objects
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Workticket-Planning-Data"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/order-planning-datas":
+    post:
+      tags:
+        - mes
+      summary: Stores the planning-data for the orders
+      requestBody:
+        description: Array of order planning data objects
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Order-Planning-Data"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets-material-removals":
+    post:
+      tags:
+        - mes
+      summary: Stores the material removals for the work tickets
+      requestBody:
+        description: Array of material removal objects
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Workticket-Material-Removal"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+components:
+  schemas:
+    Workticket-Reply:
+      type: object
+      required:
+        - WT_NO
+        - WT_STATUS
+      properties:
+        WT_NO:
+          type: string
+          description: Unique identifier of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        MACHINE_NO:
+          type: string
+          description: Guide number of manufacturing resource (group number or KST)/Leitzahl der Fertigungsressource (Gruppennummer bzw. KST)
+          maxLength: 50
+          minLength: 0
+          nullable: false
+        PERS_NO:
+          type: string
+          description: Personnel number for personal tours. Is not filled with a machine page record/Personalnummer für Personenzeiten. Wird bei einem Maschinenzeiten-Datensatz nicht gefüllt
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        SETUPTIME:
+          type: number
+          format: float
+          description: Set time for the operation (min) in the confirmation period/Rüstzeit für den Arbeitsgang (Min) im Rückmeldezeitraum
+          nullable: true
+        PROCESSTIME:
+          type: number
+          format: float
+          description: Production time for the operation (min) in the confirmation period/Produktionszeit für den Arbeitsgang (Min) im Rückmeldezeitraum
+          nullable: true
+        QTY_YIELD:
+          type: number
+          format: float
+          description: Good amount in the confirmation period/Gut-Menge im Rückmeldezeitraum
+          nullable: true
+        QTY_SCRAP:
+          type: number
+          format: float
+          description: Scrap amount in the confirmation period/Ausschuss-Menge im Rückmeldezeitraum
+          nullable: true
+        WT_STATUS: 
+          type: string
+          description: Status of the operation/Status des Arbeitsgangs; "C_START" If the WT is logged in for the first time (configurable)/Wenn das WT das erste mal angemeldet wird (konfigurierbar); "C_RUECK" reply during WT running/Rückmeldung bei laufendem WT; "C_TFRTG" part/Teilfertig; "C_FRTG" done/Fertig
+          nullable: false
+          enum:
+            - 'C_START'
+            - 'C_RUECK'
+            - 'C_TFRTG'
+            - 'C_FRTG'
+          x-enum-varnames:
+            - 'C_START'
+            - 'C_RUECK'
+            - 'C_TFRTG'
+            - 'C_FRTG'
+        ACTIVITY:
+          type: string
+          description: Description of activities in unplanned operations/Beschreibung der Tätigkeiten bei ungeplanten Arbeitsgängen
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        END_TS:
+          type: string
+          format: date-time
+          description: Timestamp of the last reply in the confirmation period/Zeitstempel der letzten Rückmeldung im Rückmeldezeitraum
+          nullable: true
+        END_BATCH:
+          type: string
+          maxLength: 50
+          minLength: 0
+          description: End Product batch/Endprodukt-Charge
+          nullable: true
+        RES_TYPE:
+          type: string
+          maxLength: 50
+          minLength: 0
+          description: Workplace Type/Arbeitsplatztyp; "C_MACH" Machine/Maschine; "C_WKPL" Assembly/Montage; "C_COLLECTIVE_WKPL" Collective Workplace/Sammelarbeitsplatz
+          nullable: true
+          enum:
+            - 'C_MACH'
+            - 'C_WKPL'
+            - 'C_COLLECTIVE_WKPL'
+          x-enum-varnames:
+            - 'C_MACH'
+            - 'C_WKPL'
+            - 'C_COLLECTIVE_WKPL'
+        SCRAP_REASON:
+          type: string
+          maxLength: 50
+          minLength: 0
+          description: When turned on in the configuration, the scrap reason is passed to the set quantity in box QTY_SCRAP/Wenn in der Konfiguration eingeschaltet, wird der SCRAP_REASON zur gemeldeten Menge in Feld QTY_SCRAP übergeben
+          nullable: true
+        REPLIER:
+          type: string
+          maxLength: 50
+          minLength: 0
+          description: PPS_NR of the replier/PPS_NR des Rückmelders
+          nullable: true
+        REPLY_COMMENT:
+          type: string
+          maxLength: 2000
+          minLength: 0
+          description: Reply comment up to 2000 characters/Rückmelder Kommentar bis zu 2000 Zeichen
+          nullable: true
+    Workticket-Material-Removal:
+      type: object
+      required:
+        - WT_NO
+        - MAT_NO
+        - BATCH_NO
+        - QTY
+        - UNIT
+      properties:
+        WT_NO:
+          type: string
+          description: Unique identifier of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        MAT_NO:
+          type: string
+          description: material number/Materialnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        BATCH_NO:
+          type: string
+          description: batch number/Chargennummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        QTY:
+          type: number
+          format: float
+          description: Quantity, which was taken for the work ticket/Menge, welche zum Arbeitsschein entnommen wurde
+          nullable: false
+        POS_NO:
+          type: number
+          format: int32
+          description: Position number in the parts list/Positionsnummer in der Stückliste
+          nullable: true
+        UNIT:
+          type: string
+          description: Unit/Einheit
+          maxLength: 50
+          minLength: 1
+          nullable: false
+    Workticket-Planning-Data:
+      type: object
+      required:
+        - WT_NO
+        - MACHINE_NO
+        - CREATE_TS
+      properties:
+        WT_NO:
+          type: string
+          description: Unique identifier of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        MACHINE_NO:
+          type: string
+          description: Guide number of manufacturing resource (group number or KST)/Leitzahl der Fertigungsressource (Gruppennummer bzw. KST)
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        BEGIN_SCHEDULED:
+          type: string
+          format: date-time
+          description: planned start date/Geplanter Starttermin
+          nullable: true
+        END_SCHEDULED:
+          type: string
+          format: date-time
+          description: planned end date/Geplanter Endtermin
+          nullable: true
+        CREATE_TS:
+          type: string
+          format: date-time
+          description: Timestamp of the generation of the record/Zeitstempel der Erzeugung des Datensatzes
+          nullable: false
+        PLANNED_PALLET:
+          type: number
+          format: int32
+          description: Pallet ID What is planned/Palletten ID worauf geplant ist
+          nullable: true
+        COUNT_OF_SPLITS:
+          type: number
+          format: int32
+          description: Number of all splits of the WT/Anzahl aller Splits des WTs
+          nullable: true
+    Order-Planning-Data:
+      type: object
+      required:
+        - ORDER_NO
+        - CREATE_TS
+      properties:
+        ORDER_NO:
+          type: string
+          description: order number/Auftragsnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        BEGIN_SCHEDULED:
+          type: string
+          format: date-time
+          description: planned start date/Geplanter Starttermin
+          nullable: true
+        END_SCHEDULED:
+          type: string
+          format: date-time
+          description: planned end date/Geplanter Endtermin
+          nullable: true
+        CREATE_TS:
+          type: string
+          format: date-time
+          description: Timestamp of the generation of the record/Zeitstempel der Erzeugung des Datensatzes
+          nullable: false
+
+

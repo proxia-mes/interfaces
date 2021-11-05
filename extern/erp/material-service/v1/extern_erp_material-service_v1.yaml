@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: ERP MES MATERIAL API
+  description: REST API provided by the ERP system for MES systems to determine material information
+  version: "1.0.0"
+servers:
+  - url: "erp/mes/material-interface/v1"
+tags:
+  - name: erp
+    description: Everything about the interface for MES systems provided by the ERP system
+paths:
+  "/material-available-amount":
+    post:
+      tags:
+        - erp
+      summary: returns current stock of material
+      requestBody:
+          description: Array of material descriptors
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MaterialAvailableAmounts"
+      responses:
+        '200':
+          description: OK
+          content: 
+            application/json:
+              schema:              
+                "$ref": "#/components/schemas/MaterialAvailableAmounts"
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+components:
+  schemas:
+    MaterialAvailableAmounts:
+      type: array
+      items:
+        $ref: '#/components/schemas/MaterialAvailableAmount'
+    MaterialAvailableAmount:
+      type: object
+      required:
+        - MAT_NO
+        - PLANT_NO
+      properties:
+        MAT_NO:
+          type: string
+          description: Article or material number/Artikel- oder Materialnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        PLANT_NO:
+          type: string
+          description: Plant/Werk
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        AMOUNT:
+          type: number
+          format: float
+          description: Material quantity/Materialbestand
+          nullable: false

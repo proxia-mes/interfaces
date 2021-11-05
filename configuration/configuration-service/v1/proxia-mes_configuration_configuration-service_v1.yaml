@@ -1,0 +1,94 @@
+---
+openapi: 3.0.2
+info:
+  title: Proxia MES Configuration Service API
+  description: Proxia MES Configuration Service API
+  version: '1.0.0'
+servers:
+- url: "/proxia/mes/configuration-service/v1"
+tags:
+- name: config
+  description: Everything about configuration
+paths:
+  "/config/{sectionId}":
+    get:
+      tags:
+      - config
+      summary: returns the configuration of a specific section
+      parameters:
+      - name: sectionId
+        in: path
+        description: The sectionId of the configuration
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '204':
+          description: No Content
+          content: {}
+        '400':
+          description: Bad Request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+    post:
+      tags:
+      - config
+      summary: Stores the configuration of a specific section
+      parameters:
+      - name: sectionId
+        in: path
+        description: The sectionId of the configuration
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: The configuration of a specific section
+        content:
+          application/json:
+            schema:
+                type: string
+          application/xml:
+            schema:
+                type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '400':
+          description: Bad Request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+ 
+components:
+  securitySchemes: 
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration    
