@@ -98,7 +98,7 @@ A service is the REST service provider, which provides different endpoints.
 ## Naming convention
 A service name consist of two parts: An individual, freely selectable service name(lowercase and dash) and the suffix "-service":
 
-`<service-name>-service`
+    <service-name>-service
 
 e.g. `gui-service` 
 
@@ -143,7 +143,7 @@ A service definition is done by an OpenAPI-Spec yaml document.
 ## Naming convention
 The yaml filename must contain the module name, the service name and the version, separated by underscore:
 
-`<scope>_<moduleName>_<serviceName>_<version>.yaml`
+    <scope>_<moduleName>_<serviceName>_<version>.yaml
 
 e.g. `proxia-mes_monitoring-dashboard_gui-service_v1.yaml`
 
@@ -179,7 +179,7 @@ For testing a service a tool called Postman is used. Postman test specifications
 #### Naming convention
 Spec files:
 
-`<scope>_<moduleName>_<serviceName>_<version>.postman_collection.json`
+    <scope>_<moduleName>_<serviceName>_<version>.postman_collection.json
 
 e.g. `proxia-mes_connector_erp-service_v1.postman_collection.json`
 
@@ -187,9 +187,9 @@ The json filenames are equal to the OpenAPI-Spec yaml filenames, followed by ".p
 
 Environment files:
 
-`<action-name>.postname_environment.json`
+    <action-name>.postname_environment.json
 
-e.g. nightly-build.postman_environment.json
+e.g. `nightly-build.postman_environment.json`
 
 The GitHub Action Name used this environment (see [CI/CD](#CI/CD))
 
@@ -230,7 +230,8 @@ For every OpenAPI-Spec in the interfaces directory a GitHub Action Job can be cr
 This is done by storing a GitHub Action yaml in the directory '.github/workflows'.
 
 #### Naming convention
-`<scope>_<moduleName>_<serviceName>_<version>.yml`
+
+    <scope>_<moduleName>_<serviceName>_<version>.yml
 
 e.g. `proxia-mes_connector_erp-service_v1.yml`
 
@@ -243,7 +244,7 @@ How GitHub Action is working and how the exact build is working can be seen in t
 ##### GitHub Action Name
 The display name specified in the GitHub Actions files must follow the naming convention:
 
-`name: <scope>_<moduleName>_<serviceName>_<version>`
+    name: <scope>_<moduleName>_<serviceName>_<version>
 
 e.g. `name: proxia-mes_connector_erp-service_v1`
 
@@ -280,16 +281,18 @@ Login to GitHub npm registry:
 
 Reference your package in the package.json:
     
-        "@proxia-mes/monitoring-dashboard-gui-service-api": "^1.0.24",
+    "@proxia-mes/monitoring-dashboard-gui-service-api": "^1.0.24",
 
 Run `npm install`
 
 
 ### Local
+
 The artifact of a GitHub Action run is directly stored to the corresponding online GitHub Repository (e.g. Nuget repository or npm registry).
 For controlling and testing the generation process and have a look at the generated sources, it is possible to run the generation local on your machine to see what happens.
 
 #### local-gen
+
 You can place a local generation script in the local-gen directories:
 
     └───interfaces                                                                   
@@ -324,19 +327,20 @@ Or your IDE has an integrated OpenAPI support, e.g. Rider or Visual Studio Code
 
 ####  1. Title
 The title of an internal API should always follow the naming convention:
-`PROXIA-MES <Module name> <Service name> API`
+
+    PROXIA-MES <Module name> <Service name> API
 
 e.g. 
 `PROXIA-MES Monitoring-Dashboard GUI-Service API`
 
 ####  2. Description
-If no text description available use title
+If no text description available use title.
 
 ####  3. Version
 A OpenAPI Spec has always semantic versioning, e.g. 1.0.1
 
 A new version with breakable changes is a major version with a new URL context -> V2
-Minor and bugfixes are only non-breakable and extension changes to the API.
+Minor and bugfixes are only non-breakable and extendable changes to the API.
 
 #### 4. Server URL
 Because some tools have problems with relative URLs it is recommend to specify an absolute URL with dummy localhost and no https. 
@@ -344,7 +348,7 @@ This is not a problem because the URL of the specification is not a binding part
 
 Naming convention: 
 
-`http://localhost:8080/proxia-mes/<module-name>/<service-name>/<version-number>`
+    http://localhost:8080/proxia-mes/<module-name>/<service-name>/<version-number>
 
 #### Example
 
@@ -356,14 +360,16 @@ Naming convention:
     servers:
       - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 
-### Inheritance, schema combination
+### Inheritance and schema combination
+
 Avoid `oneOf`, `anyOf`, `allOf`, `not`!!!
 
 https://swagger.io/docs/specification/data-models/oneof-anyof-allof-not/
 
-This elements are very critical since the first days (beginning with JsonSchema 1.0.0). Tool support is not available and if then the implementation is quit buggie.
+This elements are very critical since the first days (beginning with JsonSchema 1.0.0). Tool support is not available and if then the implementation is quit buggy.
 
 ### Separate api and model
+
 Because of the clearness and the tooling support, it is recommend to separate the api and the model.
 So in your endpoint-definitions just place references to the model and do not specify model data in the "paths" section.
 
