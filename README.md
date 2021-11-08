@@ -364,8 +364,8 @@ https://swagger.io/docs/specification/data-models/oneof-anyof-allof-not/
 This elements are very critical since the first days (beginning with JsonSchema 1.0.0). Tool support is not available and if then the implementation is quit buggie.
 
 ### Separate api and model
-Because of the tooling support, it is recommend to separate the api and the model.
-So in your endpoint-definition just place reference to the model and do not specify model data in the "paths" section.
+Because of the clearness and the tooling support, it is recommend to separate the api and the model.
+So in your endpoint-definitions just place references to the model and do not specify model data in the "paths" section.
 
     paths:
       "/dashboards":
