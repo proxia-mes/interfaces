@@ -1,4 +1,4 @@
-name: connector_erp-service_v1
+name: proxia-mes_connector_erp-service_v1
 
 on:
   push:

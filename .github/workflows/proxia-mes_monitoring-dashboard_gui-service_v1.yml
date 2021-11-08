@@ -1,4 +1,4 @@
-name: monitoring-dashboard_gui-service_v1
+name: proxia-mes_monitoring-dashboard_gui-service_v1
 
 on:
   push:

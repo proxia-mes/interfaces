@@ -1,4 +1,4 @@
-name: configuration_configuration-service_v1
+name: proxia-mes_configuration_configuration-service_v1
 
 on:
   push:
