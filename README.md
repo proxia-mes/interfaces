@@ -16,11 +16,11 @@ Two kind of communications are possible:
 
 ### 1:1	producer/consumer
 
-A producer sends a message to a queue on the message broker, which is asynchronously fetched by exact one receiver. Data is delivered only in one direction.
+A producer sends a message to a queue on the message broker, which is asynchronously fetched by exact one consumer. Data is delivered only in one direction.
 
 ### 1:N	publish/subscribe
 
-A publisher sends a message to a queue on the message broker, which is asynchronously fetched by more receivers who has subscribed to this message type. Data is delivered only in one direction.
+A publisher sends a message to a queue on the message broker, which is asynchronously fetched by more consumers who has subscribed to this message type. Data is delivered only in one direction.
 
 ## Synchronous service
 
@@ -82,7 +82,7 @@ On the first directory level the internal service providing modules are listed (
         ├───extern                                                                     
         └───...
 
-##"extern" directory
+## "extern" directory
 
 All external modules called by the PROXIA-MES system are described in this directory.
 
@@ -208,23 +208,23 @@ This saves a lot of time when the service interface is changing.
 
 It is possible to generate Controller and Clients for different programming languages and platforms, e.g.
 
-###C#-Controllers:
+### C#-Controllers:
 https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/aspnetcore.md
 
-###C#-Clients
+### C#-Clients
 https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/csharp-netcore.md
 
-###TS-Angular-Clients
+### TS-Angular-Clients
 https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-angular.md
 
-##Use Generator
+## Use Generator
 
 ### GitHub Actions
 
 The generator is called inside GitHub Workflows called Actions. GitHub Actions are well documented:
 https://docs.github.com/en/actions
 
-####.github/workflows
+#### .github/workflows
 
 For every OpenAPI-Spec in the interfaces directory a GitHub Action Job can be created for generating the classes.
 This is done by storing a GitHub Action yaml in the directory '.github/workflows'.
@@ -325,7 +325,7 @@ Or your IDE has an integrated OpenAPI support, e.g. Rider or Visual Studio Code
 
 ### Naming conventions
 
-####  1. Title
+#### 1. Title
 The title of an internal API should always follow the naming convention:
 
     PROXIA-MES <Module name> <Service name> API
@@ -333,10 +333,10 @@ The title of an internal API should always follow the naming convention:
 e.g. 
 `PROXIA-MES Monitoring-Dashboard GUI-Service API`
 
-####  2. Description
+#### 2. Description
 If no text description available use title.
 
-####  3. Version
+#### 3. Version
 A OpenAPI Spec has always semantic versioning, e.g. 1.0.1
 
 A new version with breakable changes is a major version with a new URL context -> V2
