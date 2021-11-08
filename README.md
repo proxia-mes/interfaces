@@ -67,7 +67,7 @@ Complete example structure:
 
 # Level 0: "interfaces"
 
-On the highest level in the "interfaces" git repository is called "interfaces".
+The highest level is the "interfaces" git repository itself.
 
 # Level 1: Modules
 
@@ -82,8 +82,9 @@ On the first directory level the internal service providing modules are listed (
         ├───extern                                                                     
         └───...
 
-##extern directory
-All external modules called by our PROXIA-MES system are described in this directory.
+##"extern" directory
+
+All external modules called by the PROXIA-MES system are described in this directory.
 
 ## Naming convention
 No naming convention, only lowercase with dash
@@ -117,7 +118,7 @@ On the third level the MAJOR version of a service is notated.
 
 Even if "interfaces" is a git repository, we are not using git versioning for the major version, if a service has a new version of the service is created as directory (v1→v2).
 
-Note: All non-breaking-change (minor or bugfix) are documented inside the OpenAPISpec-Definition at the version tag (see Versioning)
+Note: All non-breaking-change (minor or bugfix) are documented inside the OpenAPI-Spec with the version tag (see [Version](#3-version))
 
 ## Naming convention
 At any context a service is versioned by a prefix lowercase "v" and an integer number:
@@ -247,9 +248,11 @@ The display name specified in the GitHub Actions files must follow the naming co
 e.g. `name: proxia-mes_connector_erp-service_v1`
 
 ### Use the generated Artifacts
-Once a Artifact is generated (for C# the (.dll) libs, is added to the GitHub Nuget Repository, for Typescript the npm-package ist added to the GitHub npm registry), you can use this libs as any other resource.
 
 #### 1. C# .Net
+
+If an Artifact is generated, the dll lib is added to the GitHub Nuget Repository, you can use this libs like any other resource:
+
 Add nuget resource to your .NET project
 
     dotnet nuget add source --username <USERNAME> --password <PERSONAL_ACCESS_TOKEN> --store-password-in-clear-text --name github "https://nuget.pkg.github.com/proxia-mes/index.json"
@@ -263,6 +266,8 @@ Run `dotnet restore`
 
 
 #### 2. Typescript
+
+If an Artifact is generated, the Typescript/Javascript npm package is added to the GitHub npm registry, you can use this libs like any other resource.
 
 Login to GitHub npm registry:
 
@@ -329,6 +334,9 @@ If no text description available use title
 
 ####  3. Version
 A OpenAPI Spec has always semantic versioning, e.g. 1.0.1
+
+A new version with breakable changes is a major version with a new URL context -> V2
+Minor and bugfixes are only non-breakable and extension changes to the API.
 
 #### 4. Server URL
 Because some tools have problems with relative URLs it is recommend to specify an absolute URL with dummy localhost and no https. 
