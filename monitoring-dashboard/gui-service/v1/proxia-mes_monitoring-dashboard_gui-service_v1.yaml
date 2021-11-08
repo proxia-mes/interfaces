@@ -1,11 +1,11 @@
 ---
 openapi: 3.0.3
 info:
-  title: Proxia MES Monitoring Dashboard GUI Service API
-  description: Proxia MES Monitoring Dashboard GUI Service API
+  title: PROXIA-MES Monitoring-Dashboard GUI-Service API
+  description: PROXIA-MES Monitoring-Dashboard GUI-Service API
   version: '1.0.25'
 servers:
-  - url: "/proxia/mes/monitoring-dashboard/gui-service/v1"
+  - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
   - name: dashboard
     description: Everything about dashboard views

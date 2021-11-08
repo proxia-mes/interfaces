@@ -1,11 +1,11 @@
 ---
 openapi: 3.0.3
 info:
-  title: ERP MES API
-  description: REST API provided by the ERP system for MES systems
+  title: Extern ERP MES-Service API
+  description: Extern ERP MES-Service API
   version: '1.0.5'
 servers:
-  - url: "erp/mes-service/v1"
+  - url: "http://localhost:8080/extern/erp/mes-service/v1"
 tags:
   - name: mes
     description: Everything about the interface for MES systems provided by the ERP system
@@ -20,9 +20,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Workticket-Reply"
+              $ref: "#/components/schemas/Workticket-Replies"
         required: true
       responses:
         '200':
@@ -44,9 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Workticket-Planning-Data"
+             $ref: "#/components/schemas/Workticket-Planning-Datas"
         required: true
       responses:
         '200':
@@ -68,9 +64,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Order-Planning-Data"
+             $ref: "#/components/schemas/Order-Planning-Datas"
         required: true
       responses:
         '200':
@@ -92,9 +86,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Workticket-Material-Removal"
+              $ref: "#/components/schemas/Workticket-Material-Removals"
         required: true
       responses:
         '200':
@@ -108,6 +100,22 @@ paths:
           content: { }
 components:
   schemas:
+    Workticket-Material-Removals:
+      type: array
+      items:
+        $ref: "#/components/schemas/Workticket-Material-Removal"
+    Order-Planning-Datas:
+      type: array
+      items:
+        "$ref": "#/components/schemas/Order-Planning-Data"
+    Workticket-Planning-Datas:
+      type: array
+      items:
+        $ref: "#/components/schemas/Workticket-Planning-Data"
+    Workticket-Replies:
+      type: array
+      items:
+        $ref: '#/components/schemas/Workticket-Reply'
     Workticket-Reply:
       type: object
       required:

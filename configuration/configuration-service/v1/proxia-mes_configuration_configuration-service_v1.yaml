@@ -1,11 +1,11 @@
 ---
 openapi: 3.0.2
 info:
-  title: Proxia MES Configuration Service API
-  description: Proxia MES Configuration Service API
+  title: PROXIA-MES Configuration Configuration-Service API
+  description: PROXIA-MES Configuration Configuration-Service API
   version: '1.0.0'
 servers:
-- url: "/proxia/mes/configuration-service/v1"
+- url: "http://localhost:8080/proxia-mes/configuration/configuration-service/v1"
 tags:
 - name: config
   description: Everything about configuration

@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.3
 info:
-  title: PROXIA MES ERP INTERFACE API
+  title: PROXIA-MES Connector ERP-Service API
   description: REST API provided by the PROXIA MES system for ERP systems
   version: '1.0.8'
 servers:
@@ -20,9 +20,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Order"
+              $ref: "#/components/schemas/Orders"
         required: true
       responses:
         '200':
@@ -44,9 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Workticket"
+              $ref: "#/components/schemas/Worktickets"
         required: true
       responses:
         '200':
@@ -70,7 +66,7 @@ paths:
             schema:
               type: array
               items:
-                "$ref": "#/components/schemas/Workticket-Material"
+                "$ref": "#/components/schemas/Workticket-Materials"
       responses:
         '200':
           description: OK
@@ -91,9 +87,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Customer"
+              $ref: "#/components/schemas/Customers"
       responses:
         '200':
           description: OK
@@ -114,9 +108,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Material-Batch-Assignment"
+              $ref: "#/components/schemas/Material-Batch-Assignments"
       responses:
         '200':
           description: OK
@@ -137,9 +129,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Material"
+              $ref: "#/components/schemas/Materials"
       responses:
         '200':
           description: OK
@@ -160,9 +150,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                "$ref": "#/components/schemas/Stock-Material"
+              $ref: "#/components/schemas/Stock-Materials"
       responses:
         '200':
           description: OK
@@ -175,6 +163,34 @@ paths:
           content: { }
 components:
   schemas:
+    Worktickets:
+      type: array
+      items:
+        $ref: "#/components/schemas/Workticket"
+    Workticket-Materials:
+      type: array
+      items:
+        $ref: "#/components/schemas/Workticket-Material"
+    Customers:
+      type: array
+      items:
+        $ref: "#/components/schemas/Customer"
+    Material-Batch-Assignments:
+      type: array
+      items:
+        $ref: "#/components/schemas/Material-Batch-Assignment"
+    Materials:
+      type: array
+      items:
+        $ref: "#/components/schemas/Material"
+    Stock-Materials:
+      type: array
+      items:
+        $ref: "#/components/schemas/Stock-Material"
+    Orders:
+      type: array
+      items:
+        $ref: "#/components/schemas/Order"
     Order:
       type: object
       required:

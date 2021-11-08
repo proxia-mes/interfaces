@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
-  title: ERP MES MATERIAL API
+  title: Extern ERP Material-Service API
   description: REST API provided by the ERP system for MES systems to determine material information
   version: "1.0.0"
 servers:
-  - url: "erp/mes/material-interface/v1"
+  - url: "http://localhost:8080/extern/erp/material-service/v1"
 tags:
   - name: erp
     description: Everything about the interface for MES systems provided by the ERP system

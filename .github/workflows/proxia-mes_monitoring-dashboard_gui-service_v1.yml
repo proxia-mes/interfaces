@@ -26,13 +26,13 @@ jobs:
       PROJECT_DIR: gen/src/PAG.Mes.MonitoringDashboard.GuiService.ControllerStub
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checks-out interfaces repository under $GITHUB_WORKSPACE
+        uses: actions/checkout@v2
 
       - name: Create out dir
         run: mkdir -p $GEN_OUT_DIR
 
-      - name: Get interface version from yaml and set to env
+      - name: Get interface version from OpenAPI Spec yaml and set to env
         run: echo INTERFACE_VERSION=`yq eval .info.version $INTERFACE_FILE` >> $GITHUB_ENV 
 
       - name: Generate C# controller code
@@ -72,10 +72,10 @@ jobs:
       PACKAGE_NAME: '@proxia-mes/monitoring-dashboard-gui-service-api'
     
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checks-out interfaces repository under $GITHUB_WORKSPACE
+        uses: actions/checkout@v2
 
-      - name: Create gen dir
+      - name: Create generator output directory
         run: mkdir -p $GEN_OUT_DIR
 
       - name: Generate angular typescript client code
