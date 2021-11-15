@@ -1,0 +1,123 @@
+---
+openapi: 3.0.3
+info:
+  title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
+  description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
+  version: '1.0.0'
+servers:
+  - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
+tags:
+  - name: resources
+    description: Everything about dashboard resources
+paths:
+  "/resources":
+    get:
+      tags:
+        - resources
+      summary: returns all resources
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/resources"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+components:
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
+  schemas:
+    resourceId:
+      type: string
+      description: The unque id of a resource (UUID4)
+      example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 3
+    resourceName:
+      type: string
+      description: The name of a resource
+      maxLength: 50
+      minLength: 3
+    resources:
+      type: array
+      items:
+        $ref: '#/components/schemas/resourceMainGroup'
+    resourceMainGroup:
+      type: object
+      required:
+        - id
+        - name
+        - resourceGroups
+      properties:
+        id:
+          $ref: '#/components/schemas/resourceId'
+        name:
+          $ref: '#/components/schemas/resourceName'
+        resourceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/resourceGroup'
+          minItems: 0
+          maxItems: 100
+    resourceGroup:
+      type: object
+      required:
+        - id
+        - name
+        - resources
+      properties:
+        id:
+          $ref: '#/components/schemas/resourceId'
+        name:
+          $ref: '#/components/schemas/resourceName'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/resource'
+          minItems: 0
+          maxItems: 100
+    resource:
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - plant
+        - state
+      properties:
+        id:
+          $ref: '#/components/schemas/resourceId'
+        name:
+          $ref: '#/components/schemas/resourceName'
+        type:
+          type: string
+          description: The type of the resource
+          maxLength: 255
+          minLength: 3
+        plant:
+          type: string
+          description: The plant of the resource
+          maxLength: 255
+          minLength: 3
+        state:
+          type: string
+          description: The current state of the resource
+          maxLength: 255
+          minLength: 3
+        
