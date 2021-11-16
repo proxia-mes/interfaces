@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.0'
+  version: '1.0.1'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -14,7 +14,7 @@ paths:
     get:
       tags:
         - resources
-      summary: returns all resources
+      summary: returns all resources by groups
       responses:
         '200':
           description: OK
@@ -22,6 +22,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/resources"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/resource-status":
+    get:
+      tags:
+        - resources
+      summary: returns all resource-status by groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/resourceStatuses"
         '204':
           description: No Content
           content: { }
@@ -45,13 +72,13 @@ components:
   schemas:
     resourceId:
       type: string
-      description: The unque id of a resource (UUID4)
+      description: The unque id of a resource or group (UUID4 or C_<String>)
       example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
       maxLength: 50
       minLength: 3
     resourceName:
       type: string
-      description: The name of a resource
+      description: The name of a resource or group
       maxLength: 50
       minLength: 3
     resources:
@@ -120,4 +147,63 @@ components:
           description: The current state of the resource
           maxLength: 255
           minLength: 3
+    resourceStatusId:
+      type: string
+      description: The unque id of a resource status or group (UUID4 or C_<String>)
+      example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 3
+    resourceStatusName:
+      type: string
+      description: The name of a resource status or group
+      maxLength: 50
+      minLength: 3
+    resourceStatuses:
+      type: array
+      items:
+        $ref: '#/components/schemas/resourceStatusMainGroup'
+    resourceStatusMainGroup:
+      type: object
+      required:
+        - id
+        - name
+        - resourceStatusGroups
+      properties:
+        id:
+          $ref: '#/components/schemas/resourceStatusId'
+        name:
+          $ref: '#/components/schemas/resourceStatusName'
+        resourceStatusGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/resourceStatusGroup'
+          minItems: 0
+          maxItems: 100
+    resourceStatusGroup:
+      type: object
+      required:
+        - id
+        - name
+        - resources
+      properties:
+        id:
+          $ref: '#/components/schemas/resourceStatusId'
+        name:
+          $ref: '#/components/schemas/resourceStatusName'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/resourceStatus'
+          minItems: 0
+          maxItems: 100
+    resourceStatus:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/resourceStatusId'
+        name:
+          $ref: '#/components/schemas/resourceStatusName'
         
