@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.1'
+  version: '1.0.2'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -37,7 +37,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/resource-status":
+  "/resource-statuses":
     get:
       tags:
         - resources
@@ -190,7 +190,7 @@ components:
           $ref: '#/components/schemas/resourceStatusId'
         name:
           $ref: '#/components/schemas/resourceStatusName'
-        resources:
+        resourceStatuses:
           type: array
           items:
             $ref: '#/components/schemas/resourceStatus'
