@@ -1,0 +1,71 @@
+---
+openapi: 3.0.3
+info:
+  title: PROXIA-MES Monitoring-Dashboard COMU-Database TRS_RES Change-Event
+  description: PROXIA-MES Monitoring-Dashboard COMU-Database TRS_RES Change-Event
+  version: '1.0.0'
+paths:
+  "/dummy":
+    get:
+      summary: a dummy request for the generator
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    before:
+      type: object
+      nullable: true
+      properties:
+        RES_ID:
+          type: string
+        RES_STATUS_ID:
+          type: string
+          nullable: true
+    after:
+      type: object
+      nullable: true
+      properties:
+        RES_ID:
+          type: string
+        RES_STATUS_ID:
+          type: string
+          nullable: true
+    source:
+      type: object
+      properties:
+        version:
+          type: string
+        connector:
+          type: string
+        name:
+          type: string
+        ts_ms:
+          type: integer
+          format: int64
+        snapshot:
+          type: string
+        db:
+          type: string
+        sequence:
+          type: string
+          format: nullable
+        schema:
+          type: string
+        table:
+          type: string
+        change_lsn:
+          type: string
+        commit_lsn:
+          type: string
+        event_serial_no:
+          type: integer
+          format: int32
+    op:
+      type: string
+    ts_ms:
+      type: integer
+      format: int64
+    transaction:
+      type: string
+      nullable: true
