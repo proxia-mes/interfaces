@@ -7,7 +7,7 @@
 /bin
 
 # local gen tests
-**/local-gen/*/out
+**/local-gen/**/out
 
 # IDE
 /.vscode
