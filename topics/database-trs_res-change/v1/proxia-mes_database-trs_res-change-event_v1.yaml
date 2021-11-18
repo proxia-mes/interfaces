@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-Database TRS_RES Change-Event
   description: PROXIA-MES Monitoring-Dashboard COMU-Database TRS_RES Change-Event
-  version: '1.0.1'
+  version: '1.0.2'
 paths:
   "/dummy":
     get:
@@ -78,6 +78,10 @@ components:
           format: int32
     op:
       type: string
+      enum:
+        - 'c'
+        - 'd'
+        - 'u'
     ts_ms:
       type: integer
       format: int64
