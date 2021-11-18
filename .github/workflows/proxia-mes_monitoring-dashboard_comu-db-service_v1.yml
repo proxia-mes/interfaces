@@ -64,7 +64,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore $PROJECT_DIR/
       
       - name: Create the Nuget package
-        run: dotnet pack $PROJECT_DIR/$PACKAGE_NAME.csproj --include-source --no-build --configuration Release
+        run: dotnet pack $PROJECT_DIR/$PACKAGE_NAME.csproj --no-build --configuration Release
       
       - name: Publish the Nuget package to Github Package Repository (GPR)
         run: dotnet nuget push $PROJECT_DIR/bin/Release/$PACKAGE_NAME*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source github
@@ -109,7 +109,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore $PROJECT_DIR/
             
       - name: Create the Nuget package
-        run: dotnet pack $PROJECT_DIR/$PACKAGE_NAME.csproj --no-build --include-source --configuration Release
+        run: dotnet pack $PROJECT_DIR/$PACKAGE_NAME.csproj --no-build --configuration Release
       
       - name: Publish the Nuget package to Github Package Repository (GPR)
         run: dotnet nuget push $PROJECT_DIR/bin/Release/$PACKAGE_NAME*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source github
