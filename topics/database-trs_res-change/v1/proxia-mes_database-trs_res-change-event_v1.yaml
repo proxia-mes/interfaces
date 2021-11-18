@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-Database TRS_RES Change-Event
   description: PROXIA-MES Monitoring-Dashboard COMU-Database TRS_RES Change-Event
-  version: '1.0.0'
+  version: '1.0.1'
 paths:
   "/dummy":
     get:
@@ -13,6 +13,21 @@ paths:
           description: OK
 components:
   schemas:
+    databaseTrsResChangeEvent:
+      type: object
+      properties: 
+        before:
+          $ref: '#/components/schemas/before'
+        after:
+          $ref: '#/components/schemas/after'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
     before:
       type: object
       nullable: true
