@@ -301,154 +301,86 @@ components:
           description: The description of a dashboard
           maxLength: 255
           minLength: 0
-        resource-status-widgets:
-          type: array
-          items:
-            $ref: '#/components/schemas/resource-status-widget'
-          minItems: 0
-          maxItems: 100
-        processing-degree-widgets:
-          type: array
-          items:
-            $ref: '#/components/schemas/processing-degree-widget'
-          minItems: 0
-          maxItems: 100
-        planning-accuracy-widgets:
-          type: array
-          items:
-            $ref: '#/components/schemas/planning-accuracy-widget'
-          minItems: 0
-          maxItems: 100
+    widget:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: The unque id of a widget (UUID4)
+          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+          maxLength: 50
+          minLength: 10
+        name:
+          type: string
+          description: The name of a widget
+          maxLength: 100
+          minLength: 3
+        description:
+          type: string
+          description: The description of a widget
+          maxLength: 255
+          minLength: 0
+        x:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+        y:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+        cols:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+        rows:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+        threshold:
+          type: object
+          properties:
+            low:
+              $ref: '#/components/schemas/threshold'
+            medium:
+              $ref: '#/components/schemas/threshold'
+            high:
+              $ref: '#/components/schemas/threshold'
+        resource-status-widget:
+          $ref: '#/components/schemas/resource-status-widget'
+        processing-degree-widget:
+          $ref: '#/components/schemas/processing-degree-widget'
+        planning-accuracy-widget:
+          $ref: '#/components/schemas/planning-accuracy-widget'
     planning-accuracy-widget:
       type: object
       required:
-        - id
-        - name
+        - dummy
       properties:
-        id:
+        dummy:
           type: string
-          description: The unque id of a widget (UUID4)
-          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
-          maxLength: 50
-          minLength: 10
-        name:
-          type: string
-          description: The name of a widget
-          maxLength: 100
-          minLength: 3
-        description:
-          type: string
-          description: The description of a widget
-          maxLength: 255
-          minLength: 0
-        x:
-          type: number
-          format: int32
-          minimum: 0
-          maximum: 100
-        y:
-          type: number
-          format: int32
-          minimum: 0
-          maximum: 100
-        cols:
-          type: number
-          format: int32
-          minimum: 1
-          maximum: 100
-        rows:
-          type: number
-          format: int32
-          minimum: 1
-          maximum: 100
+          description: Not implemented yet
     processing-degree-widget:
       type: object
       required:
-        - id
-        - name
+        - dummy
       properties:
-        id:
+        dummy:
           type: string
-          description: The unque id of a widget (UUID4)
-          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
-          maxLength: 50
-          minLength: 10
-        name:
-          type: string
-          description: The name of a widget
-          maxLength: 100
-          minLength: 3
-        description:
-          type: string
-          description: The description of a widget
-          maxLength: 255
-          minLength: 0
-        x:
-          type: number
-          format: int32
-          minimum: 0
-          maximum: 100
-        y:
-          type: number
-          format: int32
-          minimum: 0
-          maximum: 100
-        cols:
-          type: number
-          format: int32
-          minimum: 1
-          maximum: 100
-        rows:
-          type: number
-          format: int32
-          minimum: 1
-          maximum:
-            100
+          description: Not implemented yet
     resource-status-widget:
       type: object
       required:
-        - id
-        - name
         - resources
         - resourceStatuses
         - chart
       properties:
-        id:
-          type: string
-          description: The unque id of a widget (UUID4)
-          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
-          maxLength: 50
-          minLength: 10
-        name:
-          type: string
-          description: The name of a widget
-          maxLength: 100
-          minLength: 3
-        description:
-          type: string
-          description: The description of a widget
-          maxLength: 255
-          minLength: 0
-        x:
-          type: number
-          format: int32
-          minimum: 0
-          maximum: 100
-        y:
-          type: number
-          format: int32
-          minimum: 0
-          maximum: 100
-        cols:
-          type: number
-          format: int32
-          minimum: 1
-          maximum: 100
-        rows:
-          type: number
-          format: int32
-          minimum: 1
-          maximum: 100
         resources:
           type: array
           items:
@@ -474,15 +406,6 @@ components:
           enum:
             - 'aggregated'
             - 'detail'
-        threshold:
-          type: object
-          properties:
-            low:
-              $ref: '#/components/schemas/threshold'
-            medium:
-              $ref: '#/components/schemas/threshold'
-            high:
-              $ref: '#/components/schemas/threshold'
     threshold:
       type: object
       description: a treshold of a widget
