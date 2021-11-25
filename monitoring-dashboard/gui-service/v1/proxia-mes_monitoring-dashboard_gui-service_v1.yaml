@@ -3,19 +3,19 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.26'
+  version: '1.0.27'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
-  - name: dashboard
-    description: Everything about dashboard views
+  - name: dashboards
+    description: Everything about dashboards
   - name: resources
-    description: Everything about dashboard resources
+    description: Everything about resources
 paths:
   "/dashboards":
     get:
       tags:
-        - dashboard
+        - dashboards
       summary: returns all dashboards for a user
       parameters:
         - name: userId
@@ -49,7 +49,7 @@ paths:
   "/dashboard/{userId}/{dashboardId}":
     delete:
       tags:
-        - dashboard
+        - dashboards
       summary: deletes a dashboard for a user
       parameters:
         - name: userId
@@ -88,7 +88,7 @@ paths:
           content: { }
     get:
       tags:
-        - dashboard
+        - dashboards
       summary: returns a dashboard for a user
       parameters:
         - name: userId
@@ -128,7 +128,7 @@ paths:
   "/dashboard/{userId}":
     post:
       tags:
-        - dashboard
+        - dashboards
       summary: adds a new dashboard for a user
       security:
         - OpenID:
@@ -169,7 +169,7 @@ paths:
           content: { }
     put:
       tags:
-        - dashboard
+        - dashboards
       summary: modifies an existing dashboard for a user
       security:
         - OpenID:
