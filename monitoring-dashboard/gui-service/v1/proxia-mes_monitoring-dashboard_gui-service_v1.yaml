@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.27'
+  version: '1.0.28'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -288,7 +288,6 @@ components:
       required:
         - id
         - name
-        - widgets
       properties:
         id:
           $ref: '#/components/schemas/dashboardId'
@@ -302,19 +301,116 @@ components:
           description: The description of a dashboard
           maxLength: 255
           minLength: 0
-        widgets:
+        resource-status-widgets:
           type: array
           items:
-            $ref: '#/components/schemas/widget'
+            $ref: '#/components/schemas/resource-status-widget'
           minItems: 0
           maxItems: 100
-    widget:
+        processing-degree-widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/processing-degree-widget'
+          minItems: 0
+          maxItems: 100
+        planning-accuracy-widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/planning-accuracy-widget'
+          minItems: 0
+          maxItems: 100
+    planning-accuracy-widget:
       type: object
       required:
         - id
         - name
-        - performance_indicator
-        - time
+      properties:
+        id:
+          type: string
+          description: The unque id of a widget (UUID4)
+          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+          maxLength: 50
+          minLength: 10
+        name:
+          type: string
+          description: The name of a widget
+          maxLength: 100
+          minLength: 3
+        description:
+          type: string
+          description: The description of a widget
+          maxLength: 255
+          minLength: 0
+        x:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+        y:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+        cols:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+        rows:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+    processing-degree-widget:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: The unque id of a widget (UUID4)
+          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+          maxLength: 50
+          minLength: 10
+        name:
+          type: string
+          description: The name of a widget
+          maxLength: 100
+          minLength: 3
+        description:
+          type: string
+          description: The description of a widget
+          maxLength: 255
+          minLength: 0
+        x:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+        y:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+        cols:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+        rows:
+          type: number
+          format: int32
+          minimum: 1
+          maximum:
+            100
+    resource-status-widget:
+      type: object
+      required:
+        - id
+        - name
+        - resources
+        - resourceStatuses
         - chart
       properties:
         id:
@@ -353,125 +449,31 @@ components:
           format: int32
           minimum: 1
           maximum: 100
-        performance_indicator:
-          type: object
-          required:
-            - category
-          properties:
-            category:
-              type: string
-              enum:
-                - 'RESOURCE_PKI'
-                - 'TIMELINESS_PKI'
-            resource_pki:
-              $ref: '#/components/schemas/resource_pki'
-            timeliness_pki:
-              $ref: '#/components/schemas/timeliness_pki'
-        time:
-          type: object
-          required:
-            - category
-          properties:
-            category:
-              type: string
-              enum:
-                - 'TIME_MOMENT'
-                - 'TIME_PERIOD'
-            time_moment:
-              $ref: '#/components/schemas/time_moment'
-            time_period:
-              $ref: '#/components/schemas/time_period'
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource status (UUID4 or C_<String>)
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        resourceStatuses:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource status (UUID4 or C_<String>)
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
         chart:
-          type: object
-          required:
-            - category
-          properties:
-            category:
-              type: string
-              enum:
-                - 'SUMMARIZING_CHART'
-                - 'TIMELINE_CHART'
-                - 'TIME_MOMENT_CHART'
-            summarizing_chart:
-              $ref: '#/components/schemas/summarizing_chart'
-            timeline_chart:
-              $ref: '#/components/schemas/timeline_chart'
-            time_moment_chart:
-              $ref: '#/components/schemas/time_moment_chart'
-    time_moment:
-      type: object
-      required:
-        - moment
-      properties:
-        moment:
-          type: string
-          nullable: false
-          enum:
-            - 'NOW'
-            - 'CURRENT_SHIFT_START'
-            - 'CURRENT_SHIFT_END'
-            - 'LAST_SHIFT_START'
-            - 'LAST_SHIFT_END'
-            - 'PENULTIMATE_SHIFT_START'
-            - 'PENULTIMATE_SHIFT_END'
-    time_period:
-      type: object
-      required:
-        - period
-      properties:
-        period:
           type: string
           enum:
-            - 'LAST_5_MIN'
-            - 'LAST_15_MIN'
-            - 'LAST_30_MIN'
-            - 'LAST_1_HOUR'
-            - 'LAST_4_HOUR'
-            - 'LAST_SHIFT'
-            - 'WORKDAY'
-            - 'WORKWEEK'
-            - 'MONTH'
-    timeline_chart:
-      type: object
-      properties:
-        visualization:
-          type: string
-          description: The visualization of the widget
-          enum:
-            - 'TIMELINE_CHART'
-    time_moment_chart:
-      type: object
-      properties:
-        visualization:
-          type: string
-          description: The visualization of the widget
-          enum:
-            - 'VALUE_CARD'
-    summarizing_chart:
-      type: object
-      properties:
-        visualization:
-          type: string
-          description: The visualization of the widget
-          enum:
-            - 'BAR_CHART'
-            - 'PIE_CHART'
-            - 'LINE_CHART'
-            - 'VALUE_WITH_SPARKLINE'
-            - 'TREE_MAP_CHART'
-        unit:
-          type: string
-          description: The time unit for grouping summarizing charts
-          enum:
-            - 'MINUTE'
-            - 'HOUR'
-            - 'SHIFT'
-            - 'WORKDAY'
-            - 'WORKWEEK'
-        calc_no_shift_time:
-          type: boolean
-          description: calc no shift time on summarizing visualisation
-          default: false
+            - 'aggregated'
+            - 'detail'
         threshold:
           type: object
           properties:
@@ -497,43 +499,6 @@ components:
           minimum: 1
           maximum: 60
           description: the number of widget time units the value must exceed the threshold
-    resource_pki:
-      type: object
-      description: pki for a resource
-      required:
-        - name
-        - nature
-        - resource
-      properties:
-        nature:
-          type: string
-          description: The performance-indicator visualized by the widget
-          enum:
-            - 'RESOURCE_STATE'
-            - 'RESOURCE_UTILIZATION'
-        resource:
-          type: string
-          description: The resource visualized by the widget
-          enum:
-            - 'MACHINE'
-            - 'WORKPLACE'
-            - 'PERSON'
-        name:
-          type: string
-          description: the name of the resource
-          minLength: 1
-          maxLength: 100
-    timeliness_pki:
-      type: object
-      description: pki for a resource
-      required:
-        - nature
-      properties:
-        nature:
-          type: string
-          description: The performance-indicator visualized by the widget
-          enum:
-            - 'TIMELINESS_ORDER_PLANNING'
     resourceId:
       type: string
       description: The unque id of a resource or group (UUID4 or C_<String>)
