@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Cache-Service API
   description: PROXIA-MES Monitoring-Dashboard Cache-Service API
-  version: '1.0.0'
+  version: '1.0.1'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/cache-service/v1"
 tags:
@@ -124,9 +124,6 @@ components:
       required:
         - id
         - name
-        - type
-        - plant
-        - state
       properties:
         id:
           $ref: '#/components/schemas/resourceId'
@@ -184,7 +181,7 @@ components:
       required:
         - id
         - name
-        - resources
+        - resourceStatuses
       properties:
         id:
           $ref: '#/components/schemas/resourceStatusId'
