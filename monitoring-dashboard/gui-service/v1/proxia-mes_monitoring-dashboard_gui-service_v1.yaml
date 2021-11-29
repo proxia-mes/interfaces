@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.31'
+  version: '1.0.32'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -356,13 +356,13 @@ components:
               $ref: '#/components/schemas/threshold'
             high:
               $ref: '#/components/schemas/threshold'
-        resource-status-widget:
-          $ref: '#/components/schemas/resource-status-widget'
-        processing-degree-widget:
-          $ref: '#/components/schemas/processing-degree-widget'
-        planning-accuracy-widget:
-          $ref: '#/components/schemas/planning-accuracy-widget'
-    planning-accuracy-widget:
+        resourceStatusWidget:
+          $ref: '#/components/schemas/resourceStatusWidget'
+        processingDegreeWidget:
+          $ref: '#/components/schemas/processingDegreeWidget'
+        planningAccuracyWidget:
+          $ref: '#/components/schemas/planningAccuracyWidget'
+    planningAccuracyWidget:
       type: object
       required:
         - dummy
@@ -370,7 +370,7 @@ components:
         dummy:
           type: string
           description: Not implemented yet
-    processing-degree-widget:
+    processingDegreeWidget:
       type: object
       required:
         - dummy
@@ -378,7 +378,7 @@ components:
         dummy:
           type: string
           description: Not implemented yet
-    resource-status-widget:
+    resourceStatusWidget:
       type: object
       required:
         - resources
