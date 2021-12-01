@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Cache-Service API
   description: PROXIA-MES Monitoring-Dashboard Cache-Service API
-  version: '1.0.2'
+  version: '1.0.3'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/cache-service/v1"
 tags:
@@ -76,6 +76,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/resourceStatuses"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/flat-resource-statuses":
+    get:
+      tags:
+        - resources
+      summary: returns all resource-statuses as array without groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flatResourceStatuses"
         '204':
           description: No Content
           content: { }
@@ -186,6 +213,10 @@ components:
       description: The name of a resource status or group
       maxLength: 50
       minLength: 3
+    flatResourceStatuses:
+      type: array
+      items:
+        $ref: '#/components/schemas/resourceStatus'
     resourceStatuses:
       type: array
       items:
