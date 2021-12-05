@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.4'
+  version: '1.0.5'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -198,9 +198,15 @@ components:
       required:
         - id
         - name
+        - color
       properties:
         id:
           $ref: '#/components/schemas/resourceStatusId'
         name:
           $ref: '#/components/schemas/resourceStatusName'
+        color:
+          type: string
+          description: The color of a resource status
+          maxLength: 50
+          minLength: 3
         
