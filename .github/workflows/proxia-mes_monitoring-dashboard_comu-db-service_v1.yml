@@ -21,8 +21,8 @@ jobs:
     runs-on: ubuntu-20.04
     
     env:
-      PACKAGE_NAME: PAG.Mes.MonitoringDashboard.ComuDBService.ControllerStub
-      PROJECT_DIR: gen/src/PAG.Mes.MonitoringDashboard.ComuDBService.ControllerStub
+      PACKAGE_NAME: PAG.Mes.MonitoringDashboard.ComuDbService.ControllerStub
+      PROJECT_DIR: gen/src/PAG.Mes.MonitoringDashboard.ComuDbService.ControllerStub
     
     steps:
       - name: Checks-out interfaces repository under $GITHUB_WORKSPACE
@@ -73,8 +73,8 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
-      PACKAGE_NAME: PAG.Mes.MonitoringDashboard.ComuDBService.Client
-      PROJECT_DIR: gen/src/PAG.Mes.MonitoringDashboard.ComuDBService.Client
+      PACKAGE_NAME: PAG.Mes.MonitoringDashboard.ComuDbService.Client
+      PROJECT_DIR: gen/src/PAG.Mes.MonitoringDashboard.ComuDbService.Client
       
     steps:
       - name: Checks-out interfaces repository under $GITHUB_WORKSPACE
