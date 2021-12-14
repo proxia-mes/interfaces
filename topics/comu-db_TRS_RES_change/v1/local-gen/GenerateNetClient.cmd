@@ -3,7 +3,7 @@ REM https://github.com/OpenAPITools/openapi-generator
 SET OUTPUT_DIRECTORY=${PWD}/out
 SET INTERFACE_DIRECTORY=${PWD}/..
 SET INTERFACE_FILE=proxia-mes_comu-db_TRS_RES_change-event_v1.yaml
-SET PACKAGE_NAME=PAG.Mes.MonitoringDashboard.ComuDbTrsResChangeEvent
+SET PACKAGE_NAME=PAG.Mes.ComuDb.TrsResChangeEvent
 SET INTERFACE_VERSION=1.0.0
 
 powershell Remove-Item %OUTPUT_DIRECTORY% -Recurse -force

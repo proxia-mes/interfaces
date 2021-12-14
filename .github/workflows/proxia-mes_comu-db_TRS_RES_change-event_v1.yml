@@ -15,8 +15,8 @@ env:
   INTERFACE_FILE: topics/comu-db_TRS_RES_change/v1/proxia-mes_comu-db_TRS_RES_change-event_v1.yaml
   GITHUB_NUGET_REPOSITORY: https://nuget.pkg.github.com/proxia-mes/index.json
   GIT_TAG_NAME: proxia-mes_comu-db_TRS_RES_change-event_v1_v
-  PACKAGE_NAME: PAG.Mes.MonitoringDashboard.ComuDbTrsResChangeEvent
-  PROJECT_DIR: gen/src/PAG.Mes.MonitoringDashboard.ComuDbTrsResChangeEvent
+  PACKAGE_NAME: PAG.Mes.ComuDb.TrsResChangeEvent
+  PROJECT_DIR: gen/src/PAG.Mes.ComuDb.TrsResChangeEvent
 
 jobs:
   generate-csharp-client:
