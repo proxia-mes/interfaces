@@ -40,7 +40,7 @@ paths:
   "/resource-statuses":
     get:
       tags:
-        - resources
+        - resource-status
       summary: returns all resource-status by groups
       responses:
         '200':
