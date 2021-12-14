@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.5'
+  version: '1.0.6'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -70,15 +70,15 @@ components:
       type: openIdConnect
       openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
   schemas:
-    resourceId:
+    id:
       type: string
-      description: The unque id of a resource or group (UUID4 or C_<String>)
+      description: The unque id of an element (UUID4 or C_<String>)
       example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
       maxLength: 50
       minLength: 3
-    resourceName:
+    name:
       type: string
-      description: The name of a resource or group
+      description: The name of an element
       maxLength: 50
       minLength: 3
     resources:
@@ -93,9 +93,9 @@ components:
         - resourceGroups
       properties:
         id:
-          $ref: '#/components/schemas/resourceId'
+          $ref: '#/components/schemas/id'
         name:
-          $ref: '#/components/schemas/resourceName'
+          $ref: '#/components/schemas/name'
         resourceGroups:
           type: array
           items:
@@ -110,9 +110,9 @@ components:
         - resources
       properties:
         id:
-          $ref: '#/components/schemas/resourceId'
+          $ref: '#/components/schemas/id'
         name:
-          $ref: '#/components/schemas/resourceName'
+          $ref: '#/components/schemas/name'
         resources:
           type: array
           items:
@@ -126,9 +126,9 @@ components:
         - name
       properties:
         id:
-          $ref: '#/components/schemas/resourceId'
+          $ref: '#/components/schemas/id'
         name:
-          $ref: '#/components/schemas/resourceName'
+          $ref: '#/components/schemas/name'
         type:
           type: string
           description: The type of the resource
@@ -144,55 +144,10 @@ components:
           description: The current state of the resource
           maxLength: 255
           minLength: 3
-    resourceStatusId:
-      type: string
-      description: The unque id of a resource status or group (UUID4 or C_<String>)
-      example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
-      maxLength: 50
-      minLength: 3
-    resourceStatusName:
-      type: string
-      description: The name of a resource status or group
-      maxLength: 50
-      minLength: 3
     resourceStatuses:
       type: array
       items:
-        $ref: '#/components/schemas/resourceStatusMainGroup'
-    resourceStatusMainGroup:
-      type: object
-      required:
-        - id
-        - name
-        - resourceStatusGroups
-      properties:
-        id:
-          $ref: '#/components/schemas/resourceStatusId'
-        name:
-          $ref: '#/components/schemas/resourceStatusName'
-        resourceStatusGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/resourceStatusGroup'
-          minItems: 0
-          maxItems: 100
-    resourceStatusGroup:
-      type: object
-      required:
-        - id
-        - name
-        - resourceStatuses
-      properties:
-        id:
-          $ref: '#/components/schemas/resourceStatusId'
-        name:
-          $ref: '#/components/schemas/resourceStatusName'
-        resourceStatuses:
-          type: array
-          items:
-            $ref: '#/components/schemas/resourceStatus'
-          minItems: 0
-          maxItems: 100
+        $ref: '#/components/schemas/resourceStatus'
     resourceStatus:
       type: object
       required:
@@ -201,12 +156,15 @@ components:
         - color
       properties:
         id:
-          $ref: '#/components/schemas/resourceStatusId'
+          $ref: '#/components/schemas/id'
         name:
-          $ref: '#/components/schemas/resourceStatusName'
+          $ref: '#/components/schemas/name'
         color:
           type: string
           description: The color of a resource status
           maxLength: 50
           minLength: 3
-        
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
