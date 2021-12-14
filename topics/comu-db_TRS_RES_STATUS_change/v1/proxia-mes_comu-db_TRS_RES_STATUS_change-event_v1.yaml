@@ -1,0 +1,96 @@
+---
+openapi: 3.0.3
+info:
+  title: PROXIA-MES Monitoring-Dashboard COMU-Database TRS_RES_STATUS Change-Event
+  description: PROXIA-MES Monitoring-Dashboard COMU-Database TRS_RES_STATUS Change-Event
+  version: '1.0.0'
+paths:
+  "/dummy":
+    get:
+      summary: a dummy request for the generator
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    databaseTrsResChangeEvent:
+      type: object
+      properties: 
+        before:
+          $ref: '#/components/schemas/before'
+        after:
+          $ref: '#/components/schemas/after'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    before:
+      type: object
+      nullable: true
+      properties:
+        RES_STATUS_ID:
+          type: string
+        RES_STATUS_GRP_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+        RES_STATUS_COLOR:
+          type: string
+    after:
+      type: object
+      nullable: true
+      properties:
+        RES_STATUS_ID:
+          type: string
+        RES_STATUS_GRP_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+        RES_STATUS_COLOR:
+          type: string
+    source:
+      type: object
+      properties:
+        version:
+          type: string
+        connector:
+          type: string
+        name:
+          type: string
+        ts_ms:
+          type: integer
+          format: int64
+        snapshot:
+          type: string
+        db:
+          type: string
+        sequence:
+          type: string
+          format: nullable
+        schema:
+          type: string
+        table:
+          type: string
+        change_lsn:
+          type: string
+        commit_lsn:
+          type: string
+        event_serial_no:
+          type: integer
+          format: int32
+    op:
+      type: string
+      enum:
+        - 'c'
+        - 'd'
+        - 'u'
+    ts_ms:
+      type: integer
+      format: int64
+    transaction:
+      type: string
+      nullable: true
