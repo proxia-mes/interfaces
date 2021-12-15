@@ -1,0 +1,159 @@
+---
+openapi: 3.0.3
+info:
+  title: PROXIA-MES COMU-Database Change-Events
+  description: PROXIA-MES COMU-Database Change-Events
+  version: '1.0.0'
+paths:
+  "/dummy":
+    get:
+      summary: a dummy request for the generator
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    comuDbTrsResStatusChangeEvent:
+      type: object
+      properties: 
+        before:
+          $ref: '#/components/schemas/comuDbTrsResStatusColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTrsResStatusColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTrsResStatusColumns:
+      type: object
+      nullable: true
+      properties:
+        RES_STATUS_ID:
+          type: string
+        RES_STATUS_GRP_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+        RES_STATUS_COLOR:
+          type: string
+    comuDbTrsResChangeEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTrsResColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTrsResColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTrsResColumns:
+      type: object
+      nullable: true
+      properties:
+        RES_STATUS_ID:
+          type: string
+        RES_STATUS_GRP_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+        RES_STATUS_COLOR:
+          type: string
+    comuDbTrsResStatusGrpChangeEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTrsResStatusGrpColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTrsResStatusGrpColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTrsResStatusGrpColumns:
+      type: object
+      nullable: true
+      properties:
+        RES_STATUS_GRP_ID:
+          type: string
+        RES_STATUS_MAINGRP_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+    comuDbTrsResStatusMainGrpChangeEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTrsResStatusMainGrpColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTrsResStatusMainGrpColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTrsResStatusMainGrpColumns:
+      type: object
+      nullable: true
+      properties:
+        RES_STATUS_MAINGRP_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+    source:
+      type: object
+      properties:
+        version:
+          type: string
+        connector:
+          type: string
+        name:
+          type: string
+        ts_ms:
+          type: integer
+          format: int64
+        snapshot:
+          type: string
+        db:
+          type: string
+        sequence:
+          type: string
+          format: nullable
+        schema:
+          type: string
+        table:
+          type: string
+        change_lsn:
+          type: string
+        commit_lsn:
+          type: string
+        event_serial_no:
+          type: integer
+          format: int32
+    op:
+      type: string
+      enum:
+        - 'c'
+        - 'd'
+        - 'u'
+    ts_ms:
+      type: integer
+      format: int64
+    transaction:
+      type: string
+      nullable: true

@@ -1,9 +1,9 @@
-name: proxia-mes_comu-db_TRS_RES_STATUS_change-event_v1
+name: proxia-mes_comu-db_change-events_v1
 
 on:
   push:
     paths:
-      - 'topics/comu-db_TRS_RES_STATUS_change/v1/*'
+      - 'topics/comu-db_change-events/v1/*'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -12,11 +12,11 @@ env:
   READ_PROXIA_GITHUB_PACKAGES_SECRET: ${{ secrets.READ_PROXIA_GITHUB_PACKAGES_SECRET }}
   READ_PROXIA_GITHUB_PACKAGES_USER: flobuc
   GEN_OUT_DIR: gen
-  INTERFACE_FILE: topics/comu-db_TRS_RES_STATUS_change/v1/proxia-mes_comu-db_TRS_RES_STATUS_change-event_v1.yaml
+  INTERFACE_FILE: topics/comu-db_change-events/v1/proxia-mes_comu-db_change-events_v1.yaml
   GITHUB_NUGET_REPOSITORY: https://nuget.pkg.github.com/proxia-mes/index.json
-  GIT_TAG_NAME: proxia-mes_comu-db_TRS_RES_STATUS_change-event_v1_v
-  PACKAGE_NAME: PAG.Mes.ComuDb.TrsResStatusChangeEvent
-  PROJECT_DIR: gen/src/PAG.Mes.ComuDb.TrsResStatusChangeEvent
+  GIT_TAG_NAME: proxia-mes_comu-db_change-event_v1_v
+  PACKAGE_NAME: PAG.Mes.ComuDb.ChangeEvents
+  PROJECT_DIR: gen/src/PAG.Mes.ComuDb.ChangeEvents
 
 jobs:
   generate-csharp-client:
