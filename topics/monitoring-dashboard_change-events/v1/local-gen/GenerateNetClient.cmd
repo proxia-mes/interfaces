@@ -2,8 +2,8 @@ REM https://github.com/OpenAPITools/openapi-generator
 
 SET OUTPUT_DIRECTORY=${PWD}/out
 SET INTERFACE_DIRECTORY=${PWD}/..
-SET INTERFACE_FILE=proxia-mes_resource-data-change-event_v1.yaml
-SET PACKAGE_NAME=PAG.Mes.MonitoringDashboard.ResourceDataChangeEvent
+SET INTERFACE_FILE=proxia-mes_monitoring-dashboard_change-events_v1.yaml
+SET PACKAGE_NAME=PAG.Mes.MonitoringDashboard.ChangeEvents
 SET INTERFACE_VERSION=1.0.0
 
 powershell Remove-Item %OUTPUT_DIRECTORY% -Recurse -force

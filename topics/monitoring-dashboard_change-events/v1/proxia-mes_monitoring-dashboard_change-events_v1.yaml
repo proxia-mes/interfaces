@@ -1,0 +1,133 @@
+---
+openapi: 3.0.3
+info:
+  title: PROXIA-MES Monitoring-Dashboard Change-Event
+  description: PROXIA-MES Monitoring-Dashboard Change-Event
+  version: '1.0.0'
+paths:
+  "/dummy":
+    get:
+      summary: a dummy request for the generator
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    change-event:
+      type: object
+      properties:
+        person:
+          $ref: '#/components/schemas/person'
+        machine:
+          $ref: '#/components/schemas/machine'
+        workplace:
+          $ref: '#/components/schemas/workplace'
+        resource-status:
+          $ref: '#/components/schemas/resource-status'
+        order:
+          $ref: '#/components/schemas/order'
+        wt:
+          $ref: '#/components/schemas/wt'
+        wt-allocation:
+          $ref: '#/components/schemas/wt-allocation'
+        person-allocation:
+          $ref: '#/components/schemas/person-allocation'
+        op:
+          $ref: '#/components/schemas/op'
+        object:
+          $ref: '#/components/schemas/object'
+    person:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+    machine:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+    workplace:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+    resourceStatus:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        color:
+          type: string
+          description: The color of a resource status
+          maxLength: 50
+          minLength: 3
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
+    order:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+    wt:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+    wt-allocation:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+    person-allocation:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+    id:
+      type: string
+      description: The unque id of an element (UUID4 or C_<String>)
+      example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 3
+    name:
+      type: string
+      description: The name of an element
+      maxLength: 50
+      minLength: 3
+    op:
+      type: string
+      enum:
+        - 'c'
+        - 'd'
+        - 'u'
+    object:
+      type: string
+      enum:
+        - 'person'
+        - 'machine'
+        - 'workplace'
+        - 'resource-status'
+        - 'order'
+        - 'wt'
+        - 'wt-allocation'
+        - 'person-allocation'
