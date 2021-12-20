@@ -21,7 +21,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/resources"
+                $ref: "#/components/schemas/machines"
         '204':
           description: No Content
           content: { }
