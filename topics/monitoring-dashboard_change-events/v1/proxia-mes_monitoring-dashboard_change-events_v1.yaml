@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.1'
+  version: '1.0.2'
 paths:
   "/dummy":
     get:
@@ -27,15 +27,15 @@ components:
         workplace:
           $ref: '#/components/schemas/workplace'
         resource-status:
-          $ref: '#/components/schemas/resource-status'
+          $ref: '#/components/schemas/resourceStatus'
         order:
           $ref: '#/components/schemas/order'
         wt:
           $ref: '#/components/schemas/wt'
         wt-allocation:
-          $ref: '#/components/schemas/wt-allocation'
+          $ref: '#/components/schemas/wtAllocation'
         person-allocation:
-          $ref: '#/components/schemas/person-allocation'
+          $ref: '#/components/schemas/personAllocation'
         id: 
           $ref: '#/components/schemas/id'
         op:
@@ -91,14 +91,14 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/id'
-    wt-allocation:
+    wtAllocation:
       type: object
       required:
         - id
       properties:
         id:
           $ref: '#/components/schemas/id'
-    person-allocation:
+    personAllocation:
       type: object
       required:
         - id
