@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.0'
+  version: '1.0.1'
 paths:
   "/dummy":
     get:
@@ -29,33 +29,6 @@ components:
         transaction:
           $ref: '#/components/schemas/transaction'
     comuDbTrsResStatusColumns:
-      type: object
-      nullable: true
-      properties:
-        RES_STATUS_ID:
-          type: string
-        RES_STATUS_GRP_ID:
-          type: string
-        DISPLAYNAME:
-          type: string
-        RES_STATUS_COLOR:
-          type: string
-    comuDbTrsResChangeEvent:
-      type: object
-      properties:
-        before:
-          $ref: '#/components/schemas/comuDbTrsResColumns'
-        after:
-          $ref: '#/components/schemas/comuDbTrsResColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
-    comuDbTrsResColumns:
       type: object
       nullable: true
       properties:
@@ -115,6 +88,70 @@ components:
           type: string
         DISPLAYNAME:
           type: string
+    comuDbTrsResChangeEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTrsResColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTrsResColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTrsResColumns:
+      type: object
+      nullable: true
+      properties:
+        RES_ID:
+          type: string
+        PARENT_RES_ID:
+          type: string
+        PLANT_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+        RES_STATUS_ID:
+          type: string
+    comuDbTrsMachineEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTrsMachineColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTrsMachineColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTrsMachineColumns:
+      type: object
+      nullable: true
+      properties:
+        RES_ID:
+          type: string
+        DESCRIPTION:
+          type: string
+        INVENTORY_NUMBER:
+          type: string
+        MANUFACTURER:
+          type: string
+        MACHINE_TYPE:
+          type: string
+        CONTROL_UNIT:
+          type: string
+        FACTORY_NR:
+          type: string
+        
+    # Basic-Properties      
     source:
       type: object
       properties:
