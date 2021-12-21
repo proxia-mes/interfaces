@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.3'
+  version: '1.0.4'
 paths:
   "/dummy":
     get:
@@ -116,6 +116,8 @@ components:
         DISPLAYNAME:
           type: string
         RES_STATUS_ID:
+          type: string
+        RES_TYPE_ID:
           type: string
     comuDbTrsMachineEvent:
       type: object
