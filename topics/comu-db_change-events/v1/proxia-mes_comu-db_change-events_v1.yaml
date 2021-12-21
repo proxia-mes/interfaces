@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.2'
+  version: '1.0.3'
 paths:
   "/dummy":
     get:
@@ -150,13 +150,13 @@ components:
           type: string
         FACTORY_NR:
           type: string
-    comuDbTrsPersonEvent:
+    comuDbTrsPersEvent:
       type: object
       properties:
         before:
-          $ref: '#/components/schemas/comuDbTrsPersonColumns'
+          $ref: '#/components/schemas/comuDbTrsPersColumns'
         after:
-          $ref: '#/components/schemas/comuDbTrsPersonColumns'
+          $ref: '#/components/schemas/comuDbTrsPersColumns'
         source:
           $ref: '#/components/schemas/source'
         op:
@@ -165,7 +165,7 @@ components:
           $ref: '#/components/schemas/ts_ms'
         transaction:
           $ref: '#/components/schemas/transaction'
-    comuDbTrsPersonColumns:
+    comuDbTrsPersColumns:
       type: object
       nullable: true
       properties:
