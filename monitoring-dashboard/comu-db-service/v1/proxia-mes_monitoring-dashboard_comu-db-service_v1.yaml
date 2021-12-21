@@ -3,13 +3,40 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.8'
+  version: '1.0.9'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
   - name: resources
     description: Everything about dashboard resources
 paths:
+  "/persons":
+    get:
+      tags:
+        - resources
+      summary: returns all persons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/persons"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/machines":
     get:
       tags:
@@ -81,6 +108,10 @@ components:
       description: The name of an element
       maxLength: 50
       minLength: 3
+    persons:
+      type: array
+      items:
+        $ref: '#/components/schemas/person'
     machines:
       type: array
       items:
@@ -137,6 +168,41 @@ components:
         factoryNumber:
           type: string
           description: The type of the machine
+          maxLength: 50
+          minLength: 0
+    person:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        lastName:
+          type: string
+          description: The lastname of the person
+          maxLength: 50
+          minLength: 0
+        firstName:
+          type: string
+          description: The firstname of the person
+          maxLength: 50
+          minLength: 0
+        persId:
+          type: string
+          description: The HR person id
+          maxLength: 50
+          minLength: 0
+        mail:
+          type: string
+          description: The e-mail address
+          maxLength: 50
+          minLength: 0
+        mobile:
+          type: string
+          description: The mobile phone number of the person
           maxLength: 50
           minLength: 0
     resourceStatuses:
