@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.5'
+  version: '1.0.6'
 paths:
   "/dummy":
     get:
@@ -45,8 +45,6 @@ components:
     person:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/id'
         name:
           $ref: '#/components/schemas/name'
         plant:
@@ -91,8 +89,6 @@ components:
     machine:
       type: object
       properties:
-        id:
-          $ref: '#/components/schemas/id'
         name:
           $ref: '#/components/schemas/name'
         plant:
@@ -141,11 +137,23 @@ components:
           minLength: 0
     workplace:
       type: object
-      required:
-        - id
       properties:
-        id:
-          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant of the wkpl
+          maxLength: 255
+          minLength: 3
+        state:
+          type: string
+          description: The current state of the wkpl
+          maxLength: 255
+          minLength: 3
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
     resourceStatus:
       type: object
       properties:
