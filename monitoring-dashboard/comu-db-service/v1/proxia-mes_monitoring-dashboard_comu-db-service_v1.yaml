@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.9'
+  version: '1.0.10'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -179,6 +179,20 @@ components:
         id:
           $ref: '#/components/schemas/id'
         name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant of the machine
+          maxLength: 255
+          minLength: 3
+        state:
+          type: string
+          description: The current state of the machine
+          maxLength: 255
+          minLength: 3
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
           $ref: '#/components/schemas/name'
         lastName:
           type: string
