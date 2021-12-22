@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "98d6f87d-bb3e-42bc-82ba-9bddcff561ac",
+		"_postman_id": "4911f9ea-3560-4c66-9729-c298d00c6aa4",
 		"name": "PROXIA MES CONNECTOR ERP SERVICE API 1.0.4",
 		"description": "REST API provided by the PROXIA MES system for ERP systems",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -13,7 +13,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var lastCreatedFileContent=\"ad|ipsum Duis sit minim|aliqua est Duis||FEnum|mollit deserunt in|20140110002133|19570915103458|voluptate sed nisi|anim cillum consectetur offi|aute Duis incididunt proident|-97793496|culpa in|in reprehenderit incididunt Duis|laboris in enim ea elit|Excepteur dolore officia deserunt tempor|in irure ea|s|ad|fugiat officia nostrud|0|REnum\\ntempor aliquip cillum officia|ut et aliquip voluptate |ipsum ut dolore||FEnum|sed veniam|20120225155558|19621220165303|occaecat dolore|ut culpa veniam sed||-89483464|voluptate esse qui officia|reprehenderit laborum aute laboris|sit|in sit|quis|id|consectetur|nulla offic|0|REnum\\n\";\r",
+							"var lastCreatedFileContent=\"ad|ipsum Duis sit minim|aliqua est Duis||F|mollit deserunt in|20140110002133|19570915103458|voluptate sed nisi|anim cillum consectetur offi|aute Duis incididunt proident|-97793496|culpa in|in reprehenderit incididunt Duis|laboris in enim ea elit|Excepteur dolore officia deserunt tempor|in irure ea|s|ad|fugiat officia nostrud|0|R\\ntempor aliquip cillum officia|ut et aliquip voluptate |ipsum ut dolore||F|sed veniam|20120225155558|19621220165303|occaecat dolore|ut culpa veniam sed||-89483464|voluptate esse qui officia|reprehenderit laborum aute laboris|sit|in sit|quis|id|consectetur|nulla offic|0|R\\n\";\r",
 							"\r",
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
