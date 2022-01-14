@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.9'
+  version: '1.0.10'
 paths:
   "/dummy":
     get:
@@ -213,26 +213,32 @@ components:
         customerOrderDelivery:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled delivery of the customer-order of the order
         beginScheduled:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled begin of the order
         endScheduled:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled end of the order
         deliveryScheduled:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled delivery of the order
         earliestStartScheduled:
           type: string
           format: date-time
+          nullable: true
           description: The earliest scheduled begin of the order
         desiredDue:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled desire of the order
         priority:
           type: number

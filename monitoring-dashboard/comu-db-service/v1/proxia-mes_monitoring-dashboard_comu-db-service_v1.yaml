@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.13'
+  version: '1.0.14'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -407,26 +407,32 @@ components:
         customerOrderDelivery:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled delivery of the customer-order of the order
         beginScheduled:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled begin of the order
         endScheduled:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled end of the order          
         deliveryScheduled:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled delivery of the order
         earliestStartScheduled:
           type: string
           format: date-time
+          nullable: true
           description: The earliest scheduled begin of the order
         desiredDue:
           type: string
           format: date-time
+          nullable: true
           description: The scheduled desire of the order
         priority:
           type: number
