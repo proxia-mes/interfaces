@@ -1431,6 +1431,19 @@ components:
           description: Url of an operation to be executed for this menu item.
       additionalProperties: false
       description: Menu item which executes an operation
+    InstructionAttachment:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: Display name of attachment
+          nullable: true
+        url:
+          type: string
+          description: Url to the document
+          nullable: true
+      additionalProperties: false
+      description: Details of instruction attachment
     InstructionDto:
       type: object
       properties:
@@ -1444,10 +1457,10 @@ components:
             type: string
           description: Texts for setup activities
           nullable: true
-        documentFilePaths:
+        attachments:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/InstructionAttachment'
           description: File paths for documents
           nullable: true
       additionalProperties: false
@@ -2006,32 +2019,28 @@ components:
           type: array
           items:
             type: string
-          description: Array of user ids who are logged on the work place
+          description: List of user ids who are logged on the work place
           nullable: true
-        activeWorkTickets:
+        loggedOnWorkTickets:
           type: array
           items:
             $ref: '#/components/schemas/WorkTicketDto'
-          description: first 3 work tickets which are logged and active on the work place
+          description: Work tickets which are logged on the work place
           nullable: true
-        activeWorkTicketsCount:
+        loggedOnWorkTicketsCount:
           type: integer
-          description: number of all work tickets which are logged and active on the work place
+          description: Number of work tickets which are logged on the work place
           format: int32
         pendingWorkTickets:
           type: array
           items:
             $ref: '#/components/schemas/WorkTicketDto'
-          description: The usage and content of this property is unknown yet
+          description: Work tickets which are assigned and not logged on the work place
           nullable: true
         pendingWorkTicketCount:
           type: integer
-          description: The usage and content of this property is unknown yet
+          description: Number of work tickets which are assigned and not logged on the work place
           format: int32
-        resourceType:
-          type: string
-          description: The usage and content of this property is unknown yet
-          nullable: true
         statusId:
           maxLength: 50
           type: string
@@ -2040,7 +2049,7 @@ components:
         statusDisplayName:
           maxLength: 255
           type: string
-          description: /// Display name of current work place's status
+          description: Display name of current work place's status
           nullable: true
       additionalProperties: false
       description: Work places overview data
