@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.8'
+  version: '1.0.9'
 paths:
   "/dummy":
     get:
@@ -179,9 +179,69 @@ components:
       type: object
       required:
         - id
+        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant id of the order
+          maxLength: 255
+          minLength: 3
+        type:
+          type: string
+          description: The type of the order
+          maxLength: 255
+          minLength: 3
+        customer:
+          type: string
+          description: The customer of the order
+          maxLength: 255
+          minLength: 1
+        customerOrder:
+          type: string
+          description: The customer-order of the order
+          maxLength: 255
+          minLength: 1
+        customerOrderNumber:
+          type: string
+          description: The customer-order number of the order
+          maxLength: 255
+          minLength: 1
+        customerOrderDelivery:
+          type: string
+          format: date-time
+          description: The scheduled delivery of the customer-order of the order
+        beginScheduled:
+          type: string
+          format: date-time
+          description: The scheduled begin of the order
+        endScheduled:
+          type: string
+          format: date-time
+          description: The scheduled end of the order
+        deliveryScheduled:
+          type: string
+          format: date-time
+          description: The scheduled delivery of the order
+        earliestStartScheduled:
+          type: string
+          format: date-time
+          description: The earliest scheduled begin of the order
+        desiredDue:
+          type: string
+          format: date-time
+          description: The scheduled desire of the order
+        priority:
+          type: number
+          description: The priority of the order
+        description:
+          type: string
+          description: The description of the order
+          maxLength: 255
+          minLength: 1
     wt:
       type: object
       required:

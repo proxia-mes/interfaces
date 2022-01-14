@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.4'
+  version: '1.0.5'
 paths:
   "/dummy":
     get:
@@ -13,6 +13,7 @@ paths:
           description: OK
 components:
   schemas:
+    #resource-statuses
     comuDbTrsResStatusChangeEvent:
       type: object
       properties: 
@@ -88,6 +89,7 @@ components:
           type: string
         DISPLAYNAME:
           type: string
+    #resources
     comuDbTrsResChangeEvent:
       type: object
       properties:
@@ -183,7 +185,132 @@ components:
           type: string
         HANDY_NR:
           type: string
-          
+    #orders
+    comuDbTccCustomerEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTccCustomerColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTccCustomerColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTccCustomerColumns:
+      type: object
+      nullable: true
+      properties:
+        CUSTOMER_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+    comuDbTsfCustOrderEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsfCustOrderColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsfCustOrderColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTsfCustOrderColumns:
+      type: object
+      nullable: true
+      properties:
+        CUST_ORDER_ID:
+          type: string
+        PLAN_LIEFERDATUM:
+          type: string
+          format: date-time          
+        DISPLAYNAME:
+          type: string
+        CUST_ORDER_NR:
+          type: string   
+    comuDbTsfFaTypeEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsfFaTypeColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsfFaTypeColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTsfFaTypeColumns:
+      type: object
+      nullable: true
+      properties:
+        FA_TYPE_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+    comuDbTsfFaEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsfFaColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsfFaColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTsfFaColumns:
+      type: object
+      nullable: true
+      properties:
+        FA_ID:
+          type: string
+        FA_TYPE_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+        PLANT_ID:
+          type: string
+        CUSTOMER_ID:
+          type: string
+        BEGIN_SCHEDULED:
+          type: string
+          format: date-time
+        END_SCHEDULED:
+          type: string
+          format: date-time
+        PLAN_LIEFERDATUM:
+          type: string
+          format: date-time
+        EARLIEST_BEGIN_TS:
+          type: string
+          format: date-time
+        DESIRED_DUE_TS:
+          type: string
+          format: date-time
+        FA_PRIORITY:
+          type: string
+        FA_DESCRIPTION:
+          type: string
+        CUST_ORDER_ID:
+          type: string
+                  
     # Basic-Properties      
     source:
       type: object
