@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.12'
+  version: '1.0.13'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -22,6 +22,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/persons"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/orders":
+    get:
+      tags:
+        - order
+      summary: returns all orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/orders"
         '204':
           description: No Content
           content: { }
@@ -161,10 +188,6 @@ components:
       description: The name of an element
       maxLength: 50
       minLength: 3
-    persons:
-      type: array
-      items:
-        $ref: '#/components/schemas/person'
     workplaces:
       type: array
       items:
@@ -265,6 +288,10 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
+    persons:
+      type: array
+      items:
+        $ref: '#/components/schemas/person'
     person:
       type: object
       required:
@@ -338,3 +365,75 @@ components:
           $ref: '#/components/schemas/name'
         mainGroupName:
           $ref: '#/components/schemas/name'
+    orders:
+      type: array
+      items:
+        $ref: '#/components/schemas/order'
+    order:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant id of the order
+          maxLength: 255
+          minLength: 3
+        type:
+          type: string
+          description: The type of the order
+          maxLength: 255
+          minLength: 3
+        customer:
+          type: string
+          description: The customer of the order
+          maxLength: 255
+          minLength: 1
+        customerOrder:
+          type: string
+          description: The customer-order of the order
+          maxLength: 255
+          minLength: 1
+        customerOrderNumber:
+          type: string
+          description: The customer-order number of the order
+          maxLength: 255
+          minLength: 1
+        customerOrderDelivery:
+          type: string
+          format: date-time
+          description: The scheduled delivery of the customer-order of the order
+        beginScheduled:
+          type: string
+          format: date-time
+          description: The scheduled begin of the order
+        endScheduled:
+          type: string
+          format: date-time
+          description: The scheduled end of the order          
+        deliveryScheduled:
+          type: string
+          format: date-time
+          description: The scheduled delivery of the order
+        earliestStartScheduled:
+          type: string
+          format: date-time
+          description: The earliest scheduled begin of the order
+        desiredDue:
+          type: string
+          format: date-time
+          description: The scheduled desire of the order
+        priority:
+          type: number
+          description: The priority of the order
+        description:
+          type: string
+          description: The description of the order
+          maxLength: 255
+          minLength: 1
+        
