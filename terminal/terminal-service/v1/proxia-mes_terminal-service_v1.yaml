@@ -1,0 +1,2296 @@
+openapi: 3.0.1
+info:
+  title: PROXIA-MES Terminal Service API
+  description: REST API provided by the PROXIA MES system for Terminal client
+  version: 1.0.0
+servers:
+  - url: "http://localhost:8080/proxia-mes/terminal/terminal-service/v1"
+paths:
+  /proxia/mes/terminal-service/interface/v1/Configurations:
+    get:
+      tags:
+        - Configurations
+      summary: Returns settings for a terminal
+      operationId: GetTerminalConfigurationAsync
+      parameters:
+        - name: configId
+          in: query
+          description: ID of a terminal configuration
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns settings for a terminal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationTerminalDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/loggedIn:
+    get:
+      tags:
+        - User
+      summary: Returns users which are logged in on a work place. Data can be optionally filtered.
+      operationId: GetLoggedUsersAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: ID of work place
+          required: true
+          schema:
+            type: string
+        - name: PageStart
+          in: query
+          description: "Number of first page to be shown.\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageCount
+          in: query
+          description: "Count of pages to be shown starting from PageStartIndex\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          description: "Number of items pro page.\r\nDefault value: unlimited"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: UseCache
+          in: query
+          description: "Determines if server can use cached data.\r\nDefault value: false"
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Returns logged in users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDtoPagedResultData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/assigned:
+    get:
+      tags:
+        - User
+      summary: Returns users which are assigned to a work place. It is recommended to filter data using page parameters.
+      operationId: GetAssignedUsersAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: ID of work place
+          required: true
+          schema:
+            type: string
+        - name: PageStart
+          in: query
+          description: "Number of first page to be shown.\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageCount
+          in: query
+          description: "Count of pages to be shown starting from PageStartIndex\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          description: "Number of items pro page.\r\nDefault value: unlimited"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: UseCache
+          in: query
+          description: "Determines if server can use cached data.\r\nDefault value: false"
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Returns details of a page and assigned users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDtoPagedResultData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/shift-relevant:
+    get:
+      tags:
+        - User
+      summary: Returns users which are relevant for the current and next shift. Data can be optionally filtered.
+      operationId: GetAssignedUsersForShiftAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: ID of work place
+          required: true
+          schema:
+            type: string
+        - name: PageStart
+          in: query
+          description: "Number of first page to be shown.\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageCount
+          in: query
+          description: "Count of pages to be shown starting from PageStartIndex\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          description: "Number of items pro page.\r\nDefault value: unlimited"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: UseCache
+          in: query
+          description: "Determines if server can use cached data.\r\nDefault value: false"
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Returns shift relevant users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserShiftDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/{userId}/login:
+    post:
+      tags:
+        - User
+      summary: Logs in user on a work place
+      operationId: UserLoginAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSingleLoginDto'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/login:
+    post:
+      tags:
+        - User
+      summary: Logs in multiple users on a work place
+      operationId: UsersLoginAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMultiLoginDto'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/{userId}/logout:
+    post:
+      tags:
+        - User
+      summary: Logs out a user from a work place
+      operationId: UserLogoutAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSingleLogoutDto'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/logout:
+    post:
+      tags:
+        - User
+      summary: Logs out multiple users from a work place
+      operationId: UsersLogoutAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserMultiLogoutDto'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/users/{userId}/logout-all-workplaces:
+    post:
+      tags:
+        - User
+      summary: Logs out a user from all work places
+      operationId: UserLogoutAllWorkplacesAsync
+      parameters:
+        - name: userId
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/{userId}/log-switch:
+    post:
+      tags:
+        - User
+      summary: Logs out a user from one work place and logs him in on another work place
+      operationId: UserLogSwitchAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogSwitchDto'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/Workplaces:
+    get:
+      tags:
+        - Workplaces
+      summary: Returns work places configured for a terminal. It is recommended to filter data using page parameters.
+      operationId: GetWorkplacesByConfigurationIdsync
+      parameters:
+        - name: configurationId
+          in: query
+          description: Id of terminal configuration
+          required: true
+          schema:
+            type: string
+        - name: PageStart
+          in: query
+          description: Determines index of the first page whose data should be returned. Value must be equal or greater than '1'.
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageCount
+          in: query
+          description: Determines how many pages should be returned.  Value must be equal or greater than '1'.
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          description: Determines how many rows are on a single page. Value must be equal or greater than '1'.
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: UseCache
+          in: query
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling."
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Returns details of a page and a list of work places. Page details are also returned when page parameters are not used
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkplaceDataDtoPagedResultData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/Workplaces/{workplaceId}/status-items:
+    get:
+      tags:
+        - Workplaces
+      summary: Returns list of status items for a work place
+      operationId: GetStatusMenu2Async
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of status items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatusItemDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/Workplaces/{workplaceId}/new-status:
+    put:
+      tags:
+        - Workplaces
+      summary: Changes a status of a work place to a new status
+      operationId: ChangeStatusAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewStatusDto'
+      responses:
+        '200':
+          description: Operation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/revision-data:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns quantity information for a work ticket's revision page
+      operationId: GetRevisionDataAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: workTicketId
+          in: path
+          description: Work ticket id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns quantity information for a work ticket's revision page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuantityRevisionDataDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/revision-action:
+    post:
+      tags:
+        - WorkTickets
+      summary: Executes revision of a work ticket
+      operationId: ExecuteRevisionAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: workTicketId
+          in: path
+          description: Work ticket id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevisionInputDataDto'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/log-on:
+    post:
+      tags:
+        - WorkTickets
+      summary: Logs a work ticket on a work place
+      operationId: WorkTicketLogonAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: workTicketId
+          in: path
+          description: Work ticket id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkTicketSingleLogonDto'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/log-on:
+    post:
+      tags:
+        - WorkTickets
+      summary: Logs multiple work tickets on a work place
+      operationId: WorkTicketsLogonAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkTicketMultiLogonDto'
+      responses:
+        '200':
+          description: Result summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/logged:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns all work tickets which are logged on a work place. It is recommended to filter data using filter parameters.
+      operationId: GetLoggedWorkTicketsAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: PageStart
+          in: query
+          description: "Number of first page to be shown.\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageCount
+          in: query
+          description: "Count of pages to be shown starting from PageStartIndex\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          description: "Number of items pro page.\r\nDefault value: unlimited"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: UseCache
+          in: query
+          description: "Determines if server can use cached data.\r\nDefault value: false"
+          schema:
+            type: boolean
+        - name: SearchType
+          in: query
+          description: "Determines search pattern.\r\nDefault: 'None' - all data will be returned"
+          schema:
+            $ref: '#/components/schemas/WorkTicketSearchType'
+        - name: SearchValue
+          in: query
+          description: Searched value
+          schema:
+            type: string
+        - name: SortOrder
+          in: query
+          description: "Determines direction of data sorting\r\nDefault value: ascending"
+          schema:
+            $ref: '#/components/schemas/SortOrders'
+      responses:
+        '200':
+          description: Returns work tickets which are logged on a work place and page details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolOfOrdersDtoPagedResultData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/pending:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns all work tickets which assigned and not logged on a work place. It is recommended to filter data using filter parameters.
+      operationId: GetPendingWorkTicketsAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: PageStart
+          in: query
+          description: "Number of first page to be shown.\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageCount
+          in: query
+          description: "Count of pages to be shown starting from PageStartIndex\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          description: "Number of items pro page.\r\nDefault value: unlimited"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: UseCache
+          in: query
+          description: "Determines if server can use cached data.\r\nDefault value: false"
+          schema:
+            type: boolean
+        - name: SearchType
+          in: query
+          description: "Determines search pattern.\r\nDefault: 'None' - all data will be returned"
+          schema:
+            $ref: '#/components/schemas/WorkTicketSearchType'
+        - name: SearchValue
+          in: query
+          description: Searched value
+          schema:
+            type: string
+        - name: SortOrder
+          in: query
+          description: "Determines direction of data sorting\r\nDefault value: ascending"
+          schema:
+            $ref: '#/components/schemas/SortOrders'
+      responses:
+        '200':
+          description: Returns pending work tickets and page details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolOfOrdersDtoPagedResultData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/manual:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns all manual work tickets for a work place. It is recommended to filter data using filter parameters.
+      operationId: GetManualWorkTicketsAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: PageStart
+          in: query
+          description: "Number of first page to be shown.\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageCount
+          in: query
+          description: "Count of pages to be shown starting from PageStartIndex\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          description: "Number of items pro page.\r\nDefault value: unlimited"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: UseCache
+          in: query
+          description: "Determines if server can use cached data.\r\nDefault value: false"
+          schema:
+            type: boolean
+        - name: SearchType
+          in: query
+          description: "Determines search pattern.\r\nDefault: 'None' - all data will be returned"
+          schema:
+            $ref: '#/components/schemas/WorkTicketSearchType'
+        - name: SearchValue
+          in: query
+          description: Searched value
+          schema:
+            type: string
+        - name: SortOrder
+          in: query
+          description: "Determines direction of data sorting\r\nDefault value: ascending"
+          schema:
+            $ref: '#/components/schemas/SortOrders'
+      responses:
+        '200':
+          description: Returns manual work tickets and page details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolOfOrdersDtoPagedResultData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/internal:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns internal work tickets for a work place. It is recommended to filter data using filter parameters.
+      operationId: GetInternalWorkTicketsAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: PageStart
+          in: query
+          description: "Number of first page to be shown.\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageCount
+          in: query
+          description: "Count of pages to be shown starting from PageStartIndex\r\nDefault value: 1"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          description: "Number of items pro page.\r\nDefault value: unlimited"
+          schema:
+            maximum: 2147483647
+            minimum: 1
+            type: integer
+            format: int32
+        - name: UseCache
+          in: query
+          description: "Determines if server can use cached data.\r\nDefault value: false"
+          schema:
+            type: boolean
+        - name: SearchType
+          in: query
+          description: "Determines search pattern.\r\nDefault: 'None' - all data will be returned"
+          schema:
+            $ref: '#/components/schemas/WorkTicketSearchType'
+        - name: SearchValue
+          in: query
+          description: Searched value
+          schema:
+            type: string
+        - name: SortOrder
+          in: query
+          description: "Determines direction of data sorting\r\nDefault value: ascending"
+          schema:
+            $ref: '#/components/schemas/SortOrders'
+      responses:
+        '200':
+          description: Returns internal work tickets and page results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolOfOrdersDtoPagedResultData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/production:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns work ticket's production data
+      operationId: GetWorkTicketProductionDataAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: workTicketId
+          in: path
+          description: Work ticket id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Work ticket's production data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/details:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns work ticket's details
+      operationId: GetWorkTicketDetailsAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: workTicketId
+          in: path
+          description: Work ticket id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns work ticket's details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkTicketProductionDetailsDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/instructions:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns work ticket's instructions
+      operationId: GetWorkTicketInstructionsAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: workTicketId
+          in: path
+          description: Work ticket id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns work ticket's instructions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstructionDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/materials:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns work ticket's bill of materials
+      operationId: GetWorkTicketMaterialsAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: workTicketId
+          in: path
+          description: Work ticket id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns work ticket's bill of materials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillOfMaterialsDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+  /proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/work-plan:
+    get:
+      tags:
+        - WorkTickets
+      summary: Returns work ticket's work plan
+      operationId: GetWorkTicketWorkPlanAsync
+      parameters:
+        - name: workplaceId
+          in: path
+          description: Work place id
+          required: true
+          schema:
+            type: string
+        - name: workTicketId
+          in: path
+          description: Work ticket id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns work ticket's work plan
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkPlanDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetailsDto'
+components:
+  schemas:
+    BillOfMaterialsDto:
+      required:
+        - materialDisplayName
+        - materialNumber
+        - materialType
+        - position
+        - requiredQuantity
+        - unit
+      type: object
+      properties:
+        position:
+          type: integer
+          description: Position number
+          format: int32
+        materialDisplayName:
+          maxLength: 50
+          type: string
+          description: Display name of material
+        materialNumber:
+          maxLength: 50
+          type: string
+          description: Material number
+        materialType:
+          maxLength: 50
+          type: string
+          description: Material type
+        materialDescription:
+          maxLength: 150
+          type: string
+          description: Material number
+          nullable: true
+        quantityPerItem:
+          type: number
+          description: Quantity of material required per one produced item
+          format: double
+        requiredQuantity:
+          type: number
+          description: Total quantity of material required for a work ticket
+          format: double
+        availableQuantity:
+          type: number
+          description: Available quantity of material
+          format: double
+        reservedQuantity:
+          type: number
+          description: Reserved quantity of material
+          format: double
+        storageLocation:
+          maxLength: 50
+          type: string
+          description: Storage location's display name
+          nullable: true
+        unit:
+          maxLength: 10
+          type: string
+          description: Unit display name
+      additionalProperties: false
+      description: Item in bill of materials (material list)
+    ConfigurationQuantityRevisionDto:
+      type: object
+      properties:
+        enableScrap:
+          type: boolean
+          description: Enables scrap quantities
+        enableRework:
+          type: boolean
+          description: Enables rework quantities
+      additionalProperties: false
+      description: Settings for quantity revision
+    ConfigurationTerminalDto:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of terminal configuration
+        mainMenuItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/FunctionItemDto'
+          description: Items of main menu
+          nullable: true
+        quantityRevision:
+          $ref: '#/components/schemas/ConfigurationQuantityRevisionDto'
+        users:
+          $ref: '#/components/schemas/ConfigurationUsersDto'
+        workplaces:
+          $ref: '#/components/schemas/ConfigurationWorkplacesDto'
+        workTicketDetails:
+          $ref: '#/components/schemas/ConfigurationWorkTicketDetailsDto'
+      additionalProperties: false
+      description: Terminal configuration
+    ConfigurationUsersDto:
+      type: object
+      properties:
+        showUsersForShift:
+          type: boolean
+          description: "Determines if a list of users which are relevant for the current and the next shift can be displayed\r\nDefault value: false"
+        enableMultiSelect:
+          type: boolean
+          description: "Enables selection of multiple users.\r\nDefault value: false"
+        loginRequiresBadgeAuthentication:
+          type: boolean
+          description: "Determines if user authentication via badge is required when user logs in\r\nDefault value: false"
+      additionalProperties: false
+      description: Settings for user specific functions
+    ConfigurationWorkplacesDto:
+      type: object
+      properties:
+        enableAutomaticLayout:
+          type: boolean
+          description: "Enables automatic layout of tiles with work places\r\nDefault value: true"
+        tileSize:
+          $ref: '#/components/schemas/TileSizes'
+        tileRowCount:
+          type: integer
+          description: "Determines how many rows should be used to show work place tiles.\r\nThis property is not used if automatic layout is enabled\r\nDefault value: null"
+          format: int32
+          nullable: true
+      additionalProperties: false
+      description: Settings for work places
+    ConfigurationWorkTicketDetailsDto:
+      type: object
+      properties:
+        showInstructions:
+          type: boolean
+          description: Determines if instructions should be used in work ticket's details
+      additionalProperties: false
+      description: Settings for work ticket's details
+    ConfirmedQuantitiesDto:
+      type: object
+      properties:
+        goodQuantity:
+          $ref: '#/components/schemas/QuantityDetailsDto'
+        scrapQuantity:
+          $ref: '#/components/schemas/QuantityDetailsDto'
+        reworkQuantity:
+          $ref: '#/components/schemas/QuantityDetailsDto'
+        machineQuantity:
+          $ref: '#/components/schemas/QuantityDetailsDto'
+      additionalProperties: false
+      description: All confirmed quantities
+    ErrorDetailsDto:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title shows general information
+          nullable: true
+        httpStatus:
+          type: integer
+          description: Http status code of the operation
+          format: int32
+        errorMessages:
+          type: array
+          items:
+            type: string
+          description: Detailed description of the error
+          nullable: true
+        url:
+          type: string
+          description: Url of endpoint which handles this operation
+          nullable: true
+      additionalProperties: false
+      description: "Details of result data for operations\r\nwhich caused an error in the service"
+    FunctionItemDto:
+      required:
+        - displayName
+        - url
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: "User friendly name of an operation\r\nwhich will be executed with this menu item."
+        url:
+          type: string
+          description: Url of an operation to be executed for this menu item.
+      additionalProperties: false
+      description: Menu item which executes an operation
+    InstructionDto:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title
+          nullable: true
+        texts:
+          type: array
+          items:
+            type: string
+          description: Texts for setup activities
+          nullable: true
+        documentFilePaths:
+          type: array
+          items:
+            type: string
+          description: File paths for documents
+          nullable: true
+      additionalProperties: false
+      description: Work ticket's instructions
+    NewStatusDto:
+      required:
+        - statusId
+      type: object
+      properties:
+        statusId:
+          maxLength: 50
+          type: string
+          description: ID of the new status
+        comment:
+          maxLength: 2000
+          type: string
+          description: Comment
+          nullable: true
+      additionalProperties: false
+      description: Details of new status
+    PoolOfOrdersDto:
+      required:
+        - workTicketId
+      type: object
+      properties:
+        workTicketId:
+          maxLength: 50
+          type: string
+          description: Work ticket's Id
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableColumnDataDto'
+          description: Columns in the work ticket list
+          nullable: true
+      additionalProperties: false
+      description: "Pool of orders shows details of work ticket\r\nwith dynamic definition of table columns."
+    PoolOfOrdersDtoPagedResultData:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: Number of the current page. Starts with '1'.
+          format: int32
+          readOnly: true
+        totalPages:
+          type: integer
+          description: Total number of pages would be required to show all items.
+          format: int32
+          readOnly: true
+        pageSize:
+          type: integer
+          description: Number of items per page.
+          format: int32
+        pageCount:
+          type: integer
+          description: Number of pages for items in this object
+          format: int32
+        totalItemCount:
+          type: integer
+          description: Total number of items
+          format: int32
+          readOnly: true
+        hasPrevious:
+          type: boolean
+          description: Determines if there is a previous page
+          readOnly: true
+        hasNext:
+          type: boolean
+          description: Determines if there is a next page
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoolOfOrdersDto'
+          description: Items
+          nullable: true
+      additionalProperties: false
+      description: Contains details of a page and a page data
+    ProductionDto:
+      type: object
+      properties:
+        performanceData:
+          $ref: '#/components/schemas/ProductionPerformanceDto'
+        statusItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItemDto'
+          description: Status items
+          nullable: true
+        functionItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/FunctionItemDto'
+          description: Functions
+          nullable: true
+      additionalProperties: false
+      description: Production data
+    ProductionPerformanceDto:
+      type: object
+      properties:
+        plannedQuantityAmount:
+          type: number
+          description: Work ticket's planned quantity
+          format: double
+        currentGoodQuantityAmount:
+          type: number
+          description: Current work ticket's good quantity
+          format: double
+        currentScrapQuantities:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuantityDetailsDto'
+          description: Current work ticket's scrap quantities
+          nullable: true
+        currentReworkQuantities:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuantityDetailsDto'
+          description: work ticket's rework quantities
+          nullable: true
+        plannedSetupTime:
+          type: number
+          description: Planned setup time
+          format: double
+        plannedProcessTime:
+          type: number
+          description: Planned process (production) time
+          format: double
+        currentSetupTime:
+          type: number
+          description: Current (actual) setup time
+          format: double
+        currentProcessTime:
+          type: number
+          description: Current (actual) process (production) time
+          format: double
+        quantityUnit:
+          type: string
+          description: Unit of quantity items
+          nullable: true
+      additionalProperties: false
+      description: Performance indicator data for production
+    QuantityDetailsDto:
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: Display name
+          nullable: true
+        amount:
+          type: number
+          description: Amount of quantity
+          format: double
+      additionalProperties: false
+      description: Quantity details
+    QuantityRevisionDataDto:
+      type: object
+      properties:
+        confirmedQuantities:
+          $ref: '#/components/schemas/ConfirmedQuantitiesDto'
+        scrapQuantityReasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuantityDetailsDto'
+          description: List of possible scrap quantity reasons
+          nullable: true
+        reworkQuantityReasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuantityDetailsDto'
+          description: List of possible rework quantity reasons
+          nullable: true
+        quantityUnit:
+          type: string
+          description: Name of unit used in quantities
+          nullable: true
+      additionalProperties: false
+      description: Quantity data for revision page
+    ResultDto:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title shows general information
+          nullable: true
+          readOnly: true
+        httpStatus:
+          type: integer
+          description: Http status code of the operation
+          format: int32
+          readOnly: true
+        messages:
+          type: array
+          items:
+            type: string
+          description: "Messages can contain texts generated by a business logic like\r\nwarnings, errors etc\r\nThe list can be empty."
+          nullable: true
+        success:
+          type: boolean
+          description: Determines if operation was successful in a business logic
+        url:
+          type: string
+          description: Url of endpoint which handles this operation
+          nullable: true
+      additionalProperties: false
+      description: "Details of result data for operations\r\nwhich did not cause any errors in the service"
+    RevisionInputDataDto:
+      required:
+        - userId
+        - userRoleId
+      type: object
+      properties:
+        userId:
+          maxLength: 50
+          type: string
+          description: Id of user
+        userRoleId:
+          maxLength: 50
+          type: string
+          description: Role id of user
+        quantities:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuantityDetailsDto'
+          description: Quantities to be booked
+          nullable: true
+        comment:
+          type: string
+          description: Reply comment
+          nullable: true
+      additionalProperties: false
+      description: Input data to be used by reply logic
+    RgbColorDto:
+      type: object
+      properties:
+        alpha:
+          type: integer
+          description: Alpha component
+          format: int32
+        red:
+          type: integer
+          description: Red component
+          format: int32
+        green:
+          type: integer
+          description: Green component
+          format: int32
+        blue:
+          type: integer
+          description: Blue component
+          format: int32
+      additionalProperties: false
+      description: RGB color definition
+    SortOrders:
+      enum:
+        - Ascending
+        - Descending
+        - None
+      type: string
+      description: Order to be used when sorting data
+    StatusItemDto:
+      required:
+        - color
+        - displayName
+        - statusId
+      type: object
+      properties:
+        statusId:
+          maxLength: 50
+          type: string
+          description: Status id
+        isCurrent:
+          type: boolean
+          description: Determines if a work place has currently this status
+        displayName:
+          maxLength: 255
+          type: string
+          description: Status display name
+        color:
+          $ref: '#/components/schemas/RgbColorDto'
+        requiresComment:
+          type: boolean
+          description: Determines if change to this status requires a comment
+        subStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusItemDto'
+          description: "List of sub status of the current status.\r\nIt can be used to build hierarchical structure."
+          nullable: true
+      additionalProperties: false
+      description: Details of status menu
+    TableColumnDataDto:
+      required:
+        - dataType
+        - headerText
+      type: object
+      properties:
+        headerText:
+          type: string
+          description: Text in a column header
+        value:
+          type: string
+          description: Value shown in a column
+          nullable: true
+        dataType:
+          type: string
+          description: Value's data type
+        sortOrder:
+          $ref: '#/components/schemas/SortOrders'
+      additionalProperties: false
+      description: Place holder for table columns
+    TileSizes:
+      enum:
+        - Large
+        - Small
+      type: string
+      description: Sizes of tiles
+    UserDto:
+      required:
+        - firstName
+        - id
+        - lastName
+      type: object
+      properties:
+        id:
+          type: string
+          description: User id
+        firstName:
+          maxLength: 50
+          type: string
+          description: First name
+        lastName:
+          maxLength: 50
+          type: string
+          description: Last name
+        personalNumber:
+          maxLength: 50
+          type: string
+          description: 'Optional: personal number'
+          nullable: true
+        badgeId:
+          maxLength: 50
+          type: string
+          description: 'Optional: id of a user''s badge (card)'
+          nullable: true
+        userRoleIds:
+          type: array
+          items:
+            type: string
+          description: "List of user's role ids. Value depends on a current context.\r\nE.g. it could be roles with which the user is logged in\r\nor roles assigned to the user.\r\nThe list can be empty."
+          nullable: true
+      additionalProperties: false
+      description: Details of user data
+    UserDtoPagedResultData:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: Number of the current page. Starts with '1'.
+          format: int32
+          readOnly: true
+        totalPages:
+          type: integer
+          description: Total number of pages would be required to show all items.
+          format: int32
+          readOnly: true
+        pageSize:
+          type: integer
+          description: Number of items per page.
+          format: int32
+        pageCount:
+          type: integer
+          description: Number of pages for items in this object
+          format: int32
+        totalItemCount:
+          type: integer
+          description: Total number of items
+          format: int32
+          readOnly: true
+        hasPrevious:
+          type: boolean
+          description: Determines if there is a previous page
+          readOnly: true
+        hasNext:
+          type: boolean
+          description: Determines if there is a next page
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDto'
+          description: Items
+          nullable: true
+      additionalProperties: false
+      description: Contains details of a page and a page data
+    UserLogSwitchDto:
+      required:
+        - loginUserRoleId
+        - loginWorkPlaceId
+        - logoutUserRoleId
+        - logoutWorkPlaceId
+        - userId
+      type: object
+      properties:
+        userId:
+          maxLength: 50
+          type: string
+          description: User id
+        logoutUserRoleId:
+          maxLength: 50
+          type: string
+          description: "User role with which the user will be logged out.\r\nAs a user can be logged in with different roles on the same work place,\r\nit is necessary to define the role for the log-out operation."
+        logoutWorkPlaceId:
+          maxLength: 50
+          type: string
+          description: Work place from which the user will be logged out
+        loginUserRoleId:
+          maxLength: 50
+          type: string
+          description: Role with which the user will be logged in
+        loginWorkPlaceId:
+          maxLength: 50
+          type: string
+          description: Work place where the user will be logged in
+      additionalProperties: false
+    UserMultiLoginDto:
+      required:
+        - users
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRoleDto'
+      additionalProperties: false
+      description: User's login data
+    UserMultiLogoutDto:
+      required:
+        - userId
+        - userRoleId
+      type: object
+      properties:
+        userId:
+          maxLength: 50
+          type: string
+          description: Id of user
+        userRoleId:
+          maxLength: 50
+          type: string
+          description: Role id of user
+      additionalProperties: false
+    UserRoleDto:
+      required:
+        - userId
+        - userRoleId
+      type: object
+      properties:
+        userId:
+          maxLength: 50
+          type: string
+          description: Id of user
+        userRoleId:
+          maxLength: 50
+          type: string
+          description: Role id of user
+      additionalProperties: false
+      description: User and user role details
+    UserShiftDto:
+      required:
+        - firstName
+        - hasCurrentShift
+        - hasNextShift
+        - id
+        - lastName
+      type: object
+      properties:
+        id:
+          type: string
+          description: User id
+        firstName:
+          maxLength: 50
+          type: string
+          description: First name
+        lastName:
+          maxLength: 50
+          type: string
+          description: Last name
+        personalNumber:
+          maxLength: 50
+          type: string
+          description: 'Optional: personal number'
+          nullable: true
+        badgeId:
+          maxLength: 50
+          type: string
+          description: 'Optional: id of a user''s badge (card)'
+          nullable: true
+        userRoleIds:
+          type: array
+          items:
+            type: string
+          description: "List of user's role ids. Value depends on a current context.\r\nE.g. it could be roles with which the user is logged in\r\nor roles assigned to the user.\r\nThe list can be empty."
+          nullable: true
+        hasCurrentShift:
+          type: boolean
+          description: "Determines if the user is assigned to the current shift.\r\nDefault value: false"
+        hasNextShift:
+          type: boolean
+          description: "Determines if the user is assigned to the next shift.\r\nDefault value: false"
+      additionalProperties: false
+      description: Details of user data with shift information
+    UserSingleLoginDto:
+      required:
+        - userRoleId
+      type: object
+      properties:
+        userRoleId:
+          maxLength: 50
+          type: string
+          description: Role with which the user will be logged in
+      additionalProperties: false
+      description: Details for login operation for a user
+    UserSingleLogoutDto:
+      required:
+        - userRoleId
+      type: object
+      properties:
+        userRoleId:
+          maxLength: 50
+          type: string
+          description: "User role with which the user will be logged out.\r\nAs a user can be logged in with different roles on the same work place,\r\nit is necessary to define the role for the log-out operation."
+      additionalProperties: false
+      description: Details for logout operation for a user
+    WorkplaceDataDto:
+      required:
+        - displayName
+        - id
+      type: object
+      properties:
+        id:
+          maxLength: 50
+          type: string
+          description: Work place Id
+        displayName:
+          maxLength: 255
+          type: string
+          description: Work place display name
+        loggedInUsers:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDto'
+          description: Users logged on the work place
+          nullable: true
+        loggedInUsersId:
+          type: array
+          items:
+            type: string
+          description: Array of user ids who are logged on the work place
+          nullable: true
+        activeWorkTickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTicketDto'
+          description: first 3 work tickets which are logged and active on the work place
+          nullable: true
+        activeWorkTicketsCount:
+          type: integer
+          description: number of all work tickets which are logged and active on the work place
+          format: int32
+        pendingWorkTickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkTicketDto'
+          description: The usage and content of this property is unknown yet
+          nullable: true
+        pendingWorkTicketCount:
+          type: integer
+          description: The usage and content of this property is unknown yet
+          format: int32
+        resourceType:
+          type: string
+          description: The usage and content of this property is unknown yet
+          nullable: true
+        statusId:
+          maxLength: 50
+          type: string
+          description: Id of current work place's status
+          nullable: true
+        statusDisplayName:
+          maxLength: 255
+          type: string
+          description: /// Display name of current work place's status
+          nullable: true
+      additionalProperties: false
+      description: Work places overview data
+    WorkplaceDataDtoPagedResultData:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: Number of the current page. Starts with '1'.
+          format: int32
+          readOnly: true
+        totalPages:
+          type: integer
+          description: Total number of pages would be required to show all items.
+          format: int32
+          readOnly: true
+        pageSize:
+          type: integer
+          description: Number of items per page.
+          format: int32
+        pageCount:
+          type: integer
+          description: Number of pages for items in this object
+          format: int32
+        totalItemCount:
+          type: integer
+          description: Total number of items
+          format: int32
+          readOnly: true
+        hasPrevious:
+          type: boolean
+          description: Determines if there is a previous page
+          readOnly: true
+        hasNext:
+          type: boolean
+          description: Determines if there is a next page
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkplaceDataDto'
+          description: Items
+          nullable: true
+      additionalProperties: false
+      description: Contains details of a page and a page data
+    WorkPlanDto:
+      required:
+        - position
+        - workPlaceDisplayName
+        - workTicketNumber
+        - workTicketStatus
+      type: object
+      properties:
+        position:
+          type: integer
+          description: Work ticket's position index
+          format: int32
+        workTicketNumber:
+          maxLength: 50
+          type: string
+          description: Work ticket's number
+        workTicketDisplayName:
+          maxLength: 50
+          type: string
+          description: Work ticket's display name
+          nullable: true
+        workTicketStatus:
+          maxLength: 255
+          type: string
+          description: Work ticket's display name
+        workPlaceDisplayName:
+          maxItems: 255
+          type: array
+          items:
+            type: string
+          description: Display name of one or more work places
+        producedQuantity:
+          type: number
+          description: Produced quantity
+          format: double
+        plannedBeginTimeUtc:
+          type: string
+          description: Planned begin time as UTC
+          format: date-time
+        plannedEndTimeUtc:
+          type: string
+          description: Planned end time as UTC
+          format: date-time
+        plannedDurationInMinutes:
+          type: number
+          description: Planned duration of production in minutes
+          format: double
+        actualBeginTimeUtc:
+          type: string
+          description: Actual begin time as UTC
+          format: date-time
+        actualEndTimeUtc:
+          type: string
+          description: Actual end time as UTC
+          format: date-time
+        actualDurationInMinutes:
+          type: number
+          description: Actual duration of production in minutes
+          format: double
+      additionalProperties: false
+      description: Work ticket's work plan
+    WorkTicketDto:
+      required:
+        - description
+        - id
+      type: object
+      properties:
+        id:
+          maxLength: 50
+          type: string
+          description: Work ticket's Id
+        description:
+          maxLength: 255
+          type: string
+          description: Work ticket's display name
+      additionalProperties: false
+      description: Work ticket's data used in machine overview
+    WorkTicketMultiLogonDto:
+      required:
+        - userId
+        - userRoleId
+        - workTicketIds
+      type: object
+      properties:
+        userId:
+          maxLength: 50
+          type: string
+          description: Id of user
+        userRoleId:
+          maxLength: 50
+          type: string
+          description: Role id of user
+        workTicketIds:
+          type: array
+          items:
+            type: string
+          description: Work tickets which should be logged on
+      additionalProperties: false
+    WorkTicketProductionDetailsDto:
+      required:
+        - workTicketDescription
+        - workTicketStatus
+      type: object
+      properties:
+        workTicketDisplayName:
+          maxLength: 50
+          type: string
+          description: Display name of the work ticket
+          nullable: true
+        workTicketDescription:
+          maxLength: 50
+          type: string
+          description: Work ticket's description
+        workTicketStatus:
+          maxLength: 50
+          type: string
+          description: Work ticket's display name
+        activityDescription:
+          maxLength: 50
+          type: string
+          description: Description of work ticket's activity
+          nullable: true
+        articleDescription:
+          maxLength: 50
+          type: string
+          description: Description of produced article
+          nullable: true
+        order:
+          maxLength: 50
+          type: string
+          description: Display name of the customer's order
+          nullable: true
+        storageLocation:
+          maxLength: 50
+          type: string
+          description: Display nam of storage location
+          nullable: true
+        notes:
+          maxLength: 2000
+          type: string
+          description: Text notes of the work ticket
+          nullable: true
+        performanceData:
+          $ref: '#/components/schemas/ProductionPerformanceDto'
+        currentStatus:
+          maxLength: 50
+          type: string
+          description: Display name of the current work place's status
+          nullable: true
+        plannedBeginTimeUtc:
+          type: string
+          description: Planned begin time as UTC
+          format: date-time
+        plannedEndTimeUtc:
+          type: string
+          description: Planned end time as UTC
+          format: date-time
+        plannedSetupTime:
+          type: number
+          description: Planned setup time
+          format: double
+        plannedProcessTime:
+          type: number
+          description: Planned process (production) time
+          format: double
+        currentSetupTime:
+          type: number
+          description: Current (actual) setup time
+          format: double
+        currentProcessTime:
+          type: number
+          description: Current (actual) process (production) time
+          format: double
+        functionItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/FunctionItemDto'
+          description: Data for function buttons
+          nullable: true
+        verticalMenuItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/FunctionItemDto'
+          description: Data for vertical menu
+          nullable: true
+      additionalProperties: false
+      description: Work ticket details' general information
+    WorkTicketSearchType:
+      enum:
+        - ByContext
+        - None
+      type: string
+      description: Search types characterize different search patterns
+    WorkTicketSingleLogonDto:
+      required:
+        - userId
+        - userRoleId
+      type: object
+      properties:
+        userId:
+          maxLength: 50
+          type: string
+          description: Id of user
+        userRoleId:
+          maxLength: 50
+          type: string
+          description: Role id of user
+      additionalProperties: false
