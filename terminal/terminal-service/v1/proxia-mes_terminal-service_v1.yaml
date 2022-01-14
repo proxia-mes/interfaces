@@ -77,7 +77,7 @@ paths:
             format: int32
         - name: UseCache
           in: query
-          description: "Determines if server can use cached data.\r\nDefault value: false"
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling.\r\nDefault value: false"
           schema:
             type: boolean
       responses:
@@ -138,7 +138,7 @@ paths:
             format: int32
         - name: UseCache
           in: query
-          description: "Determines if server can use cached data.\r\nDefault value: false"
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling.\r\nDefault value: false"
           schema:
             type: boolean
       responses:
@@ -199,7 +199,7 @@ paths:
             format: int32
         - name: UseCache
           in: query
-          description: "Determines if server can use cached data.\r\nDefault value: false"
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling.\r\nDefault value: false"
           schema:
             type: boolean
       responses:
@@ -499,7 +499,7 @@ paths:
             format: int32
         - name: UseCache
           in: query
-          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling."
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling.\r\nDefault value: false"
           required: true
           schema:
             type: boolean
@@ -793,7 +793,7 @@ paths:
             format: int32
         - name: UseCache
           in: query
-          description: "Determines if server can use cached data.\r\nDefault value: false"
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling.\r\nDefault value: false"
           schema:
             type: boolean
         - name: SearchType
@@ -869,7 +869,7 @@ paths:
             format: int32
         - name: UseCache
           in: query
-          description: "Determines if server can use cached data.\r\nDefault value: false"
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling.\r\nDefault value: false"
           schema:
             type: boolean
         - name: SearchType
@@ -944,7 +944,7 @@ paths:
             format: int32
         - name: UseCache
           in: query
-          description: "Determines if server can use cached data.\r\nDefault value: false"
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling.\r\nDefault value: false"
           schema:
             type: boolean
         - name: SearchType
@@ -1020,7 +1020,7 @@ paths:
             format: int32
         - name: UseCache
           in: query
-          description: "Determines if server can use cached data.\r\nDefault value: false"
+          description: "Determines if cached data can be used.\r\nCaching improves performance but can result in outdated data.\r\nIt is recommended to enable caching only during scrolling.\r\nDefault value: false"
           schema:
             type: boolean
         - name: SearchType
