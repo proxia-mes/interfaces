@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.6'
+  version: '1.0.7'
 paths:
   "/dummy":
     get:
@@ -329,7 +329,7 @@ components:
       type: object
       nullable: true
       properties:
-        FA_TYPE_ID:
+        WT_TYPE_ID:
           type: string
         DISPLAYNAME:
           type: string
@@ -352,7 +352,7 @@ components:
       type: object
       nullable: true
       properties:
-        FA_TYPE_ID:
+        WT_STATUS_ID:
           type: string
         DISPLAYNAME:
           type: string
