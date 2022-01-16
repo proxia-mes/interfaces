@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.12'
+  version: '1.0.13'
 paths:
   "/dummy":
     get:
@@ -293,18 +293,25 @@ components:
           description: The target quantitiy of the wt
         plannedSetuptime:
           type: number
+          nullable: true
         plannedProcesstime:
           type: number
+          nullable: true
         confirmedGoodQty:
           type: number
+          nullable: true
         confirmedScrapQty:
           type: number
+          nullable: true
         confirmedReworkQty:
           type: number
+          nullable: true
         confirmedSetuptime:
           type: number
+          nullable: true
         confirmedProcesstime:
           type: number
+          nullable: true
         type:
           type: string
           description: The type of the wt
