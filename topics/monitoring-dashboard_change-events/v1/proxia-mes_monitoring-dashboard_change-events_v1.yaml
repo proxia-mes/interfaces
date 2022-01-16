@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.13'
+  version: '1.0.14'
 paths:
   "/dummy":
     get:
@@ -306,6 +306,18 @@ components:
         confirmedReworkQty:
           type: number
           nullable: true
+        goodQty:
+          type: number
+          nullable: true
+          description: The good quantitiy of the wt, calculated from TSF_WT_QTY
+        scrapQty:
+          type: number
+          nullable: true
+          description: The scrap quantitiy of the wt, calculated from TSF_WT_QTY
+        reworkQty:
+          type: number
+          nullable: true
+          description: The rework quantitiy of the wt, calculated from TSF_WT_QTY
         confirmedSetuptime:
           type: number
           nullable: true

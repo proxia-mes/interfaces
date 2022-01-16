@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.16'
+  version: '1.0.17'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -531,6 +531,18 @@ components:
         confirmedReworkQty:
           type: number
           nullable: true
+        goodQty:
+          type: number
+          nullable: true
+          description: The good quantitiy of the wt, calculated from TSF_WT_QTY
+        scrapQty:
+          type: number
+          nullable: true
+          description: The scrap quantitiy of the wt, calculated from TSF_WT_QTY
+        reworkQty:
+          type: number
+          nullable: true
+          description: The rework quantitiy of the wt, calculated from TSF_WT_QTY
         confirmedSetuptime:
           type: number
           nullable: true
