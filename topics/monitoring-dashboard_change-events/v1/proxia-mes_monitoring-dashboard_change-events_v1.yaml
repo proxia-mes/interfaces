@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.11'
+  version: '1.0.12'
 paths:
   "/dummy":
     get:
@@ -30,7 +30,7 @@ components:
           $ref: '#/components/schemas/resourceStatus'
         order:
           $ref: '#/components/schemas/order'
-        wt:
+        workticket:
           $ref: '#/components/schemas/workticket'
         wt-allocation:
           $ref: '#/components/schemas/wtAllocation'
