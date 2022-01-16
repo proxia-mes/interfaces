@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.5'
+  version: '1.0.6'
 paths:
   "/dummy":
     get:
@@ -305,12 +305,125 @@ components:
           type: string
           format: date-time
         FA_PRIORITY:
-          type: string
+          type: number
         FA_DESCRIPTION:
           type: string
         CUST_ORDER_ID:
           type: string
-                  
+    comuDbTsfWtTypeEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsfWtTypeColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsfWtTypeColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTsfWtTypeColumns:
+      type: object
+      nullable: true
+      properties:
+        FA_TYPE_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+    comuDbTsfWtStatusEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsfWtStatusColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsfWtStatusColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTsfWtStatusColumns:
+      type: object
+      nullable: true
+      properties:
+        FA_TYPE_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+    comuDbTsfWtEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsfWtColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsfWtColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTsfWtColumns:
+      type: object
+      nullable: true
+      properties:
+        WT_ID:
+          type: string
+        BEGIN_SCHEDULED:
+          type: string
+          format: date-time
+        END_SCHEDULED:
+          type: string
+          format: date-time
+        WT_STATUS_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+        PPS_ORDER:
+          type: string
+        PPS_ART_NR:
+          type: string
+        PPS_ART_DISPLAYNAME:
+          type: string
+        QTY_SOLL:
+          type: number
+        PLANNED_SETUPTIME:
+          type: number
+        PLANNED_PROCESSTIME:
+          type: number
+        QTY_CONFIRMED_GUT:
+          type: number
+        QTY_CONFIRMED_AUS:
+          type: number
+        QTY_CONFIRMED_NACH:
+          type: number
+        CONFIRMED_SETUPTIME:
+          type: number
+        CONFIRMED_PROCESSTIME:
+          type: number
+        WT_TYPE_ID:
+          type: string
+        FA_ID:
+          type: string
+        PLANT_ID:
+          type: string
+        EARLIEST_BEGIN_TS:
+          type: string
+          format: date-time
+        DESIRED_DUE_TS:
+          type: string
+          format: date-time
+        PLANNED_RES_ID:
+          type: string
+          
     # Basic-Properties      
     source:
       type: object

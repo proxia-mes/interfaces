@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.10'
+  version: '1.0.11'
 paths:
   "/dummy":
     get:
@@ -31,7 +31,7 @@ components:
         order:
           $ref: '#/components/schemas/order'
         wt:
-          $ref: '#/components/schemas/wt'
+          $ref: '#/components/schemas/workticket'
         wt-allocation:
           $ref: '#/components/schemas/wtAllocation'
         person-allocation:
@@ -248,13 +248,93 @@ components:
           description: The description of the order
           maxLength: 255
           minLength: 1
-    wt:
+    workticket:
       type: object
       required:
         - id
+        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        beginScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled begin of the wt
+        endScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled end of the wt
+        status:
+          type: string
+          description: The status of the wt
+          maxLength: 255
+          minLength: 3
+        ppsOrder:
+          type: string
+          description: The order of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        ppsArticleNumber:
+          type: string
+          description: The article number of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        ppsArticle:
+          type: string
+          description: The article of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        targetQty:
+          type: number
+          description: The target quantitiy of the wt
+        plannedSetuptime:
+          type: number
+        plannedProcesstime:
+          type: number
+        confirmedGoodQty:
+          type: number
+        confirmedScrapQty:
+          type: number
+        confirmedReworkQty:
+          type: number
+        confirmedSetuptime:
+          type: number
+        confirmedProcesstime:
+          type: number
+        type:
+          type: string
+          description: The type of the wt
+          maxLength: 255
+          minLength: 3
+        order:
+          type: string
+          description: The order id of the wt
+          maxLength: 255
+          minLength: 3
+        plant:
+          type: string
+          description: The plant id of the wt
+          maxLength: 255
+          minLength: 3
+        earliestStartScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The earliest scheduled begin of the wt
+        desiredDue:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled desire of the wt
+        plannedResourceId:
+          type: string
+          description: The resource id the wt is planned on
+          maxLength: 255
+          minLength: 3
     wtAllocation:
       type: object
       required:
@@ -296,7 +376,7 @@ components:
         - 'workplace'
         - 'resource-status'
         - 'order'
-        - 'wt'
+        - 'workticket'
         - 'wt-allocation'
         - 'person-allocation'
         - 'plant'

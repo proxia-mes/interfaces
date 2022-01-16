@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.14'
+  version: '1.0.15'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -49,6 +49,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/orders"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets":
+    get:
+      tags:
+        - workticket
+      summary: returns all worktickets
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/worktickets"
         '204':
           description: No Content
           content: { }
@@ -442,4 +469,94 @@ components:
           description: The description of the order
           maxLength: 255
           minLength: 1
-        
+    worktickets:
+      type: array
+      items:
+        $ref: '#/components/schemas/workticket'
+    workticket:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        beginScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled begin of the wt
+        endScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled end of the wt
+        status:
+          type: string
+          description: The status of the wt
+          maxLength: 255
+          minLength: 3
+        ppsOrder:
+          type: string
+          description: The order of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        ppsArticleNumber:
+          type: string
+          description: The article number of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        ppsArticle:
+          type: string
+          description: The article of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        targetQty:
+          type: number
+          description: The target quantitiy of the wt
+        plannedSetuptime:
+          type: number
+        plannedProcesstime:
+          type: number
+        confirmedGoodQty:
+          type: number
+        confirmedScrapQty:
+          type: number
+        confirmedReworkQty:
+          type: number
+        confirmedSetuptime:
+          type: number
+        confirmedProcesstime:
+          type: number
+        type:
+          type: string
+          description: The type of the wt
+          maxLength: 255
+          minLength: 3
+        order:
+          type: string
+          description: The order id of the wt
+          maxLength: 255
+          minLength: 3
+        plant:
+          type: string
+          description: The plant id of the wt
+          maxLength: 255
+          minLength: 3
+        earliestStartScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The earliest scheduled begin of the wt
+        desiredDue:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled desire of the wt
+        plannedResourceId:
+          type: string
+          description: The resource id the wt is planned on
+          maxLength: 255
+          minLength: 3    
