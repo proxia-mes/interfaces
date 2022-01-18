@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.15'
+  version: '1.0.16'
 paths:
   "/dummy":
     get:
@@ -32,8 +32,8 @@ components:
           $ref: '#/components/schemas/order'
         workticket:
           $ref: '#/components/schemas/workticket'
-        wt-allocation:
-          $ref: '#/components/schemas/wtAllocation'
+        workticket-allocation:
+          $ref: '#/components/schemas/workticketAllocation'
         person-allocation:
           $ref: '#/components/schemas/personAllocation'
         plant:
@@ -354,13 +354,32 @@ components:
           description: The resource id the wt is mapped to
           maxLength: 255
           minLength: 3
-    wtAllocation:
+    workticketAllocation:
       type: object
       required:
         - id
+        - workplaceId
+        - resourceId
+        - begin
       properties:
         id:
           $ref: '#/components/schemas/id'
+        workticketId:
+          $ref: '#/components/schemas/id'
+        resourceId:
+          $ref: '#/components/schemas/id'
+        workplaceId:
+          $ref: '#/components/schemas/id'
+        begin:
+          type: string
+          format: date-time
+          nullable: true
+          description: The  begin of the allocation
+        end:
+          type: string
+          format: date-time
+          nullable: true
+          description: The end of the allocation
     personAllocation:
       type: object
       required:

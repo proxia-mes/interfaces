@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.18'
+  version: '1.0.19'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -198,7 +198,46 @@ paths:
           content: { }
         '500':
           description: Internal Server Error
+          content: {  }
+  "/workticket-allocations":
+    get:
+      tags:
+        - workticket
+      summary: returns workticket-allocations (all/per resource/per workticket)
+      parameters:
+        - name: resource
+          in: query
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+        - name: workticket
+          in: query
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workticketAllocations"
+        '204':
+          description: No Content
           content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+                    
 components:
   securitySchemes:
     OpenID:
@@ -578,4 +617,34 @@ components:
           type: string
           description: The resource id the wt is mapped 
           maxLength: 255
-          minLength: 3    
+          minLength: 3
+    workticketAllocations:
+      type: array
+      items:
+        $ref: '#/components/schemas/workticketAllocation'
+    workticketAllocation:
+      type: object
+      required:
+        - id
+        - workplaceId
+        - resourceId
+        - begin
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        workticketId:
+          $ref: '#/components/schemas/id'
+        resourceId:
+          $ref: '#/components/schemas/id'
+        workplaceId:
+          $ref: '#/components/schemas/id'
+        begin:
+          type: string
+          format: date-time
+          nullable: true
+          description: The  begin of the allocation
+        end:
+          type: string
+          format: date-time
+          nullable: true
+          description: The end of the allocation
