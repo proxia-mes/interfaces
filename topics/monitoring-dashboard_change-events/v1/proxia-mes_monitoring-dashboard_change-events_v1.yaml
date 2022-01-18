@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.14'
+  version: '1.0.15'
 paths:
   "/dummy":
     get:
@@ -349,9 +349,9 @@ components:
           format: date-time
           nullable: true
           description: The scheduled desire of the wt
-        plannedResourceId:
+        mappedResourceId:
           type: string
-          description: The resource id the wt is planned on
+          description: The resource id the wt is mapped to
           maxLength: 255
           minLength: 3
     wtAllocation:

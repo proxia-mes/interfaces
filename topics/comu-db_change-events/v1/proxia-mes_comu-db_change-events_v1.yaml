@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.8'
+  version: '1.0.9'
 paths:
   "/dummy":
     get:
@@ -421,8 +421,6 @@ components:
         DESIRED_DUE_TS:
           type: string
           format: date-time
-        PLANNED_RES_ID:
-          type: string
     comuDbTsfWtQtyEvent:
       type: object
       properties:
@@ -452,6 +450,30 @@ components:
           type: string
         QTY:
           type: number
+    comuDbTsfWtZuordnungEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsfWtZuordnungColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsfWtZuordnungColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTsfWtZuordnungColumns:
+      type: object
+      nullable: true
+      properties:
+        WT_ID:
+          type: string
+        RES_ID:
+          type: string
+        
     # Basic-Properties      
     source:
       type: object
