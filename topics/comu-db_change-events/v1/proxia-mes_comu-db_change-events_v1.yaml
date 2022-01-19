@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.11'
+  version: '1.0.12'
 paths:
   "/dummy":
     get:
@@ -506,7 +506,35 @@ components:
         END_TS:
           type: string
           format: date-time
-        
+    comuDbTsfResBelegungEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsfResBelegungColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsfResBelegungColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTsfResBelegungColumns:
+      type: object
+      nullable: true
+      properties:
+        MASTER_RES_ID:
+          type: string
+        RES_ID:
+          type: string
+        BEGIN_TS:
+          type: string
+          format: date-time
+        END_TS:
+          type: string
+          format: date-time        
     # Basic-Properties      
     source:
       type: object

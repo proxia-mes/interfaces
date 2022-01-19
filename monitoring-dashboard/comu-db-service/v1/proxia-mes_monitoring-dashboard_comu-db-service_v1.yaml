@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.19'
+  version: '1.0.20'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -237,7 +237,33 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-                    
+  "/person-allocations":
+    get:
+      tags:
+        - person
+      summary: returns person allocations to resource
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/personAllocations"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }                    
 components:
   securitySchemes:
     OpenID:
@@ -643,6 +669,29 @@ components:
           format: date-time
           nullable: true
           description: The  begin of the allocation
+        end:
+          type: string
+          format: date-time
+          nullable: true
+          description: The end of the allocation
+    personAllocations:
+      type: array
+      items:
+        $ref: '#/components/schemas/personAllocation'
+    personAllocation:
+      type: object
+      required:
+        - resourceId
+        - personId
+        - begin
+      properties:
+        resourceId:
+          $ref: '#/components/schemas/id'
+        personId:
+          $ref: '#/components/schemas/id'
+        begin:
+          type: string
+          format: date-time
         end:
           type: string
           format: date-time
