@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.19'
+  version: '1.0.20'
 paths:
   "/dummy":
     get:
@@ -18,7 +18,7 @@ components:
       required: 
         - id
         - op
-        - object      
+        - entity      
       properties:
         person:
           $ref: '#/components/schemas/person'
@@ -42,8 +42,8 @@ components:
           $ref: '#/components/schemas/id'
         op:
           $ref: '#/components/schemas/op'
-        object:
-          $ref: '#/components/schemas/object'
+        entity:
+          $ref: '#/components/schemas/entity'
     plant:
       type: object
       properties:
@@ -409,7 +409,7 @@ components:
         - 'c'
         - 'd'
         - 'u'
-    object:
+    entity:
       type: string
       enum:
         - 'person'
