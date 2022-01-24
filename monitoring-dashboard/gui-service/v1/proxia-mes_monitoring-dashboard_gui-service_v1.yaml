@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.34'
+  version: '1.0.35'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -445,6 +445,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/personAllocations"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/resource-status-widget-drill-down-resources":
+    get:
+      tags:
+        - widgets
+      summary: returns all resources for the resource-status widget drill-down
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/resourceStatusWidgetDrillDownResources"
         '204':
           description: No Content
           content: { }
@@ -1040,3 +1067,34 @@ components:
           format: date-time
           nullable: true
           description: The end of the allocation
+    resourceStatusWidgetDrillDownResources:
+      type: array
+      items: 
+        type: object
+        properties:
+          resource:
+            type: object
+            properties: 
+              resourceId:
+                $ref: '#/components/schemas/id'
+              resourceName:
+                $ref: '#/components/schemas/name'
+              resourceState:
+                $ref: '#/components/schemas/name'
+          allocatedWorkticket:
+            type: object
+            properties: 
+              workticketId:
+                $ref: '#/components/schemas/id'
+              workticketName:
+                $ref: '#/components/schemas/name'
+          allocatedPersons:
+            type: array
+            items:
+              type: object
+              properties: 
+                personId:
+                  $ref: '#/components/schemas/id'
+                personFullName:
+                  $ref: '#/components/schemas/name'
+ 
