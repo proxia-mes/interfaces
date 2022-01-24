@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.35'
+  version: '1.0.36'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -394,7 +394,7 @@ paths:
           content: { }
         '500':
           description: Internal Server Error
-          content: {  }
+          content: { }
   "/workticket-allocations":
     get:
       tags:
@@ -1069,32 +1069,35 @@ components:
           description: The end of the allocation
     resourceStatusWidgetDrillDownResources:
       type: array
-      items: 
-        type: object
-        properties:
-          resource:
+      items:
+        $ref: '#/components/schemas/resourceStatusWidgetDrillDownResource'
+    resourceStatusWidgetDrillDownResource:
+      type: object
+      properties:
+        resource:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
+            state:
+              $ref: '#/components/schemas/name'
+        allocatedWorkticket:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
             type: object
-            properties: 
-              resourceId:
+            title: allocatedPerson
+            properties:
+              id:
                 $ref: '#/components/schemas/id'
-              resourceName:
+              name:
                 $ref: '#/components/schemas/name'
-              resourceState:
-                $ref: '#/components/schemas/name'
-          allocatedWorkticket:
-            type: object
-            properties: 
-              workticketId:
-                $ref: '#/components/schemas/id'
-              workticketName:
-                $ref: '#/components/schemas/name'
-          allocatedPersons:
-            type: array
-            items:
-              type: object
-              properties: 
-                personId:
-                  $ref: '#/components/schemas/id'
-                personFullName:
-                  $ref: '#/components/schemas/name'
  
