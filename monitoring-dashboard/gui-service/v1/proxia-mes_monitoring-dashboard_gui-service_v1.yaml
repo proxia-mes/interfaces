@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.44'
+  version: '1.0.45'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1080,6 +1080,10 @@ components:
           items:
             type: string
     resourceStatusWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/resourceStatusWidgetDrillDownResource'
+    resourceStatusWidgetDrillDownResource:
       type: object
       properties:
         resource:
@@ -1118,6 +1122,10 @@ components:
         inOrderCount:
           type: integer
     planningAccuracyWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/planningAccuracyWidgetDrillDownResource'
+    planningAccuracyWidgetDrillDownResource:
       type: object
       properties:
         resource:
