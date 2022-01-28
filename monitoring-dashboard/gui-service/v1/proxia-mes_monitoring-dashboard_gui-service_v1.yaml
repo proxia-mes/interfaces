@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.43'
+  version: '1.0.44'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -586,6 +586,11 @@ components:
         timePeriod:
           type: integer
           description: the monitored time period
+        presentation:
+          type: string
+          enum:
+            - 'widget'
+            - 'drill-down'
     processingDegreeWidget:
       type: object
       required:
@@ -599,7 +604,7 @@ components:
       required:
         - resources
         - resourceStatuses
-        - chart
+        - presentation
       properties:
         resources:
           type: array
@@ -621,11 +626,12 @@ components:
             minLength: 3
           minItems: 0
           maxItems: 100
-        chart:
+        presentation:
           type: string
           enum:
             - 'aggregated'
             - 'detail'
+            - 'drill-down'
     threshold:
       type: object
       description: a treshold of a widget
