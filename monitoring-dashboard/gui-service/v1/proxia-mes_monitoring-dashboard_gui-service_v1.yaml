@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.41'
+  version: '1.0.42'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -445,33 +445,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/personAllocations"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/resource-status-widget-drill-down-resources":
-    get:
-      tags:
-        - widgets
-      summary: returns all resources for the resource-status widget drill-down
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/resourceStatusWidgetDrillDownResources"
         '204':
           description: No Content
           content: { }
@@ -1085,11 +1058,22 @@ components:
           format: date-time
           nullable: true
           description: The end of the allocation
-    resourceStatusWidgetDrillDownResources:
-      type: array
-      items:
-        $ref: '#/components/schemas/resourceStatusWidgetDrillDownResource'
-    resourceStatusWidgetDrillDownResource:
+    resourceStatusWidgetData:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        colors:
+          type: array
+          items:
+            type: string
+    resourceStatusWidgetDrillDownData:
       type: object
       properties:
         resource:
@@ -1120,4 +1104,43 @@ components:
                 $ref: '#/components/schemas/id'
               name:
                 $ref: '#/components/schemas/name'
- 
+    planningAccuracyWidgetData:
+      type: object
+      properties:
+        resourceCount:
+          type: integer
+        inOrderCount:
+          type: string
+    planningAccuracyWidgetDrillDownData:
+      type: object
+      properties:
+        resource:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
+            state:
+              $ref: '#/components/schemas/name'
+            stateColor:
+              type: string
+            inOrder:
+              type: boolean
+        allocatedWorkticket:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
+            type: object
+            title: allocatedPerson
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
