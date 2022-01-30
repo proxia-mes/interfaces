@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.12'
+  version: '1.0.13'
 paths:
   "/dummy":
     get:
@@ -397,18 +397,25 @@ components:
           type: number
         PLANNED_SETUPTIME:
           type: number
+          nullable: true
         PLANNED_PROCESSTIME:
           type: number
+          nullable: true
         QTY_CONFIRMED_GUT:
           type: number
+          nullable: true
         QTY_CONFIRMED_AUS:
           type: number
+          nullable: true
         QTY_CONFIRMED_NACH:
           type: number
+          nullable: true
         CONFIRMED_SETUPTIME:
           type: number
+          nullable: true
         CONFIRMED_PROCESSTIME:
           type: number
+          nullable: true
         WT_TYPE_ID:
           type: string
         FA_ID:
