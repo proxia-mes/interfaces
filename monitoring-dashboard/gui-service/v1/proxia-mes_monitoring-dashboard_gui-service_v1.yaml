@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.49'
+  version: '1.0.50'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1083,6 +1083,53 @@ components:
           type: integer
         inTime:
           type: integer
+    processingDegreeWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/processingDegreeWidgetDrillDownOrder'
+    processingDegreeWidgetDrillDownOrder:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        type:
+          type: string
+          description: The type of the order
+          maxLength: 255
+          minLength: 3
+        customer:
+          type: string
+          description: The customer of the order
+          maxLength: 255
+          minLength: 1
+        endScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled end of the order
+        priority:
+          type: number
+          description: The priority of the order
+        progress:
+          type: number
+        workticketsCount:
+          type: integer
+        workticketsOpen:
+          type: integer
+        workticketsDone:
+          type: integer
+        workticketsActive:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
     resourceStatusWidgetData:
       type: object
       properties:
