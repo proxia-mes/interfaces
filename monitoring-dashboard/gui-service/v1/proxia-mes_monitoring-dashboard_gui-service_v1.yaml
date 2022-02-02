@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.52'
+  version: '1.0.53'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1118,8 +1118,11 @@ components:
         priority:
           type: number
           description: The priority of the order
+        punctual:
+          type: boolean
+          nullable: true
         progress:
-          type: number
+          type: integer
         workticketsCount:
           type: integer
         workticketsOpen:
@@ -1127,12 +1130,15 @@ components:
         workticketsDone:
           type: integer
         workticketsActive:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
+          type: array
+          items:
+            type: object
+            title: activeWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
     resourceStatusWidgetData:
       type: object
       properties:
