@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.14'
+  version: '1.0.15'
 paths:
   "/dummy":
     get:
@@ -512,7 +512,8 @@ components:
           format: date-time
         END_TS:
           type: string
-          format: date-time
+          format: date-time,
+          nullable: true
     comuDbTsfResBelegungEvent:
       type: object
       properties:
