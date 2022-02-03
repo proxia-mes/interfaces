@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.16'
+  version: '1.0.17'
 paths:
   "/dummy":
     get:
@@ -292,20 +292,26 @@ components:
         BEGIN_SCHEDULED:
           type: string
           format: date-time
+          nullable: true
         END_SCHEDULED:
           type: string
           format: date-time
+          nullable: true
         PLAN_LIEFERDATUM:
           type: string
           format: date-time
+          nullable: true
         EARLIEST_BEGIN_TS:
           type: string
           format: date-time
+          nullable: true
         DESIRED_DUE_TS:
           type: string
           format: date-time
+          nullable: true
         FA_PRIORITY:
           type: number
+          nullable: true
         FA_DESCRIPTION:
           type: string
         CUST_ORDER_ID:
@@ -395,6 +401,7 @@ components:
           type: string
         QTY_SOLL:
           type: number
+          nullable: true
         PLANNED_SETUPTIME:
           type: number
           nullable: true
@@ -425,9 +432,11 @@ components:
         EARLIEST_BEGIN_TS:
           type: string
           format: date-time
+          nullable: true
         DESIRED_DUE_TS:
           type: string
           format: date-time
+          nullable: true
     comuDbTsfWtQtyEvent:
       type: object
       properties:

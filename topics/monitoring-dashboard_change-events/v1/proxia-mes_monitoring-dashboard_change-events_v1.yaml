@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.22'
+  version: '1.0.23'
 paths:
   "/dummy":
     get:
@@ -280,6 +280,7 @@ components:
           minLength: 3
         targetQty:
           type: number
+          nullable: true
           description: The target quantitiy of the wt
         plannedSetuptime:
           type: number
@@ -373,6 +374,7 @@ components:
         begin:
           type: string
           format: date-time
+          nullable: true
         end:
           type: string
           format: date-time
