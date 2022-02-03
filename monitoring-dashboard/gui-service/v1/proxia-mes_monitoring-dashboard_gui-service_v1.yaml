@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.56'
+  version: '1.0.57'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1117,6 +1117,7 @@ components:
           description: The scheduled end of the order
         priority:
           type: number
+          nullable: true
           description: The priority of the order
         punctual:
           type: boolean
