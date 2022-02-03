@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.23'
+  version: '1.0.24'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 tags:
@@ -634,6 +634,7 @@ components:
           minLength: 3
         targetQty:
           type: number
+          nullable: true
           description: The target quantitiy of the wt
         plannedSetuptime:
           type: number
@@ -737,6 +738,7 @@ components:
         begin:
           type: string
           format: date-time
+          nullable: true
         end:
           type: string
           format: date-time
