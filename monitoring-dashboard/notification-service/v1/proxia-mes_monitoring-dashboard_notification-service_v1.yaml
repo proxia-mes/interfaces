@@ -3,14 +3,14 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Notification-Service API
   description: PROXIA-MES Monitoring-Dashboard Notification-Service API
-  version: '1.0.0'
+  version: '1.0.1'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/notification-service/v1"
 tags:
   - name: notifications
     description: Everything about notifications
 paths:
-  "/dashboards":
+  "/notifications":
     get:
       tags:
         - notifications
@@ -40,6 +40,166 @@ paths:
           content: { }
         '403':
           description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/notification/{userId}/{notificationId}":
+    delete:
+      tags:
+        - notifications
+      summary: deletes a notification for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+        - name: notificationId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/notification"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    get:
+      tags:
+        - notifications
+      summary: returns a notification for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+        - name: notificationId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/notification"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/notification/{userId}":
+    post:
+      tags:
+        - notifications
+      summary: adds a new notification for a user
+      security:
+        - OpenID:
+            - admin
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      requestBody:
+        description: notification object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/notification"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '409':
+          description: Conflict
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    put:
+      tags:
+        - notifications
+      summary: modifies an existing notification for a user
+      security:
+        - OpenID:
+            - admin
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      requestBody:
+        description: notification object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/notification"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '409':
+          description: Conflict
           content: { }
         '500':
           description: Internal Server Error
