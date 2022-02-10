@@ -1,0 +1,398 @@
+---
+openapi: 3.0.3
+info:
+  title: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
+  description: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
+  version: '1.0.0'
+servers:
+  - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/dashboard-domain-service/v1"
+tags:
+  - name: dashboards
+    description: Everything about dashboards
+paths:
+  "/dashboards":
+    get:
+      tags:
+        - dashboards
+      summary: returns all dashboards for a user
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          style: form
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/dashboards"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/dashboard/{userId}/{dashboardId}":
+    delete:
+      tags:
+        - dashboards
+      summary: deletes a dashboard for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+        - name: dashboardId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/dashboard"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    get:
+      tags:
+        - dashboards
+      summary: returns a dashboard for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+        - name: dashboardId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/dashboard"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/dashboard/{userId}":
+    post:
+      tags:
+        - dashboards
+      summary: adds a new dashboard for a user
+      security:
+        - OpenID:
+            - admin
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      requestBody:
+        description: dashboard object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/dashboard"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '409':
+          description: Conflict
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    put:
+      tags:
+        - dashboards
+      summary: modifies an existing dashboard for a user
+      security:
+        - OpenID:
+            - admin
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      requestBody:
+        description: dashboard object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/dashboard"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '409':
+          description: Conflict
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+components:
+  securitySchemes:
+    OpenID:
+      type: openIdConnect
+      openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
+  schemas:
+    id:
+      type: string
+      description: The unque id of an element, UUID4 or C_* e.g. 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 3
+    name:
+      type: string
+      description: The name of an element
+      maxLength: 50
+      minLength: 3
+    dashboards:
+      type: array
+      items:
+        $ref: '#/components/schemas/dashboard'
+    dashboard:
+      type: object
+      required:
+        - id
+        - userId
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        userId:
+          $ref: '#/components/schemas/name'
+        name:
+          type: string
+          description: The name of a dashboard
+          maxLength: 100
+          minLength: 3
+        description:
+          type: string
+          description: The description of a dashboard
+          maxLength: 255
+          minLength: 0
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/widget'
+    widget:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: The unque id of a widget (UUID4)
+          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+          maxLength: 50
+          minLength: 10
+        name:
+          type: string
+          description: The name of a widget
+          maxLength: 100
+          minLength: 3
+        description:
+          type: string
+          description: The description of a widget
+          maxLength: 255
+          minLength: 0
+        x:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+          default: 0
+          nullable: true
+        y:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+          default: 0
+          nullable: true
+        cols:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 1
+          nullable: true
+        rows:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 1
+          nullable: true
+        notification:
+          type: boolean
+        threshold:
+          type: object
+          properties:
+            low:
+              type: integer
+              nullable: true
+            medium:
+              type: integer
+              nullable: true
+            high:
+              type: integer
+              nullable: true
+        resourceStatusWidget:
+          $ref: '#/components/schemas/resourceStatusWidget'
+        processingDegreeWidget:
+          $ref: '#/components/schemas/processingDegreeWidget'
+        planningAccuracyWidget:
+          $ref: '#/components/schemas/planningAccuracyWidget'
+    planningAccuracyWidget:
+      type: object
+      required:
+        - timePeriod
+        - resources
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        timePeriod:
+          type: integer
+          description: the monitored time period
+        presentation:
+          type: string
+          enum:
+            - 'widget'
+            - 'drill-down'
+    processingDegreeWidget:
+      type: object
+      required:
+        - earlyThreshold
+        - delayThreshold
+        - presentation
+      properties:
+        delayThreshold:
+          type: integer
+        earlyThreshold:
+          type: integer
+        presentation:
+          type: string
+          enum:
+            - 'text'
+            - 'bar'
+            - 'diagram'
+            - 'drill-down'
+    resourceStatusWidget:
+      type: object
+      required:
+        - resources
+        - resourceStatuses
+        - presentation
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        resourceStatuses:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        presentation:
+          type: string
+          enum:
+            - 'aggregated'
+            - 'detail'
+            - 'drill-down'
+
+            
