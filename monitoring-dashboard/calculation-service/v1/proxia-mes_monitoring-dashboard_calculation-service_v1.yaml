@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.3'
+  version: '1.0.4'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -46,7 +46,7 @@ paths:
   "/planning-accuracy-widget-drill-down":
     post:
       tags:
-        - widgets
+        - widget-calculations
       summary: calculates planning-accuracy-widget-drill-down data
       requestBody:
         required: true
@@ -79,7 +79,7 @@ paths:
   "/resource-status-widget":
     post:
       tags:
-        - widgets
+        - widget-calculations
       summary: calculates resource-status-widget data
       requestBody:
         required: true
@@ -112,7 +112,7 @@ paths:
   "/resource-status-widget-drill-down":
     post:
       tags:
-        - widgets
+        - widget-calculations
       summary: calculates resource-status-widget-drill-down data
       requestBody:
         required: true
@@ -145,7 +145,7 @@ paths:
   "/processing-degree-widget":
     post:
       tags:
-        - widgets
+        - widget-calculations
       summary: calculates processing-degree-widget data
       requestBody:
         required: true
@@ -178,7 +178,7 @@ paths:
   "/processing-degree-widget-drill-down":
     post:
       tags:
-        - widgets
+        - widget-calculations
       summary: calculates processing-degree-widget-drill-down data
       requestBody:
         required: true
