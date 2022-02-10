@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.2'
+  version: '1.0.3'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -13,7 +13,7 @@ paths:
   "/planning-accuracy-widget":
     post:
       tags:
-        - widgets
+        - widget-calculations
       summary: calculates planning-accuracy-widget data
       requestBody:
         required: true
