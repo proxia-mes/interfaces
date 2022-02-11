@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
   description: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
-  version: '1.0.0'
+  version: '1.0.1'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/dashboard-domain-service/v1"
 tags:
@@ -128,9 +128,6 @@ paths:
       tags:
         - dashboards
       summary: adds a new dashboard for a user
-      security:
-        - OpenID:
-            - admin
       parameters:
         - name: userId
           in: path
@@ -168,9 +165,6 @@ paths:
       tags:
         - dashboards
       summary: modifies an existing dashboard for a user
-      security:
-        - OpenID:
-            - admin
       parameters:
         - name: userId
           in: path
@@ -205,10 +199,6 @@ paths:
           description: Internal Server Error
           content: { }
 components:
-  securitySchemes:
-    OpenID:
-      type: openIdConnect
-      openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
   schemas:
     id:
       type: string
