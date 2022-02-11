@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.59'
+  version: '1.0.60'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -555,15 +555,20 @@ components:
           maximum: 100
           default: 1
           nullable: true
+        notification:
+          type: boolean
         threshold:
           type: object
           properties:
             low:
-              $ref: '#/components/schemas/threshold'
+              type: integer
+              nullable: true
             medium:
-              $ref: '#/components/schemas/threshold'
+              type: integer
+              nullable: true
             high:
-              $ref: '#/components/schemas/threshold'
+              type: integer
+              nullable: true
         resourceStatusWidget:
           $ref: '#/components/schemas/resourceStatusWidget'
         processingDegreeWidget:
@@ -580,7 +585,7 @@ components:
           type: array
           items:
             type: string
-            description: The unque id of a resource status (UUID4 or C_<String>)
+            description: The unque id of a resource
             example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
             maxLength: 50
             minLength: 3
@@ -623,7 +628,7 @@ components:
           type: array
           items:
             type: string
-            description: The unque id of a resource status (UUID4 or C_<String>)
+            description: The unque id of a resource
             example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
             maxLength: 50
             minLength: 3
@@ -633,7 +638,7 @@ components:
           type: array
           items:
             type: string
-            description: The unque id of a resource status (UUID4 or C_<String>)
+            description: The unque id of a resource
             example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
             maxLength: 50
             minLength: 3
@@ -645,22 +650,6 @@ components:
             - 'aggregated'
             - 'detail'
             - 'drill-down'
-    threshold:
-      type: object
-      description: a treshold of a widget
-      properties:
-        value:
-          type: string
-          description: the value of the threshold
-          minLength: 1
-          maxLength: 50
-        duration:
-          type: number
-          format: int32
-          default: 1
-          minimum: 1
-          maximum: 60
-          description: the number of widget time units the value must exceed the threshold
     workplaces:
       type: array
       items:
