@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
   description: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
-  version: '1.0.1'
+  version: '1.0.2'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/dashboard-domain-service/v1"
 tags:
@@ -14,11 +14,11 @@ paths:
     get:
       tags:
         - dashboards
-      summary: returns all dashboards for a user
+      summary: returns all dashboards for a user or all dashboards if userId is null
       parameters:
         - name: userId
           in: query
-          required: true
+          required: false
           style: form
           schema:
             $ref: "#/components/schemas/id"
