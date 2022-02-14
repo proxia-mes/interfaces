@@ -3,15 +3,51 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.60'
+  version: '1.0.61'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
   - name: dashboards
     description: Everything about dashboards
+  - name: notifications
+    description: Everything about notifications
   - name: resources
     description: Everything about resources
 paths:
+  "/notifications":
+    get:
+      tags:
+        - notifications
+      summary: returns all notifications for a user
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          style: form
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/notifications"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/dashboards":
     get:
       tags:
@@ -1244,4 +1280,55 @@ components:
           type: array
           items:
             type: string
+    notifications:
+      type: array
+      items:
+        $ref: '#/components/schemas/notification'
+    notification:
+      type: object
+      required:
+        - id
+        - userId
+        - subject
+        - description
+        - date
+        - content
+        - priority
+        - read
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        userId:
+          $ref: '#/components/schemas/name'
+        dashboardId:
+          $ref: '#/components/schemas/id'
+        widgetId:
+          $ref: '#/components/schemas/id'
+        subject:
+          type: string
+          description: The subject of the notification
+          maxLength: 100
+          minLength: 3
+        description:
+          type: string
+          description: The short description of the notification
+          maxLength: 100
+          minLength: 3
+        date:
+          type: string
+          format: date-time
+          description: The date-time of the notification
+        content:
+          type: string
+          description: The long content of the notification
+          maxLength: 1000
+          minLength: 3
+        priority:
+          type: string
+          enum:
+            - 'low'
+            - 'medium'
+            - 'high'
+        read:
+          type: boolean
             
