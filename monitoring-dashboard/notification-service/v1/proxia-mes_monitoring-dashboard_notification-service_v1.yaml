@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Notification-Service API
   description: PROXIA-MES Monitoring-Dashboard Notification-Service API
-  version: '1.0.1'
+  version: '1.0.2'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/notification-service/v1"
 tags:
@@ -240,6 +240,10 @@ components:
           $ref: '#/components/schemas/id'
         userId:
           $ref: '#/components/schemas/name'
+        dashboardId:
+          $ref: '#/components/schemas/id'
+        widgetId:
+          $ref: '#/components/schemas/id'
         subject:
           type: string
           description: The subject of the notification
