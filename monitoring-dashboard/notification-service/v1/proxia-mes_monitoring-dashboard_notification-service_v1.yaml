@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Notification-Service API
   description: PROXIA-MES Monitoring-Dashboard Notification-Service API
-  version: '1.0.2'
+  version: '1.0.3'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/notification-service/v1"
 tags:
@@ -271,6 +271,7 @@ components:
             - 'high'
         read:
           type: boolean
+          nullable: true
         
             
         
