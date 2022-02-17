@@ -3,12 +3,14 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.4'
+  version: '1.0.5'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
   - name: widget-calculations
     description: Calculations for widgets
+  - name: explorer
+    description: Objects for explorer
 paths:
   "/planning-accuracy-widget":
     post:
@@ -193,6 +195,311 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/processingDegreeWidgetDrillDownData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/persons":
+    get:
+      tags:
+        - explorer
+      summary: returns all persons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/persons"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/person":
+    get:
+      tags:
+        - explorer
+      summary: returns a person
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/person"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/orders":
+    get:
+      tags:
+        - explorer
+      summary: returns all orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/orders"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/order":
+    get:
+      tags:
+        - explorer
+      summary: returns an order
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/order"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets":
+    get:
+      tags:
+        - explorer
+      summary: returns all worktickets
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/worktickets"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workticket":
+    get:
+      tags:
+        - explorer
+      summary: returns a workticket
+      parameters:
+        - name: workticketId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workticket"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workplaces":
+    get:
+      tags:
+        - explorer
+      summary: returns all workplaces
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workplaces"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workplace":
+    get:
+      tags:
+        - explorer
+      summary: returns a workplace
+      parameters:
+        - name: workplaceId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workplace"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/machines":
+    get:
+      tags:
+        - explorer
+      summary: returns all machines
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/machines"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/machine":
+    get:
+      tags:
+        - explorer
+      summary: returns a machine
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/machine"
         '204':
           description: No Content
           content: { }
@@ -543,4 +850,430 @@ components:
           type: array
           items:
             type: string
-             
+    workplaces:
+      type: array
+      items:
+        $ref: '#/components/schemas/workplace'
+    workplace:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant of the wkpl
+          maxLength: 255
+          minLength: 3
+        state:
+          type: string
+          description: The current state of the wkpl
+          maxLength: 255
+          minLength: 3
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
+        persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        workticket:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
+    machines:
+      type: array
+      items:
+        $ref: '#/components/schemas/machine'
+    machine:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant of the machine
+          maxLength: 255
+          minLength: 3
+        state:
+          type: string
+          description: The current state of the machine
+          maxLength: 255
+          minLength: 3
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
+        description:
+          type: string
+          description: The description of the machine
+          maxLength: 2000
+          minLength: 0
+        inventoryNumber:
+          type: string
+          description: The inventory number of the machine
+          maxLength: 50
+          minLength: 0
+        manufacturer:
+          type: string
+          description: The manufacurer of the machine
+          maxLength: 50
+          minLength: 0
+        machineType:
+          type: string
+          description: The type of the machine
+          maxLength: 50
+          minLength: 0
+        controlUnit:
+          type: string
+          description: The control unit of the machine
+          maxLength: 50
+          minLength: 0
+        factoryNumber:
+          type: string
+          description: The type of the machine
+          maxLength: 50
+          minLength: 0
+        persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        workticket:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
+    persons:
+      type: array
+      items:
+        $ref: '#/components/schemas/person'
+    person:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant of the machine
+          maxLength: 255
+          minLength: 3
+        state:
+          type: string
+          description: The current state of the machine
+          maxLength: 255
+          minLength: 3
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
+        lastName:
+          type: string
+          description: The lastname of the person
+          maxLength: 50
+          minLength: 0
+        firstName:
+          type: string
+          description: The firstname of the person
+          maxLength: 50
+          minLength: 0
+        persId:
+          type: string
+          description: The HR person id
+          maxLength: 50
+          minLength: 0
+        mail:
+          type: string
+          description: The e-mail address
+          maxLength: 50
+          minLength: 0
+        mobile:
+          type: string
+          description: The mobile phone number of the person
+          maxLength: 50
+          minLength: 0
+        resources:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        worktickets:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+    orders:
+      type: array
+      items:
+        $ref: '#/components/schemas/order'
+    order:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant id of the order
+          maxLength: 255
+          minLength: 3
+        type:
+          type: string
+          description: The type of the order
+          maxLength: 255
+          minLength: 3
+        customer:
+          type: string
+          description: The customer of the order
+          maxLength: 255
+          minLength: 1
+        customerOrder:
+          type: string
+          description: The customer-order of the order
+          maxLength: 255
+          minLength: 1
+        customerOrderNumber:
+          type: string
+          description: The customer-order number of the order
+          maxLength: 255
+          minLength: 1
+        customerOrderDelivery:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled delivery of the customer-order of the order
+        beginScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled begin of the order
+        endScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled end of the order
+        deliveryScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled delivery of the order
+        earliestStartScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The earliest scheduled begin of the order
+        desiredDue:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled desire of the order
+        priority:
+          type: number
+          description: The priority of the order
+        description:
+          type: string
+          description: The description of the order
+          maxLength: 255
+          minLength: 1
+        punctual:
+          type: boolean
+          nullable: true
+        progress:
+          type: integer
+          nullable: true
+        workticketsCount:
+          type: integer
+          nullable: true
+        workticketsOpen:
+          type: array
+          items:
+            type: object
+            title: activeWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        workticketsDone:
+          type: array
+          items:
+            type: object
+            title: activeWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        workticketsActive:
+          type: array
+          items:
+            type: object
+            title: activeWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+    worktickets:
+      type: array
+      items:
+        $ref: '#/components/schemas/workticket'
+    workticket:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        beginScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled begin of the wt
+        endScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled end of the wt
+        status:
+          type: string
+          description: The status of the wt
+          maxLength: 255
+          minLength: 3
+        ppsOrder:
+          type: string
+          description: The order of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        ppsArticleNumber:
+          type: string
+          description: The article number of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        ppsArticle:
+          type: string
+          description: The article of the wt in the PPS
+          maxLength: 255
+          minLength: 3
+        targetQty:
+          type: number
+          description: The target quantitiy of the wt
+        plannedSetuptime:
+          type: number
+          nullable: true
+        plannedProcesstime:
+          type: number
+          nullable: true
+        confirmedGoodQty:
+          type: number
+          nullable: true
+        confirmedScrapQty:
+          type: number
+          nullable: true
+        confirmedReworkQty:
+          type: number
+          nullable: true
+        goodQty:
+          type: number
+          nullable: true
+          description: The good quantitiy of the wt, calculated from TSF_WT_QTY
+        scrapQty:
+          type: number
+          nullable: true
+          description: The scrap quantitiy of the wt, calculated from TSF_WT_QTY
+        reworkQty:
+          type: number
+          nullable: true
+          description: The rework quantitiy of the wt, calculated from TSF_WT_QTY
+        confirmedSetuptime:
+          type: number
+          nullable: true
+        confirmedProcesstime:
+          type: number
+          nullable: true
+        type:
+          type: string
+          description: The type of the wt
+          maxLength: 255
+          minLength: 3
+        plant:
+          type: string
+          description: The plant id of the wt
+          maxLength: 255
+          minLength: 3
+        earliestStartScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The earliest scheduled begin of the wt
+        desiredDue:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled desire of the wt
+        mappedResourceId:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
+        persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        order:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'         

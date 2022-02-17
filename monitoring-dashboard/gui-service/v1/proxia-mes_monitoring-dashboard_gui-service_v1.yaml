@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.64'
+  version: '1.0.65'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -11,8 +11,8 @@ tags:
     description: Everything about dashboards
   - name: notifications
     description: Everything about notifications
-  - name: resources
-    description: Everything about resources
+  - name: explorer
+    description: Objects for explorer
 paths:
   "/notifications":
     get:
@@ -405,7 +405,7 @@ paths:
   "/persons":
     get:
       tags:
-        - resources
+        - explorer
       summary: returns all persons
       responses:
         '200':
@@ -432,7 +432,7 @@ paths:
   "/person":
     get:
       tags:
-        - resources
+        - explorer
       summary: returns a person
       parameters:
         - name: personId
@@ -466,7 +466,7 @@ paths:
   "/orders":
     get:
       tags:
-        - order
+        - explorer
       summary: returns all orders
       responses:
         '200':
@@ -493,7 +493,7 @@ paths:
   "/order":
     get:
       tags:
-        - order
+        - explorer
       summary: returns an order
       parameters:
         - name: orderId
@@ -527,7 +527,7 @@ paths:
   "/worktickets":
     get:
       tags:
-        - workticket
+        - explorer
       summary: returns all worktickets
       responses:
         '200':
@@ -554,7 +554,7 @@ paths:
   "/workticket":
     get:
       tags:
-        - workticket
+        - explorer
       summary: returns a workticket
       parameters:
         - name: workticketId
@@ -585,37 +585,10 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/plants":
-    get:
-      tags:
-        - resources
-      summary: returns all plants
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/plants"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
   "/workplaces":
     get:
       tags:
-        - resources
+        - explorer
       summary: returns all workplaces
       responses:
         '200':
@@ -642,7 +615,7 @@ paths:
   "/workplace":
     get:
       tags:
-        - resources
+        - explorer
       summary: returns a workplace
       parameters:
         - name: workplaceId
@@ -676,7 +649,7 @@ paths:
   "/machines":
     get:
       tags:
-        - resources
+        - explorer
       summary: returns all machines
       responses:
         '200':
@@ -703,7 +676,7 @@ paths:
   "/machine":
     get:
       tags:
-        - resources
+        - explorer
       summary: returns a machine
       parameters:
         - name: machineId
@@ -719,98 +692,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/machine"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/resource-statuses":
-    get:
-      tags:
-        - resource-status
-      summary: returns all resource-statuses
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/resourceStatuses"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/workticket-allocations":
-    get:
-      tags:
-        - workticket
-      summary: returns workticket-allocations (all/per resource/per workticket)
-      parameters:
-        - name: resource
-          in: query
-          style: simple
-          schema:
-            $ref: "#/components/schemas/id"
-        - name: workticket
-          in: query
-          style: simple
-          schema:
-            $ref: "#/components/schemas/id"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/workticketAllocations"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/person-allocations":
-    get:
-      tags:
-        - person
-      summary: returns person allocations to resource
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/personAllocations"
         '204':
           description: No Content
           content: { }
@@ -1060,20 +941,6 @@ components:
               $ref: '#/components/schemas/id'
             name:
               $ref: '#/components/schemas/name'
-    plants:
-      type: array
-      items:
-        $ref: '#/components/schemas/plant'
-    plant:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
     machines:
       type: array
       items:
@@ -1219,30 +1086,6 @@ components:
                 $ref: '#/components/schemas/id'
               name:
                 $ref: '#/components/schemas/name'
-    resourceStatuses:
-      type: array
-      items:
-        $ref: '#/components/schemas/resourceStatus'
-    resourceStatus:
-      type: object
-      required:
-        - id
-        - name
-        - color
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        color:
-          type: string
-          description: The color of a resource status
-          maxLength: 50
-          minLength: 3
-        groupName:
-          $ref: '#/components/schemas/name'
-        mainGroupName:
-          $ref: '#/components/schemas/name'
     orders:
       type: array
       items:
@@ -1481,59 +1324,6 @@ components:
               $ref: '#/components/schemas/id'
             name:
               $ref: '#/components/schemas/name'
-    workticketAllocations:
-      type: array
-      items:
-        $ref: '#/components/schemas/workticketAllocation'
-    workticketAllocation:
-      type: object
-      required:
-        - id
-        - workplaceId
-        - resourceId
-        - begin
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        workticketId:
-          $ref: '#/components/schemas/id'
-        resourceId:
-          $ref: '#/components/schemas/id'
-        workplaceId:
-          $ref: '#/components/schemas/id'
-        begin:
-          type: string
-          format: date-time
-          nullable: true
-          description: The  begin of the allocation
-        end:
-          type: string
-          format: date-time
-          nullable: true
-          description: The end of the allocation
-    personAllocations:
-      type: array
-      items:
-        $ref: '#/components/schemas/personAllocation'
-    personAllocation:
-      type: object
-      required:
-        - resourceId
-        - personId
-        - begin
-      properties:
-        resourceId:
-          $ref: '#/components/schemas/id'
-        personId:
-          $ref: '#/components/schemas/id'
-        begin:
-          type: string
-          format: date-time
-        end:
-          type: string
-          format: date-time
-          nullable: true
-          description: The end of the allocation
     processingDegreeWidgetData:
       type: object
       properties:
