@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.63'
+  version: '1.0.64'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -429,6 +429,40 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/person":
+    get:
+      tags:
+        - resources
+      summary: returns a person
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/person"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/orders":
     get:
       tags:
@@ -456,6 +490,40 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/order":
+    get:
+      tags:
+        - order
+      summary: returns an order
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/order"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/worktickets":
     get:
       tags:
@@ -468,6 +536,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/worktickets"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workticket":
+    get:
+      tags:
+        - workticket
+      summary: returns a workticket
+      parameters:
+        - name: workticketId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workticket"
         '204':
           description: No Content
           content: { }
@@ -537,6 +639,40 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/workplace":
+    get:
+      tags:
+        - resources
+      summary: returns a workplace
+      parameters:
+        - name: workplaceId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workplace"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/machines":
     get:
       tags:
@@ -549,6 +685,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/machines"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/machine":
+    get:
+      tags:
+        - resources
+      summary: returns a machine
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/machine"
         '204':
           description: No Content
           content: { }
@@ -874,6 +1044,22 @@ components:
           $ref: '#/components/schemas/name'
         mainGroupName:
           $ref: '#/components/schemas/name'
+        persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        workticket:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
     plants:
       type: array
       items:
@@ -946,6 +1132,22 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
+        persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        workticket:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
     persons:
       type: array
       items:
@@ -999,6 +1201,24 @@ components:
           description: The mobile phone number of the person
           maxLength: 50
           minLength: 0
+        resources:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        worktickets:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
     resourceStatuses:
       type: array
       items:
@@ -1100,6 +1320,45 @@ components:
           description: The description of the order
           maxLength: 255
           minLength: 1
+        punctual:
+          type: boolean
+          nullable: true
+        progress:
+          type: integer
+          nullable: true
+        workticketsCount:
+          type: integer
+          nullable: true
+        workticketsOpen:
+          type: array
+          items:
+            type: object
+            title: activeWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        workticketsDone:
+          type: array
+          items:
+            type: object
+            title: activeWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        workticketsActive:
+          type: array
+          items:
+            type: object
+            title: activeWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
     worktickets:
       type: array
       items:
@@ -1184,11 +1443,6 @@ components:
           description: The type of the wt
           maxLength: 255
           minLength: 3
-        order:
-          type: string
-          description: The order id of the wt
-          maxLength: 255
-          minLength: 3
         plant:
           type: string
           description: The plant id of the wt
@@ -1205,10 +1459,28 @@ components:
           nullable: true
           description: The scheduled desire of the wt
         mappedResourceId:
-          type: string
-          description: The resource id the wt is mapped
-          maxLength: 255
-          minLength: 3
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
+        persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        order:
+          type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/id'
+            name:
+              $ref: '#/components/schemas/name'
     workticketAllocations:
       type: array
       items:
