@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.5'
+  version: '1.0.6'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -1116,9 +1116,6 @@ components:
           description: The description of the order
           maxLength: 255
           minLength: 1
-        punctual:
-          type: boolean
-          nullable: true
         progress:
           type: integer
           nullable: true
@@ -1254,7 +1251,7 @@ components:
           format: date-time
           nullable: true
           description: The scheduled desire of the wt
-        mappedResourceId:
+        mappedResource:
           type: object
           properties:
             id:
