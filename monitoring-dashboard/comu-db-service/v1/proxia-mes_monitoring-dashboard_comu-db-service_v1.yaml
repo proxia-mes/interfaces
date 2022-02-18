@@ -3,17 +3,14 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.25'
+  version: '1.0.26'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/comu-db-service/v1"
-tags:
-  - name: resources
-    description: Everything about dashboard resources
 paths:
   "/resources":
     get:
       tags:
-        - resources
+        - resource
       summary: returns all resources (machines and workplaces)
       responses:
         '200':
@@ -37,10 +34,44 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/resource":
+    get:
+      tags:
+        - resource
+      summary: returns a resource
+      parameters:
+        - name: resourceId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/resource"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/persons":
     get:
       tags:
-        - resources
+        - person
       summary: returns all persons
       responses:
         '200':
@@ -49,6 +80,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/persons"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/person":
+    get:
+      tags:
+        - person
+      summary: returns a person
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/person"
         '204':
           description: No Content
           content: { }
@@ -91,6 +156,40 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/order":
+    get:
+      tags:
+        - order
+      summary: returns a order
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/order"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/worktickets":
     get:
       tags:
@@ -118,10 +217,44 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/workticket":
+    get:
+      tags:
+        - workticket
+      summary: returns a workticket
+      parameters:
+        - name: workticketId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workticket"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/plants":
     get:
       tags:
-        - resources
+        - plant
       summary: returns all plants
       responses:
         '200':
@@ -145,10 +278,44 @@ paths:
         '500':
           description: Internal Server Error
           content: { } 
+  "/plant":
+    get:
+      tags:
+        - plant
+      summary: returns a plant
+      parameters:
+        - name: plantId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/plant"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/workplaces":
     get:
       tags:
-        - resources
+        - resource
       summary: returns all workplaces
       responses:
         '200':
@@ -172,10 +339,44 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/workplace":
+    get:
+      tags:
+        - resource
+      summary: returns a workplace
+      parameters:
+        - name: workplaceId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workplace"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/machines":
     get:
       tags:
-        - resources
+        - resource
       summary: returns all machines
       responses:
         '200':
@@ -184,6 +385,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/machines"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/machine":
+    get:
+      tags:
+        - resource
+      summary: returns a machine
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/machine"
         '204':
           description: No Content
           content: { }
@@ -226,6 +461,40 @@ paths:
         '500':
           description: Internal Server Error
           content: {  }
+  "/resource-status":
+    get:
+      tags:
+        - resource-status
+      summary: returns a resource-status
+      parameters:
+        - name: resourceStatusId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/resourceStatus"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/workticket-allocations":
     get:
       tags:
@@ -249,6 +518,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/workticketAllocations"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workticket-allocation":
+    get:
+      tags:
+        - workticket
+      summary: returns a workticket-allocation
+      parameters:
+        - name: workticketAllocationId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/workticketAllocation"
         '204':
           description: No Content
           content: { }
@@ -290,7 +593,42 @@ paths:
           content: { }
         '500':
           description: Internal Server Error
-          content: { }                    
+          content: { }
+  "/person-allocation":
+    get:
+      tags:
+        - person
+      summary: returns a person-allocation
+      parameters:
+        - name: personAllocationId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/personAllocation"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+
 components:
   securitySchemes:
     OpenID:
