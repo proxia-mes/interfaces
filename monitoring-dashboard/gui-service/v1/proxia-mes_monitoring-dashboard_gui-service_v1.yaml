@@ -3,9 +3,9 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.66'
+  version: '1.0.67'
 servers:
-  - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/gui-service/v1"
+  - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
   - name: dashboards
     description: Everything about dashboards
@@ -429,7 +429,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/person":
+  "/person/{personId}":
     get:
       tags:
         - explorer
@@ -490,7 +490,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/order":
+  "/order/{orderId}":
     get:
       tags:
         - explorer
@@ -551,7 +551,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/workticket":
+  "/workticket/{workticketId}":
     get:
       tags:
         - explorer
@@ -612,7 +612,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/workplace":
+  "/workplace/{workplaceId}":
     get:
       tags:
         - explorer
@@ -673,7 +673,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/machine":
+  "/machine/{machineId}":
     get:
       tags:
         - explorer
@@ -734,7 +734,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/resource":
+  "/resource/{resourceId}":
     get:
       tags:
         - resource
@@ -795,7 +795,7 @@ paths:
         '500':
           description: Internal Server Error
           content: {  }
-  "/resource-status":
+  "/resource-status/{resourceStatusId}":
     get:
       tags:
         - resource-status
