@@ -3,9 +3,9 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.6'
+  version: '1.0.8'
 servers:
-  - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/calculation-service/v1"
+  - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
   - name: widget-calculations
     description: Calculations for widgets
@@ -237,7 +237,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/person":
+  "/person/{personId}":
     get:
       tags:
         - explorer
@@ -298,7 +298,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/order":
+  "/order/{orderId}":
     get:
       tags:
         - explorer
@@ -359,7 +359,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/workticket":
+  "/workticket/{workticketId}":
     get:
       tags:
         - explorer
@@ -420,7 +420,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/workplace":
+  "/workplace/{workplaceId}":
     get:
       tags:
         - explorer
@@ -481,7 +481,7 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/machine":
+  "/machine/{machineId}":
     get:
       tags:
         - explorer
