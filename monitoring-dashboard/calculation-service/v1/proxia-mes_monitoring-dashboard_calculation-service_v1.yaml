@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.9'
+  version: '1.0.10'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -764,16 +764,16 @@ components:
     resourceStatusWidgetDrillDownResource:
       type: object
       properties:
-        resource:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        state:
           type: object
           properties:
-            id:
-              $ref: '#/components/schemas/id'
             name:
               $ref: '#/components/schemas/name'
-            state:
-              $ref: '#/components/schemas/name'
-            stateColor:
+            color:
               type: string
         allocatedWorktickets:
           type: array
@@ -870,32 +870,36 @@ components:
           maxLength: 255
           minLength: 3
         state:
-          type: string
-          description: The current state of the wkpl
-          maxLength: 255
-          minLength: 3
-        stateColor:
-          type: string
+          type: object
+          properties:
+            name:
+              $ref: '#/components/schemas/name'
+            color:
+              type: string
         groupName:
           $ref: '#/components/schemas/name'
         mainGroupName:
           $ref: '#/components/schemas/name'
-        persons:
+        allocatedWorktickets:
           type: array
           items:
             type: object
+            title: allocatedWorkticket
             properties:
               id:
                 $ref: '#/components/schemas/id'
               name:
                 $ref: '#/components/schemas/name'
-        workticket:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
+            type: object
+            title: allocatedPerson
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
     machines:
       type: array
       items:
@@ -916,12 +920,12 @@ components:
           maxLength: 255
           minLength: 3
         state:
-          type: string
-          description: The current state of the machine
-          maxLength: 255
-          minLength: 3
-        stateColor:
-          type: string
+          type: object
+          properties:
+            name:
+              $ref: '#/components/schemas/name'
+            color:
+              type: string
         groupName:
           $ref: '#/components/schemas/name'
         mainGroupName:
@@ -956,22 +960,26 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
-        persons:
+        allocatedWorktickets:
           type: array
           items:
             type: object
+            title: allocatedWorkticket
             properties:
               id:
                 $ref: '#/components/schemas/id'
               name:
                 $ref: '#/components/schemas/name'
-        workticket:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
+            type: object
+            title: allocatedPerson
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
     persons:
       type: array
       items:
