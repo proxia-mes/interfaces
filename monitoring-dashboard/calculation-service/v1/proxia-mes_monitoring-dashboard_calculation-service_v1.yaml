@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.12'
+  version: '1.0.13'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -776,46 +776,27 @@ components:
       type: object
       properties:
         resource:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
-            state:
-              $ref: '#/components/schemas/name'
-            stateColor:
-              type: string
-            inOrder:
-              type: boolean
-        allocatedWorktickets:
-          type: array
-          items:
-            type: object
-            title: allocatedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        allocatedPersons:
-          type: array
-          items:
-            type: object
-            title: allocatedPerson
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+          $ref: '#/components/schemas/resource'
         plannedWorktickets:
           type: array
           items:
-            type: string
+            type: object
+            title: plannedWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
         lastWorktickets:
           type: array
           items:
-            type: string
+            type: object
+            title: lastWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
     resource:
       type: object
       required:
