@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.14'
+  version: '1.0.15'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -840,7 +840,7 @@ components:
                 $ref: '#/components/schemas/id'
               name:
                 $ref: '#/components/schemas/name'
-        allocatedResource:
+        allocatedResources:
           type: array
           description: A machine or workplace has allocated Persons, a person has allocated machines or workplaces
           items:
