@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.74'
+  version: '1.0.75'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1322,14 +1322,23 @@ components:
           format: date-time
           nullable: true
           description: The scheduled desire of the wt
-        mappedResourceId:
+        plannedResource:
           type: object
           properties:
             id:
               $ref: '#/components/schemas/id'
             name:
               $ref: '#/components/schemas/name'
-        persons:
+        allocatedPersons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        allocatedResources:
           type: array
           items:
             type: object

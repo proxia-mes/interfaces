@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.28'
+  version: '1.0.29'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -1018,7 +1018,7 @@ components:
           description: The type of the wt
           maxLength: 255
           minLength: 3
-        order:
+        orderId:
           type: string
           description: The order id of the wt
           maxLength: 255
@@ -1038,9 +1038,9 @@ components:
           format: date-time
           nullable: true
           description: The scheduled desire of the wt
-        mappedResourceId:
+        plannedResourceId:
           type: string
-          description: The resource id the wt is mapped 
+          description: The resource id the wt is planned 
           maxLength: 255
           minLength: 3
     workticketAllocations:
