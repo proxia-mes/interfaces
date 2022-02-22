@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.67'
+  version: '1.0.68'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1043,6 +1043,8 @@ components:
           description: The current state of the wkpl
           maxLength: 255
           minLength: 3
+        stateColor:
+          type: string
         groupName:
           $ref: '#/components/schemas/name'
         mainGroupName:
@@ -1087,6 +1089,8 @@ components:
           description: The current state of the machine
           maxLength: 255
           minLength: 3
+        stateColor:
+          type: string
         groupName:
           $ref: '#/components/schemas/name'
         mainGroupName:

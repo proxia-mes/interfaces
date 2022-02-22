@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.8'
+  version: '1.0.9'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -874,6 +874,8 @@ components:
           description: The current state of the wkpl
           maxLength: 255
           minLength: 3
+        stateColor:
+          type: string
         groupName:
           $ref: '#/components/schemas/name'
         mainGroupName:
@@ -918,6 +920,8 @@ components:
           description: The current state of the machine
           maxLength: 255
           minLength: 3
+        stateColor:
+          type: string
         groupName:
           $ref: '#/components/schemas/name'
         mainGroupName:
