@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.69'
+  version: '1.0.70'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1026,45 +1026,10 @@ components:
     workplace:
       type: object
       required:
-        - id
-        - name
+        - resource
       properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        plant:
-          type: string
-          description: The plant of the wkpl
-          maxLength: 255
-          minLength: 3
-        state:
-          type: object
-          properties:
-            name:
-              $ref: '#/components/schemas/name'
-            color:
-              type: string
-        groupName:
-          $ref: '#/components/schemas/name'
-        mainGroupName:
-          $ref: '#/components/schemas/name'
-        persons:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        workticket:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
+        resource:
+          $ref: '#/components/schemas/resource'
     machines:
       type: array
       items:
@@ -1072,29 +1037,10 @@ components:
     machine:
       type: object
       required:
-        - id
-        - name
+        - resource
       properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        plant:
-          type: string
-          description: The plant of the machine
-          maxLength: 255
-          minLength: 3
-        state:
-          type: object
-          properties:
-            name:
-              $ref: '#/components/schemas/name'
-            color:
-              type: string
-        groupName:
-          $ref: '#/components/schemas/name'
-        mainGroupName:
-          $ref: '#/components/schemas/name'
+        resource:
+          $ref: '#/components/schemas/resource'
         description:
           type: string
           description: The description of the machine
@@ -1125,22 +1071,6 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
-        persons:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        workticket:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
     persons:
       type: array
       items:
@@ -1494,10 +1424,12 @@ components:
           maxLength: 255
           minLength: 3
         state:
-          type: string
-          description: The current state of the machine
-          maxLength: 255
-          minLength: 3
+          type: object
+          properties:
+            name:
+              $ref: '#/components/schemas/name'
+            color:
+              type: string
         groupName:
           $ref: '#/components/schemas/name'
         mainGroupName:
@@ -1507,6 +1439,26 @@ components:
           enum:
             - 'machine'
             - 'workplace'
+        allocatedWorktickets:
+          type: array
+          items:
+            type: object
+            title: allocatedWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
+            type: object
+            title: allocatedPerson
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
     processingDegreeWidgetData:
       type: object
       properties:
@@ -1595,41 +1547,7 @@ components:
     resourceStatusWidgetDrillDownData:
       type: array
       items:
-        $ref: '#/components/schemas/resourceStatusWidgetDrillDownResource'
-    resourceStatusWidgetDrillDownResource:
-      type: object
-      properties:
-        resource:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
-            state:
-              $ref: '#/components/schemas/name'
-            stateColor:
-              type: string
-        allocatedWorktickets:
-          type: array
-          items:
-            type: object
-            title: allocatedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        allocatedPersons:
-          type: array
-          items:
-            type: object
-            title: allocatedPerson
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+        $ref: '#/components/schemas/resource'
     planningAccuracyWidgetData:
       type: object
       properties:

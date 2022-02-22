@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.10'
+  version: '1.0.11'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -760,41 +760,7 @@ components:
     resourceStatusWidgetDrillDownData:
       type: array
       items:
-        $ref: '#/components/schemas/resourceStatusWidgetDrillDownResource'
-    resourceStatusWidgetDrillDownResource:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        state:
-          type: object
-          properties:
-            name:
-              $ref: '#/components/schemas/name'
-            color:
-              type: string
-        allocatedWorktickets:
-          type: array
-          items:
-            type: object
-            title: allocatedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        allocatedPersons:
-          type: array
-          items:
-            type: object
-            title: allocatedPerson
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+        $ref: '#/components/schemas/resource'
     planningAccuracyWidgetData:
       type: object
       properties:
@@ -850,61 +816,7 @@ components:
           type: array
           items:
             type: string
-    workplaces:
-      type: array
-      items:
-        $ref: '#/components/schemas/workplace'
-    workplace:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        plant:
-          type: string
-          description: The plant of the wkpl
-          maxLength: 255
-          minLength: 3
-        state:
-          type: object
-          properties:
-            name:
-              $ref: '#/components/schemas/name'
-            color:
-              type: string
-        groupName:
-          $ref: '#/components/schemas/name'
-        mainGroupName:
-          $ref: '#/components/schemas/name'
-        allocatedWorktickets:
-          type: array
-          items:
-            type: object
-            title: allocatedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        allocatedPersons:
-          type: array
-          items:
-            type: object
-            title: allocatedPerson
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-    machines:
-      type: array
-      items:
-        $ref: '#/components/schemas/machine'
-    machine:
+    resource:
       type: object
       required:
         - id
@@ -930,6 +842,53 @@ components:
           $ref: '#/components/schemas/name'
         mainGroupName:
           $ref: '#/components/schemas/name'
+        resourceType:
+          type: string
+          enum:
+            - 'machine'
+            - 'workplace'
+        allocatedWorktickets:
+          type: array
+          items:
+            type: object
+            title: allocatedWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
+            type: object
+            title: allocatedPerson
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+    workplaces:
+      type: array
+      items:
+        $ref: '#/components/schemas/workplace'
+    workplace:
+      type: object
+      required:
+        - resource
+      properties:
+        resource:
+          $ref: '#/components/schemas/resource'
+    machines:
+      type: array
+      items:
+        $ref: '#/components/schemas/machine'
+    machine:
+      type: object
+      required:
+        - resource
+      properties:
+        resource:
+          $ref: '#/components/schemas/resource'
         description:
           type: string
           description: The description of the machine
@@ -960,26 +919,6 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
-        allocatedWorktickets:
-          type: array
-          items:
-            type: object
-            title: allocatedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        allocatedPersons:
-          type: array
-          items:
-            type: object
-            title: allocatedPerson
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
     persons:
       type: array
       items:
