@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.13'
+  version: '1.0.14'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -777,6 +777,8 @@ components:
       properties:
         resource:
           $ref: '#/components/schemas/resource'
+        inOrder:
+          type: boolean
         plannedWorktickets:
           type: array
           items:
