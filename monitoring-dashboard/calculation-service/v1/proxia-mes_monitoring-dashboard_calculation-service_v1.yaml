@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.11'
+  version: '1.0.12'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -857,11 +857,12 @@ components:
                 $ref: '#/components/schemas/id'
               name:
                 $ref: '#/components/schemas/name'
-        allocatedPersons:
+        allocatedResource:
           type: array
+          description: A machine or workplace has allocated Persons, a person has allocated machines or workplaces
           items:
             type: object
-            title: allocatedPerson
+            title: allocatedResource
             properties:
               id:
                 $ref: '#/components/schemas/id'
@@ -926,27 +927,10 @@ components:
     person:
       type: object
       required:
-        - id
-        - name
+        - resource
       properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        plant:
-          type: string
-          description: The plant of the machine
-          maxLength: 255
-          minLength: 3
-        state:
-          type: string
-          description: The current state of the machine
-          maxLength: 255
-          minLength: 3
-        groupName:
-          $ref: '#/components/schemas/name'
-        mainGroupName:
-          $ref: '#/components/schemas/name'
+        resource:
+          $ref: '#/components/schemas/resource'
         lastName:
           type: string
           description: The lastname of the person
@@ -972,24 +956,6 @@ components:
           description: The mobile phone number of the person
           maxLength: 50
           minLength: 0
-        resources:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        worktickets:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
     orders:
       type: array
       items:
