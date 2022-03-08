@@ -15,8 +15,8 @@ env:
   INTERFACE_FILE: topics/monitoring-dashboard_notification-events/v1/proxia-mes_monitoring-dashboard_notification-events_v1.yaml
   GITHUB_NUGET_REPOSITORY: https://nuget.pkg.github.com/proxia-mes/index.json
   GIT_TAG_NAME: proxia-mes_monitoring-dashboard_notification-events_v1_v
-  PACKAGE_NAME: PAG.Mes.ComuDb.NotificationEvents
-  PROJECT_DIR: gen/src/PAG.Mes.ComuDb.NotificationEvents
+  PACKAGE_NAME: PAG.Mes.MonitoringDashboard.NotificationEvents
+  PROJECT_DIR: gen/src/PAG.Mes.MonitoringDashboard.NotificationEvents
 
 jobs:
   generate-csharp-client:
