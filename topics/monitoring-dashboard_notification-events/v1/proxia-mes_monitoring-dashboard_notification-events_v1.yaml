@@ -61,3 +61,14 @@ components:
         read:
           type: boolean
           nullable: true
+    id:
+      type: string
+      description: The unque id of an element (UUID4 or C_<String>)
+      example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 3
+    name:
+      type: string
+      description: The name of an element
+      maxLength: 50
+      minLength: 3
