@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.29'
+  version: '1.0.30'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -19,6 +19,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/resources"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/oees":
+    get:
+      tags:
+        - oee
+      summary: returns all oees
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oees"
         '204':
           description: No Content
           content: { }
@@ -778,6 +805,67 @@ components:
           enum:
             - 'machine'
             - 'workplace' 
+    oees:
+      type: array
+      items:
+        $ref: '#/components/schemas/oee'
+    oee:
+      type: object
+      required:
+        - resId
+        - calDay
+      properties:
+        resId:
+          $ref: '#/components/schemas/id'
+        resDisplayname:
+          $ref: '#/components/schemas/name'
+        calDay:
+          type: string
+          format: date-time
+        performance:
+          type: number
+          format: float
+        availability:
+          type: number
+          format: float
+        quality:
+          type: number
+          format: float
+        oeeValue:
+          type: number
+          format: float
+        wtCount:
+          type: integer
+        prodTime:
+          type: number
+          format: float
+        plannedProdTime:
+          type: number
+          format: float
+        plannedAllocationTime:
+          type: number
+          format: float
+        setupTime:
+          type: number
+          format: float
+        sideTime:
+          type: number
+          format: float
+        failureTime:
+          type: number
+          format: float
+        goodQty:
+          type: number
+          format: float
+        scrapQty:
+          type: number
+          format: float
+        complaintQty:
+          type: number
+          format: float
+        reworkQty:
+          type: number
+          format: float
     persons:
       type: array
       items:
