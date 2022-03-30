@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.16'
+  version: '1.0.17'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -12,6 +12,171 @@ tags:
   - name: explorer
     description: Objects for explorer
 paths:
+  "/oee-overall-widget":
+    post:
+      tags:
+        - oee
+      summary: calculates oee-overall-widget data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oeeOverallWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/oee-value-widget":
+    post:
+      tags:
+        - oee
+      summary: calculates oee-value-widget data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oeeValueWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/oee-availability-widget":
+    post:
+      tags:
+        - oee
+      summary: calculates oee-availability-widget data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oeeAvailabilityWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/oee-performance-widget":
+    post:
+      tags:
+        - oee
+      summary: calculates oee-performance-widget data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oeePerformanceWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/oee-quality-widget":
+    post:
+      tags:
+        - oee
+      summary: calculates oee-quality-widget data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oeeQualityWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/planning-accuracy-widget":
     post:
       tags:
@@ -597,6 +762,40 @@ components:
           $ref: '#/components/schemas/processingDegreeWidget'
         planningAccuracyWidget:
           $ref: '#/components/schemas/planningAccuracyWidget'
+        oeePerformanceWidget:
+          $ref: '#/components/schemas/oeeWidget'
+        oeeQualityWidget:
+          $ref: '#/components/schemas/oeeWidget'
+        oeeAvailabilityWidget:
+          $ref: '#/components/schemas/oeeWidget'
+        oeeValueWidget:
+          $ref: '#/components/schemas/oeeWidget'
+        oeeOverallWidget:
+          $ref: '#/components/schemas/oeeWidget'
+    oeeWidget:
+      type: object
+      required:
+        - resources
+        - presentation
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        presentation:
+          type: string
+          enum:
+            - 'gauge'
+            - 'bar'
+            - 'drill-down'
+        timespan:
+          type: integer
     planningAccuracyWidget:
       type: object
       required:
@@ -1182,4 +1381,56 @@ components:
             id:
               $ref: '#/components/schemas/id'
             name:
-              $ref: '#/components/schemas/name'         
+              $ref: '#/components/schemas/name'
+    oeeQualityWidgetData:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: number
+          format: float
+    oeePerformanceWidgetData:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: number
+          format: float
+    oeeAvailabilityWidgetData:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: number
+          format: float
+    oeeValueWidgetData:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: number
+          format: float
+    oeeOverallWidgetData:
+      type: object
+      required:
+        - value
+        - performance
+        - availability
+        - quality
+      properties:
+        value:
+          type: number
+          format: float
+        performance:
+          type: number
+          format: float
+        availability:
+          type: number
+          format: float
+        quality:
+          type: number
+          format: float
