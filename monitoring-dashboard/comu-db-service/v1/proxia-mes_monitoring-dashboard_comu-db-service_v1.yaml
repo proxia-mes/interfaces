@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.31'
+  version: '1.0.32'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -825,47 +825,61 @@ components:
         performance:
           type: number
           format: double
+          nullable: true
         availability:
           type: number
           format: double
+          nullable: true
         quality:
           type: number
           format: double
+          nullable: true
         oeeValue:
           type: number
           format: double
+          nullable: true
         wtCount:
           type: integer
         prodTime:
           type: number
           format: double
+          nullable: true
         plannedProdTime:
           type: number
           format: double
+          nullable: true
         plannedAllocationTime:
           type: number
           format: double
+          nullable: true
         setupTime:
           type: number
           format: double
+          nullable: true
         sideTime:
           type: number
           format: double
+          nullable: true
         failureTime:
           type: number
           format: double
+          nullable: true
         goodQty:
           type: number
           format: double
+          nullable: true
         scrapQty:
           type: number
           format: double
+          nullable: true
         complaintQty:
           type: number
           format: double
+          nullable: true
         reworkQty:
           type: number
           format: double
+          nullable: true
     persons:
       type: array
       items:
