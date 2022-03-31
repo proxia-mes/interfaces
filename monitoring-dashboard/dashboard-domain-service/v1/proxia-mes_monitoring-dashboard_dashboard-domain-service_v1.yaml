@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
   description: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
-  version: '1.0.2'
+  version: '1.0.5'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/dashboard-domain-service/v1"
 tags:
