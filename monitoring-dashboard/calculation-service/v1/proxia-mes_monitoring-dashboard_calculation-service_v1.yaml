@@ -1609,7 +1609,7 @@ components:
       type: object
       properties:
         oeeDiagram:
-          $ref: '#/components/schemas/oeeDiagram'
+          $ref: '#/components/schemas/oeeDiagramData'
         oeeDetailDataTable:
           $ref: '#/components/schemas/oeeDataTable'
       allOf:
