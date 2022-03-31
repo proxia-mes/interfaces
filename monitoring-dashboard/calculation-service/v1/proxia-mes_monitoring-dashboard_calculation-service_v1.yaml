@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.17'
+  version: '1.0.18'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -45,6 +45,39 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/oee-diagram-widget":
+    post:
+      tags:
+        - oee
+      summary: calculates oee-overall-widget with  data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oeeDiagramData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }  
   "/oee-value-widget":
     post:
       tags:
@@ -162,6 +195,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/oeeQualityWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/oee-widget-drill-down":
+    post:
+      tags:
+        - oee
+      summary: calculates oee drill-down data for all oee widgets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/oeeWidgetDrillDownData"
         '204':
           description: No Content
           content: { }
@@ -771,6 +837,8 @@ components:
         oeeValueWidget:
           $ref: '#/components/schemas/oeeWidget'
         oeeOverallWidget:
+          $ref: '#/components/schemas/oeeWidget'
+        oeeDiagramWidget:
           $ref: '#/components/schemas/oeeWidget'
     oeeWidget:
       type: object
@@ -1434,3 +1502,121 @@ components:
         quality:
           type: number
           format: float
+    oeeDiagramData:
+      type: array
+      items: 
+        $ref: '#/components/schemas/oeeDiagramTimestamp'
+    oeeDiagramTimestamp:  
+      type: object
+      properties:
+        shift:
+          $ref: '#/components/schemas/name'
+        calDay:
+          type: string
+          format: date-time
+        performance:
+          type: number
+          format: double
+          nullable: true
+        availability:
+          type: number
+          format: double
+          nullable: true
+        quality:
+          type: number
+          format: double
+          nullable: true
+        oeeValue:
+          type: number
+          format: double
+          nullable: true
+    oeeDataTable:
+      type: array
+      items:
+        $ref: '#/components/schemas/oeeDataRow'
+    oeeDataRow:
+      type: object
+      properties:
+        resId:
+          $ref: '#/components/schemas/id'
+        resDisplayname:
+          $ref: '#/components/schemas/name'
+        shift:
+          $ref: '#/components/schemas/name'
+        calDay:
+          type: string
+          format: date-time
+        performance:
+          type: number
+          format: double
+          nullable: true
+        availability:
+          type: number
+          format: double
+          nullable: true
+        quality:
+          type: number
+          format: double
+          nullable: true
+        oeeValue:
+          type: number
+          format: double
+          nullable: true
+        wtCount:
+          type: integer
+          nullable: true
+        prodTime:
+          type: number
+          format: double
+          nullable: true
+        plannedProdTime:
+          type: number
+          format: double
+          nullable: true
+        plannedAllocationTime:
+          type: number
+          format: double
+          nullable: true
+        setupTime:
+          type: number
+          format: double
+          nullable: true
+        sideTime:
+          type: number
+          format: double
+          nullable: true
+        failureTime:
+          type: number
+          format: double
+          nullable: true
+        goodQty:
+          type: number
+          format: double
+          nullable: true
+        scrapQty:
+          type: number
+          format: double
+          nullable: true
+        complaintQty:
+          type: number
+          format: double
+          nullable: true
+        reworkQty:
+          type: number
+          format: double
+          nullable: true
+    oeeResourceData:
+      type: object
+      properties:
+        oeeDiagram:
+          $ref: '#/components/schemas/oeeDiagram'
+        oeeDetailDataTable:
+          $ref: '#/components/schemas/oeeDataTable'
+      allOf:
+        - $ref: '#/components/schemas/oeeDataRow'
+    oeeWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/oeeResourceData'
+        
+        
