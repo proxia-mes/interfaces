@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.76'
+  version: '1.0.75'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -896,37 +896,6 @@ components:
           description: The description of a widget
           maxLength: 255
           minLength: 0
-        layouts:
-          type: object
-          description: layout of the widget, position and size for different number of colums
-          items:
-            $ref: '#/components/schemas/layout'
-        notification:
-          type: boolean
-        threshold:
-          type: object
-          properties:
-            low:
-              type: integer
-              nullable: true
-            medium:
-              type: integer
-              nullable: true
-            high:
-              type: integer
-              nullable: true
-        resourceStatusWidget:
-          $ref: '#/components/schemas/resourceStatusWidget'
-        processingDegreeWidget:
-          $ref: '#/components/schemas/processingDegreeWidget'
-        planningAccuracyWidget:
-          $ref: '#/components/schemas/planningAccuracyWidget'
-    layout:
-      type: object
-      properties:
-        colCount:
-          type: number
-          format: int32
         x:
           type: number
           format: int32
@@ -954,8 +923,27 @@ components:
           minimum: 1
           maximum: 100
           default: 1
-          nullable:
-            true
+          nullable: true
+        notification:
+          type: boolean
+        threshold:
+          type: object
+          properties:
+            low:
+              type: integer
+              nullable: true
+            medium:
+              type: integer
+              nullable: true
+            high:
+              type: integer
+              nullable: true
+        resourceStatusWidget:
+          $ref: '#/components/schemas/resourceStatusWidget'
+        processingDegreeWidget:
+          $ref: '#/components/schemas/processingDegreeWidget'
+        planningAccuracyWidget:
+          $ref: '#/components/schemas/planningAccuracyWidget'
     planningAccuracyWidget:
       type: object
       required:
