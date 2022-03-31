@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
   description: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
-  version: '1.0.4'
+  version: '1.0.3'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/dashboard-domain-service/v1"
 tags:
@@ -262,7 +262,7 @@ components:
           maxLength: 255
           minLength: 0
         layouts:
-          type: array
+          type: object
           description: layout of the widget, position and size for different number of colums
           items:  
             $ref: '#/components/schemas/layout'
