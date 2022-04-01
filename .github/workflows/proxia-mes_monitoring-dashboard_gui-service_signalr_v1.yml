@@ -12,7 +12,7 @@ env:
   READ_PROXIA_GITHUB_PACKAGES_USER: flobuc
   READ_PROXIA_GITHUB_PACKAGES_SECRET: ${{ secrets.READ_PROXIA_GITHUB_PACKAGES_SECRET }}
   GEN_OUT_DIR: gen
-  INTERFACE_FILE: monitoring-dashboard/gui-service/v1/proxia-mes_monitoring-dashboard_gui-service_signalr_v1.yaml
+  INTERFACE_FILE: monitoring-dashboard/gui-service/signalr/v1/proxia-mes_monitoring-dashboard_gui-service_signalr_v1.yaml
   GITHUB_NUGET_REPOSITORY: https://nuget.pkg.github.com/proxia-mes/index.json
   GITHUB_NPM_REGISTRY: 'https://npm.pkg.github.com'
   GIT_TAG_NAME: proxia-mes_monitoring-dashboard_gui-service_signalr_v1_v
