@@ -295,3 +295,55 @@ components:
                 $ref: '#/components/schemas/id'
               name:
                 $ref: '#/components/schemas/name'
+    resource:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          type: string
+          description: The plant of the machine
+          maxLength: 255
+          minLength: 3
+        state:
+          type: object
+          properties:
+            name:
+              $ref: '#/components/schemas/name'
+            color:
+              type: string
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
+        resourceType:
+          type: string
+          enum:
+            - 'machine'
+            - 'workplace'
+        allocatedWorktickets:
+          type: array
+          items:
+            type: object
+            title: allocatedWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        allocatedResources:
+          type: array
+          description: A machine or workplace has allocated Persons, a person has allocated machines or workplaces
+          items:
+            type: object
+            title: allocatedResource
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
