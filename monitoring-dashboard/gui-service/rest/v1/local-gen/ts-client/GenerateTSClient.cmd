@@ -3,8 +3,8 @@ REM https://github.com/OpenAPITools/openapi-generator
 
 SET OUTPUT_DIRECTORY=${PWD}/out
 SET INTERFACE_DIRECTORY=${PWD}/../..
-SET INTERFACE_FILE=proxia-mes_monitoring-dashboard_gui-service_v1.yaml
-SET PACKAGE_NAME=@proxia-mes/monitoring-dashboard-gui-service-api
+SET INTERFACE_FILE=proxia-mes_monitoring-dashboard_gui-service_rest_v1.yaml
+SET PACKAGE_NAME=@proxia-mes/monitoring-dashboard-gui-service-rest-api
 
 powershell Remove-Item %OUTPUT_DIRECTORY% -Recurse -Force -ErrorAction SilentlyContinue
 REM generate

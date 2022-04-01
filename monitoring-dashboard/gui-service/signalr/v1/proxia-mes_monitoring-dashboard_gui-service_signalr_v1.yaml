@@ -1,0 +1,297 @@
+---
+openapi: 3.0.3
+info:
+  title: PROXIA-MES Monitoring-Dashboard GUI-Service SignalR-API
+  description: PROXIA-MES Monitoring-Dashboard GUI-Service SignalR-API
+  version: '1.0.0'
+paths:
+  "/dummy":
+    get:
+      summary: a dummy request for the generator
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    id:
+      type: string
+      description: The unque id of an element, UUID4 or C_* e.g. 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 3
+    name:
+      type: string
+      description: The name of an element
+      maxLength: 50
+      minLength: 3
+    widget:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: The unque id of a widget (UUID4)
+          example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+          maxLength: 50
+          minLength: 10
+        name:
+          type: string
+          description: The name of a widget
+          maxLength: 100
+          minLength: 3
+        description:
+          type: string
+          description: The description of a widget
+          maxLength: 255
+          minLength: 0
+        x:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+          default: 0
+          nullable: true
+        y:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+          default: 0
+          nullable: true
+        cols:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 1
+          nullable: true
+        rows:
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 1
+          nullable: true
+        notification:
+          type: boolean
+        threshold:
+          type: object
+          properties:
+            low:
+              type: integer
+              nullable: true
+            medium:
+              type: integer
+              nullable: true
+            high:
+              type: integer
+              nullable: true
+        resourceStatusWidget:
+          $ref: '#/components/schemas/resourceStatusWidget'
+        processingDegreeWidget:
+          $ref: '#/components/schemas/processingDegreeWidget'
+        planningAccuracyWidget:
+          $ref: '#/components/schemas/planningAccuracyWidget'
+    planningAccuracyWidget:
+      type: object
+      required:
+        - timePeriod
+        - resources
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        timePeriod:
+          type: integer
+          description: the monitored time period
+        presentation:
+          type: string
+          enum:
+            - 'widget'
+            - 'drill-down'
+    processingDegreeWidget:
+      type: object
+      required:
+        - earlyThreshold
+        - delayThreshold
+        - presentation
+      properties:
+        delayThreshold:
+          type: integer
+        earlyThreshold:
+          type: integer
+        presentation:
+          type: string
+          enum:
+            - 'text'
+            - 'bar'
+            - 'diagram'
+            - 'drill-down'
+    resourceStatusWidget:
+      type: object
+      required:
+        - resources
+        - resourceStatuses
+        - presentation
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        resourceStatuses:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        presentation:
+          type: string
+          enum:
+            - 'aggregated'
+            - 'detail'
+            - 'drill-down'
+    processingDegreeWidgetData:
+      type: object
+      properties:
+        toEarly:
+          type: integer
+          nullable: true
+        toLate:
+          type: integer
+          nullable: true
+        inTime:
+          type: integer
+          nullable: true
+    processingDegreeWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/processingDegreeWidgetDrillDownOrder'
+    processingDegreeWidgetDrillDownOrder:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        type:
+          type: string
+          description: The type of the order
+          maxLength: 255
+          minLength: 3
+        customer:
+          type: string
+          description: The customer of the order
+          maxLength: 255
+          minLength: 1
+        endScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled end of the order
+        priority:
+          type: number
+          nullable: true
+          description: The priority of the order
+        punctual:
+          type: boolean
+          nullable: true
+        progress:
+          type: integer
+          nullable: true
+        workticketsCount:
+          type: integer
+          nullable: true
+        workticketsOpen:
+          type: integer
+          nullable: true
+        workticketsDone:
+          type: integer
+          nullable: true
+        workticketsActive:
+          type: array
+          items:
+            type: object
+            title: activeWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+    resourceStatusWidgetData:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        colors:
+          type: array
+          items:
+            type: string
+    resourceStatusWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/resource'
+    planningAccuracyWidgetData:
+      type: object
+      properties:
+        resourceCount:
+          type: integer
+        inOrderCount:
+          type: integer
+    planningAccuracyWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/planningAccuracyWidgetDrillDownResource'
+    planningAccuracyWidgetDrillDownResource:
+      type: object
+      properties:
+        resource:
+          $ref: '#/components/schemas/resource'
+        inOrder:
+          type: boolean
+        plannedWorktickets:
+          type: array
+          items:
+            type: object
+            title: plannedWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'
+        lastWorktickets:
+          type: array
+          items:
+            type: object
+            title: lastWorkticket
+            properties:
+              id:
+                $ref: '#/components/schemas/id'
+              name:
+                $ref: '#/components/schemas/name'

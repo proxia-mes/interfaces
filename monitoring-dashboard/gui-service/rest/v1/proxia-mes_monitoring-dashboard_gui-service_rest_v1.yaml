@@ -1,9 +1,9 @@
 ---
 openapi: 3.0.3
 info:
-  title: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.78'
+  title: PROXIA-MES Monitoring-Dashboard GUI-Service Rest-API
+  description: PROXIA-MES Monitoring-Dashboard GUI-Service Rest-API
+  version: '1.0.79'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1429,133 +1429,6 @@ components:
           items:
             type: object
             title: allocatedResource
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-    processingDegreeWidgetData:
-      type: object
-      properties:
-        toEarly:
-          type: integer
-          nullable: true
-        toLate:
-          type: integer
-          nullable: true
-        inTime:
-          type: integer
-          nullable: true
-    processingDegreeWidgetDrillDownData:
-      type: array
-      items:
-        $ref: '#/components/schemas/processingDegreeWidgetDrillDownOrder'
-    processingDegreeWidgetDrillDownOrder:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        type:
-          type: string
-          description: The type of the order
-          maxLength: 255
-          minLength: 3
-        customer:
-          type: string
-          description: The customer of the order
-          maxLength: 255
-          minLength: 1
-        endScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled end of the order
-        priority:
-          type: number
-          nullable: true
-          description: The priority of the order
-        punctual:
-          type: boolean
-          nullable: true
-        progress:
-          type: integer
-          nullable: true
-        workticketsCount:
-          type: integer
-          nullable: true
-        workticketsOpen:
-          type: integer
-          nullable: true
-        workticketsDone:
-          type: integer
-          nullable: true
-        workticketsActive:
-          type: array
-          items:
-            type: object
-            title: activeWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-    resourceStatusWidgetData:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: integer
-        labels:
-          type: array
-          items:
-            type: string
-        colors:
-          type: array
-          items:
-            type: string
-    resourceStatusWidgetDrillDownData:
-      type: array
-      items:
-        $ref: '#/components/schemas/resource'
-    planningAccuracyWidgetData:
-      type: object
-      properties:
-        resourceCount:
-          type: integer
-        inOrderCount:
-          type: integer
-    planningAccuracyWidgetDrillDownData:
-      type: array
-      items:
-        $ref: '#/components/schemas/planningAccuracyWidgetDrillDownResource'
-    planningAccuracyWidgetDrillDownResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/resource'
-        inOrder:
-          type: boolean
-        plannedWorktickets:
-          type: array
-          items:
-            type: object
-            title: plannedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        lastWorktickets:
-          type: array
-          items:
-            type: object
-            title: lastWorkticket
             properties:
               id:
                 $ref: '#/components/schemas/id'
