@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.19'
+  version: '1.0.20'
 paths:
   "/dummy":
     get:
@@ -576,49 +576,71 @@ components:
           type: string
         RES_DISPLAYNAME:
           type: string
+          nullable: true
         SHIFT_ID:
           type: string
         CAL_DAY:
           type: string
           format: date-time
-        CAL_WEEK:
-          type: string
-        CAL_MONTH:
-          type: string
-        CAL_YEAR:
-          type: string
         LEISTUNG:
-          type: string
+          type: number
+          format: double
+          nullable: true
         VERFUEGBARKEIT:
-          type: string
+          type: number
+          format: double
+          nullable: true
         QUALITAET:
-          type: string
+          type: number
+          format: double
+          nullable: true
         OEE:
-          type: string
+          type: number
+          format: double
+          nullable: true
         WT_ANZAHL:
-          type: string
+          type: integer
+          nullable: true
         PROD_ZEIT:
-          type: string
+          type: number
+          format: double
+          nullable: true
         SOLL_PROD_ZEIT:
-          type: string
+          type: number
+          format: double
+          nullable: true
         PLAN_BELEGUNGS_ZEIT:
-          type: string
+          type: number
+          format: double
+          nullable: true
         RUEST_ZEIT:
-          type: string
+          type: number
+          format: double
+          nullable: true
         NEBEN_ZEIT:
-          type: string
+          type: number
+          format: double
+          nullable: true
         STOER_ZEIT:
-          type: string
+          type: number
+          format: double
+          nullable: true
         QTY_GUT:
-          type: string
+          type: number
+          format: double
+          nullable: true
         QTY_AUS:
-          type: string
+          type: number
+          format: double
+          nullable: true
         QTY_BEAN:
-          type: string
+          type: number
+          format: double
+          nullable: true
         QTY_NACH:
-          type: string
-        PROD_ZEIT_NULL_WT:
-          type: string
+          type: number
+          format: double
+          nullable: true
     # Basic-Properties      
     source:
       type: object
