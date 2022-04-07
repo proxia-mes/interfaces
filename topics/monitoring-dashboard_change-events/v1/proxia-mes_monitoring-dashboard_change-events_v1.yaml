@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.25'
+  version: '1.0.26'
 paths:
   "/dummy":
     get:
@@ -20,6 +20,8 @@ components:
         - op
         - entity      
       properties:
+        oee:
+          $ref: '#/components/schemas/oee'
         person:
           $ref: '#/components/schemas/person'
         machine:
@@ -44,6 +46,80 @@ components:
           $ref: '#/components/schemas/op'
         entity:
           $ref: '#/components/schemas/entity'
+    oee:
+      type: object
+      required:
+        - resId
+        - calDay
+      properties:
+        resId:
+          $ref: '#/components/schemas/id'
+        resDisplayname:
+          $ref: '#/components/schemas/name'
+        shift:
+          $ref: '#/components/schemas/name'
+        calDay:
+          type: string
+          format: date-time
+        performance:
+          type: number
+          format: double
+          nullable: true
+        availability:
+          type: number
+          format: double
+          nullable: true
+        quality:
+          type: number
+          format: double
+          nullable: true
+        oeeValue:
+          type: number
+          format: double
+          nullable: true
+        wtCount:
+          type: integer
+          nullable: true
+        prodTime:
+          type: number
+          format: double
+          nullable: true
+        plannedProdTime:
+          type: number
+          format: double
+          nullable: true
+        plannedAllocationTime:
+          type: number
+          format: double
+          nullable: true
+        setupTime:
+          type: number
+          format: double
+          nullable: true
+        sideTime:
+          type: number
+          format: double
+          nullable: true
+        failureTime:
+          type: number
+          format: double
+          nullable: true
+        goodQty:
+          type: number
+          format: double
+          nullable: true
+        scrapQty:
+          type: number
+          format: double
+          nullable: true
+        complaintQty:
+          type: number
+          format: double
+          nullable: true
+        reworkQty:
+          type: number
+          format: double
+          nullable: true
     plant:
       type: object
       properties:
@@ -412,3 +488,4 @@ components:
         - 'workticket-allocation'
         - 'person-allocation'
         - 'plant'
+        - 'oee'
