@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.18'
+  version: '1.0.19'
 paths:
   "/dummy":
     get:
@@ -580,6 +580,7 @@ components:
           type: string
         CAL_DAY:
           type: string
+          format: date-time
         CAL_WEEK:
           type: string
         CAL_MONTH:
