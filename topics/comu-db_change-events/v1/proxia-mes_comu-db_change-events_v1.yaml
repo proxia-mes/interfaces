@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.17'
+  version: '1.0.18'
 paths:
   "/dummy":
     get:
@@ -553,6 +553,71 @@ components:
           type: string
           format: date-time
           nullable: true
+    comuDbTrpOeeEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTrpOeeColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTrpOeeColumns'
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
+    comuDbTrpOeeColumns:
+      type: object
+      nullable: true
+      properties:
+        RES_ID:
+          type: string
+        RES_DISPLAYNAME:
+          type: string
+        SHIFT_ID:
+          type: string
+        CAL_DAY:
+          type: string
+        CAL_WEEK:
+          type: string
+        CAL_MONTH:
+          type: string
+        CAL_YEAR:
+          type: string
+        LEISTUNG:
+          type: string
+        VERFUEGBARKEIT:
+          type: string
+        QUALITAET:
+          type: string
+        OEE:
+          type: string
+        WT_ANZAHL:
+          type: string
+        PROD_ZEIT:
+          type: string
+        SOLL_PROD_ZEIT:
+          type: string
+        PLAN_BELEGUNGS_ZEIT:
+          type: string
+        RUEST_ZEIT:
+          type: string
+        NEBEN_ZEIT:
+          type: string
+        STOER_ZEIT:
+          type: string
+        QTY_GUT:
+          type: string
+        QTY_AUS:
+          type: string
+        QTY_BEAN:
+          type: string
+        QTY_NACH:
+          type: string
+        PROD_ZEIT_NULL_WT:
+          type: string
     # Basic-Properties      
     source:
       type: object
