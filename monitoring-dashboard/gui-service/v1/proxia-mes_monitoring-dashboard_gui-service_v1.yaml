@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.80'
+  version: '1.0.81'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1702,33 +1702,32 @@ components:
           type: number
           format: float
     oeeDiagramData:
-      type: array
-      items:
-        $ref: '#/components/schemas/oeeDiagramTimestamp'
-    oeeDiagramTimestamp:
       type: object
       properties:
-        shift:
-          $ref: '#/components/schemas/name'
-        calDay:
-          type: string
-          format: date-time
-        performance:
-          type: number
-          format: double
-          nullable: true
-        availability:
-          type: number
-          format: double
-          nullable: true
+        labels:
+          type: array
+          items:
+            type: string
+        oee:
+          type: array
+          items:
+            type: number
+            format: float
         quality:
-          type: number
-          format: double
-          nullable: true
-        oeeValue:
-          type: number
-          format: double
-          nullable: true
+          type: array
+          items:
+            type: number
+            format: float
+        performance:
+          type: array
+          items:
+            type: number
+            format: float
+        availability:
+          type: array
+          items:
+            type: number
+            format: float
     oeeDataTable:
       type: array
       items:
