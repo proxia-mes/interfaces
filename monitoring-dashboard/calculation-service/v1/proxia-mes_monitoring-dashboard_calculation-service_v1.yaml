@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.19'
+  version: '1.0.20'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -1458,6 +1458,7 @@ components:
         value:
           type: number
           format: float
+          nullable: true
     oeePerformanceWidgetData:
       type: object
       required:
@@ -1466,6 +1467,7 @@ components:
         value:
           type: number
           format: float
+          nullable: true
     oeeAvailabilityWidgetData:
       type: object
       required:
@@ -1474,6 +1476,7 @@ components:
         value:
           type: number
           format: float
+          nullable: true
     oeeValueWidgetData:
       type: object
       required:
@@ -1482,6 +1485,7 @@ components:
         value:
           type: number
           format: float
+          nullable: true
     oeeOverallWidgetData:
       type: object
       required:
@@ -1493,17 +1497,27 @@ components:
         value:
           type: number
           format: float
+          nullable: true
         performance:
           type: number
           format: float
+          nullable: true
         availability:
           type: number
           format: float
+          nullable: true
         quality:
           type: number
           format: float
+          nullable: true
     oeeDiagramData:
       type: object
+      required:
+        - labels
+        - oee
+        - availability
+        - quality
+        - performance
       properties: 
         labels:
           type: array
@@ -1535,6 +1549,15 @@ components:
         $ref: '#/components/schemas/oeeDataRow'
     oeeDataRow:
       type: object
+      required:
+        - resId
+        - resDisplayname
+        - shift
+        - calDay
+        - performance
+        - availability
+        - quality
+        - oeeValue
       properties:
         resId:
           $ref: '#/components/schemas/id'
