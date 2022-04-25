@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.20'
+  version: '1.0.21'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -1457,7 +1457,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
     oeePerformanceWidgetData:
       type: object
@@ -1466,7 +1466,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
     oeeAvailabilityWidgetData:
       type: object
@@ -1475,7 +1475,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
     oeeValueWidgetData:
       type: object
@@ -1484,7 +1484,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
     oeeOverallWidgetData:
       type: object
@@ -1496,19 +1496,19 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
         performance:
           type: number
-          format: float
+          format: double
           nullable: true
         availability:
           type: number
-          format: float
+          format: double
           nullable: true
         quality:
           type: number
-          format: float
+          format: double
           nullable: true
     oeeDiagramData:
       type: object
@@ -1527,22 +1527,22 @@ components:
           type: array
           items:
             type: number
-            format: float
+            format: double
         quality:
           type: array
           items:
             type: number
-            format: float
+            format: double
         performance:
           type: array
           items:
             type: number
-            format: float
+            format: double
         availability:
           type: array
           items:
             type: number
-            format: float
+            format: double
     oeeDataTable:
       type: array
       items:

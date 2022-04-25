@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.82'
+  version: '1.0.83'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1656,7 +1656,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
     oeePerformanceWidgetData:
       type: object
@@ -1665,7 +1665,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
     oeeAvailabilityWidgetData:
       type: object
@@ -1674,7 +1674,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
     oeeValueWidgetData:
       type: object
@@ -1683,7 +1683,7 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
     oeeOverallWidgetData:
       type: object
@@ -1695,19 +1695,19 @@ components:
       properties:
         value:
           type: number
-          format: float
+          format: double
           nullable: true
         performance:
           type: number
-          format: float
+          format: double
           nullable: true
         availability:
           type: number
-          format: float
+          format: double
           nullable: true
         quality:
           type: number
-          format: float
+          format: double
           nullable: true
     oeeDiagramData:
       type: object
@@ -1726,22 +1726,22 @@ components:
           type: array
           items:
             type: number
-            format: float
+            format: double
         quality:
           type: array
           items:
             type: number
-            format: float
+            format: double
         performance:
           type: array
           items:
             type: number
-            format: float
+            format: double
         availability:
           type: array
           items:
             type: number
-            format: float
+            format: double
     oeeDataTable:
       type: array
       items:
