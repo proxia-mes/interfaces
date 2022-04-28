@@ -3,7 +3,7 @@ name: xi-mes_person-service_v1
 on:
   push:
     paths:
-      - 'xi-mes/person-service/v1/*'x
+      - 'xi-mes/person-service/v1/*'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
