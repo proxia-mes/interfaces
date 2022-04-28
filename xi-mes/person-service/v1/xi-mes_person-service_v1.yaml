@@ -1,0 +1,190 @@
+﻿---
+openapi: 3.0.3
+info:
+  title: XI-MES Person-Service API
+  description: XI-MES Person-Service API
+  version: '1.0.0'
+servers:
+  - url: "http://localhost:5000/xi-mes/person-service/v1"
+paths:
+  "/persons":
+    get:
+      tags:
+        - person
+      summary: returns all persons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/persons"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/person/{personId}":
+    delete:
+      tags:
+        - person
+      summary: deletes a person
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/person"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    get:
+      tags:
+        - person
+      summary: returns a person
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/person"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    post:
+      tags:
+        - person
+      summary: adds a new person
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      requestBody:
+        description: person object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/person"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '409':
+          description: Conflict
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    put:
+      tags:
+        - person
+      summary: modifies an existing person
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      requestBody:
+        description: person object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/person"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+components:
+  schemas:
+    id:
+      type: string
+      description: The unique id of an element, UUID4 e.g. 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 3
+    persons:
+      type: array
+      items:
+        $ref: '#/components/schemas/person'
+    person:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        firstname:
+          type: string
+          description: The firstname of a person
+          maxLength: 100
+          minLength: 1
+        lastname:
+          type: string
+          description: The lastname of a person
+          maxLength: 100
+          minLength: 1
+        persNumber:
+          type: string
+          description: The persNumber of a person
+          maxLength: 100
+          minLength: 1
+        cardId:
+          type: string
+          description: The cardId of a person
+          maxLength: 100
+          minLength: 1
+        language:
+          type: string
+          description: The language code of a person e.g. de,en
+          maxLength: 2
+          minLength: 2
