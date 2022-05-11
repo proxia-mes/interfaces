@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.21'
+  version: '1.0.22'
 paths:
   "/dummy":
     get:
@@ -21,14 +21,8 @@ components:
           $ref: '#/components/schemas/comuDbTrsResStatusColumns'
         after:
           $ref: '#/components/schemas/comuDbTrsResStatusColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTrsResStatusColumns:
       type: object
       nullable: true
@@ -48,14 +42,8 @@ components:
           $ref: '#/components/schemas/comuDbTrsResStatusGrpColumns'
         after:
           $ref: '#/components/schemas/comuDbTrsResStatusGrpColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTrsResStatusGrpColumns:
       type: object
       nullable: true
@@ -73,14 +61,8 @@ components:
           $ref: '#/components/schemas/comuDbTrsResStatusMainGrpColumns'
         after:
           $ref: '#/components/schemas/comuDbTrsResStatusMainGrpColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTrsResStatusMainGrpColumns:
       type: object
       nullable: true
@@ -97,14 +79,8 @@ components:
           $ref: '#/components/schemas/comuDbTrsResColumns'
         after:
           $ref: '#/components/schemas/comuDbTrsResColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTrsResColumns:
       type: object
       nullable: true
@@ -128,14 +104,8 @@ components:
           $ref: '#/components/schemas/comuDbTrsMachineColumns'
         after:
           $ref: '#/components/schemas/comuDbTrsMachineColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTrsMachineColumns:
       type: object
       nullable: true
@@ -161,14 +131,8 @@ components:
           $ref: '#/components/schemas/comuDbTrsPersColumns'
         after:
           $ref: '#/components/schemas/comuDbTrsPersColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTrsPersColumns:
       type: object
       nullable: true
@@ -193,14 +157,8 @@ components:
           $ref: '#/components/schemas/comuDbTccCustomerColumns'
         after:
           $ref: '#/components/schemas/comuDbTccCustomerColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTccCustomerColumns:
       type: object
       nullable: true
@@ -216,14 +174,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfCustOrderColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfCustOrderColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfCustOrderColumns:
       type: object
       nullable: true
@@ -244,14 +196,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfFaTypeColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfFaTypeColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfFaTypeColumns:
       type: object
       nullable: true
@@ -267,14 +213,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfFaColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfFaColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfFaColumns:
       type: object
       nullable: true
@@ -323,14 +263,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfWtTypeColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfWtTypeColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfWtTypeColumns:
       type: object
       nullable: true
@@ -346,14 +280,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfWtStatusColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfWtStatusColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfWtStatusColumns:
       type: object
       nullable: true
@@ -369,14 +297,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfWtColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfWtColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfWtColumns:
       type: object
       nullable: true
@@ -444,14 +366,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfWtQtyColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfWtQtyColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfWtQtyColumns:
       type: object
       nullable: true
@@ -473,14 +389,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfWtZuordnungColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfWtZuordnungColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfWtZuordnungColumns:
       type: object
       nullable: true
@@ -496,14 +406,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfWtAnmeldungColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfWtAnmeldungColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfWtAnmeldungColumns:
       type: object
       nullable: true
@@ -530,14 +434,8 @@ components:
           $ref: '#/components/schemas/comuDbTsfResBelegungColumns'
         after:
           $ref: '#/components/schemas/comuDbTsfResBelegungColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTsfResBelegungColumns:
       type: object
       nullable: true
@@ -560,14 +458,8 @@ components:
           $ref: '#/components/schemas/comuDbTrpOeeColumns'
         after:
           $ref: '#/components/schemas/comuDbTrpOeeColumns'
-        source:
-          $ref: '#/components/schemas/source'
-        op:
-          $ref: '#/components/schemas/op'
-        ts_ms:
-          $ref: '#/components/schemas/ts_ms'
-        transaction:
-          $ref: '#/components/schemas/transaction'
+      allOf:
+        - $ref: '#/components/schemas/event'
     comuDbTrpOeeColumns:
       type: object
       nullable: true
@@ -707,6 +599,7 @@ components:
         - 'c'
         - 'd'
         - 'u'
+        - 'r'
     ts_ms:
       type: integer
       format: int64
