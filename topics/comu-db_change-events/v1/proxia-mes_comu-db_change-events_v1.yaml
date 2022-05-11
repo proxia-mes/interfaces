@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.20'
+  version: '1.0.21'
 paths:
   "/dummy":
     get:
@@ -641,7 +641,36 @@ components:
           type: number
           format: double
           nullable: true
-    # Basic-Properties      
+    comuDbTsmShiftEvent:
+      type: object
+      properties:
+        before:
+          $ref: '#/components/schemas/comuDbTsmShiftColumns'
+        after:
+          $ref: '#/components/schemas/comuDbTsmShiftColumns'
+      allOf:
+        - $ref: '#/components/schemas/event'
+    comuDbTsmShiftColumns:
+      type: object
+      nullable: true
+      properties:
+        SHIFT_ID:
+          type: string
+        DISPLAYNAME:
+          type: string
+          nullable: true
+    # Basic-Properties
+    event: 
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/source'
+        op:
+          $ref: '#/components/schemas/op'
+        ts_ms:
+          $ref: '#/components/schemas/ts_ms'
+        transaction:
+          $ref: '#/components/schemas/transaction'
     source:
       type: object
       properties:
