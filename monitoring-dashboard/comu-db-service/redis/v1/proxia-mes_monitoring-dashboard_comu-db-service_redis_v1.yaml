@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
-  version: '1.0.2'
+  version: '1.0.3'
 paths:
   "/dummy":
     get:
@@ -15,7 +15,7 @@ components:
   schemas:
     id:
       type: string
-      description: The unque id of an element, UUID4 or C_* e.g. 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      description: The unique id of an element, UUID4 or C_* e.g. 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
       maxLength: 50
       minLength: 3
     name:
@@ -49,11 +49,11 @@ components:
           minLength: 3
         groupId:
           $ref: '#/components/schemas/id'
-        groupName:
+        group:
           $ref: '#/components/schemas/name'
         mainGroupId:
           $ref: '#/components/schemas/id'
-        mainGroupName:
+        mainGroup:
           $ref: '#/components/schemas/name'
     plant:
       type: object
@@ -118,24 +118,18 @@ components:
         plantId:
           $ref: '#/components/schemas/id'
         plant:
-          type: string
-          description: The plant of the machine
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         stateId:
           $ref: '#/components/schemas/id'
         state:
-          type: string
-          description: The current state of the machine
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         groupId:
           $ref: '#/components/schemas/id'
-        groupName:
+        group:
           $ref: '#/components/schemas/name'
         mainGroupId:
           $ref: '#/components/schemas/id'
-        mainGroupName:
+        mainGroup:
           $ref: '#/components/schemas/name'
         description:
           type: string
@@ -180,12 +174,13 @@ components:
     oee:
       type: object
       required:
-        - resId
+        - resourceId
         - calDay
+        - shiftId
       properties:
-        resId:
+        resourceId:
           $ref: '#/components/schemas/id'
-        resDisplayname:
+        resource:
           $ref: '#/components/schemas/name'
         shiftId:
           $ref: '#/components/schemas/id'
@@ -266,24 +261,18 @@ components:
         plantId:
           $ref: '#/components/schemas/id'
         plant:
-          type: string
-          description: The plant of the person
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         stateId:
           $ref: '#/components/schemas/id'
         state:
-          type: string
-          description: The current state of the person
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         groupId:
           $ref: '#/components/schemas/id'
-        groupName:
+        group:
           $ref: '#/components/schemas/name'
         mainGroupId:
           $ref: '#/components/schemas/id'
-        mainGroupName:
+        mainGroup:
           $ref: '#/components/schemas/name'
         lastName:
           type: string
@@ -328,11 +317,11 @@ components:
           minLength: 3
         groupId:
           $ref: '#/components/schemas/id'
-        groupName:
+        group:
           $ref: '#/components/schemas/name'
         mainGroupId:
           $ref: '#/components/schemas/id'
-        mainGroupName:
+        mainGroup:
           $ref: '#/components/schemas/name'
     customer:
       type: object
@@ -388,35 +377,19 @@ components:
         plantId:
           $ref: '#/components/schemas/id'
         plant:
-          type: string
-          description: The plant of the order
-          maxLength: 255
-          minLength: 3
-          nullable: true
+          $ref: '#/components/schemas/name'
         typeId:
           $ref: '#/components/schemas/id'
         type:
-          type: string
-          description: The type of the order
-          maxLength: 255
-          minLength: 3
-          nullable: true
+          $ref: '#/components/schemas/name'
         customerId:
           $ref: '#/components/schemas/id'
         customer:
-          type: string
-          description: The customer of the order
-          maxLength: 255
-          minLength: 1
-          nullable: true
+          $ref: '#/components/schemas/name'
         customerOrderId:
           $ref: '#/components/schemas/id'
         customerOrder:
-          type: string
-          description: The customer-order of the order
-          maxLength: 255
-          minLength: 1
-          nullable: true
+          $ref: '#/components/schemas/name'
         customerOrderNumber:
           type: string
           description: The customer-order number of the order
@@ -532,11 +505,7 @@ components:
         statusId:
           $ref: '#/components/schemas/id'
         status:
-          type: string
-          description: The status of the wt
-          maxLength: 255
-          minLength: 3
-          nullable: true
+          $ref: '#/components/schemas/name'
         ppsOrder:
           type: string
           description: The order of the wt in the PPS
@@ -594,27 +563,15 @@ components:
         typeId:
           $ref: '#/components/schemas/id'
         type:
-          type: string
-          description: The type of the wt
-          maxLength: 255
-          minLength: 3
-          nullable: true
+          $ref: '#/components/schemas/name'
         orderId:
           $ref: '#/components/schemas/id'
         order:
-          type: string
-          description: The order of the wt
-          maxLength: 255
-          minLength: 3
-          nullable: true
+          $ref: '#/components/schemas/name'
         plantId:
           $ref: '#/components/schemas/id'
         plant:
-          type: string
-          description: The plant of the wt
-          maxLength: 255
-          minLength: 3
-          nullable: true
+          $ref: '#/components/schemas/name'
         earliestStartScheduled:
           type: string
           format: date-time
@@ -628,11 +585,7 @@ components:
         plannedResourceId:
           $ref: '#/components/schemas/id'
         plannedResource:
-          type: string
-          description: The resource the wt is planned 
-          maxLength: 255
-          minLength: 3
-          nullable: true
+          $ref: '#/components/schemas/name'
     workticketAllocation:
       type: object
       properties:
@@ -663,6 +616,8 @@ components:
       properties:
         resourceId:
           $ref: '#/components/schemas/id'
+        resource:
+          $ref: '#/components/schemas/name'
         personId:
           $ref: '#/components/schemas/id'
         person:

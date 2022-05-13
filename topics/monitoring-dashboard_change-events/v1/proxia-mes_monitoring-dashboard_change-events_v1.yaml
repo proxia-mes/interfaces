@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.26'
+  version: '1.0.27'
 paths:
   "/dummy":
     get:
@@ -49,12 +49,13 @@ components:
     oee:
       type: object
       required:
-        - resId
+        - resourceId
         - calDay
+        - shift
       properties:
-        resId:
+        resourceId:
           $ref: '#/components/schemas/id'
-        resDisplayname:
+        resource:
           $ref: '#/components/schemas/name'
         shift:
           $ref: '#/components/schemas/name'
@@ -131,18 +132,12 @@ components:
         name:
           $ref: '#/components/schemas/name'
         plant:
-          type: string
-          description: The plant of the machine
-          maxLength: 255
-          minLength: 3
-        state:
-          type: string
-          description: The current state of the machine
-          maxLength: 255
-          minLength: 3
-        groupName:
           $ref: '#/components/schemas/name'
-        mainGroupName:
+        state:
+          $ref: '#/components/schemas/name'
+        group:
+          $ref: '#/components/schemas/name'
+        mainGroup:
           $ref: '#/components/schemas/name'
         lastName:
           type: string
@@ -175,18 +170,12 @@ components:
         name:
           $ref: '#/components/schemas/name'
         plant:
-          type: string
-          description: The plant of the machine
-          maxLength: 255
-          minLength: 3
-        state:
-          type: string
-          description: The current state of the machine
-          maxLength: 255
-          minLength: 3
-        groupName:
           $ref: '#/components/schemas/name'
-        mainGroupName:
+        state:
+          $ref: '#/components/schemas/name'
+        group:
+          $ref: '#/components/schemas/name'
+        mainGroup:
           $ref: '#/components/schemas/name'
         description:
           type: string
@@ -224,18 +213,12 @@ components:
         name:
           $ref: '#/components/schemas/name'
         plant:
-          type: string
-          description: The plant of the wkpl
-          maxLength: 255
-          minLength: 3
-        state:
-          type: string
-          description: The current state of the wkpl
-          maxLength: 255
-          minLength: 3
-        groupName:
           $ref: '#/components/schemas/name'
-        mainGroupName:
+        state:
+          $ref: '#/components/schemas/name'
+        group:
+          $ref: '#/components/schemas/name'
+        mainGroup:
           $ref: '#/components/schemas/name'
     resourceStatus:
       type: object
@@ -247,9 +230,9 @@ components:
           description: The color of a resource status
           maxLength: 50
           minLength: 3
-        groupName:
+        group:
           $ref: '#/components/schemas/name'
-        mainGroupName:
+        mainGroup:
           $ref: '#/components/schemas/name'
     order:
       type: object
@@ -257,25 +240,13 @@ components:
         name:
           $ref: '#/components/schemas/name'
         plant:
-          type: string
-          description: The plant id of the order
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         type:
-          type: string
-          description: The type of the order
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         customer:
-          type: string
-          description: The customer of the order
-          maxLength: 255
-          minLength: 1
+          $ref: '#/components/schemas/name'
         customerOrder:
-          type: string
-          description: The customer-order of the order
-          maxLength: 255
-          minLength: 1
+          $ref: '#/components/schemas/name'
         customerOrderNumber:
           type: string
           description: The customer-order number of the order
@@ -336,10 +307,7 @@ components:
           nullable: true
           description: The scheduled end of the wt
         status:
-          type: string
-          description: The status of the wt
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         ppsOrder:
           type: string
           description: The order of the wt in the PPS
@@ -393,20 +361,13 @@ components:
           type: number
           nullable: true
         type:
-          type: string
-          description: The type of the wt
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         orderId:
-          type: string
-          description: The order id of the wt
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/id'
+        order:
+          $ref: '#/components/schemas/name'
         plant:
-          type: string
-          description: The plant id of the wt
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/name'
         earliestStartScheduled:
           type: string
           format: date-time
@@ -418,10 +379,9 @@ components:
           nullable: true
           description: The scheduled desire of the wt
         plannedResourceId:
-          type: string
-          description: The resource id the wt is planned
-          maxLength: 255
-          minLength: 3
+          $ref: '#/components/schemas/id'
+        plannedResource:
+          $ref: '#/components/schemas/name'
     workticketAllocation:
       type: object
       properties:
@@ -429,8 +389,12 @@ components:
           $ref: '#/components/schemas/id'
         resourceId:
           $ref: '#/components/schemas/id'
+        resource:
+          $ref: '#/components/schemas/name'
         workplaceId:
           $ref: '#/components/schemas/id'
+        workplace:
+          $ref: '#/components/schemas/name'
         begin:
           type: string
           format: date-time
@@ -446,8 +410,12 @@ components:
       properties:
         resourceId:
           $ref: '#/components/schemas/id'
+        resource:
+          $ref: '#/components/schemas/name'
         personId:
           $ref: '#/components/schemas/id'
+        person:
+          $ref: '#/components/schemas/name'
         begin:
           type: string
           format: date-time
