@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
-  version: '1.0.0'
+  version: '1.0.1'
 paths:
   "/dummy":
     get:
@@ -493,6 +493,23 @@ components:
           $ref: '#/components/schemas/id'
         resourceId:
           $ref: '#/components/schemas/id'
+    workticketQuantities:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        workticketQtyId:
+          $ref: '#/components/schemas/id'
+        workticketId:
+          $ref: '#/components/schemas/id'
+        resourceId:
+          $ref: '#/components/schemas/id'
+        qtyClassId:
+          $ref: '#/components/schemas/id'
+        qty:
+          type: number
+          nullable: true
     workticket:
       type: object
       required:
