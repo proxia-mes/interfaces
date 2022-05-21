@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES COMU-Database Change-Events
   description: PROXIA-MES COMU-Database Change-Events
-  version: '1.0.22'
+  version: '1.0.23'
 paths:
   "/dummy":
     get:
@@ -593,6 +593,7 @@ components:
         event_serial_no:
           type: integer
           format: int32
+          nullable: true
     op:
       type: string
       enum:
