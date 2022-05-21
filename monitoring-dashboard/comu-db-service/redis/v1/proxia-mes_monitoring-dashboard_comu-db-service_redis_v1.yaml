@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
-  version: '1.0.6'
+  version: '1.0.7'
 paths:
   "/dummy":
     get:
@@ -27,7 +27,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -59,7 +58,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -69,7 +67,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -81,7 +78,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -91,7 +87,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -103,7 +98,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -113,7 +107,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -169,7 +162,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -256,7 +248,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -307,8 +298,6 @@ components:
       type: object
       required:
         - id
-        - name
-        - color
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -331,7 +320,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -341,7 +329,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -352,17 +339,14 @@ components:
           description: The customer-order number of the order
           maxLength: 255
           minLength: 1
-          nullable: true
         delivery:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled delivery of the customer-order of the order
     orderType:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -372,7 +356,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -399,7 +382,6 @@ components:
           description: The customer-order number of the order
           maxLength: 255
           minLength: 1
-          nullable: true
         customerOrderDelivery:
           type: string
           format: date-time
@@ -439,12 +421,10 @@ components:
           description: The description of the order
           maxLength: 255
           minLength: 1
-          nullable: true
     workticketStatus:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -454,7 +434,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -464,7 +443,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         workticketId:
           $ref: '#/components/schemas/id'
@@ -474,7 +452,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         workticketQtyId:
           $ref: '#/components/schemas/id'
@@ -515,13 +492,11 @@ components:
           description: The order of the wt in the PPS
           maxLength: 255
           minLength: 3
-          nullable: true
         ppsArticleNumber:
           type: string
           description: The article number of the wt in the PPS
           maxLength: 255
           minLength: 3
-          nullable: true
         ppsArticle:
           type: string
           description: The article of the wt in the PPS
@@ -592,6 +567,8 @@ components:
           $ref: '#/components/schemas/name'
     workticketAllocation:
       type: object
+      required:
+        - id
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -617,6 +594,9 @@ components:
           description: The end of the allocation
     personAllocation:
       type: object
+      required:
+        - resourceId
+        - begin
       properties:
         resourceId:
           $ref: '#/components/schemas/id'

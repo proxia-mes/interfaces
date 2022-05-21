@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.27'
+  version: '1.0.28'
 paths:
   "/dummy":
     get:
@@ -51,12 +51,14 @@ components:
       required:
         - resourceId
         - calDay
-        - shift
+        - shiftId
       properties:
         resourceId:
           $ref: '#/components/schemas/id'
         resource:
           $ref: '#/components/schemas/name'
+        shiftId:
+          $ref: '#/components/schemas/id'
         shift:
           $ref: '#/components/schemas/name'
         calDay:
@@ -65,62 +67,47 @@ components:
         performance:
           type: number
           format: double
-          nullable: true
         availability:
           type: number
           format: double
-          nullable: true
         quality:
           type: number
           format: double
-          nullable: true
         oeeValue:
           type: number
           format: double
-          nullable: true
         wtCount:
           type: integer
-          nullable: true
         prodTime:
           type: number
           format: double
-          nullable: true
         plannedProdTime:
           type: number
           format: double
-          nullable: true
         plannedAllocationTime:
           type: number
           format: double
-          nullable: true
         setupTime:
           type: number
           format: double
-          nullable: true
         sideTime:
           type: number
           format: double
-          nullable: true
         failureTime:
           type: number
           format: double
-          nullable: true
         goodQty:
           type: number
           format: double
-          nullable: true
         scrapQty:
           type: number
           format: double
-          nullable: true
         complaintQty:
           type: number
           format: double
-          nullable: true
         reworkQty:
           type: number
           format: double
-          nullable: true
     plant:
       type: object
       properties:
@@ -255,36 +242,29 @@ components:
         customerOrderDelivery:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled delivery of the customer-order of the order
         beginScheduled:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled begin of the order
         endScheduled:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled end of the order
         deliveryScheduled:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled delivery of the order
         earliestStartScheduled:
           type: string
           format: date-time
-          nullable: true
           description: The earliest scheduled begin of the order
         desiredDue:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled desire of the order
         priority:
           type: number
-          nullable: true
           description: The priority of the order
         description:
           type: string
@@ -299,12 +279,10 @@ components:
         beginScheduled:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled begin of the wt
         endScheduled:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled end of the wt
         status:
           $ref: '#/components/schemas/name'
@@ -325,41 +303,30 @@ components:
           minLength: 3
         targetQty:
           type: number
-          nullable: true
           description: The target quantitiy of the wt
         plannedSetuptime:
           type: number
-          nullable: true
         plannedProcesstime:
           type: number
-          nullable: true
         confirmedGoodQty:
           type: number
-          nullable: true
         confirmedScrapQty:
           type: number
-          nullable: true
         confirmedReworkQty:
           type: number
-          nullable: true
         goodQty:
           type: number
-          nullable: true
           description: The good quantitiy of the wt, calculated from TSF_WT_QTY
         scrapQty:
           type: number
-          nullable: true
           description: The scrap quantitiy of the wt, calculated from TSF_WT_QTY
         reworkQty:
           type: number
-          nullable: true
           description: The rework quantitiy of the wt, calculated from TSF_WT_QTY
         confirmedSetuptime:
           type: number
-          nullable: true
         confirmedProcesstime:
           type: number
-          nullable: true
         type:
           $ref: '#/components/schemas/name'
         orderId:
@@ -371,12 +338,10 @@ components:
         earliestStartScheduled:
           type: string
           format: date-time
-          nullable: true
           description: The earliest scheduled begin of the wt
         desiredDue:
           type: string
           format: date-time
-          nullable: true
           description: The scheduled desire of the wt
         plannedResourceId:
           $ref: '#/components/schemas/id'
@@ -398,12 +363,10 @@ components:
         begin:
           type: string
           format: date-time
-          nullable: true
           description: The  begin of the allocation
         end:
           type: string
           format: date-time
-          nullable: true
           description: The end of the allocation
     personAllocation:
       type: object
@@ -419,11 +382,9 @@ components:
         begin:
           type: string
           format: date-time
-          nullable: true
         end:
           type: string
           format: date-time
-          nullable: true
           description: The end of the allocation
           
     # Basic-Properties      

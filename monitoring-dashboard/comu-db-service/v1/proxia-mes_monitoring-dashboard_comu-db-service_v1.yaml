@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.34'
+  version: '1.0.35'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -694,7 +694,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -718,7 +717,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -728,7 +726,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -776,7 +773,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -800,12 +796,14 @@ components:
       required:
         - resourceId
         - calDay
-        - shift
+        - shiftId
       properties:
         resourceId:
           $ref: '#/components/schemas/id'
         resource:
           $ref: '#/components/schemas/name'
+        shiftId:
+          $ref: '#/components/schemas/id'
         shift:
           $ref: '#/components/schemas/name'
         calDay:
@@ -874,7 +872,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -917,8 +914,6 @@ components:
       type: object
       required:
         - id
-        - name
-        - color
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -937,7 +932,6 @@ components:
       type: object
       required:
         - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -1092,6 +1086,8 @@ components:
           $ref: '#/components/schemas/name'
     workticketAllocation:
       type: object
+      required:
+        - id
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -1117,6 +1113,9 @@ components:
           description: The end of the allocation
     personAllocation:
       type: object
+      required:
+        - resourceId
+        - begin
       properties:
         resourceId:
           $ref: '#/components/schemas/id'
