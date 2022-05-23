@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.22'
+  version: '1.0.23'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -768,6 +768,13 @@ components:
       description: The name of an element
       maxLength: 50
       minLength: 3
+    nameObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
     widget:
       type: object
       required:
@@ -1012,13 +1019,7 @@ components:
         workticketsActive:
           type: array
           items:
-            type: object
-            title: activeWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
     resourceStatusWidgetData:
       type: object
       properties:
@@ -1034,48 +1035,6 @@ components:
           type: array
           items:
             type: string
-    resourceStatusWidgetDrillDownData:
-      type: array
-      items:
-        $ref: '#/components/schemas/resource'
-    planningAccuracyWidgetData:
-      type: object
-      properties:
-        resourceCount:
-          type: integer
-        inOrderCount:
-          type: integer
-    planningAccuracyWidgetDrillDownData:
-      type: array
-      items:
-        $ref: '#/components/schemas/planningAccuracyWidgetDrillDownResource'
-    planningAccuracyWidgetDrillDownResource:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/resource'
-      properties:
-        inOrder:
-          type: boolean
-        plannedWorktickets:
-          type: array
-          items:
-            type: object
-            title: plannedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        lastWorktickets:
-          type: array
-          items:
-            type: object
-            title: lastWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
     resource:
       type: object
       required:
@@ -1102,24 +1061,42 @@ components:
         allocatedWorktickets:
           type: array
           items:
-            type: object
-            title: allocatedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
         allocatedResources:
           type: array
           description: A machine or workplace has allocated Persons, a person has allocated machines or workplaces
           items:
-            type: object
-            title: allocatedResource
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
+    resourceStatusWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/resource'
+    planningAccuracyWidgetData:
+      type: object
+      properties:
+        resourceCount:
+          type: integer
+        inOrderCount:
+          type: integer
+    planningAccuracyWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/planningAccuracyWidgetDrillDownResource'
+    planningAccuracyWidgetDrillDownResource:
+      type: object
+      properties:
+        inOrder:
+          type: boolean
+        plannedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+        lastWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+      allOf:
+        - $ref: '#/components/schemas/resource'
     workplace:
       type: object
       allOf:
@@ -1271,33 +1248,15 @@ components:
         workticketsOpen:
           type: array
           items:
-            type: object
-            title: openWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
         workticketsDone:
           type: array
           items:
-            type: object
-            title: doneWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
         workticketsActive:
           type: array
           items:
-            type: object
-            title: activeWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
     workticket:
       type: object
       required:
@@ -1404,22 +1363,11 @@ components:
         allocatedPersons:
           type: array
           items:
-            type: object
-            title: allocatedPerson
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
         allocatedResources:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
     oeeQualityWidgetData:
       type: object
       required:
