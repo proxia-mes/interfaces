@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.28'
+  version: '1.0.29'
 paths:
   "/dummy":
     get:
@@ -160,6 +160,11 @@ components:
           $ref: '#/components/schemas/name'
         state:
           $ref: '#/components/schemas/name'
+        color:
+          type: string
+          description: The color of the resource status
+          maxLength: 50
+          minLength: 3
         group:
           $ref: '#/components/schemas/name'
         mainGroup:
@@ -203,6 +208,11 @@ components:
           $ref: '#/components/schemas/name'
         state:
           $ref: '#/components/schemas/name'
+        color:
+          type: string
+          description: The color of the resource status
+          maxLength: 50
+          minLength: 3
         group:
           $ref: '#/components/schemas/name'
         mainGroup:

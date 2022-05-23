@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
-  version: '1.0.7'
+  version: '1.0.8'
 paths:
   "/dummy":
     get:
@@ -42,9 +42,11 @@ components:
         stateId:
           $ref: '#/components/schemas/id'
         state:
+          $ref: '#/components/schemas/name'
+        color:
           type: string
-          description: The current state of the machine
-          maxLength: 255
+          description: The color of the resource status
+          maxLength: 50
           minLength: 3
         groupId:
           $ref: '#/components/schemas/id'
@@ -120,6 +122,11 @@ components:
           $ref: '#/components/schemas/id'
         state:
           $ref: '#/components/schemas/name'
+        color:
+          type: string
+          description: The color of the resource status
+          maxLength: 50
+          minLength: 3
         groupId:
           $ref: '#/components/schemas/id'
         group:
