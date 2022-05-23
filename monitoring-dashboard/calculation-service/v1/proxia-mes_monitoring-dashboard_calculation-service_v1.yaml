@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.23'
+  version: '1.0.24'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -1049,6 +1049,11 @@ components:
           $ref: '#/components/schemas/name'
         state:
           $ref: '#/components/schemas/name'
+        color:
+          type: string
+          description: The color of the resource status
+          maxLength: 50
+          minLength: 3
         groupName:
           $ref: '#/components/schemas/name'
         mainGroupName:
