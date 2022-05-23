@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Change-Event
   description: PROXIA-MES Monitoring-Dashboard Change-Event
-  version: '1.0.29'
+  version: '1.0.30'
 paths:
   "/dummy":
     get:
@@ -362,6 +362,8 @@ components:
       properties:
         workticketId:
           $ref: '#/components/schemas/id'
+        workticket:
+          $ref: '#/components/schemas/name'  
         resourceId:
           $ref: '#/components/schemas/id'
         resource:
