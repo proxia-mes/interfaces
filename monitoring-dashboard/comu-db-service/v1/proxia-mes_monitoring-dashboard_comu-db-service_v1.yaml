@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.38'
+  version: '1.0.39'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -11,7 +11,15 @@ paths:
     get:
       tags:
         - resource
-      summary: returns all resources (machines and workplaces)
+      summary: returns resources (machines and workplaces)
+      parameters:
+        - in: query
+          name: resourceIds
+          schema:
+            type: array
+            items:
+              type: string
+          description: the resourceIds of the requested resources
       responses:
         '200':
           description: OK
