@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.83'
+  version: '1.0.84'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -32,7 +32,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/notifications"
+                type: array
+                items:
+                  $ref: '#/components/schemas/notification'
         '204':
           description: No Content
           content: { }
@@ -226,7 +228,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/dashboards"
+                type: array
+                items:
+                  $ref: '#/components/schemas/dashboard'
         '204':
           description: No Content
           content: { }
@@ -413,7 +417,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/persons"
+                type: array
+                items:
+                  $ref: '#/components/schemas/person'
         '204':
           description: No Content
           content: { }
@@ -474,7 +480,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/orders"
+                type: array
+                items:
+                  $ref: '#/components/schemas/order'
         '204':
           description: No Content
           content: { }
@@ -535,7 +543,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/worktickets"
+                type: array
+                items:
+                  $ref: '#/components/schemas/workticket'
         '204':
           description: No Content
           content: { }
@@ -596,7 +606,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/workplaces"
+                type: array
+                items:
+                  $ref: '#/components/schemas/workplace'
         '204':
           description: No Content
           content: { }
@@ -657,7 +669,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/machines"
+                type: array
+                items:
+                  $ref: '#/components/schemas/machine'
         '204':
           description: No Content
           content: { }
@@ -718,7 +732,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/resources"
+                type: array
+                items:
+                  $ref: '#/components/schemas/resource'
         '204':
           description: No Content
           content: { }
@@ -779,7 +795,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/resourceStatuses"
+                type: array
+                items:
+                  $ref: '#/components/schemas/resourceStatus'
         '204':
           description: No Content
           content: { }
@@ -794,7 +812,7 @@ paths:
           content: { }
         '500':
           description: Internal Server Error
-          content: {  }
+          content: { }
   "/resource-status/{resourceStatusId}":
     get:
       tags:
@@ -845,10 +863,13 @@ components:
       description: The name of an element
       maxLength: 50
       minLength: 3
-    dashboards:
-      type: array
-      items:
-        $ref: '#/components/schemas/dashboard'
+    nameObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
     dashboard:
       type: object
       required:
@@ -1055,28 +1076,161 @@ components:
             - 'aggregated'
             - 'detail'
             - 'drill-down'
-    workplaces:
+    processingDegreeWidgetData:
+      type: object
+      properties:
+        toEarly:
+          type: integer
+          nullable: true
+        toLate:
+          type: integer
+          nullable: true
+        inTime:
+          type: integer
+          nullable: true
+    processingDegreeWidgetDrillDownData:
       type: array
       items:
-        $ref: '#/components/schemas/workplace'
+        $ref: '#/components/schemas/processingDegreeWidgetDrillDownOrder'
+    processingDegreeWidgetDrillDownOrder:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        type:
+          type: string
+          description: The type of the order
+          maxLength: 255
+          minLength: 3
+        customer:
+          type: string
+          description: The customer of the order
+          maxLength: 255
+          minLength: 1
+        endScheduled:
+          type: string
+          format: date-time
+          nullable: true
+          description: The scheduled end of the order
+        priority:
+          type: number
+          nullable: true
+          description: The priority of the order
+        punctual:
+          type: boolean
+          nullable: true
+        progress:
+          type: integer
+          nullable: true
+        workticketsCount:
+          type: integer
+          nullable: true
+        workticketsOpen:
+          type: integer
+          nullable: true
+        workticketsDone:
+          type: integer
+          nullable: true
+        workticketsActive:
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+    resourceStatusWidgetData:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        colors:
+          type: array
+          items:
+            type: string
+    resource:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        plant:
+          $ref: '#/components/schemas/name'
+        state:
+          $ref: '#/components/schemas/name'
+        color:
+          type: string
+          description: The color of the resource status
+          maxLength: 50
+          minLength: 3
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
+        resourceType:
+          type: string
+          enum:
+            - 'machine'
+            - 'workplace'
+        allocatedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+        allocatedResources:
+          type: array
+          description: A machine or workplace has allocated Persons, a person has allocated machines or workplaces
+          items:
+            $ref: '#/components/schemas/nameObject'
+    resourceStatusWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/resource'
+    planningAccuracyWidgetData:
+      type: object
+      properties:
+        resourceCount:
+          type: integer
+        inOrderCount:
+          type: integer
+    planningAccuracyWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/planningAccuracyWidgetDrillDownResource'
+    planningAccuracyWidgetDrillDownResource:
+      type: object
+      properties:
+        inOrder:
+          type: boolean
+        plannedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+        lastWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+      allOf:
+        - $ref: '#/components/schemas/resource'
     workplace:
       type: object
-      required:
-        - resource
-      properties:
-        resource:
-          $ref: '#/components/schemas/resource'
-    machines:
-      type: array
-      items:
-        $ref: '#/components/schemas/machine'
+      allOf:
+        - $ref: '#/components/schemas/resource'
     machine:
       type: object
-      required:
-        - resource
+      allOf:
+        - $ref: '#/components/schemas/resource'
       properties:
-        resource:
-          $ref: '#/components/schemas/resource'
         description:
           type: string
           description: The description of the machine
@@ -1107,17 +1261,11 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
-    persons:
-      type: array
-      items:
-        $ref: '#/components/schemas/person'
     person:
       type: object
-      required:
-        - resource
+      allOf:
+        - $ref: '#/components/schemas/resource'
       properties:
-        resource:
-          $ref: '#/components/schemas/resource'
         lastName:
           type: string
           description: The lastname of the person
@@ -1143,10 +1291,6 @@ components:
           description: The mobile phone number of the person
           maxLength: 50
           minLength: 0
-    orders:
-      type: array
-      items:
-        $ref: '#/components/schemas/order'
     order:
       type: object
       required:
@@ -1220,9 +1364,6 @@ components:
           description: The description of the order
           maxLength: 255
           minLength: 1
-        punctual:
-          type: boolean
-          nullable: true
         progress:
           type: integer
           nullable: true
@@ -1232,37 +1373,15 @@ components:
         workticketsOpen:
           type: array
           items:
-            type: object
-            title: activeWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
         workticketsDone:
           type: array
           items:
-            type: object
-            title: activeWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
         workticketsActive:
           type: array
           items:
-            type: object
-            title: activeWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-    worktickets:
-      type: array
-      items:
-        $ref: '#/components/schemas/workticket'
+            $ref: '#/components/schemas/nameObject'
     workticket:
       type: object
       required:
@@ -1358,297 +1477,22 @@ components:
           format: date-time
           nullable: true
           description: The scheduled desire of the wt
+        plannedResourceId:
+          $ref: '#/components/schemas/id'
         plannedResource:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
+          $ref: '#/components/schemas/name'
+        orderId:
+          $ref: '#/components/schemas/id'
+        order:
+          $ref: '#/components/schemas/name'
         allocatedPersons:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/nameObject'
         allocatedResources:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        order:
-          type: object
-          properties:
-            id:
-              $ref: '#/components/schemas/id'
-            name:
-              $ref: '#/components/schemas/name'
-    resourceStatuses:
-      type: array
-      items:
-        $ref: '#/components/schemas/resourceStatus'
-    resourceStatus:
-      type: object
-      required:
-        - id
-        - name
-        - color
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        color:
-          type: string
-          description: The color of a resource status
-          maxLength: 50
-          minLength: 3
-        groupName:
-          $ref: '#/components/schemas/name'
-        mainGroupName:
-          $ref: '#/components/schemas/name'
-    resources:
-      type: array
-      items:
-        $ref: '#/components/schemas/resource'
-    resource:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        plant:
-          type: string
-          description: The plant of the machine
-          maxLength: 255
-          minLength: 3
-        state:
-          type: object
-          properties:
-            name:
-              $ref: '#/components/schemas/name'
-            color:
-              type: string
-        groupName:
-          $ref: '#/components/schemas/name'
-        mainGroupName:
-          $ref: '#/components/schemas/name'
-        resourceType:
-          type: string
-          enum:
-            - 'machine'
-            - 'workplace'
-        allocatedWorktickets:
-          type: array
-          items:
-            type: object
-            title: allocatedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        allocatedResources:
-          type: array
-          description: A machine or workplace has allocated Persons, a person has allocated machines or workplaces
-          items:
-            type: object
-            title: allocatedResource
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-    processingDegreeWidgetData:
-      type: object
-      properties:
-        toEarly:
-          type: integer
-          nullable: true
-        toLate:
-          type: integer
-          nullable: true
-        inTime:
-          type: integer
-          nullable: true
-    processingDegreeWidgetDrillDownData:
-      type: array
-      items:
-        $ref: '#/components/schemas/processingDegreeWidgetDrillDownOrder'
-    processingDegreeWidgetDrillDownOrder:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        type:
-          type: string
-          description: The type of the order
-          maxLength: 255
-          minLength: 3
-        customer:
-          type: string
-          description: The customer of the order
-          maxLength: 255
-          minLength: 1
-        endScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled end of the order
-        priority:
-          type: number
-          nullable: true
-          description: The priority of the order
-        punctual:
-          type: boolean
-          nullable: true
-        progress:
-          type: integer
-          nullable: true
-        workticketsCount:
-          type: integer
-          nullable: true
-        workticketsOpen:
-          type: integer
-          nullable: true
-        workticketsDone:
-          type: integer
-          nullable: true
-        workticketsActive:
-          type: array
-          items:
-            type: object
-            title: activeWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-    resourceStatusWidgetData:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: integer
-        labels:
-          type: array
-          items:
-            type: string
-        colors:
-          type: array
-          items:
-            type: string
-    resourceStatusWidgetDrillDownData:
-      type: array
-      items:
-        $ref: '#/components/schemas/resource'
-    planningAccuracyWidgetData:
-      type: object
-      properties:
-        resourceCount:
-          type: integer
-        inOrderCount:
-          type: integer
-    planningAccuracyWidgetDrillDownData:
-      type: array
-      items:
-        $ref: '#/components/schemas/planningAccuracyWidgetDrillDownResource'
-    planningAccuracyWidgetDrillDownResource:
-      type: object
-      properties:
-        resource:
-          $ref: '#/components/schemas/resource'
-        inOrder:
-          type: boolean
-        plannedWorktickets:
-          type: array
-          items:
-            type: object
-            title: plannedWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-        lastWorktickets:
-          type: array
-          items:
-            type: object
-            title: lastWorkticket
-            properties:
-              id:
-                $ref: '#/components/schemas/id'
-              name:
-                $ref: '#/components/schemas/name'
-    notifications:
-      type: array
-      items:
-        $ref: '#/components/schemas/notification'
-    notification:
-      type: object
-      required:
-        - id
-        - userId
-        - subject
-        - description
-        - date
-        - content
-        - priority
-        - read
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        userId:
-          $ref: '#/components/schemas/name'
-        dashboardId:
-          $ref: '#/components/schemas/id'
-        widgetId:
-          $ref: '#/components/schemas/id'
-        subject:
-          type: string
-          description: The subject of the notification
-          maxLength: 100
-          minLength: 3
-        description:
-          type: string
-          description: The short description of the notification
-          maxLength: 100
-          minLength: 3
-        date:
-          type: string
-          format: date-time
-          description: The date-time of the notification
-        content:
-          type: string
-          description: The long content of the notification
-          maxLength: 1000
-          minLength: 3
-        priority:
-          type: string
-          enum:
-            - 'low'
-            - 'medium'
-            - 'high'
-        read:
-          type: boolean
-          nullable: true
+            $ref: '#/components/schemas/nameObject'
     oeeQualityWidgetData:
       type: object
       required:
@@ -1758,9 +1602,9 @@ components:
         - quality
         - oeeValue
       properties:
-        resId:
+        resourceId:
           $ref: '#/components/schemas/id'
-        resDisplayname:
+        resource:
           $ref: '#/components/schemas/name'
         shift:
           $ref: '#/components/schemas/name'
@@ -1839,4 +1683,72 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/oeeResourceData'
+    resourceStatus:
+      type: object
+      required:
+        - id
+        - name
+        - color
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        color:
+          type: string
+          description: The color of a resource status
+          maxLength: 50
+          minLength: 3
+        groupName:
+          $ref: '#/components/schemas/name'
+        mainGroupName:
+          $ref: '#/components/schemas/name'
+    notification:
+      type: object
+      required:
+        - id
+        - userId
+        - subject
+        - description
+        - date
+        - content
+        - priority
+        - read
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        userId:
+          $ref: '#/components/schemas/name'
+        dashboardId:
+          $ref: '#/components/schemas/id'
+        widgetId:
+          $ref: '#/components/schemas/id'
+        subject:
+          type: string
+          description: The subject of the notification
+          maxLength: 100
+          minLength: 3
+        description:
+          type: string
+          description: The short description of the notification
+          maxLength: 100
+          minLength: 3
+        date:
+          type: string
+          format: date-time
+          description: The date-time of the notification
+        content:
+          type: string
+          description: The long content of the notification
+          maxLength: 1000
+          minLength: 3
+        priority:
+          type: string
+          enum:
+            - 'low'
+            - 'medium'
+            - 'high'
+        read:
+          type: boolean
+          nullable: true
         
