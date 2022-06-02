@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.25'
+  version: '1.0.26'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -12,6 +12,73 @@ tags:
   - name: explorer
     description: Objects for explorer
 paths:
+  "/first-pass-yield-widget":
+    post:
+      tags:
+        - first-pass-yield
+      summary: calculates first-pass-yield-widget data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/firstPassYieldWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/first-pass-yield-drill-down":
+    post:
+      tags:
+        - first-pass-yield
+      summary: calculates first-pass-yield drill-down data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/firstPassYieldWidgetDrillDownData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+
   "/oee-overall-widget":
     post:
       tags:
@@ -1563,5 +1630,78 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/oeeResourceData'
-        
+    firstPassYieldWidgetData:
+      type: object
+      required:
+        - order
+        - value
+        - worktickets
+      properties:
+        order:
+          $ref: '#/components/schemas/name'
+        firstPassYieldValue:
+          type: number
+          format: double
+          nullable: true
+        worktickets:
+          type: array
+          items:
+            type: object
+            title: FirstPassYieldWorkticket
+            properties: 
+              workticket:
+                $ref: '#/components/schemas/name'
+              firstPassYieldValue:
+                type: number
+                format: double
+                nullable: true
+    firstPassYieldDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/firstPassYieldDrillDownWorkticket'
+    firstPassYieldDrillDownWorkticket:
+      type: object
+      properties: 
+        orderId:
+          $ref: '#/components/schemas/id'
+        order:
+          $ref: '#/components/schemas/name'
+        workticketId:
+          $ref: '#/components/schemas/id'
+        workticket:
+          $ref: '#/components/schemas/name'
+        workticketNumber:
+          type: string
+        firstPassYieldValue:
+          type: number
+          format: double
+          nullable: true
+        status:
+          $ref: '#/components/schemas/name'
+        confirmedGoodQty:
+          type: number
+          nullable: true
+        confirmedScrapQty:
+          type: number
+          nullable: true
+        confirmedReworkQty:
+          type: number
+          nullable: true
+        goodQty:
+          type: number
+          nullable: true
+          description: The good quantitiy of the wt, calculated from TSF_WT_QTY
+        scrapQty:
+          type: number
+          nullable: true
+          description: The scrap quantitiy of the wt, calculated from TSF_WT_QTY
+        reworkQty:
+          type: number
+          nullable: true
+          description: The rework quantitiy of the wt, calculated from TSF_WT_QTY
+        ppsArticleNumber:
+          type: string
+          description: The article number of the wt in the PPS
+          maxLength: 255
+          minLength: 3
         
