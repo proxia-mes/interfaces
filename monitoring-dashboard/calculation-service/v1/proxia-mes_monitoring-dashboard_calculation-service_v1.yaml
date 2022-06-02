@@ -1647,7 +1647,7 @@ components:
           type: array
           items:
             type: object
-            title: FirstPassYieldWorkticket
+            title: FirstPassYieldWidgetWorkticket
             properties: 
               workticket:
                 $ref: '#/components/schemas/name'
@@ -1655,11 +1655,11 @@ components:
                 type: number
                 format: double
                 nullable: true
-    firstPassYieldDrillDownData:
+    firstPassYieldWidgetDrillDownData:
       type: array
       items:
-        $ref: '#/components/schemas/firstPassYieldDrillDownWorkticket'
-    firstPassYieldDrillDownWorkticket:
+        $ref: '#/components/schemas/firstPassYieldWidgetDrillDownWorkticket'
+    firstPassYieldWidgetDrillDownWorkticket:
       type: object
       properties: 
         orderId:

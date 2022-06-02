@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.86'
+  version: '1.0.87'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1768,7 +1768,7 @@ components:
           type: array
           items:
             type: object
-            title: FirstPassYieldWorkticket
+            title: FirstPassYieldWidgetWorkticket
             properties:
               workticket:
                 $ref: '#/components/schemas/name'
@@ -1776,11 +1776,11 @@ components:
                 type: number
                 format: double
                 nullable: true
-    firstPassYieldDrillDownData:
+    firstPassYieldWidgetDrillDownData:
       type: array
       items:
-        $ref: '#/components/schemas/firstPassYieldDrillDownWorkticket'
-    firstPassYieldDrillDownWorkticket:
+        $ref: '#/components/schemas/firstPassYieldWidgetDrillDownWorkticket'
+    firstPassYieldWidgetDrillDownWorkticket:
       type: object
       properties:
         orderId:
@@ -1824,4 +1824,4 @@ components:
           type: string
           description: The article number of the wt in the PPS
           maxLength: 255
-          minLength: 3    
+          minLength: 3
