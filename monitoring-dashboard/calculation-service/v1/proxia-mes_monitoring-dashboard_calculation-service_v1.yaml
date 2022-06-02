@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.26'
+  version: '1.0.27'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -924,6 +924,15 @@ components:
           $ref: '#/components/schemas/oeeWidget'
         oeeDiagramWidget:
           $ref: '#/components/schemas/oeeWidget'
+        firstPassYieldWidget:
+          $ref: '#/components/schemas/firstPassYieldWidget'
+    firstPassYieldWidget:
+      type: object
+      required:
+        - order
+      properties:
+        order:
+          $ref: '#/components/schemas/id'
     oeeWidget:
       type: object
       required:
