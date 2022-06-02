@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.27'
+  version: '1.0.28'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -1650,7 +1650,6 @@ components:
           $ref: '#/components/schemas/name'
         firstPassYieldValue:
           type: number
-          format: double
           nullable: true
         worktickets:
           type: array
@@ -1662,7 +1661,6 @@ components:
                 $ref: '#/components/schemas/name'
               firstPassYieldValue:
                 type: number
-                format: double
                 nullable: true
     firstPassYieldWidgetDrillDownData:
       type: array
@@ -1683,7 +1681,6 @@ components:
           type: string
         firstPassYieldValue:
           type: number
-          format: double
           nullable: true
         status:
           $ref: '#/components/schemas/name'
