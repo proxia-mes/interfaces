@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.90'
+  version: '1.0.91'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -986,6 +986,11 @@ components:
       properties:
         order:
           $ref: '#/components/schemas/id'
+        presentation:
+          type: string
+          enum:
+            - 'widget'
+            - 'drill-down'
     oeeWidget:
       type: object
       required:
