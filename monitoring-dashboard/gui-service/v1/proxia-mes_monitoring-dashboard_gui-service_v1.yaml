@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.89'
+  version: '1.0.90'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1400,6 +1400,8 @@ components:
           $ref: '#/components/schemas/id'
         name:
           $ref: '#/components/schemas/name'
+        workticketNumber:
+          type: string
         beginScheduled:
           type: string
           format: date-time
