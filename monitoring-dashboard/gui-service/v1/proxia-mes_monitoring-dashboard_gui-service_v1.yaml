@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.91'
+  version: '1.0.92'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -848,10 +848,6 @@ paths:
           description: Internal Server Error
           content: { }
 components:
-  securitySchemes:
-    OpenID:
-      type: openIdConnect
-      openIdConnectUrl: http://localhost:8080/auth/realms/xi-mes/.well-known/openid-configuration
   schemas:
     id:
       type: string
