@@ -36,7 +36,7 @@ jobs:
         run: echo INTERFACE_VERSION=`yq eval .info.version $INTERFACE_FILE` >> $GITHUB_ENV 
 
       - name: Generate C# controller code
-        uses: docker://openapitools/openapi-generator-cli:v5.3.0
+        uses: docker://openapitools/openapi-generator-cli:v6.0.0
         with:
           args: generate -o /github/workspace/${{env.GEN_OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g aspnetcore --additional-properties aspnetCoreVersion=5.0,buildTarget=library,operationModifier=abstract,packageName=${{env.PACKAGE_NAME}},packageVersion=${{env.INTERFACE_VERSION}}
 
