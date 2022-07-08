@@ -1,0 +1,181 @@
+﻿---
+openapi: 3.0.3
+info:
+  title: XI-MES Machine-Service API
+  description: XI-MES Machine-Service API
+  version: '1.0.0'
+servers:
+  - url: "http://localhost:5000/xi-mes/machine-service/v1"
+paths:
+  "/machines":
+    get:
+      tags:
+        - machine
+      summary: returns all machines
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/machines"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/machine/{machineId}":
+    delete:
+      tags:
+        - machine
+      summary: deletes a machine
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/machine"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    get:
+      tags:
+        - machine
+      summary: returns a machine
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/machine"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    post:
+      tags:
+        - machine
+      summary: adds a new machine
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      requestBody:
+        description: machine object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/machine"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '409':
+          description: Conflict
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+    put:
+      tags:
+        - machine
+      summary: modifies an existing machine
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+      requestBody:
+        description: machine object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/machine"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+components:
+  schemas:
+    id:
+      type: string
+      description: The unique id of an element, UUID4 e.g. 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+      maxLength: 50
+      minLength: 3
+    machines:
+      type: array
+      items:
+        $ref: '#/components/schemas/machine'
+    machine:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        displayName:
+          type: string
+          description: The display name of a machine
+          maxLength: 100
+          minLength: 1
+        ppsNumber:
+          type: string
+          description: The unique number of a machine
+          maxLength: 100
+          minLength: 1
+        isPaletteMachine:
+          type: bool
+          description: Defines if the machine is a palette machine
+        paletteCount:
+          type: int
+          description: The number of palettes
