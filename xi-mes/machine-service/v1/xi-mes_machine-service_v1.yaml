@@ -174,8 +174,13 @@ components:
           maxLength: 100
           minLength: 1
         isPaletteMachine:
-          type: bool
+          type: boolean
           description: Defines if the machine is a palette machine
+          default: false
         paletteCount:
-          type: int
+          type: number
+          format: int32
           description: The number of palettes
+          minimum: 0
+          maximum: 10000
+          default: 0
