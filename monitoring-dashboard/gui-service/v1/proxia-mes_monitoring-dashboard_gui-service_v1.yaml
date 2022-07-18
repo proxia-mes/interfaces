@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.93'
+  version: '1.0.94'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1715,6 +1715,12 @@ components:
           $ref: '#/components/schemas/name'
         mainGroup:
           $ref: '#/components/schemas/name'
+    notificationPriority:
+      type: string
+      enum:
+        - 'low'
+        - 'medium'
+        - 'high'
     notification:
       type: object
       required:
@@ -1755,11 +1761,7 @@ components:
           maxLength: 1000
           minLength: 3
         priority:
-          type: string
-          enum:
-            - 'low'
-            - 'medium'
-            - 'high'
+          $ref: '#/components/schemas/notificationPriority'
         read:
           type: boolean
           nullable: true
@@ -1773,11 +1775,7 @@ components:
                 format: date-time
                 description: The date-time of the notification
               priority:
-                type: string
-                enum:
-                  - 'low'
-                  - 'medium'
-                  - 'high'
+                $ref: '#/components/schemas/notificationPriority'
               content:
                 type: string
                 description: The long content of the notification
