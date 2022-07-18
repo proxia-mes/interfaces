@@ -145,6 +145,45 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/machine/{machineId}/activation":
+    put:
+      tags:
+        - machine
+      summary: activates or deactivates an existing machine
+      parameters:
+        - name: machineId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+        - name: isActive
+          in: query
+          required: true
+          style: simple
+          schema:
+            type: boolean
+            default: true
+      requestBody:
+        description: machine object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/machine"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
 components:
   schemas:
     id:
