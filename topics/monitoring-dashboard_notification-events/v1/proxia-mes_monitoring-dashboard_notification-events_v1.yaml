@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Notification-Event
   description: PROXIA-MES Monitoring-Dashboard Notification-Event
-  version: '1.0.1'
+  version: '1.0.2'
 paths:
   "/dummy":
     get:
@@ -13,6 +13,12 @@ paths:
           description: OK
 components:
   schemas:
+    notificationPriority:
+      type: string
+      enum:
+        - 'low'
+        - 'medium'
+        - 'high'
     notification:
       type: object
       required:
@@ -53,11 +59,7 @@ components:
           maxLength: 1000
           minLength: 3
         priority:
-          type: string
-          enum:
-            - 'low'
-            - 'medium'
-            - 'high'
+          $ref: '#/components/schemas/notificationPriority'
         read:
           type: boolean
           nullable: true
@@ -71,11 +73,7 @@ components:
                 format: date-time
                 description: The date-time of the notification
               priority:
-                type: string
-                enum:
-                  - 'low'
-                  - 'medium'
-                  - 'high'
+                $ref: '#/components/schemas/notificationPriority'
               content:
                 type: string
                 description: The long content of the notification
