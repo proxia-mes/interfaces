@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: XI-MES Machine-Service API
   description: XI-MES Machine-Service API
-  version: '1.0.0'
+  version: '1.0.1'
 servers:
   - url: "http://localhost:5000/xi-mes/machine-service/v1"
 paths:
@@ -164,13 +164,6 @@ paths:
           schema:
             type: boolean
             default: true
-      requestBody:
-        description: machine object
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/machine"
-        required: true
       responses:
         '200':
           description: OK
