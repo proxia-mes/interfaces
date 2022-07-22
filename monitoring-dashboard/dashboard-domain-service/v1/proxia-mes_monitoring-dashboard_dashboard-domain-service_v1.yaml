@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
   description: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
-  version: '1.0.10'
+  version: '1.0.11'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/dashboard-domain-service/v1"
 tags:
@@ -338,9 +338,9 @@ components:
     fileViewerWidget:
       type: object
       required:
-        - filename
+        - filePath
       properties:
-        filename:
+        filePath:
           type: string
           description: the full filename (incl. path) to the S3 file
           example: "/pruefplaene/plan1.doc"
@@ -348,9 +348,9 @@ components:
     fileTreeViewerWidget:
       type: object
       required:
-        - rootFolderName
+        - rootFolderPath
       properties:
-        rootFolderName:
+        rootFolderPath:
           type: string
           description: the full foldername (incl. path) to the S3 files
           example: "/pruefplaene"
