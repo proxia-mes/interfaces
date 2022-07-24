@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.99'
+  version: '1.0.100'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -995,7 +995,8 @@ components:
         filePath:
           type: string
           description: the full file path (incl. root path) to the S3 file
-          example: "pruefplaene/plan1.doc"
+          example: "/pruefplaene/plan1.doc"
+          minLength: 2
     fileTreeViewerWidget:
       type: object
       required:
@@ -1003,8 +1004,9 @@ components:
       properties:
         rootFolderPath:
           type: string
-          description: the full folder path (incl. root path) to the S3 files, root folder is empty directory
-          example: "pruefplaene/gestern"
+          description: the full folder path (incl. root path) to the S3 files
+          example: "/pruefplaene/gestern"
+          minLength: 1
     firstPassYieldWidget:
       type: object
       required:
