@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.45'
+  version: '1.0.46'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -29,6 +29,41 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/resource"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/search":
+    get:
+      tags:
+        - search
+      summary: returns name matching machines, workplaces, persons, orders and worktickets 
+      parameters:
+        - in: query
+          name: searchString
+          schema:
+            $ref: "#/components/schemas/name"
+          description: the searchString
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/searchResult"
         '204':
           description: No Content
           content: { }
@@ -750,6 +785,25 @@ components:
       description: The name of an element
       maxLength: 50
       minLength: 3
+    searchResult:
+      type: object
+      required:
+        - id
+        - name
+        - resourceType
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        resourceType:
+          type: string
+          enum:
+            - 'machine'
+            - 'workplace'
+            - 'person'
+            - 'workticket'
+            - 'order'
     workplace:
       type: object
       required:

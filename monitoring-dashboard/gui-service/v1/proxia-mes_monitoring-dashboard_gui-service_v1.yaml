@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.105'
+  version: '1.0.106'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -14,6 +14,41 @@ tags:
   - name: explorer
     description: Objects for explorer
 paths:
+  "/search":
+    get:
+      tags:
+        - search
+      summary: returns name matching machines, workplaces, persons, orders and worktickets
+      parameters:
+        - in: query
+          name: searchString
+          schema:
+            $ref: "#/components/schemas/name"
+          description: the searchString
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/searchResult"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/notifications":
     get:
       tags:
@@ -1432,6 +1467,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/nameObject'
+    searchResult:
+      type: object
+      required:
+        - id
+        - name
+        - resourceType
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+        resourceType:
+          type: string
+          enum:
+            - 'machine'
+            - 'workplace'
+            - 'person'
+            - 'workticket'
+            - 'order'
     workticket:
       type: object
       required:
