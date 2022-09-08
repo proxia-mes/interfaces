@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: XI-MES Machine-Service API
   description: XI-MES Machine-Service API
-  version: '1.0.1'
+  version: '1.0.0'
 servers:
   - url: "http://localhost:5000/xi-mes/machine-service/v1"
 paths:
@@ -160,7 +160,7 @@ paths:
         - name: isActive
           in: query
           required: true
-          style: simple
+          style: form
           schema:
             type: boolean
             default: true
@@ -216,3 +216,7 @@ components:
           minimum: 0
           maximum: 10000
           default: 0
+        isActive:
+          type: boolean
+          description: Defines if the machine is active or not
+          default: true

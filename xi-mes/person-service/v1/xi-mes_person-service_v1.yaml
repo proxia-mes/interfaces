@@ -145,6 +145,38 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/person/{personId}/activation":
+    put:
+      tags:
+        - person
+      summary: activates or deactivates an existing person
+      parameters:
+        - name: personId
+          in: path
+          required: true
+          style: simple
+          schema:
+            $ref: "#/components/schemas/id"
+        - name: isActive
+          in: query
+          required: true
+          style: form
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
 components:
   schemas:
     id:
@@ -188,3 +220,7 @@ components:
           description: The language code of a person e.g. de,en
           maxLength: 2
           minLength: 2
+        isActive:
+          type: boolean
+          description: Defines if the person is active or not
+          default: true
