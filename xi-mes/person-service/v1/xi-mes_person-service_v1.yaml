@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: XI-MES Person-Service API
   description: XI-MES Person-Service API
-  version: '1.0.1'
+  version: '1.0.2'
 servers:
   - url: "http://localhost:5000/xi-mes/person-service/v1"
 paths:
