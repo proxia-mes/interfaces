@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.48'
+  version: '1.0.49'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -922,7 +922,10 @@ components:
         - resourceId
         - calDay
         - shiftId
+        - id
       properties:
+        id:
+          $ref: '#/components/schemas/id'
         resourceId:
           $ref: '#/components/schemas/id'
         resource:
