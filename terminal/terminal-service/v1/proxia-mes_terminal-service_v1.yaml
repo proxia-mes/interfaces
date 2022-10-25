@@ -6,7 +6,7 @@ info:
   servers:
   - url: "http://localhost:5000/proxia/mes/terminal-service/interface/v1"
 paths:
-  "/configuration/terminal":
+  "/proxia/mes/terminal-service/interface/v1/configuration/terminal":
     get:
       tags:
       - Configurations
@@ -38,7 +38,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "workplaces/{workplaceId}/users/assigned":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/assigned":
     get:
       tags:
       - User
@@ -82,6 +82,11 @@ paths:
           by first name.\r\nDefault sorting order: Ascending"
         schema:
           "$ref": "#/components/schemas/SortOrders"
+      - name: TerminalId
+        in: query
+        description: Unique ID of terminal from configuration settings
+        schema:
+          type: string
       - name: FilterValue
         in: query
         description: "Searched value is used to filter data.\r\nAll user's properties
@@ -107,7 +112,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/users/shift-relevant":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/shift-relevant":
     get:
       tags:
       - User
@@ -160,6 +165,11 @@ paths:
           by first name.\r\nDefault sorting order: Ascending"
         schema:
           "$ref": "#/components/schemas/SortOrders"
+      - name: TerminalId
+        in: query
+        description: Unique ID of terminal from configuration settings
+        schema:
+          type: string
       - name: FilterValue
         in: query
         description: "Searched value is used to filter data.\r\nAll user's properties
@@ -187,7 +197,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "workplaces/{workplaceId}/users/login":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/login":
     post:
       tags:
       - User
@@ -226,7 +236,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/users/logout":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/users/logout":
     post:
       tags:
       - User
@@ -266,7 +276,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/users/logout-all-workplaces":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/users/logout-all-workplaces":
     post:
       tags:
       - User
@@ -296,7 +306,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/Workplaces":
+  "/proxia/mes/terminal-service/interface/v1/Workplaces":
     get:
       tags:
       - Workplaces
@@ -313,7 +323,8 @@ paths:
             type: string
       - name: MaxWorkTicketCount
         in: query
-        description: "Determines maximal number of work tickets\r\nin a workplace"
+        description: "Determines maximal number of work tickets.\r\nWork tickets are
+          always sorted by planned begin time.\r\nin a workplace"
         required: true
         schema:
           maximum: 10
@@ -342,7 +353,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/Workplaces/config":
+  "/proxia/mes/terminal-service/interface/v1/Workplaces/config":
     get:
       tags:
       - Workplaces
@@ -357,7 +368,8 @@ paths:
           type: string
       - name: MaxWorkTicketCount
         in: query
-        description: "Determines maximal number of work tickets\r\nin a workplace"
+        description: "Determines maximal number of work tickets.\r\nWork tickets are
+          always sorted by planned begin time.\r\nin a workplace"
         required: true
         schema:
           maximum: 10
@@ -384,7 +396,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/Workplaces/{workplaceId}/new-status":
+  "/proxia/mes/terminal-service/interface/v1/Workplaces/{workplaceId}/new-status":
     put:
       tags:
       - Workplaces
@@ -421,7 +433,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/{workTicketId}/revision-action":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/revision-action":
     post:
       tags:
       - WorkTickets
@@ -464,7 +476,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/{workTicketId}/logon":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/logon":
     post:
       tags:
       - WorkTickets
@@ -507,7 +519,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/logon":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/logon":
     post:
       tags:
       - WorkTickets
@@ -544,7 +556,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/{workTicketId}/logoff":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/logoff":
     post:
       tags:
       - WorkTickets
@@ -587,7 +599,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/logged":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/logged":
     get:
       tags:
       - WorkTickets
@@ -626,6 +638,10 @@ paths:
         schema:
           type: boolean
           default: false
+      - name: TerminalId
+        in: query
+        schema:
+          type: string
       - name: SearchType
         in: query
         description: "Determines search pattern.\r\nDefault value: 'None' - data is
@@ -674,7 +690,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/pending":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/pending":
     get:
       tags:
       - WorkTickets
@@ -713,6 +729,10 @@ paths:
         schema:
           type: boolean
           default: false
+      - name: TerminalId
+        in: query
+        schema:
+          type: string
       - name: SearchType
         in: query
         description: "Determines search pattern.\r\nDefault value: 'None' - data is
@@ -760,7 +780,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/manual":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/manual":
     get:
       tags:
       - WorkTickets
@@ -798,6 +818,10 @@ paths:
         schema:
           type: boolean
           default: false
+      - name: TerminalId
+        in: query
+        schema:
+          type: string
       - name: SearchType
         in: query
         description: "Determines search pattern.\r\nDefault value: 'None' - data is
@@ -845,7 +869,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/internal":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/internal":
     get:
       tags:
       - WorkTickets
@@ -884,6 +908,10 @@ paths:
         schema:
           type: boolean
           default: false
+      - name: TerminalId
+        in: query
+        schema:
+          type: string
       - name: SearchType
         in: query
         description: "Determines search pattern.\r\nDefault value: 'None' - data is
@@ -931,7 +959,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/{workTicketId}/production-detail":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/production-detail":
     get:
       tags:
       - WorkTickets
@@ -969,7 +997,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/{workTicketId}/instruction":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/instruction":
     get:
       tags:
       - WorkTickets
@@ -1007,7 +1035,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultDto"
-  "/workplaces/{workplaceId}/WorkTickets/{workTicketId}/workplan":
+  "/proxia/mes/terminal-service/interface/v1/workplaces/{workplaceId}/WorkTickets/{workTicketId}/workplan":
     get:
       tags:
       - WorkTickets
@@ -1075,6 +1103,10 @@ components:
         id:
           type: string
           description: ID of terminal configuration setting
+        language:
+          type: string
+          description: Default language.
+          nullable: true
         mainMenuItems:
           type: array
           items:
@@ -1610,7 +1642,8 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/WorkTicketDto"
-          description: Work tickets which are logged on the work place
+          description: "First n work tickets which are logged on the work place.\r\nData
+            is sorted by planned start time."
           nullable: true
         loggedOnWorkTicketCount:
           type: integer
@@ -1620,8 +1653,8 @@ components:
           type: array
           items:
             "$ref": "#/components/schemas/WorkTicketDto"
-          description: Work tickets which are assigned and not logged on the work
-            place
+          description: "First n Work tickets which are assigned and not logged on
+            the work place.\r\nData is sorted by planned start time."
           nullable: true
         pendingWorkTicketCount:
           type: integer
@@ -1804,10 +1837,15 @@ components:
           type: string
           description: Display name of the work ticket
           nullable: true
+        workTicketNumber:
+          maxLength: 50
+          type: string
+          description: Number of the work ticket
+          nullable: true
         workTicketStatus:
           maxLength: 50
           type: string
-          description: Work ticket's display name
+          description: Display name of work ticket's current status
         activityDescription:
           maxLength: 50
           type: string
@@ -1822,6 +1860,17 @@ components:
           maxLength: 50
           type: string
           description: Display name of the customer's order
+          nullable: true
+        storageLocations:
+          type: array
+          items:
+            type: string
+          description: Display name of storage locations
+          nullable: true
+        notes:
+          maxLength: 2000
+          type: string
+          description: Text notes of the work ticket
           nullable: true
         performanceData:
           "$ref": "#/components/schemas/ProductionPerformanceDto"
@@ -1841,9 +1890,10 @@ components:
             "$ref": "#/components/schemas/FunctionItemDto"
           description: Data for function buttons
           nullable: true
-        note:
+        actualBeginTimeUtc:
           type: string
-          description: General note
+          description: Actual begin time
+          format: date-time
           nullable: true
       additionalProperties: false
       description: Work ticket details' general information
