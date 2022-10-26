@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.51'
+  version: '1.0.52'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -564,7 +564,7 @@ paths:
   "/machinesCount":
     get:
       tags:
-        - explorer
+        - resource
       summary: count all machines matching filter
       parameters:
         - name: globalFilter
