@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.110'
+  version: '1.0.111'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -1336,12 +1336,22 @@ components:
         allocatedWorktickets:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
-        allocatedResources:
+            type: object
+            properties:
+              workticketId:
+                $ref: '#/components/schemas/id'
+              workticket:
+                $ref: '#/components/schemas/name'
+        allocatedPersons:
           type: array
-          description: A machine or workplace has allocated Persons, a person has allocated machines or workplaces
+          description: A machine allocated Persons
           items:
-            $ref: '#/components/schemas/nameObject'
+            type: object
+            properties:
+              personId:
+                $ref: '#/components/schemas/id'
+              person:
+                $ref: '#/components/schemas/name'
     resourceStatusWidgetDrillDownData:
       type: array
       items:
