@@ -1030,6 +1030,62 @@ components:
           $ref: '#/components/schemas/fileViewerWidget'        
         fileTreeViewerWidget:
           $ref: '#/components/schemas/fileTreeViewerWidget'
+        productivityWidget:
+          $ref: '#/components/schemas/productivityWidget'
+    productivityWidget:
+      type: object
+      required:
+        - timePeriod
+        - resources
+        - presentation
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        timePeriod:
+          type: integer
+          description: the monitored time period
+        presentation:
+          type: string
+          enum:
+            - 'text'
+            - 'bar'
+            - 'drill-down'
+    productivityWidgetData:
+      type: object
+      properties:
+        actual:
+          type: integer
+        target:
+          type: integer
+        delta:
+          type: integer
+    productivityWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/productivityWidgetDrillDownResource'
+    productivityWidgetDrillDownResource:
+      type: object
+      properties:
+        inOrder: #TODO
+          type: boolean
+        plannedWorktickets: #TODO
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+        lastWorktickets: #TODO
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+      allOf: #TODO - unclear
+        - $ref: '#/components/schemas/resource'
     fileViewerWidget:
       type: object
       required:

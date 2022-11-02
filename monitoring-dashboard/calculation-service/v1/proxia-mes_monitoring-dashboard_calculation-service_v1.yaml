@@ -12,6 +12,74 @@ tags:
   - name: explorer
     description: Objects for explorer
 paths:
+  "/productivity-widget":
+    post:
+      tags:
+        - productivity
+      summary: calculates productivity-widget data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productivityWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+
+  "/productivity-drill-down":
+    post:
+      tags:
+        - productivity
+      summary: calculates productivity drill-down data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productivityWidgetDrillDownData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  
   "/first-pass-yield-widget":
     post:
       tags:
@@ -926,6 +994,34 @@ components:
           $ref: '#/components/schemas/oeeWidget'
         firstPassYieldWidget:
           $ref: '#/components/schemas/firstPassYieldWidget'
+        productivityWidget:
+          $ref: '#/components/schemas/productivityWidget'
+    productivityWidget:
+      type: object
+      required:
+        - timePeriod
+        - resources
+        - presentation
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        timePeriod:
+          type: integer
+          description: the monitored time period
+        presentation:
+          type: string
+          enum:
+            - 'text'
+            - 'bar'
+            - 'drill-down'
     firstPassYieldWidget:
       type: object
       required:
@@ -1182,6 +1278,34 @@ components:
           items:
             $ref: '#/components/schemas/nameObject'
       allOf:
+        - $ref: '#/components/schemas/resource'
+    productivityWidgetData:
+      type: object
+      properties:
+        actual:
+          type: integer
+        target:
+          type: integer
+        delta:
+          type: integer
+    productivityWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/productivityWidgetDrillDownResource'
+    productivityWidgetDrillDownResource:
+      type: object
+      properties:
+        inOrder: #TODO
+          type: boolean
+        plannedWorktickets: #TODO
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+        lastWorktickets: #TODO
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+      allOf: #TODO - unclear
         - $ref: '#/components/schemas/resource'
     workplace:
       type: object
