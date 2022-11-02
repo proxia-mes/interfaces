@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.30'
+  version: '1.0.32'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -833,6 +833,37 @@ paths:
       tags:
         - explorer
       summary: returns all machines
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -842,6 +873,40 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/machine'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/machinesCount":
+    get:
+      tags:
+        - explorer
+      summary: count all machines matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
         '204':
           description: No Content
           content: { }

@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.47'
+  version: '1.0.53'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -501,6 +501,100 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/explorer/machines":
+    get:
+      tags:
+        - explorer
+      summary: returns machines for explorer list
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/machine"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/explorer/machine-count":
+    get:
+      tags:
+        - explorer
+      summary: count all machines matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/machines":
     get:
       tags:
@@ -887,6 +981,25 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
+        allocatedWorktickets:
+          type: array
+          items:
+            type: object
+            properties:
+              workticketId:
+                $ref: '#/components/schemas/id'
+              workticket:
+                $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          description: A machine allocated Persons
+          items:
+            type: object
+            properties:
+              personId:
+                $ref: '#/components/schemas/id'
+              person:
+                $ref: '#/components/schemas/name'
     resource:
       type: object
       required:
@@ -922,7 +1035,10 @@ components:
         - resourceId
         - calDay
         - shiftId
+        - id
       properties:
+        id:
+          $ref: '#/components/schemas/id'
         resourceId:
           $ref: '#/components/schemas/id'
         resource:
@@ -1243,9 +1359,12 @@ components:
     personAllocation:
       type: object
       required:
+        - id
         - resourceId
         - begin
       properties:
+        id:
+          $ref: '#/components/schemas/id'
         resourceId:
           $ref: '#/components/schemas/id'
         resource:
