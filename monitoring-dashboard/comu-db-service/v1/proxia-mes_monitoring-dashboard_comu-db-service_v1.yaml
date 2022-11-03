@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.54'
+  version: '1.0.55'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -1017,21 +1017,11 @@ components:
         allocatedWorktickets:
           type: array
           items:
-            type: object
-            properties:
-              workticketId:
-                $ref: '#/components/schemas/id'
-              workticket:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/workticketAllocation'
         allocatedPersons:
           type: array
           items:
-            type: object
-            properties:
-              personId:
-                $ref: '#/components/schemas/id'
-              person:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/personAllocation'
     plant:
       type: object
       required:
@@ -1096,21 +1086,11 @@ components:
         allocatedWorktickets:
           type: array
           items:
-            type: object
-            properties:
-              workticketId:
-                $ref: '#/components/schemas/id'
-              workticket:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/workticketAllocation'
         allocatedPersons:
           type: array
           items:
-            type: object
-            properties:
-              personId:
-                $ref: '#/components/schemas/id'
-              person:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/personAllocation'
     resource:
       type: object
       required:
