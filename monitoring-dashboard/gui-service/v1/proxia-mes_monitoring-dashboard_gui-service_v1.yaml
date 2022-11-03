@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.112'
+  version: '1.0.113'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -630,35 +630,6 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/workplaces":
-    get:
-      tags:
-        - explorer
-      summary: returns all workplaces
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/workplace'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
   "/workplace/{workplaceId}":
     get:
       tags:
@@ -753,11 +724,105 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/machinesCount":
+  "/machines-count":
     get:
       tags:
         - explorer
       summary: count all machines matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workplaces":
+    get:
+      tags:
+        - explorer
+      summary: returns all workplaces for explorer
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/workplace'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workplaces-count":
+    get:
+      tags:
+        - explorer
+      summary: count all workplaces matching filter
       parameters:
         - name: globalFilter
           in: query
@@ -1400,7 +1465,6 @@ components:
                 $ref: '#/components/schemas/name'
         allocatedPersons:
           type: array
-          description: A machine allocated Persons
           items:
             type: object
             properties:
