@@ -3,8 +3,8 @@ REM https://github.com/OpenAPITools/openapi-generator
 
 SET OUTPUT_DIRECTORY=${PWD}/out
 SET INTERFACE_DIRECTORY=${PWD}/../..
-SET INTERFACE_FILE=proxia-mes_monitoring-dashboard_comu-db-service_redis_v1.yaml
-SET PACKAGE_NAME=PAG.Mes.MonitoringDashboard.ComuDbService.Redis.Client
+SET INTERFACE_FILE=proxia-mes_monitoring-dashboard_comu-db-service_cache_v1.yaml
+SET PACKAGE_NAME=PAG.Mes.MonitoringDashboard.ComuDbService.Cache.Client
 SET INTERFACE_VERSION=1.0.0
 
 powershell Remove-Item %OUTPUT_DIRECTORY% -Recurse -Force -ErrorAction SilentlyContinue

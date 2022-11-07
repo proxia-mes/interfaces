@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service API
-  version: '1.0.56'
+  version: '1.0.57'
 servers:
   - url: "http://localhost:5000/proxia-mes/monitoring-dashboard/comu-db-service/v1"
 paths:
@@ -782,6 +782,194 @@ paths:
           content: { }
         '500':
           description: Internal Server Error
+          content: { }  
+  "/explorer/orders":
+    get:
+      tags:
+        - explorer
+      summary: returns orders for explorer list
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/order"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/explorer/orders-count":
+    get:
+      tags:
+        - explorer
+      summary: count all orders matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/explorer/worktickets":
+    get:
+      tags:
+        - explorer
+      summary: returns worktickets for explorer list
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/workticket"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/explorer/worktickets-count":
+    get:
+      tags:
+        - explorer
+      summary: count all worktickets matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
           content: { }
   "/machines":
     get:
@@ -1067,6 +1255,13 @@ components:
       description: The name of an element
       maxLength: 50
       minLength: 3
+    referencedObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
     searchResult:
       type: object
       required:
@@ -1108,14 +1303,14 @@ components:
           $ref: '#/components/schemas/name'
         mainGroup:
           $ref: '#/components/schemas/name'
-        allocatedWorktickets:
-          type: array
-          items:
-            $ref: '#/components/schemas/workticketAllocation'
         allocatedPersons:
           type: array
           items:
-            $ref: '#/components/schemas/personAllocation'
+            $ref: '#/components/schemas/referencedObject'
+        allocatedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     plant:
       type: object
       required:
@@ -1177,14 +1372,14 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
-        allocatedWorktickets:
-          type: array
-          items:
-            $ref: '#/components/schemas/workticketAllocation'
         allocatedPersons:
           type: array
           items:
-            $ref: '#/components/schemas/personAllocation'
+            $ref: '#/components/schemas/referencedObject'
+        allocatedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     resource:
       type: object
       required:
@@ -1336,14 +1531,14 @@ components:
           description: The mobile phone number of the person
           maxLength: 50
           minLength: 0
-        allocatedWorktickets:
-          type: array
-          items:
-            $ref: '#/components/schemas/workticketAllocation'
         allocatedResources:
           type: array
           items:
-            $ref: '#/components/schemas/personAllocation'
+            $ref: '#/components/schemas/referencedObject'
+        allocatedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     resourceStatus:
       type: object
       required:
@@ -1423,6 +1618,22 @@ components:
           description: The description of the order
           maxLength: 255
           minLength: 1
+        workticketCount:
+          type: integer
+          description: The overall number of worktickets for the order
+          nullable: true
+        activeWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        openWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        doneWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     workticket:
       type: object
       required:
@@ -1520,6 +1731,14 @@ components:
           $ref: '#/components/schemas/id'
         plannedResource:
           $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        allocatedResources:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     workticketAllocation:
       type: object
       required:

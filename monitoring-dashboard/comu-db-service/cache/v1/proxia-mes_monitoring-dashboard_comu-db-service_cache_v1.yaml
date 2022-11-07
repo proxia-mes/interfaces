@@ -1,9 +1,9 @@
 ---
 openapi: 3.0.3
 info:
-  title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
-  description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Redis API
-  version: '1.0.12'
+  title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Cache API
+  description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Cache API
+  version: '1.0.13'
 paths:
   "/dummy":
     get:
@@ -23,6 +23,13 @@ components:
       description: The name of an element
       maxLength: 50
       minLength: 3
+    referencedObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
     workplace:
       type: object
       required:
@@ -56,6 +63,14 @@ components:
           $ref: '#/components/schemas/id'
         mainGroup:
           $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        allocatedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     plant:
       type: object
       required:
@@ -165,6 +180,14 @@ components:
           description: The type of the machine
           maxLength: 50
           minLength: 0
+        allocatedPersons:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        allocatedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     shift:
       type: object
       required:
@@ -304,6 +327,14 @@ components:
           description: The mobile phone number of the person
           maxLength: 50
           minLength: 0
+        allocatedResources:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        allocatedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     resourceStatus:
       type: object
       required:
@@ -431,6 +462,22 @@ components:
           description: The description of the order
           maxLength: 255
           minLength: 1
+        workticketCount:
+          type: integer
+          description: The overall number of worktickets for the order
+          nullable: true
+        activeWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        openWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        doneWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     workticketStatus:
       type: object
       required:
@@ -579,6 +626,14 @@ components:
           $ref: '#/components/schemas/id'
         plannedResource:
           $ref: '#/components/schemas/name'
+        allocatedPersons:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
+        allocatedResources:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     workticketAllocation:
       type: object
       required:
