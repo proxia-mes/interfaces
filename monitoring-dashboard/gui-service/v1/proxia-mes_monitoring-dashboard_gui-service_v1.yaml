@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.116'
+  version: '1.0.118'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -475,35 +475,6 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/orders":
-    get:
-      tags:
-        - explorer
-      summary: returns all orders
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/order'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
   "/order/{orderId}":
     get:
       tags:
@@ -523,35 +494,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/order"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/worktickets":
-    get:
-      tags:
-        - explorer
-      summary: returns all worktickets
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/workticket'
         '204':
           description: No Content
           content: { }
@@ -917,6 +859,194 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
+  "/worktickets":
+    get:
+      tags:
+        - explorer
+      summary: returns all worktickets for explorer
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/workticket'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets-count":
+    get:
+      tags:
+        - explorer
+      summary: count all worktickets matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/orders":
+    get:
+      tags:
+        - explorer
+      summary: returns all orders for explorer
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/order'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/orders-count":
+    get:
+      tags:
+        - explorer
+      summary: count all orders matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
   "/machine/{machineId}":
     get:
       tags:
@@ -1090,6 +1220,13 @@ components:
       maxLength: 50
       minLength: 3
     nameObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
+    referencedObject:
       type: object
       properties:
         id:
@@ -1519,24 +1656,14 @@ components:
           enum:
             - 'machine'
             - 'workplace'
-        allocatedWorktickets:
-          type: array
-          items:
-            type: object
-            properties:
-              workticketId:
-                $ref: '#/components/schemas/id'
-              workticket:
-                $ref: '#/components/schemas/name'
         allocatedPersons:
           type: array
           items:
-            type: object
-            properties:
-              personId:
-                $ref: '#/components/schemas/id'
-              person:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/referencedObject'
+        allocatedWorktickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     resourceStatusWidgetDrillDownData:
       type: array
       items:
@@ -1639,12 +1766,7 @@ components:
         allocatedResources:
           type: array
           items:
-            type: object
-            properties:
-              resourceId:
-                $ref: '#/components/schemas/id'
-              resource:
-                $ref: '#/components/schemas/name'
+            $ref: '#/components/schemas/referencedObject'
     order:
       type: object
       required:
@@ -1721,21 +1843,22 @@ components:
         progress:
           type: integer
           nullable: true
-        workticketsCount:
+        workticketCount:
           type: integer
+          description: The overall number of worktickets for the order
           nullable: true
-        workticketsOpen:
+        activeWorktickets:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
-        workticketsDone:
+            $ref: '#/components/schemas/referencedObject'
+        openWorktickets:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
-        workticketsActive:
+            $ref: '#/components/schemas/referencedObject'
+        doneWorktickets:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
+            $ref: '#/components/schemas/referencedObject'
     searchResult:
       type: object
       required:
@@ -1863,11 +1986,11 @@ components:
         allocatedPersons:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
+            $ref: '#/components/schemas/referencedObject'
         allocatedResources:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
+            $ref: '#/components/schemas/referencedObject'
     oeeQualityWidgetData:
       type: object
       required:
