@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Cache API
   description: PROXIA-MES Monitoring-Dashboard COMU-DB-Service Cache API
-  version: '1.0.13'
+  version: '1.0.14'
 paths:
   "/dummy":
     get:
