@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard GUI-Service API
   description: PROXIA-MES Monitoring-Dashboard GUI-Service API
-  version: '1.0.107'
+  version: '1.0.118'
 servers:
   - url: "http://localhost:5002/proxia-mes/monitoring-dashboard/gui-service/v1"
 tags:
@@ -441,35 +441,6 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/persons":
-    get:
-      tags:
-        - explorer
-      summary: returns all persons
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/person'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
   "/person/{personId}":
     get:
       tags:
@@ -489,35 +460,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/person"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/orders":
-    get:
-      tags:
-        - explorer
-      summary: returns all orders
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/order'
         '204':
           description: No Content
           content: { }
@@ -567,35 +509,6 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/worktickets":
-    get:
-      tags:
-        - explorer
-      summary: returns all worktickets
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/workticket'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
   "/workticket/{workticketId}":
     get:
       tags:
@@ -615,35 +528,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/workticket"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/workplaces":
-    get:
-      tags:
-        - explorer
-      summary: returns all workplaces
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/workplace'
         '204':
           description: No Content
           content: { }
@@ -698,6 +582,37 @@ paths:
       tags:
         - explorer
       summary: returns all machines
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -707,6 +622,416 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/machine'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/machines-count":
+    get:
+      tags:
+        - explorer
+      summary: count all machines matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workplaces":
+    get:
+      tags:
+        - explorer
+      summary: returns all workplaces for explorer
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/workplace'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/workplaces-count":
+    get:
+      tags:
+        - explorer
+      summary: count all workplaces matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }  
+  "/persons":
+    get:
+      tags:
+        - explorer
+      summary: returns all persons for explorer
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/person'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/persons-count":
+    get:
+      tags:
+        - explorer
+      summary: count all persons matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets":
+    get:
+      tags:
+        - explorer
+      summary: returns all worktickets for explorer
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/workticket'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets-count":
+    get:
+      tags:
+        - explorer
+      summary: count all worktickets matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/orders":
+    get:
+      tags:
+        - explorer
+      summary: returns all orders for explorer
+      parameters:
+        - name: firstRowOffset
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: numberOfRows
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: sortField
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+        - name: sortOrder
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: integer
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/order'
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/orders-count":
+    get:
+      tags:
+        - explorer
+      summary: count all orders matching filter
+      parameters:
+        - name: globalFilter
+          in: query
+          required: false
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: integer
         '204':
           description: No Content
           content: { }
@@ -901,6 +1226,13 @@ components:
           $ref: '#/components/schemas/id'
         name:
           $ref: '#/components/schemas/name'
+    referencedObject:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/name'
     dashboard:
       type: object
       required:
@@ -1030,6 +1362,62 @@ components:
           $ref: '#/components/schemas/fileViewerWidget'        
         fileTreeViewerWidget:
           $ref: '#/components/schemas/fileTreeViewerWidget'
+        productivityWidget:
+          $ref: '#/components/schemas/productivityWidget'
+    productivityWidget:
+      type: object
+      required:
+        - timePeriod
+        - resources
+        - presentation
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        timePeriod:
+          type: integer
+          description: the monitored time period
+        presentation:
+          type: string
+          enum:
+            - 'text'
+            - 'bar'
+            - 'drill-down'
+    productivityWidgetData:
+      type: object
+      properties:
+        actual:
+          type: integer
+        target:
+          type: integer
+        delta:
+          type: integer
+    productivityWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/productivityWidgetDrillDownResource'
+    productivityWidgetDrillDownResource:
+      type: object
+      properties:
+        inOrder: #TODO
+          type: boolean
+        plannedWorktickets: #TODO
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+        lastWorktickets: #TODO
+          type: array
+          items:
+            $ref: '#/components/schemas/nameObject'
+      allOf: #TODO - unclear
+        - $ref: '#/components/schemas/resource'
     fileViewerWidget:
       type: object
       required:
@@ -1268,15 +1656,14 @@ components:
           enum:
             - 'machine'
             - 'workplace'
+        allocatedPersons:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
         allocatedWorktickets:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
-        allocatedResources:
-          type: array
-          description: A machine or workplace has allocated Persons, a person has allocated machines or workplaces
-          items:
-            $ref: '#/components/schemas/nameObject'
+            $ref: '#/components/schemas/referencedObject'
     resourceStatusWidgetDrillDownData:
       type: array
       items:
@@ -1376,6 +1763,10 @@ components:
           description: The mobile phone number of the person
           maxLength: 50
           minLength: 0
+        allocatedResources:
+          type: array
+          items:
+            $ref: '#/components/schemas/referencedObject'
     order:
       type: object
       required:
@@ -1452,21 +1843,22 @@ components:
         progress:
           type: integer
           nullable: true
-        workticketsCount:
+        workticketCount:
           type: integer
+          description: The overall number of worktickets for the order
           nullable: true
-        workticketsOpen:
+        activeWorktickets:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
-        workticketsDone:
+            $ref: '#/components/schemas/referencedObject'
+        openWorktickets:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
-        workticketsActive:
+            $ref: '#/components/schemas/referencedObject'
+        doneWorktickets:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
+            $ref: '#/components/schemas/referencedObject'
     searchResult:
       type: object
       required:
@@ -1594,11 +1986,11 @@ components:
         allocatedPersons:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
+            $ref: '#/components/schemas/referencedObject'
         allocatedResources:
           type: array
           items:
-            $ref: '#/components/schemas/nameObject'
+            $ref: '#/components/schemas/referencedObject'
     oeeQualityWidgetData:
       type: object
       required:

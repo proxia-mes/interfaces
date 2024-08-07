@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Calculation-Service API
   description: PROXIA-MES Monitoring-Dashboard Calculation-Service API
-  version: '1.0.30'
+  version: '1.0.34'
 servers:
   - url: "http://localhost:5004/proxia-mes/monitoring-dashboard/calculation-service/v1"
 tags:
@@ -12,6 +12,74 @@ tags:
   - name: explorer
     description: Objects for explorer
 paths:
+  "/productivity-widget":
+    post:
+      tags:
+        - productivity
+      summary: calculates productivity-widget data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productivityWidgetData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+
+  "/productivity-drill-down":
+    post:
+      tags:
+        - productivity
+      summary: calculates productivity drill-down data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/widget'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productivityWidgetDrillDownData"
+        '204':
+          description: No Content
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '401':
+          description: Unauthorized
+          content: { }
+        '403':
+          description: Forbidden
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  
   "/first-pass-yield-widget":
     post:
       tags:
@@ -508,321 +576,6 @@ paths:
         '500':
           description: Internal Server Error
           content: { }
-  "/persons":
-    get:
-      tags:
-        - explorer
-      summary: returns all persons
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/person'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/person/{personId}":
-    get:
-      tags:
-        - explorer
-      summary: returns a person
-      parameters:
-        - name: personId
-          in: path
-          required: true
-          style: simple
-          schema:
-            $ref: "#/components/schemas/id"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/person"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/orders":
-    get:
-      tags:
-        - explorer
-      summary: returns all orders
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/order'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/order/{orderId}":
-    get:
-      tags:
-        - explorer
-      summary: returns an order
-      parameters:
-        - name: orderId
-          in: path
-          required: true
-          style: simple
-          schema:
-            $ref: "#/components/schemas/id"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/order"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/worktickets":
-    get:
-      tags:
-        - explorer
-      summary: returns all worktickets
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/workticket'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/workticket/{workticketId}":
-    get:
-      tags:
-        - explorer
-      summary: returns a workticket
-      parameters:
-        - name: workticketId
-          in: path
-          required: true
-          style: simple
-          schema:
-            $ref: "#/components/schemas/id"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/workticket"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/workplaces":
-    get:
-      tags:
-        - explorer
-      summary: returns all workplaces
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/workplace'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/workplace/{workplaceId}":
-    get:
-      tags:
-        - explorer
-      summary: returns a workplace
-      parameters:
-        - name: workplaceId
-          in: path
-          required: true
-          style: simple
-          schema:
-            $ref: "#/components/schemas/id"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/workplace"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/machines":
-    get:
-      tags:
-        - explorer
-      summary: returns all machines
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/machine'
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
-  "/machine/{machineId}":
-    get:
-      tags:
-        - explorer
-      summary: returns a machine
-      parameters:
-        - name: machineId
-          in: path
-          required: true
-          style: simple
-          schema:
-            $ref: "#/components/schemas/id"
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/machine"
-        '204':
-          description: No Content
-          content: { }
-        '400':
-          description: Bad Request
-          content: { }
-        '401':
-          description: Unauthorized
-          content: { }
-        '403':
-          description: Forbidden
-          content: { }
-        '500':
-          description: Internal Server Error
-          content: { }
 components:
   schemas:
     id:
@@ -926,6 +679,34 @@ components:
           $ref: '#/components/schemas/oeeWidget'
         firstPassYieldWidget:
           $ref: '#/components/schemas/firstPassYieldWidget'
+        productivityWidget:
+          $ref: '#/components/schemas/productivityWidget'
+    productivityWidget:
+      type: object
+      required:
+        - timePeriod
+        - resources
+        - presentation
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        timePeriod:
+          type: integer
+          description: the monitored time period
+        presentation:
+          type: string
+          enum:
+            - 'text'
+            - 'bar'
+            - 'drill-down'
     firstPassYieldWidget:
       type: object
       required:
@@ -1183,279 +964,34 @@ components:
             $ref: '#/components/schemas/nameObject'
       allOf:
         - $ref: '#/components/schemas/resource'
-    workplace:
+    productivityWidgetData:
       type: object
-      allOf:
-        - $ref: '#/components/schemas/resource'
-    machine:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/resource'
       properties:
-        description:
-          type: string
-          description: The description of the machine
-          maxLength: 2000
-          minLength: 0
-        inventoryNumber:
-          type: string
-          description: The inventory number of the machine
-          maxLength: 50
-          minLength: 0
-        manufacturer:
-          type: string
-          description: The manufacurer of the machine
-          maxLength: 50
-          minLength: 0
-        machineType:
-          type: string
-          description: The type of the machine
-          maxLength: 50
-          minLength: 0
-        controlUnit:
-          type: string
-          description: The control unit of the machine
-          maxLength: 50
-          minLength: 0
-        factoryNumber:
-          type: string
-          description: The type of the machine
-          maxLength: 50
-          minLength: 0
-    person:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/resource'
-      properties:
-        lastName:
-          type: string
-          description: The lastname of the person
-          maxLength: 50
-          minLength: 0
-        firstName:
-          type: string
-          description: The firstname of the person
-          maxLength: 50
-          minLength: 0
-        persId:
-          type: string
-          description: The HR person id
-          maxLength: 50
-          minLength: 0
-        mail:
-          type: string
-          description: The e-mail address
-          maxLength: 50
-          minLength: 0
-        mobile:
-          type: string
-          description: The mobile phone number of the person
-          maxLength: 50
-          minLength: 0
-    order:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        plant:
-          type: string
-          description: The plant id of the order
-          maxLength: 255
-          minLength: 3
-        type:
-          type: string
-          description: The type of the order
-          maxLength: 255
-          minLength: 3
-        customer:
-          type: string
-          description: The customer of the order
-          maxLength: 255
-          minLength: 1
-        customerOrder:
-          type: string
-          description: The customer-order of the order
-          maxLength: 255
-          minLength: 1
-        customerOrderNumber:
-          type: string
-          description: The customer-order number of the order
-          maxLength: 255
-          minLength: 1
-        customerOrderDelivery:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled delivery of the customer-order of the order
-        beginScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled begin of the order
-        endScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled end of the order
-        deliveryScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled delivery of the order
-        earliestStartScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The earliest scheduled begin of the order
-        desiredDue:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled desire of the order
-        priority:
-          type: number
-          description: The priority of the order
-        description:
-          type: string
-          description: The description of the order
-          maxLength: 255
-          minLength: 1
-        progress:
+        actual:
           type: integer
-          nullable: true
-        workticketsCount:
+        target:
           type: integer
-          nullable: true
-        workticketsOpen:
-          type: array
-          items:
-            $ref: '#/components/schemas/nameObject'
-        workticketsDone:
-          type: array
-          items:
-            $ref: '#/components/schemas/nameObject'
-        workticketsActive:
-          type: array
-          items:
-            $ref: '#/components/schemas/nameObject'
-    workticket:
+        delta:
+          type: integer
+    productivityWidgetDrillDownData:
+      type: array
+      items:
+        $ref: '#/components/schemas/productivityWidgetDrillDownResource'
+    productivityWidgetDrillDownResource:
       type: object
-      required:
-        - id
       properties:
-        id:
-          $ref: '#/components/schemas/id'
-        name:
-          $ref: '#/components/schemas/name'
-        workticketNumber:
-          type: string
-        beginScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled begin of the wt
-        endScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled end of the wt
-        status:
-          type: string
-          description: The status of the wt
-          maxLength: 255
-          minLength: 3
-        ppsOrder:
-          type: string
-          description: The order of the wt in the PPS
-          maxLength: 255
-          minLength: 3
-        ppsArticleNumber:
-          type: string
-          description: The article number of the wt in the PPS
-          maxLength: 255
-          minLength: 3
-        ppsArticle:
-          type: string
-          description: The article of the wt in the PPS
-          maxLength: 255
-          minLength: 3
-        targetQty:
-          type: number
-          description: The target quantitiy of the wt
-        plannedSetuptime:
-          type: number
-          nullable: true
-        plannedProcesstime:
-          type: number
-          nullable: true
-        confirmedGoodQty:
-          type: number
-          nullable: true
-        confirmedScrapQty:
-          type: number
-          nullable: true
-        confirmedReworkQty:
-          type: number
-          nullable: true
-        goodQty:
-          type: number
-          nullable: true
-          description: The good quantitiy of the wt, calculated from TSF_WT_QTY
-        scrapQty:
-          type: number
-          nullable: true
-          description: The scrap quantitiy of the wt, calculated from TSF_WT_QTY
-        reworkQty:
-          type: number
-          nullable: true
-          description: The rework quantitiy of the wt, calculated from TSF_WT_QTY
-        confirmedSetuptime:
-          type: number
-          nullable: true
-        confirmedProcesstime:
-          type: number
-          nullable: true
-        type:
-          type: string
-          description: The type of the wt
-          maxLength: 255
-          minLength: 3
-        plant:
-          type: string
-          description: The plant id of the wt
-          maxLength: 255
-          minLength: 3
-        earliestStartScheduled:
-          type: string
-          format: date-time
-          nullable: true
-          description: The earliest scheduled begin of the wt
-        desiredDue:
-          type: string
-          format: date-time
-          nullable: true
-          description: The scheduled desire of the wt
-        plannedResourceId:
-          $ref: '#/components/schemas/id'
-        plannedResource:
-          $ref: '#/components/schemas/name'
-        orderId:
-          $ref: '#/components/schemas/id'
-        order:
-          $ref: '#/components/schemas/name'
-        allocatedPersons:
+        inOrder: #TODO
+          type: boolean
+        plannedWorktickets: #TODO
           type: array
           items:
             $ref: '#/components/schemas/nameObject'
-        allocatedResources:
+        lastWorktickets: #TODO
           type: array
           items:
             $ref: '#/components/schemas/nameObject'
+      allOf: #TODO - unclear
+        - $ref: '#/components/schemas/resource'
     oeeQualityWidgetData:
       type: object
       required:

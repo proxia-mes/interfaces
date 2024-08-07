@@ -4,8 +4,8 @@ REM https://github.com/OpenAPITools/openapi-generator
 SET PACKAGE_DIRECTORY=%USERPROFILE%/.nuget/packages
 SET OUTPUT_DIRECTORY=${PWD}/out
 SET INTERFACE_DIRECTORY=${PWD}/../..
-SET INTERFACE_FILE=proxia-mes_monitoring-dashboard_dashboard-domain-service_v1.yaml
-SET PACKAGE_NAME=PAG.Mes.MonitoringDashboard.DashboardDomainService.Client
+SET INTERFACE_FILE=proxia-mes_monitoring-dashboard_comu-db-service_cache_v1.yaml
+SET PACKAGE_NAME=PAG.Mes.MonitoringDashboard.ComuDbService.Cache.Client
 
 REM clear output directory
 powershell Remove-Item %OUTPUT_DIRECTORY% -Recurse -Force -ErrorAction SilentlyContinue
@@ -29,4 +29,6 @@ goto :EOF
 
 :error
 echo ERROR!
+
+
 

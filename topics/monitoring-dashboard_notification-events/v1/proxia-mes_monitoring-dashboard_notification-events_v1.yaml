@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Notification-Event
   description: PROXIA-MES Monitoring-Dashboard Notification-Event
-  version: '1.0.2'
+  version: '1.0.3'
 paths:
   "/dummy":
     get:

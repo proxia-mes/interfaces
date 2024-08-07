@@ -79,7 +79,7 @@ jobs:
         run: mkdir -p $GEN_OUT_DIR
 
       - name: Generate angular typescript client code
-        uses: docker://openapitools/openapi-generator-cli:v6.0.0
+        uses: docker://openapitools/openapi-generator-cli:v6.0.1
         with:
           args: generate -o /github/workspace/${{env.GEN_OUT_DIR}} -i /github/workspace/${{env.INTERFACE_FILE}} -g typescript-angular --additional-properties npmName=${{env.PACKAGE_NAME}},npmRepository=${{env.GITHUB_NPM_REGISTRY}},stringEnums=true
 
@@ -91,7 +91,7 @@ jobs:
       # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v2
         with:
-          node-version: 12.x
+          node-version: 12
           registry-url: ${{env.GITHUB_NPM_REGISTRY}}
           
       - name: Build the module 

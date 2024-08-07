@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
   description: PROXIA-MES Monitoring-Dashboard Dashboard-Domain-Service API
-  version: '1.0.19'
+  version: '1.0.21'
 servers:
   - url: "http://localhost:8080/proxia-mes/monitoring-dashboard/dashboard-domain-service/v1"
 tags:
@@ -343,6 +343,34 @@ components:
           $ref: '#/components/schemas/fileViewerWidget'
         fileTreeViewerWidget:
           $ref: '#/components/schemas/fileTreeViewerWidget'
+        productivityWidget:
+          $ref: '#/components/schemas/productivityWidget'
+    productivityWidget:
+      type: object
+      required:
+        - timePeriod
+        - resources
+        - presentation
+      properties:
+        resources:
+          type: array
+          items:
+            type: string
+            description: The unque id of a resource
+            example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
+            maxLength: 50
+            minLength: 3
+          minItems: 0
+          maxItems: 100
+        timePeriod:
+          type: integer
+          description: the monitored time period
+        presentation:
+          type: string
+          enum:
+            - 'text'
+            - 'bar'
+            - 'drill-down'
     fileViewerWidget:
       type: object
       required:
@@ -409,7 +437,7 @@ components:
           type: array
           items:
             type: string
-            description: The unque id of a resource
+            description: The unique id of a resource
             example: 2a6783cc-f1b4-4b74-9fd8-e6460e9a0028
             maxLength: 50
             minLength: 3
