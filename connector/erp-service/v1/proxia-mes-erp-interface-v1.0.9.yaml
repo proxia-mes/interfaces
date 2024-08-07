@@ -1,0 +1,1188 @@
+---
+openapi: 3.0.3
+info:
+  title: PROXIA MES ERP INTERFACE API
+  description: REST API provided by the PROXIA MES system for ERP systems (Based on the PROXIA Connector interface description version 94!)
+  version: '1.0.9'
+servers:
+  - url: "/proxia/mes/erp/interface/v1"
+tags:
+  - name: erp
+    description: Everything about the interface for ERP systems provided by PROXIA MES (Based on the PROXIA Connector interface description version 94!)
+paths:
+  "/orders":
+    post:
+      tags:
+        - erp
+      summary: Stores new orders
+      requestBody:
+        description: Array of order objects
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Order"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets":
+    post:
+      tags:
+        - erp
+      summary: Stores new work tickets
+      requestBody:
+        description: Array of work ticket objects
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Workticket"
+        required: true
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/worktickets_materials":
+    post:
+      tags:
+        - erp
+      summary: Stores materials for work tickets
+      requestBody:
+        description: Array of work ticket materials
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Workticket-Material"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/customers":
+    post:
+      tags:
+        - erp
+      summary: Stores new customers
+      requestBody:
+        description: Array of customer objects
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Customer"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/persons":
+    post:
+      tags:
+        - erp
+      summary: Stores new persons
+      requestBody:
+        description: Array of persons
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Person"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/material-batch-assignments":
+    post:
+      tags:
+        - erp
+      summary: Stores new assignments of material to batches
+      requestBody:
+        description: Array of assignments
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Material-Batch-Assignment"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/materials":
+    post:
+      tags:
+        - erp
+      summary: Stores new materials
+      requestBody:
+        description: Array of materials
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Material"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/stock-materials":
+    post:
+      tags:
+        - erp
+      summary: Stores new materials for stock
+      requestBody:
+        description: Array of stock materials
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Stock-Material"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/deliverers":
+    post:
+      tags:
+        - erp
+      summary: Stores new deliverers
+      requestBody:
+        description: Array of deliverers
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Deliverer"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+  "/deliverer_frequencies":
+    post:
+      tags:
+        - erp
+      summary: Stores new deliverer frequencies
+      requestBody:
+        description: Array of deliverer frequencies
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Deliverer-Frequency"
+      responses:
+        '200':
+          description: OK
+          content: { }
+        '400':
+          description: Bad Request
+          content: { }
+        '500':
+          description: Internal Server Error
+          content: { }
+components:
+  schemas:
+    Order:
+      type: object
+      required:
+        - ORDER_NO
+        - BEGIN_SCHEDULED
+        - END_SCHEDULED
+        - ARTICLE_NO
+        - ARTICLE_DES
+        - QTY_TARGET
+      properties:
+        ORDER_NO:
+          type: string
+          description: Order number/Auftragsnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        ORDER_DES:
+          type: string
+          description: Order description/Beschreibung
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        PLANT_NO:
+          type: string
+          description: Plant/Werk
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        DELETE_FLAG:
+          type: boolean
+          description: object will be deleted, also all WTs for the order will be deleted/Objekt löschen, auch alle Arbeitsscheine zu dem Auftrag werden gelöscht
+          nullable: false
+          default: false
+        ORDER_TYPE:
+          type: string
+          description: Order type/Auftragsart; "F" production order/Fertigungsauftrag; "P" planned order/Planauftrag; "I" internal order/Innenauftrag; "S" service order/Serviceauftrag; "N" rework/Nacharbeit (C_NACHARBEIT); "M" orders for samples/Bemusterungsauftrag (C_MUSTER); "W" equipment order/Betriebsmittelauftrag (C_WKZ)
+          nullable: true
+          default: 'F'
+          enum:
+            - 'F'
+            - 'P'
+            - 'I'
+            - 'S'
+            - 'N'
+            - 'M'
+            - 'W'
+        CUSTOMER_NO:
+          type: string
+          description: Customer (production order)/Kunde (bei Fertigungsaufträgen)
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        BEGIN_SCHEDULED:
+          type: string
+          format: date-time
+          description: Planned start date for the order/Geplanter Starttermin für den Auftrag
+          nullable: false
+        END_SCHEDULED:
+          type: string
+          format: date-time
+          description: Planned end date for the order/Geplanter Endtermin für den Auftrag
+          nullable: false
+        ARTICLE_NO:
+          type: string
+          description: Article number of article to be made/Artikelnummer des zu fertigenden Artikels
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        ARTICLE_DES:
+          type: string
+          description: Article description of article to be made. First sentence of the article description/Artikelbezeichnung des zu fertigenden Artikels. Erster Satz aus der Artikelbezeichnung
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        DRAW_NO:
+          type: string
+          description: Drawing number for the order/Zeichnungsnummer zum Auftrag
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        QTY_TARGET:
+          type: number
+          format: float
+          description: Setpoint to order in the base unit of the material/Sollmenge zum Auftrag in der Basiseinheit des Materials
+          nullable: false
+        LONG_DES:
+          type: string
+          description: Long text/Langtext
+          maxLength: 2000
+          minLength: 0
+          nullable: true
+        PARENT_ORDER_NO:
+          type: string
+          description: Operating order number that comes after this operating order/Betriebsauftragsnummer die nach diesem Betriebsauftrag kommt
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        INFO_01:
+          type: string
+          description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        INFO_02:
+          type: string
+          description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        INFO_03:
+          type: string
+          description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        INFO_04:
+          type: string
+          description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        INFO_05:
+          type: string
+          description: Free text for information about the production order/Freitext für Informationen zum Fertigungsauftrag
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        PARENT_WT_NO:
+          type: string
+          description: Only useable with field PARENT_ORDER_NO/Nur mit Feld PARENT_ORDER_NO nutzbar
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        PRIO:
+          type: number
+          format: float
+          description: Priority/Priorität
+          default: 0
+          minimum: -10.0
+          maximum: 10.0
+          nullable: true
+        PLANNING_STRATEGY:
+          type: string
+          description: Planning strategy/Planungsstrategie; "V" forward termination/Vorwärts Terminierung; "R" backward termination/Rückwärts Terminierung; "NULL" invalid/ungültig
+          nullable: true
+          enum:
+            - 'V'
+            - 'R'
+        REVISION_NR:
+          type: number
+          format: int32
+          description: Revision number of the belonging material revision/Revisionsnummer der zugehörigen Materialrevision
+          nullable: true
+    Workticket:
+      type: object
+      required:
+        - WT_NO
+        - WT_DES
+        - WORKSTEP_NO
+        - ORDER_NO
+        - SETUP_TIME
+        - TARGET_TIME
+        - BEGIN_SCHEDULED
+        - END_SCHEDULED
+        - QTY_TARGET
+        - WORK_CENTER
+      properties:
+        WT_NO:
+          type: string
+          description: Unique identifier of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        WT_DES:
+          type: string
+          description: Work ticket description/Beschreibung des Arbeitsscheins
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        WORKSTEP_NO:
+          type: number
+          format: int32
+          description: Number of the work step of the order/Nummer der Arbeitsfolge im Auftrag
+          nullable: false
+        DELETE_FLAG:
+          type: boolean
+          description: object will be deleted/Objekt löschen
+          nullable: false
+          default: false
+        ORDER_NO:
+          type: string
+          description: Order number/Auftragsnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        ARTICLE_NO:
+          type: string
+          description: Article number of article to be made/Artikelnummer des zu fertigenden Artikels
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        ARTICLE_DES:
+          type: string
+          description: Article description of article to be made. First sentence of the article description/Artikelbezeichnung des zu fertigenden Artikels. Erster Satz aus der Artikelbezeichnung
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        SETUP_TIME:
+          type: number
+          format: float
+          description: Set-up time for the entire operation (min)/Rüstzeit für den gesamten Arbeitsgang (Min)
+          nullable: false
+        TARGET_TIME:
+          type: number
+          format: float
+          description: Production time for the entire operation (min)(Production time per piece * target piece) /Produktionszeit für den gesamten Arbeitsgang (Min)(Produktionszeit pro Stück * Sollstück)
+          nullable: false
+        BEGIN_SCHEDULED:
+          type: string
+          format: date-time
+          description: Planned start date for the work step/Geplanter Starttermin für den Arbeitsgang
+          nullable: false
+        END_SCHEDULED:
+          type: string
+          format: date-time
+          description: Planned end date for the work step/Geplanter Endtermin für den Arbeitsgang
+          nullable: false
+        DRAW_NO:
+          type: string
+          description: Drawing number for the work step/Zeichnungsnummer zum work step
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        QTY_TARGET:
+          type: number
+          format: float
+          description: Setpoint to order in the base unit of the material/Sollmenge zum Auftrag in der Basiseinheit des Materials
+          nullable: false
+        WORK_CENTER:
+          type: string
+          description: Lodges of the manufacturing resource or group, it can also specify multiple values, see description list/Leitzahlen der Fertigungsressource oder der Gruppe, es können auch mehrere Werte angeben werden, siehe Beschreibung LISTE
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        PLANNING_RELEVANT:
+          type: boolean
+          description: Planning relevance/Planungsrelevanz
+          default: true
+          nullable: true
+        QTY_YIELD:
+          type: number
+          format: float
+          description: Produced is amount for operation/Produzierte Ist-Menge zum Arbeitsgang
+          nullable: true
+        QTY_SCRAP:
+          type: number
+          format: float
+          description: Produced scrap for the operation/Produzierter Ausschussmenge zum Arbeitsgang
+          nullable: true
+        END_BATCH:
+          type: string
+          description: End product batch/Endprodukt-Charge
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        MOVE_TIME:
+          type: number
+          format: float
+          description: Transport time for operation (min)/Transportzeit zum Arbeitsgang (Min)
+          nullable: true
+        WAIT_TIME:
+          type: number
+          format: float
+          description: Lying time for operation (min)/Liegezeit zum Arbeitsgang (Min)
+          nullable: true
+        OVERLAP:
+          type: string
+          description: Overlapping indicator, the overlap always applies to the successor/Überlappungskennzeichen, die Überlappung gilt immer zum Nachfolger; "K" no overlap/keine Überlappung; "Q" Overlap by quantity/Überlappung nach Menge; "R" Overlap in percent/Überlappung in Prozent
+          nullable: true
+          default: 'K'
+          enum:
+            - 'K'
+            - 'Q'
+            - 'R'
+        OVERLAP_QTY:
+          type: number
+          format: float
+          description: Overlap/Überlappungsmenge
+          nullable: true
+        OVERLAP_RATE:
+          type: number
+          format: float
+          description: Overlap level between 0 - 1.0 (1.0 -> 100% percent)/Überlappungsgrad zwischen 0 – 1.0 (1.0 -> 100% Prozent)
+          nullable: true
+          minimum: 0.0
+          maximum: 1.0
+          default: 0.2
+        PRIO:
+          type: number
+          format: int32
+          description: Priority integer between 1-100 (100 highest priority)/Priorität Ganzzahl zwischen 1-100 (100 höchste Priorität)
+          minimum: 0
+          maximum: 100
+          default: 0
+          nullable: true
+        WT_STATUS:
+          type: string
+          description: Work ticket status/Arbeitsschein-Status; "C_FREI" released/Freigegeben; "C_TFRTG" part/Teilfertig; "C_FRTG" done/Fertig
+          nullable: true
+          default: 'C_FREI'
+          enum:
+            - 'C_FREI'
+            - 'C_TFRTG'
+            - 'C_FRTG'
+          x-enum-varnames:
+            - 'C_FREI'
+            - 'C_TFRTG'
+            - 'C_FRTG'
+        INFO_01:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_02:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_03:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_04:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_05:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_06:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_07:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_08:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_09:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        INFO_10:
+          type: string
+          description: Free text for information about the work ticket/Freitext für Informationen zum Arbeitsschein
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        PARALLEL_WITH_PREV:
+          type: boolean
+          description: False = sequentiell, true = parallel to the direct predecessor. If only evaluated in the FPL, no influence on the predecessor successor relationships/false = sequentiell, true = parallel zum direkten Vorgänger. Wird nur in der FPL ausgewertet, keinen Einfluss auf die Vorgänger-Nachfolger Beziehungen
+          default: false
+          nullable: false
+        DOWNSTREAM_TIME:
+          type: number
+          format: float
+          description: Downstream time for the entire operation (min)/Abrüstzeit für den gesamten Arbeitsgang (Min) abrüsten
+          nullable: true
+        LONG_DES:
+          type: string
+          description: Long text to work ticket/Langtext zum Arbeitsschein
+          maxLength: 2000
+          minLength: 0
+          nullable: true
+        QTY_PER_RUN:
+          type: number
+          format: float
+          description: Parts per run/Teile pro Durchlauf
+          nullable: true
+          default: 1
+        ERP_SPLIT_FACTOR:
+          type: number
+          format: int32
+          description: Divides WTs in N segments/Teilt WTs in n-Segmente
+          nullable: true
+          default: 1
+        IS_PREVIEW:
+          type: boolean
+          description: False = The workshot can be logged in to the terminal (default) true = The workshoot is displayed only on the terminal, but can not be logged in/false = Der Arbeitsschein kann am Terminal angemeldet werden (default) true = Der Arbeitsschein wird nur am Terminal angezeigt, kann jedoch nicht angemeldet werden
+          nullable: true
+          default: false
+        IS_BLOCKED:
+          type: boolean
+          description: Indicates whether a WT is locked or not false = not locked, true = locked/Kennzeichnet ob ein WT gesperrt ist oder nicht false = nicht gesperrt, true = gesperrt
+          nullable: true
+          default: false
+        IMP_PER_QTY:
+          type: number
+          format: int32
+          description: Pulses per piece/Impulse pro Stück
+          nullable: true
+          default: 1
+        IS_EXCLUSIVE_RES:
+          type: boolean
+          description: The workshoot is planned exclusively on the system of the associated resources (WORK_CENTER). Alternative resources are ignored. False = can be planned on alternative resources. True = is planned exclusively at a res/Der Arbeitsschein wird im Leitstand exklusiv auf der/einer der zugeordneten Ressourcen (WORK_CENTER) geplant. Alternative Ressourcen werden ignoriert. false=kann auf alternativen Ressourcen geplant werden. true=wird exklusiv auf einer Res geplant
+          nullable: false
+          default: false
+        DETAIL_INFO_01:
+          type: string
+          description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        DETAIL_INFO_02:
+          type: string
+          description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        DETAIL_INFO_03:
+          type: string
+          description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        DETAIL_INFO_04:
+          type: string
+          description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        DETAIL_INFO_05:
+          type: string
+          description: Free text for work ticket information (TSF_WT_DETAIL)/Freitext für Informationen zum Arbeitsschein (TSF_WT_DETAIL)
+          maxLength: 255
+          minLength: 0
+          nullable: true
+        IS_MANLESS:
+          type: boolean
+          description: Manless work ticket. false = The work ticket is as always. true = The work ticket will be flagged as manless so that it will be planned differently./Bedienerloser Arbeitsschein. false = Der Arbeitsschein ist wie immer. true = Der Arbeitsschein wird als Bedienerlos gekennzeichnet, um in der Planung anders berücksichtigt zu werden.
+          nullable: true
+    Workticket-Material:
+      type: object
+      required:
+        - WT_NO
+        - MAT_NO
+        - UNIT
+        - AMOUNT
+        - POS_NO
+      properties:
+        WT_NO:
+          type: string
+          description: Unique connoisseur of the work ticket, also serves as a reply number/Eindeutiger Kenner des Arbeitsscheins, dient auch als Rückmeldenummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        MAT_NO:
+          type: string
+          description: Article or material number/Artikel- oder Materialnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        UNIT:
+          type: string
+          description: Quantity unit in the base unit of the material/Mengeneinheit in der Basiseinheit des Materials
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        AMOUNT:
+          type: number
+          format: float
+          description: Should amount of material relative to the target set of the operation/Soll Menge Material bezogen auf die Soll Menge des Arbeitsganges
+          nullable: false
+        POS_NO:
+          type: number
+          format: int32
+          description: Position number in the parts list/Positionsnummer in der Stückliste
+    Customer:
+      type: object
+      required:
+        - CUSTOMER_NO
+        - CUSTOMER_DES
+      properties:
+        CUSTOMER_NO:
+          type: string
+          description: Customer number/Kundennummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        CUSTOMER_DES:
+          type: string
+          description: Customer name/Kundenname
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        DELETE_FLAG:
+          type: boolean
+          description: object will be deleted/Objekt löschen
+          nullable: false
+          default: false
+    Person:
+      type: object
+      required:
+        - PERSON_NO
+        - FIRST_NAME
+        - LAST_NAME
+      properties:
+        PERSON_NO:
+          type: string
+          description: Person number/Personalnummer der Person
+          maxLength: 50
+          minLength: 0
+          nullable: false
+        PLANT_NO:
+          type: string
+          description: Plant/Werk
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        FIRST_NAME:
+          type: string
+          description: First name of the person/Vorname der Person
+          maxLength: 50
+          minLength: 0
+          nullable: false
+        LAST_NAME:
+          type: string
+          description: Last name of the person/Nachname der Person
+          maxLength: 50
+          minLength: 0
+          nullable: false
+        DELETE_FLAG:
+          type: boolean
+          description: Object will be deleted/Objekt löschen
+          nullable: false
+          default: false
+        EMAIL:
+          type: string
+          description: Email address/Emailadresse
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        MOBILE_PHONE_NO:
+          type: string
+          description: Mobile phone number/Mobiltelefonnummer
+          maxLength: 30
+          minLength: 0
+          nullable: true
+        CARD_ID:
+          type: string
+          description: Unique card ID/Eindeutige Karten ID
+          maxLength: 30
+          minLength: 0
+          nullable: true
+        LANGUAGE:
+          type: string
+          description: Language key GUI/Sprachkürzel Oberfläche
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        LANGUAGE_DB:
+          type: string
+          description: Language key database/Sprachkürzel Datenbank
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        LOGON_PIN:
+          type: string
+          description: Logon PIN or password/Kennwort für die Anmeldung
+          maxLength: 25
+          minLength: 0
+          nullable: true
+    Material-Batch-Assignment:
+      type: object
+      required:
+        - MAT_NO
+        - BATCH_NO
+      properties:
+        MAT_NO:
+          type: string
+          description: Material number/Materialnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        BATCH_NO:
+          type: string
+          description: Batch number/Chargennummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        DELETE_FLAG:
+          type: boolean
+          description: object will be deleted/Objekt löschen
+          nullable: false
+          default: false
+    Material:
+      type: object
+      required:
+        - MAT_NO
+        - PLANT_NO
+        - ARTICLE_NAME
+        - UNIT
+      properties:
+        MAT_NO:
+          type: string
+          description: Article or material number/Artikel- oder Materialnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        PLANT_NO:
+          type: string
+          description: Plant/Werk
+          maxLength: 50
+          minLength: 1
+          nullable: false
+          default: 'C_STD'
+        ARTICLE_NAME:
+          type: string
+          description: Article name/Artikelbezeichnung
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        ARTICLE_DES:
+          type: string
+          description: Article description/Artikelbeschreibung
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        LONG_DES:
+          type: string
+          description: Comment/Bemerkung
+          maxLength: 500
+          minLength: 0
+          nullable: true
+        DELETE_FLAG:
+          type: boolean
+          description: object will be deleted/Objekt löschen
+          nullable: false
+          default: false
+        DRAWING_NO:
+          type: string
+          description: Drawing number/Zeichnungsnummer
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        REVISION_INDEX:
+          type: string
+          description: Change/Änderungsstand
+          maxLength: 10
+          minLength: 0
+          nullable: true
+        OBJECT_STATE:
+          type: string
+          description: Article release/Artikelfreigabe; "F" released/freigegeben; "G" locked/Gesperrt
+          nullable: true
+          default: 'F'
+          enum:
+            - 'F'
+            - 'G'
+        LOCK_REASON_ID:
+          type: number
+          format: int32
+          description: Article status/Artikelstatus
+          default: 0
+          nullable: true
+        PLANNING_RELEVANT:
+          type: boolean
+          description: Relevant for planning/Planungsrelevant
+          default: true
+          nullable: true
+        ARTICLE_TYPE:
+          type: string
+          description: Type of article/Artikeltyp; "EIGENFERTIGUNG" In-house production/Eigenproduktion; "FREMDBESCHAFFUNG" external procurment/Fremdbeschaffung
+          nullable: true
+          default: 'EIGENFERTIGUNG'
+          enum:
+            - 'EIGENFERTIGUNG'
+            - 'FREMDBESCHAFFUNG'
+        UNIT:
+          type: string
+          description: Quantity unit in the base unit of the material/Mengeneinheit in der Basiseinheit des Materials
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        REPLACEMENT_TIME:
+          type: number
+          format: float
+          description: Replacement time in days/Wiederbeschaffungszeit in Tagen
+          nullable: true
+        PPS_MAT_TYPE_ID:
+          type: string
+          description: PPS Characteristics for material type/PPS Kennzeichen für Material Type<br/><br />Tabelle TMM_MAT_TYPE muss gepflegt sein! Zuordnung über PPS_MAT_TYPE_ID/The table TMM_MAT_TYPE must contain values in PPS_MAT_TYPE_ID!<br /><br />Wenn nicht gefüllt --> Fallback zu C_ARTICLE./If not filled --> fallback to C_ARTICLE.<br /><br />Wenn gefüllt aber nicht gefunden in TMM_MAT_TYPE wird es zu C_UNKNOWN/If filled but not found in TMM_MAT_TYPE the value C_UNKNOWN will be set<br /><br />Wenn ARTICLE_TYPE=FREMDBESCHAFFUNG wrid immer C_ARTICLE_PURCHASED angenommen./If ARTICLE_TYPE=FREMDBESCHAFFUNG then the value will always be set to C_ARTICLE_PURCHASED.<br /><br /> PPS_MAT_TYPE_ID|Name/Bezeichnung|Consumables/Verbrauchsmaterial<br/> C_ARTICLE|article/Artikel|true<br/> C_ARTICLE_PURCHASED|purchased article/Zukaufteil|true<br/> C_COMPONENT|component/Komponente|false<br/> C_FACILITY|facility/Spannmittel|false<br/> C_FIXTURE|fixture/Vorrichtung|false<br/> C_HANDTOOL|hand tool/Handwerkzeug|false<br/> C_MEASUREMENT|measurement/Messmittel|false<br/> C_RAW|raw material/Rohmaterial|true<br/> C_TOOL|tool/Werkzeug|false<br/> C_UNKNOWN|Unknown type/Unbekannter Typ|true
+          nullable: true
+          default: 'C_UNKNOWN'
+          enum:
+            - 'C_ARTICLE'
+            - 'C_ARTICLE_PURCHASED'
+            - 'C_COMPONENT'
+            - 'C_FACILITY'
+            - 'C_FIXTURE'
+            - 'C_HANDTOOL'
+            - 'C_MEASUREMENT'
+            - 'C_RAW'
+            - 'C_TOOL'
+            - 'C_UNKNOWN'
+          x-enum-varnames:
+            - 'C_ARTICLE'
+            - 'C_ARTICLE_PURCHASED'
+            - 'C_COMPONENT'
+            - 'C_FACILITY'
+            - 'C_FIXTURE'
+            - 'C_HANDTOOL'
+            - 'C_MEASUREMENT'
+            - 'C_RAW'
+            - 'C_TOOL'
+            - 'C_UNKNOWN'
+        BATCH_NEEDED:
+          type: boolean
+          description: When set, a batch is needed during material removal/Wenn gesetzt, wird bei der Materialentnahme eine Charge benötigt
+          default: false
+          nullable: false
+        SERIALNUMBER_NEEDED:
+          type: boolean
+          description: When set, a serialnumber is needed during material removal/Wenn gesetzt, wird bei der Materialentnahme eine Seriennummer benötigt
+          default: false
+          nullable: false
+    Stock-Material:
+      type: object
+      required:
+        - MAT_NO
+        - PLANT_NO
+        - STOCK_TYPE
+        - AMOUNT
+      properties:
+        MAT_NO:
+          type: string
+          description: Article or material number/Artikel- oder Materialnummer
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        PLANT_NO:
+          type: string
+          description: Plant/Werk
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        STOCK_TYPE:
+          type: string
+          description: Stock type/Bestandsart; "B" Stock of the ERP system as an absolute amount in the base unit of the material/Bestand aus dem ERP-System als absolute Menge in der Basiseinheit des Materials; "A" disposal/access, all planned material movements, which have not yet been substantiated. Material movements which result from the in-house production (requirement and produced articles) will not be handed over here /Ab-/Zugang Alle geplanten Materialbewegungen, welche sich noch nicht bestandändernd ausgewirkt haben. Materialbewegungen welche aus der Eigenfertigung resultieren (Bedarfe und produzierte Artikel) werden hier nicht übergeben; "E" deposit As stored, a quantity produced applies if she has had an inventive effect. In this case, the inventory is increased and passed with the inventory type "E" a storage document. This storage document has the relation to the production order which has manufactured the material via the Order_NR field. This amount is displayed relatively/Eingelagerung Als eingelagert gilt eine produzierte Menge, wenn sie sich Bestandserhöhend ausgewirkt hat. In diesem Fall wird der Bestand erhöht und mit der Bestandsart "E" ein Einlagerungsbeleg übergeben. Dieser Einlagerungsbeleg hat über das Feld ORDER_NO den Bezug zum Fertigungsauftrag, welcher das Material gefertigt hat. Diese Menge wird relativ verbucht; "O" Outsourcing As outsourced, a lot applies if it has had an inventive impact. In this case, the stock is reduced and passed with the inventory "O" a paging document. This paging document has been taken via the WT_NO field with the reference to which the material removed (reserved). It can be configured whether this amount is posted relative or absolutely./Auslagerung Als ausgelagert gilt eine Menge, wenn sie sich Bestandsmindernd ausgewirkt hat. In diesem Fall wird der Bestand vermindert und mit der Bestandart "O" ein Auslagerungsbeleg übergeben. Dieser Auslagerungsbeleg hat über das Feld WT_NO den Bezug zu dem Arbeitsgang für welchen das Material entnommen (reserviert) wurde. Es kann konfiguriert werden, ob diese Menge relativ oder absolut verbucht wird;
+          nullable: false
+          default: 'B'
+          enum:
+            - 'B'
+            - 'A'
+            - 'E'
+            - 'O'
+        TIMESTAMP:
+          type: string
+          format: date-time
+          description: Must be completed upon "A" disposal/access, with otherwise it remains empty/muss bei Ab-/Zugang ausgefüllt werden, bei sonst bleibt es leer
+          nullable: true
+        AMOUNT:
+          type: number
+          format: float
+          description: Quantity, with departure negative, in case of feedings and outlays always positive/Menge, bei Abgang negativ, bei Ein- und Auslagerungen immer positiv
+          nullable: false
+        ORDER_NO:
+          type: string
+          description: Number of the manufacturing order for the storage of manufacturing products of a specific manufacturing order. STOCK_TYPE "E"/Nummer des Fertigungsauftrags für die Einlagerung von Fertigungserzeugnissen eines bestimmten Fertigungsauftrags. STOCK_TYPE "E"
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        WT_NO:
+          type: string
+          description: Number of the work ticket for which a lot has been outsourced. STOCK_TYPE "O"/Nummer des Arbeitsscheins für welchen eine Menge ausgelagert wurde. STOCK_TYPE "O"
+          maxLength: 50
+          minLength: 0
+          nullable: true
+        LOC_NO:
+          type: string
+          description: PPS number of the storage place/PPS Nummer des Lagerplatzes
+          maxLength: 50
+          minLength: 0
+          nullable: true
+    Deliverer:
+      type: object
+      required:
+        - DELIVERER_NO
+      properties:
+        DELIVERER_NO:
+          type: string
+          description: Deliverer number or ID (planning ID)/Lieferanten Nummer oder ID (FPL_ID)
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        DISPLAYNAME:
+          type: string
+          description: Deliverer displayname/Lieferanten Anzeigename
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        BRAND_NAME:
+          type: string
+          description: Deliverer brand name/Lieferanten Markenname
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        COMPANY_NAME:
+          type: string
+          description: Deliverer company name/Lieferanten Firmenname
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        ADDITIONAL_NAME:
+          type: string
+          description: Deliverer additional name/Lieferanten Zusatzname
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        POST_OFFICE_BOX:
+          type: string
+          description: Post office box/Postfach
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        STREET_ADDRESS:
+          type: string
+          description: Street name and number/Straße und Nummer
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        ZIP:
+          type: string
+          description: ZIP or postal code/Postleitzahl
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        LOCATION:
+          type: string
+          description: Name of the location, place, city or village/Name des Ortes, Stadt oder Dorf
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        TELEPHONE_NO:
+          type: string
+          description: Telephone number/Telefonnummer
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        TELEFAX_NO:
+          type: string
+          description: Telefax number/Faxnummer
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        INTERNET_ADDRESS:
+          type: string
+          description: Internet adress/Internetadresse
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        SHIPMENT:
+          type: string
+          description: Shipment/Versand
+          maxLength: 50
+          minLength: 1
+          nullable: true
+        REMARK:
+          type: string
+          description: Remark/Bemerkung
+          maxLength: 200
+          minLength: 1
+          nullable: true
+        PLANNING_RELEVANT:
+          type: boolean
+          description: True if the deliverer is relevant for planning; else false/True wenn der Lieferant FPL relevant ist; ansonsten false
+          maxLength: 50
+          minLength: 1
+          nullable: false
+          default: false
+        DELETE_FLAG:
+          type: boolean
+          description: Object will be deleted/Objekt löschen
+          nullable: false
+          default: false
+    Deliverer-Frequency:
+      type: object
+      required:
+        - DELIVERER_NO
+        - FREQUENCY_TYPE
+        - FREQUENCY_DAY
+        - FREQUENCY_TIME
+      properties:
+        DELIVERER_NO:
+          type: string
+          description: Deliverer number or ID (planning ID)/Lieferanten Nummer oder ID (FPL_ID)
+          maxLength: 50
+          minLength: 1
+          nullable: false
+        FREQUENCY_TYPE:
+          type: string
+          description: Frequency type; "IN" = delivery into the plant; "OUT" = delivery out of the plant to the deliverer/Turnus Typ; "IN" = Lierung ins Werk; "OUT" = Lieferung zu Lieferant
+          maxLength: 3
+          minLength: 1
+          nullable: false
+          enum:
+            - 'IN'
+            - 'OUT'
+          x-enum-varnames:
+            - 'IN'
+            - 'OUT'
+        FREQUENCY_DAY:
+          type: number
+          description: Day index 0 = sunday, 1 = monday, 2 = tuesday, .../Tag Index 0 = Sonntag, 1 = Montag, 2 = Dienstag, ...
+          format: int16
+          nullable: false
+        FREQUENCY_TIME:
+          type: string
+          format: time
+          description: Local time of the day (e.g. "12:00:00")/Lokale Uhrzeit (z.B. "12:00:00")
+          nullable: false
+          

@@ -3,9 +3,9 @@ REM https://github.com/OpenAPITools/openapi-generator
 
 SET OUTPUT_DIRECTORY=${PWD}/out
 SET INTERFACE_DIRECTORY=${PWD}/../..
-SET INTERFACE_FILE=extern_erp_mes-service_v1.yaml
+SET INTERFACE_FILE=erp-mes-interface-v1.0.6.yaml
 SET PACKAGE_NAME=PAG.Mes.Connector.ERPService.Client
-SET INTERFACE_VERSION=1.0.5
+SET INTERFACE_VERSION=1.0.6
 
 powershell Remove-Item %OUTPUT_DIRECTORY% -Recurse -Force -ErrorAction SilentlyContinue
 REM generate
