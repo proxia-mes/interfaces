@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA MES ERP INTERFACE API
   description: REST API provided by the PROXIA MES system for ERP systems (Based on the PROXIA Connector interface description version 94!)
-  version: '1.0.10'
+  version: '1.0.11'
 servers:
   - url: "/proxia/mes/erp/interface/v1"
 tags:
@@ -1166,8 +1166,6 @@ components:
         FREQUENCY_TYPE:
           type: string
           description: Frequency type; "IN" = delivery into the plant; "OUT" = delivery out of the plant to the deliverer/Turnus Typ; "IN" = Lierung ins Werk; "OUT" = Lieferung zu Lieferant
-          maxLength: 3
-          minLength: 1
           nullable: false
           enum:
             - 'IN'
