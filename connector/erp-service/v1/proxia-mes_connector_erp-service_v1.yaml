@@ -1063,79 +1063,79 @@ components:
           type: string
           description: Deliverer displayname/Lieferanten Anzeigename
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         BRAND_NAME:
           type: string
           description: Deliverer brand name/Lieferanten Markenname
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         COMPANY_NAME:
           type: string
           description: Deliverer company name/Lieferanten Firmenname
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         ADDITIONAL_NAME:
           type: string
           description: Deliverer additional name/Lieferanten Zusatzname
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         POST_OFFICE_BOX:
           type: string
           description: Post office box/Postfach
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         STREET_ADDRESS:
           type: string
           description: Street name and number/Straße und Nummer
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         ZIP:
           type: string
           description: ZIP or postal code/Postleitzahl
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         LOCATION:
           type: string
           description: Name of the location, place, city or village/Name des Ortes, Stadt oder Dorf
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         TELEPHONE_NO:
           type: string
           description: Telephone number/Telefonnummer
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         TELEFAX_NO:
           type: string
           description: Telefax number/Faxnummer
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         INTERNET_ADDRESS:
           type: string
           description: Internet adress/Internetadresse
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         SHIPMENT:
           type: string
           description: Shipment/Versand
           maxLength: 50
-          minLength: 1
+          minLength: 0
           nullable: true
         REMARK:
           type: string
           description: Remark/Bemerkung
           maxLength: 200
-          minLength: 1
+          minLength: 0
           nullable: true
         PLANNING_RELEVANT:
           type: boolean
