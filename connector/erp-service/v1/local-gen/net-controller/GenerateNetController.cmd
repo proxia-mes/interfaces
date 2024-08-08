@@ -5,7 +5,7 @@ SET OUTPUT_DIRECTORY=${PWD}/out
 SET INTERFACE_DIRECTORY=${PWD}/../..
 SET INTERFACE_FILE=proxia-mes_connector_erp-service_v1.yaml
 SET PACKAGE_NAME=PAG.Mes.Connector.ERPService.ControllerStub
-SET INTERFACE_VERSION=1.0.9
+SET INTERFACE_VERSION=1.0.10
 
 powershell Remove-Item %OUTPUT_DIRECTORY% -Recurse -Force -ErrorAction SilentlyContinue
 REM generate
