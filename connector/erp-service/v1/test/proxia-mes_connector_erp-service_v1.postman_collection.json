@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "4911f9ea-3560-4c66-9729-c298d00c6aa4",
-		"name": "PROXIA MES CONNECTOR ERP SERVICE API 1.0.4",
+		"_postman_id": "c3429905-99ec-44e7-a67c-d49c7f7adaf6",
+		"name": "GITHUB TEST PROXIA MES CONNECTOR ERP SERVICE API 1.0.4",
 		"description": "REST API provided by the PROXIA MES system for ERP systems",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29999659"
 	},
 	"item": [
 		{
@@ -13,7 +14,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var lastCreatedFileContent=\"ad|ipsum Duis sit minim|aliqua est Duis||F|mollit deserunt in|20140110002133|19570915103458|voluptate sed nisi|anim cillum consectetur offi|aute Duis incididunt proident|-97793496|culpa in|in reprehenderit incididunt Duis|laboris in enim ea elit|Excepteur dolore officia deserunt tempor|in irure ea|s|ad|fugiat officia nostrud|0|R|\\ntempor aliquip cillum officia|ut et aliquip voluptate |ipsum ut dolore||F|sed veniam|20120225155558|19621220165303|occaecat dolore|ut culpa veniam sed||-89483464|voluptate esse qui officia|reprehenderit laborum aute laboris|sit|in sit|quis|id|consectetur|nulla offic|0|R|\\n\";\r",
+							"var lastCreatedFileContent=\"ad|ipsum Duis sit minim|aliqua est Duis||F|mollit deserunt in|20140110002133|19570915103458|voluptate sed nisi|anim cillum consectetur offi|aute Duis incididunt proident|-97793496|culpa in|in reprehenderit incididunt Duis|laboris in enim ea elit|Excepteur dolore officia deserunt tempor|in irure ea|s|ad|fugiat officia nostrud|0|R||\\ntempor aliquip cillum officia|ut et aliquip voluptate |ipsum ut dolore||F|sed veniam|20120225155558|19621220165303|occaecat dolore|ut culpa veniam sed||-89483464|voluptate esse qui officia|reprehenderit laborum aute laboris|sit|in sit|quis|id|consectetur|nulla offic|0|R|1|\\n\";\r",
 							"\r",
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -33,7 +34,8 @@
 							"});\r",
 							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				},
 				{
@@ -42,7 +44,8 @@
 						"exec": [
 							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -56,7 +59,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\n    {\n        \"ORDER_NO\": \"ad\",\n        \"BEGIN_SCHEDULED\": \"2014-01-10T00:21:33.276Z\",\n        \"END_SCHEDULED\": \"1957-09-15T10:34:58.805Z\",\n        \"ARTICLE_NO\": \"voluptate sed nisi\",\n        \"ARTICLE_DES\": \"anim cillum consectetur offi\",\n        \"QTY_TARGET\": -97793493.8046641,\n        \"ORDER_DES\": \"ipsum Duis sit minim\",\n        \"PLANT_NO\": \"aliqua est Duis\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"mollit deserunt in\",\n        \"DRAW_NO\": \"aute Duis incididunt proident\",\n        \"LONG_DES\": \"culpa in\",\n        \"PARENT_ORDER_NO\": \"in reprehenderit incididunt Duis\",\n        \"INFO_01\": \"laboris in enim ea elit\",\n        \"INFO_02\": \"Excepteur dolore officia deserunt tempor\",\n        \"INFO_03\": \"in irure ea\",\n        \"INFO_04\": \"s\",\n        \"INFO_05\": \"ad\",\n        \"PARENT_WT_NO\": \"fugiat officia nostrud\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"R\"\n    },\n    {\n        \"ORDER_NO\": \"tempor aliquip cillum officia\",\n        \"BEGIN_SCHEDULED\": \"2012-02-25T15:55:58.570Z\",\n        \"END_SCHEDULED\": \"1962-12-20T16:53:03.168Z\",\n        \"ARTICLE_NO\": \"occaecat dolore\",\n        \"ARTICLE_DES\": \"ut culpa veniam sed\",\n        \"QTY_TARGET\": -89483462.97280061,\n        \"ORDER_DES\": \"ut et aliquip voluptate \",\n        \"PLANT_NO\": \"ipsum ut dolore\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"sed veniam\",\n        \"DRAW_NO\": \"\",\n        \"LONG_DES\": \"voluptate esse qui officia\",\n        \"PARENT_ORDER_NO\": \"reprehenderit laborum aute laboris\",\n        \"INFO_01\": \"sit\",\n        \"INFO_02\": \"in sit\",\n        \"INFO_03\": \"quis\",\n        \"INFO_04\": \"id\",\n        \"INFO_05\": \"consectetur\",\n        \"PARENT_WT_NO\": \"nulla offic\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"R\"\n    }\n]"
+					"raw": "[\n    {\n        \"ORDER_NO\": \"ad\",\n        \"BEGIN_SCHEDULED\": \"2014-01-10T00:21:33.276Z\",\n        \"END_SCHEDULED\": \"1957-09-15T10:34:58.805Z\",\n        \"ARTICLE_NO\": \"voluptate sed nisi\",\n        \"ARTICLE_DES\": \"anim cillum consectetur offi\",\n        \"QTY_TARGET\": -97793493.8046641,\n        \"ORDER_DES\": \"ipsum Duis sit minim\",\n        \"PLANT_NO\": \"aliqua est Duis\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"mollit deserunt in\",\n        \"DRAW_NO\": \"aute Duis incididunt proident\",\n        \"LONG_DES\": \"culpa in\",\n        \"PARENT_ORDER_NO\": \"in reprehenderit incididunt Duis\",\n        \"INFO_01\": \"laboris in enim ea elit\",\n        \"INFO_02\": \"Excepteur dolore officia deserunt tempor\",\n        \"INFO_03\": \"in irure ea\",\n        \"INFO_04\": \"s\",\n        \"INFO_05\": \"ad\",\n        \"PARENT_WT_NO\": \"fugiat officia nostrud\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"R\",\n        \"REVISION_NR\": null\n    },\n    {\n        \"ORDER_NO\": \"tempor aliquip cillum officia\",\n        \"BEGIN_SCHEDULED\": \"2012-02-25T15:55:58.570Z\",\n        \"END_SCHEDULED\": \"1962-12-20T16:53:03.168Z\",\n        \"ARTICLE_NO\": \"occaecat dolore\",\n        \"ARTICLE_DES\": \"ut culpa veniam sed\",\n        \"QTY_TARGET\": -89483462.97280061,\n        \"ORDER_DES\": \"ut et aliquip voluptate \",\n        \"PLANT_NO\": \"ipsum ut dolore\",\n        \"DELETE_FLAG\": false,\n        \"ORDER_TYPE\": \"F\",\n        \"CUSTOMER_NO\": \"sed veniam\",\n        \"DRAW_NO\": \"\",\n        \"LONG_DES\": \"voluptate esse qui officia\",\n        \"PARENT_ORDER_NO\": \"reprehenderit laborum aute laboris\",\n        \"INFO_01\": \"sit\",\n        \"INFO_02\": \"in sit\",\n        \"INFO_03\": \"quis\",\n        \"INFO_04\": \"id\",\n        \"INFO_05\": \"consectetur\",\n        \"PARENT_WT_NO\": \"nulla offic\",\n        \"PRIO\": 0,\n        \"PLANNING_STRATEGY\": \"R\",\n        \"REVISION_NR\": 1\n    }\n]"
 				},
 				"url": {
 					"raw": "{{protocol}}://{{host}}:{{port}}{{context}}/orders",
