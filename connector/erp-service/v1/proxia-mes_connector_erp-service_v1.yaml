@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: PROXIA MES ERP INTERFACE API
   description: REST API provided by the PROXIA MES system for ERP systems (Based on the PROXIA Connector interface description version 94!)
-  version: '1.0.11'
+  version: '1.0.12'
 servers:
   - url: "/proxia/mes/erp/interface/v1"
 tags:
@@ -1140,8 +1140,6 @@ components:
         PLANNING_RELEVANT:
           type: boolean
           description: True if the deliverer is relevant for planning; else false/True wenn der Lieferant FPL relevant ist; ansonsten false
-          maxLength: 50
-          minLength: 1
           nullable: false
           default: false
         DELETE_FLAG:
