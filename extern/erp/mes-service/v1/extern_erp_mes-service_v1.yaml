@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: ERP MES API
   description: REST API provided by the ERP system for MES systems (Based on the PROXIA Connector interface description version 94!)
-  version: '1.0.6'
+  version: '1.0.7'
 servers:
   - url: "erp/mes/interface/v1"
 tags:
@@ -215,6 +215,15 @@ components:
           minLength: 0
           description: Reply comment up to 2000 characters/Rückmelder Kommentar bis zu 2000 Zeichen
           nullable: true
+        U_WEIGHT:
+          type: number
+          format: float
+          description: Customer specific weight input (K181)/Kundenspezifische Gewichtseingabe (K181)
+          nullable: true
+        U_TRAY_ID:
+          type: string
+          maxLength: 50
+          description: Customer specific input of a Tray ID (K181)/Kundenspezifische Eingabe von Tray ID (K181)
     Workticket-Material-Removal:
       type: object
       required:
