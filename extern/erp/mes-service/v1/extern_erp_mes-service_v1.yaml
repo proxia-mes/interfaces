@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: ERP MES API
   description: REST API provided by the ERP system for MES systems (Based on the PROXIA Connector interface description version 94!)
-  version: '1.0.7'
+  version: '1.0.8'
 servers:
   - url: "erp/mes/interface/v1"
 tags:
